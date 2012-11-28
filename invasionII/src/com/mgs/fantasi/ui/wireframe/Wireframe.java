@@ -10,10 +10,10 @@ public class Wireframe {
 	private final Grid<Wireframe> content;
 	private final SizeStrategy sizeStrategy;
 
-	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Wireframe content, SizeStrategy sizeStrategy) {
+	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Grid<Wireframe> content, SizeStrategy sizeStrategy) {
 		this.structureType = structureType;
 		this.shape = shape;
-		this.content = Grid.withOnlyOneCell(content);
+		this.content = content;
 		this.sizeStrategy = sizeStrategy;
 	}
 

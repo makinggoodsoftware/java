@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 public class LayeredElementStructureBuilder extends BaseStructureBuilder {
@@ -10,7 +11,7 @@ public class LayeredElementStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Wireframe buildContent() {
+	protected Grid<Wireframe> buildContent() {
 		return null;
 	}
 }

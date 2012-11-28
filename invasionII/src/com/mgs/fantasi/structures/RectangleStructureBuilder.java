@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 public class RectangleStructureBuilder extends BaseStructureBuilder{
@@ -11,8 +12,8 @@ public class RectangleStructureBuilder extends BaseStructureBuilder{
 	}
 
 	@Override
-	protected Wireframe buildContent() {
+	protected Grid<Wireframe> buildContent() {
 		if (content == null) return null;
-		return content.build();
+		return Grid.withOnlyOneCell(content.build());
 	}
 }

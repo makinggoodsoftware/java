@@ -1,5 +1,6 @@
 package com.mgs.fantasi.ui.driver;
 
+import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 import com.mgs.fantasi.ui.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.ui.driver.swing.SwingUINativeElementCreatorStrategy;
@@ -35,9 +36,12 @@ public class UIDriver<T> {
 		Set<UIStyle> uiStyles = uiProfile.findStylesFor(wireframe);
 		T parent = uiNativeElementCreatorStrategy.create(wireframe, uiStyles);
 
-		Wireframe child = wireframe.getContent().getCell(0 ,0);
+		Grid<Wireframe> content = wireframe.getContent();
+		if (content==null) return parent;
+
+		Wireframe child = content.getCell(0, 0);
 		if (child != null) {
-			T childAsNativeComponent = buildNativeElement(wireframe.getContent().getCell(0, 0));
+			T childAsNativeComponent = buildNativeElement(content.getCell(0, 0));
 			uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, child.getSizeStrategy());
 		}
 

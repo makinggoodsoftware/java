@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
@@ -11,7 +12,7 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Wireframe buildContent() {
+	protected Grid<Wireframe> buildContent() {
 		return null;
 	}
 }

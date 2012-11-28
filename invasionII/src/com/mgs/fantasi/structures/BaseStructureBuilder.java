@@ -1,8 +1,9 @@
 package com.mgs.fantasi.structures;
 
-import com.mgs.fantasi.ui.wireframe.Wireframe;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.profile.SizeStrategy;
+import com.mgs.fantasi.ui.wireframe.Grid;
+import com.mgs.fantasi.ui.wireframe.Wireframe;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
@@ -15,7 +16,7 @@ public abstract class BaseStructureBuilder implements StructureBuilder{
 
 	@Override
 	public final Wireframe build() {
-		Wireframe content = buildContent();
+		Grid<Wireframe> content = buildContent();
 		return new Wireframe(getClass(), shape, content, sizeStrategy);
 	}
 
@@ -29,7 +30,7 @@ public abstract class BaseStructureBuilder implements StructureBuilder{
 		return this;
 	}
 
-	protected abstract Wireframe buildContent();
+	protected abstract Grid<Wireframe> buildContent();
 
 	private class NativeRectanguarShape implements PolygonPointsIterator {
 		@Override

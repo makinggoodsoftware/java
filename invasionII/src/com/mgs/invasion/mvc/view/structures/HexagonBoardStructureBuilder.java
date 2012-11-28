@@ -1,5 +1,6 @@
 package com.mgs.invasion.mvc.view.structures;
 
+import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 import com.mgs.fantasi.polygon.HexagonShape;
 import com.mgs.fantasi.structures.*;
@@ -23,7 +24,7 @@ public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 
 
 	@Override
-	protected Wireframe buildContent() {
+	protected Grid<Wireframe> buildContent() {
 		return null;
 	}
 }

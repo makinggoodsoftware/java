@@ -27,8 +27,8 @@ public class Main {
 				(
 					new PolygonStructureBuilder(new HexagonShape()).
 					withSizeStrategy(new ExpandToParent())
-				).
-//			).
+//				)
+			).
 			build();
 
 		uiDriver.show(content, new Dimension(400,400));

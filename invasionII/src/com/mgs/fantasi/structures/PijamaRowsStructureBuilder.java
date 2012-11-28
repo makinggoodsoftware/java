@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
@@ -12,7 +13,7 @@ public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Wireframe buildContent() {
+	protected Grid<Wireframe> buildContent() {
 		return null;
 	}
 }

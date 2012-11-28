@@ -35,9 +35,9 @@ public class UIDriver<T> {
 		Set<UIStyle> uiStyles = uiProfile.findStylesFor(wireframe);
 		T parent = uiNativeElementCreatorStrategy.create(wireframe, uiStyles);
 
-		Wireframe child = wireframe.getContent();
+		Wireframe child = wireframe.getContent().getCell(0 ,0);
 		if (child != null) {
-			T childAsNativeComponent = buildNativeElement(wireframe.getContent());
+			T childAsNativeComponent = buildNativeElement(wireframe.getContent().getCell(0, 0));
 			uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, child.getSizeStrategy());
 		}
 

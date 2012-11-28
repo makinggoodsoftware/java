@@ -21,14 +21,19 @@ public class Grid<T> {
 		}
 	}
 
-	private void setCell(int x, int y, T content) {
+	public void setCell(int x, int y, T content) {
 		if (x > divisionsX || y > divisionsY) throw new IllegalArgumentException();
 		cells.get(x).set(y, content);
 	}
 
 	public static <T> Grid<T> withOnlyOneCell(T content) {
-		Grid<T> grid = new Grid<T>(0, 0);
+		Grid<T> grid = new Grid<T>(1, 1);
 		grid.setCell (0, 0, content);
 		return grid;				
+	}
+
+	public T getCell(int x, int y) {
+		if (x > divisionsX || y > divisionsY) throw new IllegalArgumentException();
+		return cells.get(x).get(y);
 	}
 }

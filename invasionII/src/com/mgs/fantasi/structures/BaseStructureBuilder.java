@@ -2,6 +2,7 @@ package com.mgs.fantasi.structures;
 
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.profile.SizeStrategy;
+import com.mgs.fantasi.ui.wireframe.CellContentGenerator;
 import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -16,9 +17,18 @@ public abstract class BaseStructureBuilder implements StructureBuilder{
 
 	@Override
 	public final Wireframe build() {
-		Grid<Wireframe> content = buildContent();
+		Grid<Wireframe> content = buildLayout();
+		content.fillCells(new CellContentGenerator<Wireframe>(){
+			@Override
+			public Wireframe generateContentFor(int x, int y) {
+				return BaseStructureBuilder.this.generateContentFor(x, y);
+			}
+		});
+		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");
 		return new Wireframe(getClass(), shape, content, sizeStrategy);
 	}
+
+	protected abstract Wireframe generateContentFor(int x, int y);
 
 	public final BaseStructureBuilder withShape (PolygonPointsIterator shape){
 		this.shape = shape;
@@ -30,7 +40,7 @@ public abstract class BaseStructureBuilder implements StructureBuilder{
 		return this;
 	}
 
-	protected abstract Grid<Wireframe> buildContent();
+	protected abstract Grid<Wireframe> buildLayout();
 
 	private class NativeRectanguarShape implements PolygonPointsIterator {
 		@Override

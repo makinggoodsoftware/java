@@ -1,11 +1,12 @@
 package com.mgs.fantasi.ui.driver;
 
-import com.mgs.fantasi.ui.wireframe.Grid;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
 import com.mgs.fantasi.ui.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.ui.driver.swing.SwingUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.profile.UIStyle;
+import com.mgs.fantasi.ui.wireframe.CellIterator;
+import com.mgs.fantasi.ui.wireframe.Grid;
+import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,17 +35,15 @@ public class UIDriver<T> {
 
 	private T buildNativeElement(Wireframe wireframe) {
 		Set<UIStyle> uiStyles = uiProfile.findStylesFor(wireframe);
-		T parent = uiNativeElementCreatorStrategy.create(wireframe, uiStyles);
-
-		Grid<Wireframe> content = wireframe.getContent();
-		if (content==null) return parent;
-
-		Wireframe child = content.getCell(0, 0);
-		if (child != null) {
-			T childAsNativeComponent = buildNativeElement(content.getCell(0, 0));
-			uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, child.getSizeStrategy());
-		}
-
+		final T parent = uiNativeElementCreatorStrategy.createSkeleton(wireframe, uiStyles);
+		final Grid<Wireframe> content = wireframe.getContent();
+		content.itereateCellsWith(new CellIterator<Wireframe>() {
+			@Override
+			public void on(int x, int y, Wireframe cell) {
+				T childAsNativeComponent = buildNativeElement(cell);
+				uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, cell.getSizeStrategy(), x, y);
+			}
+		});
 		return parent;
 	}
 

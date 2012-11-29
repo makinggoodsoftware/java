@@ -15,31 +15,38 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 
 
 	@Override
-	protected JPanel newNonRectangularNativeElement(PolygonPointsIterator shape, Set<UIStyle> uiStyles) {
+	protected JPanel newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, Set<UIStyle> uiStyles) {
 		return new JPanelWithDifferentShape (shape, uiStyles);
 	}
 
 	@Override
-	protected JPanel newNativeRectangularElement() {
+	protected void createLayoutSkeleton(JPanel nativeElement) {
+		nativeElement.setLayout(new GridBagLayout());
+	}
+
+	@Override
+	protected JPanel newRectangularNativeElement() {
 		return new JPanel();
 	}
 
-
 	@Override
 	public void applyStyle(UIStyle uiStyle, JPanel nativeElement) {
-		nativeElement.setBorder(createNativeBorder(uiStyle.getBorder()));
+		BorderDefinition border = uiStyle.getBorder();
+		Border nativeBorder = BorderFactory.createLineBorder(border.getColor(), border.getWidth());
+		nativeElement.setBorder(nativeBorder);
 		nativeElement.setBackground(uiStyle.getBackgroundColor());
 
 	}
 
-	private Border createNativeBorder(BorderDefinition border) {
-		return BorderFactory.createLineBorder(border.getColor(), border.getWidth());
+	@Override
+	public void compose(JPanel parent, JPanel child, SizeStrategy sizeStrategy, int x, int y) {
+		parent.add(child, intoCoordinates(x, y));
 	}
 
-	@Override
-	public void compose(JPanel parent, JPanel child, SizeStrategy sizeStrategy) {
-		if (child==null) return;
-		parent.setLayout(new BorderLayout());
-		parent.add(child, BorderLayout.CENTER);
+	private GridBagConstraints intoCoordinates(int x, int y) {
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = x;
+		gbc.gridy = x;
+		return gbc;
 	}
 }

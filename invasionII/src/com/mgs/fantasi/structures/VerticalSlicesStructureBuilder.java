@@ -12,7 +12,12 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Grid<Wireframe> buildContent() {
+	protected Wireframe generateContentFor(int x, int y) {
+		return null;
+	}
+
+	@Override
+	protected Grid<Wireframe> buildLayout() {
 		return null;
 	}
 }

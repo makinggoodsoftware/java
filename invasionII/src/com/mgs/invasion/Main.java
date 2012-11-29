@@ -2,7 +2,6 @@ package com.mgs.invasion;
 
 import com.mgs.fantasi.polygon.HexagonShape;
 import com.mgs.fantasi.structures.PolygonStructureBuilder;
-import com.mgs.fantasi.structures.RectangleStructureBuilder;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.ExpandToParent;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
@@ -22,11 +21,11 @@ public class Main {
 
 		Wireframe content =
 //			new VerticalSlicesStructureBuilder(
-				new RectangleStructureBuilder().
-				witchContent
-				(
+//				new RectangleStructureBuilder().
+//				witchContent
+//				(
 					new PolygonStructureBuilder(new HexagonShape()).
-					withSizeStrategy(new ExpandToParent())
+					withSizeStrategy(new ExpandToParent()//)
 //				)
 			).
 			build();

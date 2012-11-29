@@ -8,22 +8,29 @@ import java.util.Set;
 
 public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeElementCreatorStrategy<T> {
 	@Override
-	public T create(Wireframe wireframe, Set<UIStyle> uiStyles) {
+	public T createSkeleton(Wireframe wireframe, Set<UIStyle> uiStyles) {
 		PolygonPointsIterator shape = wireframe.getShape();
-		if (shape.isRectangular()) {
-			T jPanel = newNativeRectangularElement();
-			for (UIStyle uiStyle : uiStyles) {
-				applyStyle(uiStyle, jPanel);
-			}
-			return jPanel;
-		}
-		return newNonRectangularNativeElement (shape, uiStyles);
+		T nativeElementSkeletonWithStyles = shape.isRectangular() ?
+			newRectangularNativeElementSkeletonWithStyles(uiStyles):
+			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
+		createLayoutSkeleton (nativeElementSkeletonWithStyles);
+		return nativeElementSkeletonWithStyles;
 
 	}
 
-	protected abstract T newNativeRectangularElement();
+	protected abstract void createLayoutSkeleton(T nativeElementSkeletonWithStyles);
 
-	protected abstract T newNonRectangularNativeElement(PolygonPointsIterator shape, Set<UIStyle> uiStyles);
+	private T newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {
+		T jPanel = newRectangularNativeElement();
+		for (UIStyle uiStyle : uiStyles) {
+			applyStyle(uiStyle, jPanel);
+		}
+		return jPanel;
+	}
+
+	protected abstract T newRectangularNativeElement();
+
+	protected abstract T newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, Set<UIStyle> uiStyles);
 
 	public abstract void applyStyle(UIStyle uiStyle, T nativeElement);
 }

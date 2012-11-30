@@ -1,9 +1,7 @@
 package com.mgs.invasion;
 
 import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.structures.PolygonStructureBuilder;
-import com.mgs.fantasi.structures.RectangleStructureBuilder;
-import com.mgs.fantasi.structures.VerticalSlicesStructureBuilder;
+import com.mgs.fantasi.structures.*;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.ExpandToParent;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
@@ -22,14 +20,18 @@ public class Main {
 		UIDriver<JPanel> uiDriver = UIDriver.forSwing(uiProfileFactory.getUIProfile());
 
 		Wireframe content =
-			new VerticalSlicesStructureBuilder(
-				new RectangleStructureBuilder().
-				witchContent
-				(
-					new PolygonStructureBuilder(new HexagonShape()).
-					withSizeStrategy(new ExpandToParent())
-				)
-			).withVerticalDivisions(3).
+			new PijamaRowsStructureBuilder(
+				new VerticalSlicesStructureBuilder(
+					new RectangleStructureBuilder().
+					witchContent
+					(
+						new PolygonStructureBuilder(new HexagonShape()).
+						withSizeStrategy(new ExpandToParent())
+					)
+				).withVerticalDivisions(3),
+				new RectangleStructureBuilder()
+			).withMainRowSize(FractionsOfThree.thwoThirds()).
+			withNumberOfGerations(2).
 			build();
 
 		uiDriver.show(content, new Dimension(400,400));

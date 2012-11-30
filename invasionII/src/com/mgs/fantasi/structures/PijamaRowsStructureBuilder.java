@@ -8,53 +8,40 @@ import com.mgs.fantasi.ui.wireframe.Wireframe;
 public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
 	private static final int UNDEFINED = -1;
 
-	private final StructureBuilder mainRowBuilder;
-	private final StructureBuilder emptyRowBuilder;
+	private final TwoLinesStructureBuilder generationBuilder;
 
-	private Fraction sizeConstraints = null;
 	private int numberOfGenerations = UNDEFINED;
 
-	public PijamaRowsStructureBuilder(StructureBuilder mainRowBuilder, StructureBuilder emptyRowBuilder) {
-		this.mainRowBuilder = mainRowBuilder;
-		this.emptyRowBuilder = emptyRowBuilder;
+	public PijamaRowsStructureBuilder(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
+		generationBuilder = new TwoLinesStructureBuilder(firstRowBuilder, secondRowBuilder);
 	}
 
-	public PijamaRowsStructureBuilder withMainRowSize(Fraction sizeContraints){
-		this.sizeConstraints = sizeContraints;
+	public PijamaRowsStructureBuilder withFirstRowSize(Fraction sizeContraints){
+		generationBuilder.withFirstRowSize(sizeContraints);
 		return this;
 	}
 
 	public PijamaRowsStructureBuilder withNumberOfGerations (int numberOfGerations){
-		this.numberOfGenerations = numberOfGerations;
+		numberOfGenerations = numberOfGerations;
 		return this;
 	}
 
 	@Override
 	protected boolean constraintsAreSatisfied() {
-		if (sizeConstraints == null | numberOfGenerations == UNDEFINED) {
-			return false;
-		}
-		return true;
+		if (! generationBuilder.constraintsAreSatisfied()) return false;
+		return numberOfGenerations != UNDEFINED;
 	}
 
 	@Override
 	protected Grid<Wireframe> buildLayoutAndChilds() {
-		int numOfRowsTotal = numberOfGenerations * 2;
-		Grid<Wireframe> layout = GridFactory.withDimensions(1, numOfRowsTotal);
+		Grid<Wireframe> layout = GridFactory.withDimensions(1, numberOfGenerations);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override
 			public Wireframe generateContentFor(int x, int y) {
-				if (isRowOdd(y)){
-					return mainRowBuilder.build();
-				}else{
-					return emptyRowBuilder.build();
-				}
+				return generationBuilder.build();
 			}
 		});
 		return layout;
 	}
 
-	private boolean isRowOdd(int y) {
-		return y % 2 == 0;
-	}
 }

@@ -28,10 +28,10 @@ public class Main {
 						new PolygonStructureBuilder(new HexagonShape()).
 						withSizeStrategy(new ExpandToParent())
 					)
-				).withVerticalDivisions(3),
+				).withVerticalDivisions(6),
 				new RectangleStructureBuilder()
-			).withMainRowSize(FractionsOfThree.thwoThirds()).
-			withNumberOfGerations(2).
+			).withFirstRowSize(FractionsOfThree.thwoThirds()).
+			withNumberOfGerations(3).
 			build();
 
 		uiDriver.show(content, new Dimension(400,400));

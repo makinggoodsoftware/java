@@ -8,4 +8,6 @@ public interface Grid<T> {
 	void fillCells(CellContentGenerator<T> cellContentGenerator);
 
 	void itereateCellsWith(CellIterator<T> cellIterator);
+
+
 }

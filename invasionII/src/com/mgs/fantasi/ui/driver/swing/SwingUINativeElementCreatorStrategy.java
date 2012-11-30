@@ -46,7 +46,7 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	private GridBagConstraints intoCoordinates(int x, int y) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
-		gbc.gridy = x;
+		gbc.gridy = y;
 		gbc.weightx = 1.0;
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;

@@ -13,6 +13,10 @@ public class GridFactory {
 		return grid;
 	}
 
+	public static Grid<Wireframe> withDimensions(int x, int y) {
+		return new ArrayListGrid<Wireframe>(x, y);
+	}
+
 	private static class EmptyGrid<T> implements Grid<T> {
 		@Override
 		public void setCell(int x, int y, T content) {

@@ -1,10 +1,10 @@
 package com.mgs.invasion.mvc.view.structures;
 
+import com.mgs.fantasi.polygon.HexagonShape;
+import com.mgs.fantasi.structures.*;
 import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.GridFactory;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
-import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.structures.*;
 
 public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 	private final LayeredElementStructureBuilder boardStructureBuilder;
@@ -25,12 +25,12 @@ public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 
 
 	@Override
-	protected Wireframe generateContentFor(int x, int y) {
-		return null;
+	protected boolean constraintsAreSatisfied() {
+		return false;
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayout() {
+	protected Grid<Wireframe> buildLayoutAndChilds() {
 		return GridFactory.empty(Wireframe.class);
 	}
 }

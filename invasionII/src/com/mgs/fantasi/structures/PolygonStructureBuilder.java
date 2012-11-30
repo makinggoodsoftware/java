@@ -1,9 +1,9 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.GridFactory;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
-import com.mgs.fantasi.polygon.PolygonPointsIterator;
 
 public class PolygonStructureBuilder extends BaseStructureBuilder {
 
@@ -12,12 +12,12 @@ public class PolygonStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Wireframe generateContentFor(int x, int y) {
-		throw new RuntimeException("This element can't ever have content");
+	protected boolean constraintsAreSatisfied() {
+		return true;
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayout() {
+	protected Grid<Wireframe> buildLayoutAndChilds() {
 		return GridFactory.empty(Wireframe.class);
 	}
 

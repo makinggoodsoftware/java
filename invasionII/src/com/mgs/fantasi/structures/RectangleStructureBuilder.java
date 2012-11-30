@@ -13,12 +13,12 @@ public class RectangleStructureBuilder extends BaseStructureBuilder{
 	}
 
 	@Override
-	protected Wireframe generateContentFor(int x, int y) {
-		return content.build();
+	protected boolean constraintsAreSatisfied() {
+		return true;
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayout() {
+	protected Grid<Wireframe> buildLayoutAndChilds() {
 		if (content == null) return GridFactory.empty(Wireframe.class);
 		return GridFactory.withOnlyOneCell(content.build());
 	}

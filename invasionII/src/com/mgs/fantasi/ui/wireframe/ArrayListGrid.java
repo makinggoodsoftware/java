@@ -12,9 +12,9 @@ public class ArrayListGrid<T> implements Grid<T> {
 		this.divisionsX = divisionsX;
 		this.divisionsY = divisionsY;
 		cells = new ArrayList<List<T>>();
-		for (int i=1; i<=divisionsX; i++){
+		for (int x=1; x<=divisionsX; x++){
 			List<T> columns = new ArrayList<T>();
-			for (int j=1; j<=divisionsY; j++){
+			for (int y=1; y<=divisionsY; y++){
 				columns.add(null);
 			}
 			cells.add(columns);
@@ -52,4 +52,12 @@ public class ArrayListGrid<T> implements Grid<T> {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "ArrayListGrid{" +
+				"cells=" + cells +
+				", divisionsX=" + divisionsX +
+				", divisionsY=" + divisionsY +
+				'}';
+	}
 }

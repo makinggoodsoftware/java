@@ -13,12 +13,12 @@ public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Wireframe generateContentFor(int x, int y) {
-		return null;
+	protected boolean constraintsAreSatisfied() {
+		return false;
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayout() {
+	protected Grid<Wireframe> buildLayoutAndChilds() {
 		return null;
 	}
 }

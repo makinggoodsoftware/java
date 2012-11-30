@@ -33,13 +33,20 @@ public class UIDriver<T> {
 		uiDIsplayManager.showPacked(uiNativeComponent, dimension);
 	}
 
-	private T buildNativeElement(Wireframe wireframe) {
+	private T buildNativeElement(final Wireframe wireframe) {
 		Set<UIStyle> uiStyles = uiProfile.findStylesFor(wireframe);
 		final T parent = uiNativeElementCreatorStrategy.createSkeleton(wireframe, uiStyles);
 		final Grid<Wireframe> content = wireframe.getContent();
 		content.itereateCellsWith(new CellIterator<Wireframe>() {
 			@Override
 			public void on(int x, int y, Wireframe cell) {
+				if (cell == null){
+					throw new RuntimeException
+							("Error building the UI native element when inspecting the content of the original" +
+							" wireframe. This should not happen ever! There must have been an error on the" +
+							" build call previous to the transformation into a native UI element" +
+							wireframe + " must be badly constructed");
+				}
 				T childAsNativeComponent = buildNativeElement(cell);
 				uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, cell.getSizeStrategy(), x, y);
 			}

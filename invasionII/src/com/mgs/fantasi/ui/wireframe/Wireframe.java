@@ -32,4 +32,14 @@ public class Wireframe {
 	public SizeStrategy getSizeStrategy() {
 		return sizeStrategy;
 	}
+
+	@Override
+	public String toString() {
+		return "Wireframe{" +
+				"content=" + content +
+				", structureType=" + structureType +
+				", shape=" + shape +
+				", sizeStrategy=" + sizeStrategy +
+				'}';
+	}
 }

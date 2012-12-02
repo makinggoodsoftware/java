@@ -32,8 +32,10 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	@Override
 	public void applyStyle(UIStyle uiStyle, JPanel nativeElement) {
 		BorderDefinition border = uiStyle.getBorder();
-		Border nativeBorder = BorderFactory.createLineBorder(border.getColor(), border.getWidth());
-		nativeElement.setBorder(nativeBorder);
+		if (border != null){
+			Border nativeBorder = BorderFactory.createLineBorder(border.getColor(), border.getWidth());
+			nativeElement.setBorder(nativeBorder);
+		}
 		nativeElement.setBackground(uiStyle.getBackgroundColor());
 
 	}

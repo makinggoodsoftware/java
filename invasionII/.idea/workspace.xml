@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af120911-6b5b-47f9-8976-b0f0669cb631" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/JPanelWithDifferentShape.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/JPanelWithDifferentShape.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" afterPath="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/DebugUIProfileFactory.java" afterPath="$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/DebugUIProfileFactory.java" />
     </list>
@@ -113,55 +113,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SwingUINativeElementCreatorStrategy.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="22" selection-start="1523" selection-end="1523" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="41" selection-start="774" selection-end="774" vertical-scroll-proportion="0.61141306">
+            <state line="35" column="22" selection-start="1117" selection-end="1117" vertical-scroll-proportion="1.1111112">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FractionsOfThree.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/FractionsOfThree.java">
+      <file leaf-file-name="PolygonStructureBuilder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/PolygonStructureBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="26" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Fraction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fraction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="38" selection-start="147" selection-end="147" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseStructureBuilder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/BaseStructureBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="35" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PijamaRowsStructureBuilder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="47" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0">
+            <state line="7" column="13" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -179,7 +143,43 @@
       <file leaf-file-name="DebugUIProfileFactory.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/DebugUIProfileFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="52" selection-start="1301" selection-end="1301" vertical-scroll-proportion="0.0">
+            <state line="41" column="43" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseUINativeElementCreatorStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/BaseUINativeElementCreatorStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="25" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwingUINativeElementCreatorStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="50" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JPanelWithDifferentShape.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/JPanelWithDifferentShape.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="41" selection-start="839" selection-end="839" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UIStyle.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/profile/UIStyle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="17" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -221,12 +221,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/BaseStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/RectangleStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PolygonStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/LayeredElementStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/structures/HexagonBoardStructureBuilder.java" />
-        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/GridFactory.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/ArrayListGrid.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/VerticalSlicesStructureBuilder.java" />
@@ -235,6 +233,8 @@
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/DivideIntoTwoProportions.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" />
+        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" />
+        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/JPanelWithDifferentShape.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/DebugUIProfileFactory.java" />
       </list>
@@ -315,8 +315,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -419,6 +417,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -849,7 +849,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="BASELINE: Working version displaying an hexagon contained in a rectangle contained in a VerticalSlicesContainer in a PijamaRowsContainer&#10;&#10;We now need to make the grid accept aspect rarios using fractions, and then translate this to the UIDriver" />
+    <option name="LAST_COMMIT_MESSAGE" value="BASELINE: Working version displaying an hexagon contained in a rectangle contained in a VerticalSlicesContainer in a PijamaRowsContainer&#10;&#10;Changed slightly the implementation of the PijamaRowsStructureBuilder so that is a bit more elegant by using the new TwoLineStructureBuilder" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -870,6 +870,7 @@
     <MESSAGE value="BASELINE: Working version displaying an hexagon contained in a rectangle&#10;&#10;Code refined so that the cells in the GridBagLayout are expanded to their maximum size" />
     <MESSAGE value="BASELINE: Working version displaying an hexagon contained in a rectangle contained in a VerticalSlicesContainer. WOOHOO!!!&#10;&#10;Code refined so that everyone use grids, and first time accomplished so that e display an element with more than one element contained inside!!" />
     <MESSAGE value="BASELINE: Working version displaying an hexagon contained in a rectangle contained in a VerticalSlicesContainer in a PijamaRowsContainer&#10;&#10;We now need to make the grid accept aspect rarios using fractions, and then translate this to the UIDriver" />
+    <MESSAGE value="BASELINE: Working version displaying an hexagon contained in a rectangle contained in a VerticalSlicesContainer in a PijamaRowsContainer&#10;&#10;Changed slightly the implementation of the PijamaRowsStructureBuilder so that is a bit more elegant by using the new TwoLineStructureBuilder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -879,26 +880,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/structures/HexagonBoardStructureBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="4" selection-start="1368" selection-end="1368" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/RectangleStructureBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/PolygonStructureBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="558" selection-end="558" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/GridFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="48" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/ArrayListGrid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="22" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.0" />
@@ -907,11 +888,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="0" selection-start="1225" selection-end="1225" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="22" selection-start="1523" selection-end="1523" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/FractionsOfThree.java">
@@ -929,6 +905,38 @@
         <state line="23" column="35" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="47" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/PolygonStructureBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="37" selection-start="247" selection-end="271" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/BaseUINativeElementCreatorStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="25" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="50" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/profile/UIStyle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="17" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContentGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="4" selection-start="83" selection-end="83" vertical-scroll-proportion="0.0" />
@@ -939,30 +947,23 @@
         <state line="32" column="27" selection-start="757" selection-end="1021" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/JPanelWithDifferentShape.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="47" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="37" selection-start="247" selection-end="271" vertical-scroll-proportion="0.0">
+        <state line="28" column="41" selection-start="839" selection-end="839" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/DebugUIProfileFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="52" selection-start="1301" selection-end="1301" vertical-scroll-proportion="0.0">
+        <state line="41" column="43" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="41" selection-start="774" selection-end="774" vertical-scroll-proportion="0.61141306">
+        <state line="35" column="22" selection-start="1117" selection-end="1117" vertical-scroll-proportion="1.1111112">
           <folding />
         </state>
       </provider>

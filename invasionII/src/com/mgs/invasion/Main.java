@@ -19,14 +19,15 @@ public class Main {
 	private void go(UIProfileFactory uiProfileFactory) {
 		UIDriver<JPanel> uiDriver = UIDriver.forSwing(uiProfileFactory.getUIProfile());
 
+		StructureBuilder hexagon = new PolygonStructureBuilder(new HexagonShape()).
+				withSizeStrategy(new ExpandToParent());
 		Wireframe content =
 			new PijamaRowsStructureBuilder(
 				new VerticalSlicesStructureBuilder(
 					new RectangleStructureBuilder().
 					witchContent
 					(
-						new PolygonStructureBuilder(new HexagonShape()).
-						withSizeStrategy(new ExpandToParent())
+							hexagon
 					)
 				).withVerticalDivisions(6),
 				new RectangleStructureBuilder()
@@ -34,7 +35,7 @@ public class Main {
 			withNumberOfGerations(3).
 			build();
 
-		uiDriver.show(content, new Dimension(400,400));
+		uiDriver.show(hexagon.build(), new Dimension(400,400));
 	}
 
 }

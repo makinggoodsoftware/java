@@ -1,12 +1,14 @@
 package com.mgs.fantasi.ui.driver.swing;
 
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.ui.profile.BorderDefinition;
 import com.mgs.fantasi.ui.profile.UIStyle;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
+import java.util.Iterator;
 import java.util.Set;
 
 class JPanelWithDifferentShape extends JPanel {
@@ -23,10 +25,19 @@ class JPanelWithDifferentShape extends JPanel {
 	public void paint(Graphics graphics) {
 		super.paint(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
-		UIStyle currentStyle = uiStyles.iterator().next();
-		Color foregroundColor = currentStyle.getBorder().getColor();
-		Color backgroundColor = currentStyle.getBackgroundColor();
-		float borderThickness = currentStyle.getBorder().getWidth();
+		Iterator<UIStyle> iterator = uiStyles.iterator();
+		if (! iterator.hasNext()) return;
+		UIStyle currentStyle = iterator.next();
+		BorderDefinition border = currentStyle.getBorder();
+		float borderThickness = 0;
+		Color foregroundColor = g2d.getColor();
+		if (border !=null){
+			borderThickness = border.getWidth();
+			foregroundColor = border.getColor();
+		}
+		Color backgroundColor = currentStyle.getBackgroundColor() != null ?
+				currentStyle.getBackgroundColor() :
+				Color.WHITE;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);
 	}

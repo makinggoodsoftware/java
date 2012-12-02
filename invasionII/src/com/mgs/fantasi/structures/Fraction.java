@@ -10,6 +10,16 @@ public class Fraction {
 	}
 
 	public double toDouble() {
-		return take / from;
+		return (double)take / (double)from;
+	}
+
+	public Fraction minus(Fraction toSubstract) {
+		if (this.from != toSubstract.from) throw new RuntimeException("" +
+				"Lame but I can't be bothered to implement it when the base of the fractions are different");
+		return new Fraction(this.take - toSubstract.take, from);
+	}
+
+	public int getBase() {
+		return from;
 	}
 }

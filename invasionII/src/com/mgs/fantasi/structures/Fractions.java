@@ -12,4 +12,8 @@ public class Fractions {
 	public static Fraction all() {
 		return new Fraction(1, 1);
 	}
+
+	public static Fraction allWithBase(int base) {
+		return new Fraction(base, base);
+	}
 }

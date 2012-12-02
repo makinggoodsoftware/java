@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" line="24" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" line="27" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af120911-6b5b-47f9-8976-b0f0669cb631" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fraction.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fraction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UINativeElementCreatorStrategy.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UINativeElementCreatorStrategy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fractions.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fractions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContent.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContent.java" />
     </list>
     <list id="3e075d1b-f044-4b8d-b10b-fc50a8e88cca" name="Ignore" comment="" />
@@ -114,24 +113,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ArrayListGrid.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/ArrayListGrid.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="29" selection-start="1461" selection-end="1461" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GridFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/GridFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="8" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UIDriver.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -144,7 +125,7 @@
       <file leaf-file-name="CellContent.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="75" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0">
+            <state line="20" column="99" selection-start="687" selection-end="687" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -159,19 +140,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SwingUINativeElementCreatorStrategy.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SwingUINativeElementCreatorStrategy.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="37" selection-start="1780" selection-end="1780" vertical-scroll-proportion="1.1314433">
+            <state line="29" column="36" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Fraction.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TwoLinesStructureBuilder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="38" selection-start="1408" selection-end="1408" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fractions.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fractions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="38" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fraction.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fraction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="26" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+            <state line="12" column="37" selection-start="254" selection-end="254" vertical-scroll-proportion="0.46035805">
               <folding />
             </state>
           </provider>
@@ -222,28 +223,29 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/JPanelWithDifferentShape.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/polygon/HexagonShape.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContentGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/VerticalSlicesStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/FractionsOfThree.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java" />
-        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Grid.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/ArrayListGrid.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellIterator.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/GridFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContent.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" />
+        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fractions.java" />
+        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" />
+        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContent.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fraction.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
     <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="height" value="774" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -788,11 +790,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="0" y="22" width="1280" height="774" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32859176" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32824427" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3984733" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -805,8 +807,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.23664123" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.67140824" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257468" sideWeight="0.0" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.6503817" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32519084" sideWeight="0.0" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -849,7 +851,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEATURING: Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Introduced the CellContent class wich contains metadata about the content to be added into one cell in a grid" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEATURING: Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Changed so that still all takes even space, but all happens with fractions being passed around" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -875,6 +877,7 @@
     <MESSAGE value="FIXING: Regression to only displaying an Hexagon but fixing the code so the hexagon always takes all space available in all cases" />
     <MESSAGE value="FIXING: Regression to only displaying an Hexagon but fixing the code so the hexagon always takes all space available in all cases&#10;&#10;There was still an issue with a trailing pixel space on the left side of the screen" />
     <MESSAGE value="FEATURING: Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Introduced the CellContent class wich contains metadata about the content to be added into one cell in a grid" />
+    <MESSAGE value="FEATURING: Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Changed so that still all takes even space, but all happens with fractions being passed around" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -894,11 +897,6 @@
         <state line="23" column="39" selection-start="915" selection-end="915" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fractions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="32" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/VerticalSlicesStructureBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="31" selection-start="769" selection-end="769" vertical-scroll-proportion="0.0" />
@@ -907,13 +905,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="31" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="31" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/ArrayListGrid.java">
@@ -931,19 +922,9 @@
         <state line="52" column="47" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="75" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UINativeElementCreatorStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="13" selection-start="369" selection-end="369" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fraction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="26" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellIterator.java">
@@ -963,7 +944,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="37" selection-start="1780" selection-end="1780" vertical-scroll-proportion="1.1314433">
+        <state line="29" column="36" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fractions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="38" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="38" selection-start="1408" selection-end="1408" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/CellContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="99" selection-start="687" selection-end="687" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/Fraction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="37" selection-start="254" selection-end="254" vertical-scroll-proportion="0.46035805">
           <folding />
         </state>
       </provider>

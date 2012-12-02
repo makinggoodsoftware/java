@@ -18,6 +18,10 @@ public class CellContent<T> {
 		return new CellContent<T>(content, Fractions.all(), Fractions.all());
 	}
 
+	public static <T> CellContent<T> withPartialHeight(T content, Fraction heightRatio) {
+		return new CellContent<T>(content, heightRatio, Fractions.allWithBase(heightRatio.getBase()));
+	}
+
 	public T getContent() {
 		return content;
 	}

@@ -2,27 +2,30 @@ package com.mgs.fantasi.structures;
 
 import com.mgs.fantasi.ui.wireframe.*;
 
+import static com.mgs.fantasi.structures.Fractions.allWithBase;
+import static com.mgs.fantasi.ui.wireframe.CellContent.withPartialHeight;
+
 public class TwoLinesStructureBuilder extends BaseStructureBuilder {
 
 	private final StructureBuilder firstLineBuilder;
 	private final StructureBuilder secondLineBuilder;
 
-	private Fraction sizeConstraints = null;
+	private Fraction firstLineHeighSizeRatio = null;
 
 	public TwoLinesStructureBuilder(StructureBuilder firstLineBuilder, StructureBuilder secondLineBuilder) {
 		this.firstLineBuilder = firstLineBuilder;
 		this.secondLineBuilder = secondLineBuilder;
 	}
 
-	public TwoLinesStructureBuilder withFirstRowSize(Fraction sizeContraints){
-		this.sizeConstraints = sizeContraints;
+	public TwoLinesStructureBuilder withFirstRowSize(Fraction firstLineHeighSizeRatio){
+		this.firstLineHeighSizeRatio = firstLineHeighSizeRatio;
 		return this;
 	}
 
 
 	@Override
 	protected boolean constraintsAreSatisfied() {
-		return sizeConstraints != null;
+		return firstLineHeighSizeRatio != null;
 	}
 
 	@Override
@@ -32,9 +35,10 @@ public class TwoLinesStructureBuilder extends BaseStructureBuilder {
 			@Override
 			public CellContent<Wireframe> generateContentFor(int x, int y) {
 				if (y == 0){
-					return CellContent.evenlyDivided(firstLineBuilder.build());
+					return withPartialHeight(firstLineBuilder.build(), firstLineHeighSizeRatio);
 				}else{
-					return CellContent.evenlyDivided(secondLineBuilder.build());
+					Fraction remainder = allWithBase(firstLineHeighSizeRatio.getBase()).minus(firstLineHeighSizeRatio);
+					return withPartialHeight(secondLineBuilder.build(), remainder);
 				}
 			}
 		});

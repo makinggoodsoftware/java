@@ -9,7 +9,7 @@ public class GridFactory {
 
 	public static <T> Grid<T> withOnlyOneCell(T content) {
 		Grid<T> grid = new ArrayListGrid<T>(1, 1);
-		grid.setCell (0, 0, content);
+		grid.setCell (0, 0, CellContent.evenlyDivided(content));
 		return grid;
 	}
 
@@ -19,12 +19,12 @@ public class GridFactory {
 
 	private static class EmptyGrid<T> implements Grid<T> {
 		@Override
-		public void setCell(int x, int y, T content) {
+		public void setCell(int x, int y, CellContent<T> content) {
 			throw new NotImplementedException();
 		}
 
 		@Override
-		public T getCell(int x, int y) {
+		public CellContent<T> getCell(int x, int y) {
 			throw new NotImplementedException();
 		}
 

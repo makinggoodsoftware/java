@@ -4,6 +4,7 @@ import com.mgs.fantasi.ui.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.ui.driver.swing.SwingUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.profile.UIStyle;
+import com.mgs.fantasi.ui.wireframe.CellContent;
 import com.mgs.fantasi.ui.wireframe.CellIterator;
 import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
@@ -39,7 +40,7 @@ public class UIDriver<T> {
 		final Grid<Wireframe> content = wireframe.getContent();
 		content.itereateCellsWith(new CellIterator<Wireframe>() {
 			@Override
-			public void on(int x, int y, Wireframe cell) {
+			public void on(int x, int y, CellContent<Wireframe> cell) {
 				if (cell == null){
 					throw new RuntimeException
 							("Error building the UI native element when inspecting the content of the original" +
@@ -47,8 +48,9 @@ public class UIDriver<T> {
 							" build call previous to the transformation into a native UI element" +
 							wireframe + " must be badly constructed");
 				}
-				T childAsNativeComponent = buildNativeElement(cell);
-				uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, cell.getSizeStrategy(), x, y);
+				Wireframe child = cell.getContent();
+				T childAsNativeComponent = buildNativeElement(child);
+				uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, child.getSizeStrategy(), x, y);
 			}
 		});
 		return parent;

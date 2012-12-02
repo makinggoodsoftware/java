@@ -20,25 +20,22 @@ public class Main {
 	private void go(UIProfileFactory uiProfileFactory) {
 		UIDriver<JPanel> uiDriver = UIDriver.forSwing(uiProfileFactory.getUIProfile());
 
-		StructureBuilder hexagon = new PolygonStructureBuilder(new HexagonShape()).
-				withSizeStrategy(new ExpandToParent());
-		RectangleStructureBuilder rectangle = new RectangleStructureBuilder().
-				witchContent
-						(
-								hexagon
-						);
-		VerticalSlicesStructureBuilder firstRowBuilder = new VerticalSlicesStructureBuilder(
-				rectangle
-		).withVerticalDivisions(6);
 		Wireframe content =
 			new PijamaRowsStructureBuilder(
-					firstRowBuilder,
+				new VerticalSlicesStructureBuilder(
+					new RectangleStructureBuilder().
+					witchContent
+							(
+									new PolygonStructureBuilder(new HexagonShape()).
+											withSizeStrategy(new ExpandToParent())
+							)
+				).withVerticalDivisions(6),
 				new RectangleStructureBuilder()
-			).withFirstRowSize(FractionsOfThree.thwoThirds()).
+			).withFirstRowSize(Fractions.thwoThirds()).
 			withNumberOfGerations(3).
 			build();
 
-		uiDriver.show(hexagon.build(), new Dimension(400,400));
+		uiDriver.show(content, new Dimension(400,400));
 	}
 
 }

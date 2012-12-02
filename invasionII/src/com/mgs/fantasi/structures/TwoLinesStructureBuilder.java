@@ -1,9 +1,6 @@
 package com.mgs.fantasi.structures;
 
-import com.mgs.fantasi.ui.wireframe.CellContentGenerator;
-import com.mgs.fantasi.ui.wireframe.Grid;
-import com.mgs.fantasi.ui.wireframe.GridFactory;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 
 public class TwoLinesStructureBuilder extends BaseStructureBuilder {
 
@@ -33,11 +30,11 @@ public class TwoLinesStructureBuilder extends BaseStructureBuilder {
 		Grid<Wireframe> layout = GridFactory.withDimensions(1, 2);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override
-			public Wireframe generateContentFor(int x, int y) {
+			public CellContent<Wireframe> generateContentFor(int x, int y) {
 				if (y == 0){
-					return firstLineBuilder.build();
+					return CellContent.evenlyDivided(firstLineBuilder.build());
 				}else{
-					return secondLineBuilder.build();
+					return CellContent.evenlyDivided(secondLineBuilder.build());
 				}
 			}
 		});

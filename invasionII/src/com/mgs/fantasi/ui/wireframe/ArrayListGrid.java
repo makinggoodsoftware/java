@@ -6,14 +6,14 @@ import java.util.List;
 public class ArrayListGrid<T> implements Grid<T> {
 	private final int divisionsX;
 	private final int divisionsY;
-	private final List<List<T>> cells;
+	private final List<List<CellContent<T>>> cells;
 
 	public ArrayListGrid(int divisionsX, int divisionsY) {
 		this.divisionsX = divisionsX;
 		this.divisionsY = divisionsY;
-		cells = new ArrayList<List<T>>();
+		cells = new ArrayList<List<CellContent<T>>>();
 		for (int x=1; x<=divisionsX; x++){
-			List<T> columns = new ArrayList<T>();
+			List<CellContent<T>> columns = new ArrayList<CellContent<T>>();
 			for (int y=1; y<=divisionsY; y++){
 				columns.add(null);
 			}
@@ -22,13 +22,13 @@ public class ArrayListGrid<T> implements Grid<T> {
 	}
 
 	@Override
-	public void setCell(int x, int y, T content) {
+	public void setCell(int x, int y, CellContent<T> content) {
 		if (x > divisionsX || y > divisionsY) throw new IllegalArgumentException();
 		cells.get(x).set(y, content);
 	}
 
 	@Override
-	public T getCell(int x, int y) {
+	public CellContent<T> getCell(int x, int y) {
 		if (x > divisionsX || y > divisionsY) throw new IllegalArgumentException();
 		return cells.get(x).get(y);
 	}
@@ -37,8 +37,8 @@ public class ArrayListGrid<T> implements Grid<T> {
 	public void fillCells(CellContentGenerator<T> cellContentGenerator) {
 		for (int x=0; x < divisionsX; x++){
 			for (int y=0; y < divisionsY; y++){
-				T content = cellContentGenerator.generateContentFor(x, y);
-				setCell(x, y, content);
+				CellContent<T> cellContent = cellContentGenerator.generateContentFor(x, y);
+				setCell(x, y, cellContent);
 			}
 		}
 	}

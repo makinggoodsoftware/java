@@ -1,9 +1,9 @@
 package com.mgs.fantasi.ui.wireframe;
 
 public interface Grid<T> {
-	void setCell(int x, int y, T content);
+	void setCell(int x, int y, CellContent<T> content);
 
-	T getCell(int x, int y);
+	CellContent<T> getCell(int x, int y);
 
 	void fillCells(CellContentGenerator<T> cellContentGenerator);
 

@@ -1,9 +1,6 @@
 package com.mgs.fantasi.structures;
 
-import com.mgs.fantasi.ui.wireframe.CellContentGenerator;
-import com.mgs.fantasi.ui.wireframe.Grid;
-import com.mgs.fantasi.ui.wireframe.GridFactory;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 
 public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 
@@ -26,8 +23,8 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 		Grid<Wireframe> layout = GridFactory.withDimensions(numberOfDivisions, 1);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override
-			public Wireframe generateContentFor(int x, int y) {
-				return contentBuilder.build();
+			public CellContent<Wireframe> generateContentFor(int x, int y) {
+				return CellContent.evenlyDivided(contentBuilder.build());
 			}
 		});
 		return layout;

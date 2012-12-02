@@ -2,5 +2,5 @@ package com.mgs.fantasi.ui.wireframe;
 
 public interface CellIterator<T> {
 
-	void on(int x, int y, T cell);
+	void on(int x, int y, CellContent<T> cell);
 }

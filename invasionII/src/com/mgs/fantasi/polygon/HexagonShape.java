@@ -22,7 +22,7 @@ public class HexagonShape implements PolygonPointsIterator {
 		double ySecondAnchor 	= yFirstAnchor * 3;
 		double yTop 			= size.getHeight();
 
-		double xOrigin   = 1;
+		double xOrigin   = 0;
 		double xCenter   = halfWidth;
 		double xEndPoint = size.getWidth();
 

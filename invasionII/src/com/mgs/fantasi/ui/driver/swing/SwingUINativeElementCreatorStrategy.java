@@ -1,6 +1,7 @@
 package com.mgs.fantasi.ui.driver.swing;
 
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.structures.Fraction;
 import com.mgs.fantasi.ui.driver.BaseUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.BorderDefinition;
 import com.mgs.fantasi.ui.profile.SizeStrategy;
@@ -41,16 +42,16 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
-	public void compose(JPanel parent, JPanel child, SizeStrategy sizeStrategy, int x, int y) {
-		parent.add(child, intoCoordinates(x, y));
+	public void compose(JPanel parent, JPanel child, SizeStrategy sizeStrategy, int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
+		parent.add(child, intoCoordinates(x, y, widthSizeRatio, heightSizeRatio));
 	}
 
-	private GridBagConstraints intoCoordinates(int x, int y) {
+	private GridBagConstraints intoCoordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
-		gbc.weightx = 1.0;
-		gbc.weighty = 1.0;
+		gbc.weightx = widthSizeRatio.toDouble();
+		gbc.weighty = heightSizeRatio.toDouble();
 		gbc.fill = GridBagConstraints.BOTH;
 		return gbc;
 	}

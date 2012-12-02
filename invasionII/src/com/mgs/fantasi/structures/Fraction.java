@@ -8,4 +8,8 @@ public class Fraction {
 		this.take = take;
 		this.from = from;
 	}
+
+	public double toDouble() {
+		return take / from;
+	}
 }

@@ -4,23 +4,29 @@ import com.mgs.fantasi.structures.Fraction;
 import com.mgs.fantasi.structures.Fractions;
 
 public class CellContent<T> {
-	private final Fraction sizeRatio;
 	private final T content;
+	private final Fraction widthSizeRatio;
+	private final Fraction heightSizeRatio;
 
-	private CellContent(Fraction sizeRatio, T content) {
-		this.sizeRatio = sizeRatio;
+	private CellContent(T content, Fraction heightSizeRatio, Fraction widthSizeRatio) {
 		this.content = content;
+		this.heightSizeRatio = heightSizeRatio;
+		this.widthSizeRatio = widthSizeRatio;
 	}
 
 	public static <T> CellContent<T> evenlyDivided(T content) {
-		return new CellContent<T>(Fractions.all(), content);
+		return new CellContent<T>(content, Fractions.all(), Fractions.all());
 	}
 
 	public T getContent() {
 		return content;
 	}
 
-	public Fraction getSizeRatio() {
-		return sizeRatio;
+	public Fraction getWidthSizeRatio() {
+		return widthSizeRatio;
+	}
+
+	public Fraction getHeightSizeRatio() {
+		return heightSizeRatio;
 	}
 }

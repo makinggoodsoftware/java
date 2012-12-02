@@ -50,7 +50,7 @@ public class UIDriver<T> {
 				}
 				Wireframe child = cell.getContent();
 				T childAsNativeComponent = buildNativeElement(child);
-				uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, child.getSizeStrategy(), x, y);
+				uiNativeElementCreatorStrategy.compose(parent, childAsNativeComponent, child.getSizeStrategy(), x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio	());
 			}
 		});
 		return parent;

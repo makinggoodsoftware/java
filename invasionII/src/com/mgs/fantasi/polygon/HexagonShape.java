@@ -17,22 +17,22 @@ public class HexagonShape implements PolygonPointsIterator {
 		double quarterHeight = size.getHeight() / 4;
 		double halfWidth = size.getWidth() / 2;
 
-		double yBottom = 1;
+		double yBottom = 0;
 		double yFirstAnchor 	= quarterHeight;
 		double ySecondAnchor 	= yFirstAnchor * 3;
-		double yTop 			= yFirstAnchor * 4;
+		double yTop 			= size.getHeight();
 
 		double xOrigin   = 1;
 		double xCenter   = halfWidth;
-		double xEndPoint = xCenter * 2;
+		double xEndPoint = size.getWidth();
 
-		hexPoints.add(new Point2D.Double(xOrigin -1, 		yFirstAnchor-1));
-		hexPoints.add(new Point2D.Double(xOrigin-1, 		ySecondAnchor-1));
-		hexPoints.add(new Point2D.Double(xCenter-1,			yTop-1));
+		hexPoints.add(new Point2D.Double(xOrigin, 		yFirstAnchor));
+		hexPoints.add(new Point2D.Double(xOrigin, 		ySecondAnchor));
+		hexPoints.add(new Point2D.Double(xCenter,			yTop));
 
-		hexPoints.add(new Point2D.Double(xEndPoint-1,		ySecondAnchor));
-		hexPoints.add(new Point2D.Double(xEndPoint-1, 		yFirstAnchor-1));
-		hexPoints.add(new Point2D.Double(xCenter-1,			yBottom-1));
+		hexPoints.add(new Point2D.Double(xEndPoint,		ySecondAnchor));
+		hexPoints.add(new Point2D.Double(xEndPoint, 		yFirstAnchor));
+		hexPoints.add(new Point2D.Double(xCenter,			yBottom));
 		return hexPoints;
 	}
 }

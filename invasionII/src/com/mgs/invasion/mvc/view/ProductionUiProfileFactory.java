@@ -1,6 +1,6 @@
 package com.mgs.invasion.mvc.view;
 
-import com.mgs.fantasi.structures.RectangleStructureBuilder;
+import com.mgs.fantasi.polygon.HexagonShape;
 import com.mgs.fantasi.ui.profile.BorderDefinition;
 import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
@@ -16,7 +16,7 @@ public class ProductionUiProfileFactory implements UIProfileFactory {
 		UIProfile debugProfile = new UIProfile();
 
 		debugProfile.addStyle(
-				UISelectorFactory.forType(RectangleStructureBuilder.class),
+				UISelectorFactory.forShape(HexagonShape.class),
 				new UIStyle().withBorder(new BorderDefinition(Color.BLACK, 1))
 		);
 

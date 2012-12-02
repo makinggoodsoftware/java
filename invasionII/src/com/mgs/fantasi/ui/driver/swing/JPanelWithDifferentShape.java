@@ -38,7 +38,7 @@ class JPanelWithDifferentShape extends JPanel {
 		Color backgroundColor = currentStyle.getBackgroundColor() != null ?
 				currentStyle.getBackgroundColor() :
 				Color.WHITE;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);
 	}
 

@@ -9,8 +9,12 @@ public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
 
 	private int numberOfGenerations = UNDEFINED;
 
-	public PijamaRowsStructureBuilder(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
+	private PijamaRowsStructureBuilder(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
 		generationBuilder = new TwoLinesStructureBuilder(firstRowBuilder, secondRowBuilder);
+	}
+
+	public static PijamaRowsStructureBuilder pijamaRows(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
+		return new PijamaRowsStructureBuilder(firstRowBuilder, secondRowBuilder);
 	}
 
 	public PijamaRowsStructureBuilder withFirstRowSize(Fraction sizeContraints){
@@ -30,7 +34,7 @@ public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayoutAndChilds() {
+	protected Structure buildLayoutAndChilds() {
 		Grid<Wireframe> layout = GridFactory.withDimensions(1, numberOfGenerations);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override

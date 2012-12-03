@@ -7,10 +7,10 @@ import com.mgs.fantasi.ui.profile.SizeStrategy;
 public class Wireframe {
 	private final Class<? extends StructureBuilder> structureType;
 	private final PolygonPointsIterator shape;
-	private final Grid<Wireframe> content;
+	private final Structure content;
 	private final SizeStrategy sizeStrategy;
 
-	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Grid<Wireframe> content, SizeStrategy sizeStrategy) {
+	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Structure content, SizeStrategy sizeStrategy) {
 		this.structureType = structureType;
 		this.shape = shape;
 		this.content = content;
@@ -25,7 +25,7 @@ public class Wireframe {
 		return shape;
 	}
 
-	public Grid<Wireframe> getContent() {
+	public Structure getContent() {
 		return content;
 	}
 

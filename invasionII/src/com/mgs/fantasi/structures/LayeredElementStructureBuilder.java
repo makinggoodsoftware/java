@@ -1,22 +1,30 @@
 package com.mgs.fantasi.structures;
 
-import com.mgs.fantasi.ui.wireframe.Grid;
+import com.mgs.fantasi.ui.wireframe.Layers;
+import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
-public class LayeredElementStructureBuilder extends BaseStructureBuilder {
-	private final StructureBuilder[] contentBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
-	public LayeredElementStructureBuilder(StructureBuilder... contentBuilder) {
-		this.contentBuilder = contentBuilder;
+public class LayeredElementStructureBuilder extends BaseStructureBuilder {
+	private final StructureBuilder[] layers;
+
+	public LayeredElementStructureBuilder(StructureBuilder... layers) {
+		this.layers = layers;
 	}
 
 	@Override
 	protected boolean constraintsAreSatisfied() {
-		return false;
+		return true;
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayoutAndChilds() {
-		return null;
+	protected Structure buildLayoutAndChilds() {
+		List<Wireframe> layersAsWireframes = new ArrayList<Wireframe>();
+		for (StructureBuilder layer : layers) {
+			layersAsWireframes.add(layer.build());
+		}
+		return new Layers<Wireframe>(layersAsWireframes);
 	}
 }

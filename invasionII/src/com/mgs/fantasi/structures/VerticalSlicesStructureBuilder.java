@@ -8,8 +8,12 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 	private final StructureBuilder contentBuilder;
 	private int numberOfDivisions = UNDEFINED;
 
-	public VerticalSlicesStructureBuilder(StructureBuilder contentBuilder) {
+	private VerticalSlicesStructureBuilder(StructureBuilder contentBuilder) {
 		this.contentBuilder = contentBuilder;
+	}
+
+	public static VerticalSlicesStructureBuilder verticalSlices(StructureBuilder contentBuilder) {
+		return new VerticalSlicesStructureBuilder(contentBuilder);
 	}
 
 	@Override
@@ -19,7 +23,7 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayoutAndChilds() {
+	protected Structure buildLayoutAndChilds() {
 		Grid<Wireframe> layout = GridFactory.withDimensions(numberOfDivisions, 1);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override

@@ -2,7 +2,7 @@ package com.mgs.fantasi.structures;
 
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.profile.SizeStrategy;
-import com.mgs.fantasi.ui.wireframe.Grid;
+import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -21,7 +21,7 @@ public abstract class BaseStructureBuilder implements StructureBuilder{
 		if (!constraintsAreSatisfied()){
 			throw new RuntimeException("Can't build " +  this +  " since some of its constraints are not satisfied");
 		}
-		Grid<Wireframe> content = buildLayoutAndChilds();
+		Structure content = buildLayoutAndChilds();
 		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");
 		return new Wireframe(getClass(), shape, content, sizeStrategy);
 	}
@@ -38,7 +38,7 @@ public abstract class BaseStructureBuilder implements StructureBuilder{
 		return this;
 	}
 
-	protected abstract Grid<Wireframe> buildLayoutAndChilds();
+	protected abstract Structure buildLayoutAndChilds();
 
 	private class NativeRectanguarShape implements PolygonPointsIterator {
 		@Override

@@ -2,8 +2,8 @@ package com.mgs.invasion.mvc.view.structures;
 
 import com.mgs.fantasi.polygon.HexagonShape;
 import com.mgs.fantasi.structures.*;
-import com.mgs.fantasi.ui.wireframe.Grid;
 import com.mgs.fantasi.ui.wireframe.GridFactory;
+import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
@@ -15,11 +15,11 @@ public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 	private final PolygonStructureBuilder hexagonBuilder;
 
 	public HexagonBoardStructureBuilder() {
-		hexagonBuilder = new PolygonStructureBuilder(new HexagonShape());
-		hexagonRowBuilder = new VerticalSlicesStructureBuilder(hexagonBuilder);
-		emptyRowBuilder = new RectangleStructureBuilder();
-		oddHexagonRowsLayerBuilder = new PijamaRowsStructureBuilder(hexagonRowBuilder, emptyRowBuilder);
-		evenHexagonRowsLayerBuilder = new PijamaRowsStructureBuilder(hexagonRowBuilder, emptyRowBuilder);
+		hexagonBuilder = PolygonStructureBuilder.polygonWithShape(new HexagonShape());
+		hexagonRowBuilder = VerticalSlicesStructureBuilder.verticalSlices(hexagonBuilder);
+		emptyRowBuilder = RectangleStructureBuilder.emptyRectangle();
+		oddHexagonRowsLayerBuilder = PijamaRowsStructureBuilder.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
+		evenHexagonRowsLayerBuilder = PijamaRowsStructureBuilder.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
 		boardStructureBuilder = new LayeredElementStructureBuilder(oddHexagonRowsLayerBuilder, evenHexagonRowsLayerBuilder);
 	}
 
@@ -30,7 +30,7 @@ public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayoutAndChilds() {
+	protected Structure buildLayoutAndChilds() {
 		return GridFactory.empty(Wireframe.class);
 	}
 }

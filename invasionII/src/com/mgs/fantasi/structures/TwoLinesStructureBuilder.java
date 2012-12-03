@@ -29,7 +29,7 @@ public class TwoLinesStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected Grid<Wireframe> buildLayoutAndChilds() {
+	protected Structure buildLayoutAndChilds() {
 		Grid<Wireframe> layout = GridFactory.withDimensions(1, 2);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override

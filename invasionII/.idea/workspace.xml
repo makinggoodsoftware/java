@@ -4,24 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" line="27" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af120911-6b5b-47f9-8976-b0f0669cb631" name="Default" comment="REFACTORING">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/LayerIterator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Layers.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Margin.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Structure.java" />
+    <list default="true" id="af120911-6b5b-47f9-8976-b0f0669cb631" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/guava-11.0.1.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/BaseStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/BaseStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/LayeredElementStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/LayeredElementStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PolygonStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PolygonStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/RectangleStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/RectangleStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/VerticalSlicesStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/VerticalSlicesStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Grid.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Grid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Wireframe.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Wireframe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" afterPath="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/structures/HexagonBoardStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/structures/HexagonBoardStructureBuilder.java" />
     </list>
     <list id="3e075d1b-f044-4b8d-b10b-fc50a8e88cca" name="Ignore" comment="" />
     <ignored path="invasionII.iws" />
@@ -124,7 +109,7 @@
       <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="54" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.5140665">
+            <state line="30" column="54" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.36061382">
               <folding />
             </state>
           </provider>
@@ -878,7 +863,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEATURING: WOOHOO!! Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Seems to be working fine... Firstly implemented into the TwoLinesStructureBuilder.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="REFACTORING Added the Structure interface that will allow for Grids and Layers... Also added static methods to builders so that the code reads better" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -906,6 +891,7 @@
     <MESSAGE value="FEATURING: Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Introduced the CellContent class wich contains metadata about the content to be added into one cell in a grid" />
     <MESSAGE value="FEATURING: Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Changed so that still all takes even space, but all happens with fractions being passed around" />
     <MESSAGE value="FEATURING: WOOHOO!! Adding the ability to specify which percentage you want each child element to take from is parent container grid as opposite of just evenly dividing the space every time&#10;&#10;Seems to be working fine... Firstly implemented into the TwoLinesStructureBuilder.java" />
+    <MESSAGE value="REFACTORING Added the Structure interface that will allow for Grids and Layers... Also added static methods to builders so that the code reads better" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -992,7 +978,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="54" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.5140665">
+        <state line="30" column="54" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.36061382">
           <folding />
         </state>
       </provider>

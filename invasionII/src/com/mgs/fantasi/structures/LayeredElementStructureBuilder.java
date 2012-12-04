@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LayeredElementStructureBuilder extends BaseStructureBuilder {
-	private final StructureBuilder[] layers;
+	private List<StructureBuilder> layers = new ArrayList<StructureBuilder>();
 
-	public LayeredElementStructureBuilder(StructureBuilder... layers) {
-		this.layers = layers;
+	public static LayeredElementStructureBuilder layered() {
+		return new LayeredElementStructureBuilder();
+	}
+
+	public LayeredElementStructureBuilder withLayer (StructureBuilder layer){
+		layers.add(layer);
+		return this;
 	}
 
 	@Override

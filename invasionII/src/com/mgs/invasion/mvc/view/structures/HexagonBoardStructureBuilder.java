@@ -20,7 +20,7 @@ public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 		emptyRowBuilder = RectangleStructureBuilder.emptyRectangle();
 		oddHexagonRowsLayerBuilder = PijamaRowsStructureBuilder.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
 		evenHexagonRowsLayerBuilder = PijamaRowsStructureBuilder.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
-		boardStructureBuilder = new LayeredElementStructureBuilder(oddHexagonRowsLayerBuilder, evenHexagonRowsLayerBuilder);
+		boardStructureBuilder = LayeredElementStructureBuilder.layered().withLayer(oddHexagonRowsLayerBuilder).withLayer(evenHexagonRowsLayerBuilder);
 	}
 
 

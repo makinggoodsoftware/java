@@ -11,13 +11,14 @@ import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
 import javax.swing.*;
 import java.awt.*;
 
+import static com.mgs.fantasi.structures.LayeredElementStructureBuilder.layered;
 import static com.mgs.fantasi.structures.PijamaRowsStructureBuilder.pijamaRows;
 import static com.mgs.fantasi.structures.PolygonStructureBuilder.polygonWithShape;
 import static com.mgs.fantasi.structures.RectangleStructureBuilder.emptyRectangle;
 import static com.mgs.fantasi.structures.VerticalSlicesStructureBuilder.verticalSlices;
 
 public class Main {
-	public static void main (String ... args){
+	public static void main(String... args) {
 //		new Main().go(new DebugUIProfileFactory());
 		new Main().go(new ProductionUiProfileFactory());
 	}
@@ -26,26 +27,28 @@ public class Main {
 		UIDriver<JPanel> uiDriver = UIDriver.forSwing(uiProfileFactory.getUIProfile());
 
 		Wireframe content =
-//			new LayeredElementStructureBuilder
-//			(
-				pijamaRows(
-					verticalSlices(
-						emptyRectangle().
-							withContent
-							(
-								polygonWithShape(new HexagonShape()).
+			layered().
+				withLayer(
+					pijamaRows(
+						verticalSlices(
+							emptyRectangle().
+								withContent(
+									polygonWithShape(new HexagonShape()).
 									withSizeStrategy(new ExpandToParent())
-							)
-					).withVerticalDivisions(10),
+								)
+						).
+						withVerticalDivisions(10),
+						emptyRectangle()
+					).
+					withFirstRowSize(Fractions.thwoThirds()).
+					withNumberOfGerations(5)
+				).
+				withLayer(
 					emptyRectangle()
-				).withFirstRowSize(Fractions.thwoThirds())
-				.withNumberOfGerations(3)
-//			,
-//				new RectangleStructureBuilder()
-//			).
-			.build();
+				).
+			build();
 
-		uiDriver.show(content, new Dimension(400,400));
+		uiDriver.show(content, new Dimension(400, 400));
 	}
 
 }

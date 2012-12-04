@@ -4,8 +4,9 @@ import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.structures.Fraction;
 import com.mgs.fantasi.ui.driver.BaseUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.BorderDefinition;
-import com.mgs.fantasi.ui.profile.SizeStrategy;
+import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.profile.UIStyle;
+import com.mgs.fantasi.ui.wireframe.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -21,8 +22,35 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
-	protected void createLayoutSkeleton(JPanel nativeElement) {
+	protected void processLayerChilds(final JPanel nativeElement, Layers<Wireframe> layers, final UIProfile uiProfile) {
+		nativeElement.setLayout(new OverlayLayout(nativeElement));
+		layers.iterateInCrescendo (new LayerIterator<Wireframe>(){
+			@Override
+			public void on(int zIndex, Wireframe layer, Margin margin) {
+				JPanel layerAsNativeElement  = create(layer, uiProfile);
+				nativeElement.add(layerAsNativeElement, zIndex);
+			}
+		});
+	}
+
+	@Override
+	protected void processGridChilds(final JPanel nativeElement, Grid<Wireframe> content, final UIProfile uiProfile) {
 		nativeElement.setLayout(new GridBagLayout());
+		content.itereateCellsWith(new CellIterator<Wireframe>() {
+			@Override
+			public void on(int x, int y, CellContent<Wireframe> cell) {
+				if (cell == null) {
+					throw new RuntimeException
+							("Error building the UI native element when inspecting the content of the original" +
+									" wireframe. This should not happen ever! There must have been an error on the" +
+									" build call previous to the transformation into a native UI element must be badly constructed");
+				}
+				Wireframe child = cell.getContent();
+				JPanel childAsNativeComponent = create(child, uiProfile);
+				nativeElement.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+			}
+		});
+
 	}
 
 	@Override
@@ -39,11 +67,6 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 		}
 		nativeElement.setBackground(uiStyle.getBackgroundColor());
 
-	}
-
-	@Override
-	public void compose(JPanel parent, JPanel child, SizeStrategy sizeStrategy, int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
-		parent.add(child, intoCoordinates(x, y, widthSizeRatio, heightSizeRatio));
 	}
 
 	private GridBagConstraints intoCoordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {

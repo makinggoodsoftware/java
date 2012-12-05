@@ -9,12 +9,14 @@ public class Wireframe {
 	private final PolygonPointsIterator shape;
 	private final Structure content;
 	private final SizeStrategy sizeStrategy;
+	private final Margin margin;
 
-	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Structure content, SizeStrategy sizeStrategy) {
+	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Structure content, SizeStrategy sizeStrategy, Margin margin) {
 		this.structureType = structureType;
 		this.shape = shape;
 		this.content = content;
 		this.sizeStrategy = sizeStrategy;
+		this.margin = margin;
 	}
 
 	public Class<? extends StructureBuilder> getStructureType() {
@@ -33,6 +35,10 @@ public class Wireframe {
 		return sizeStrategy;
 	}
 
+	public Margin getMargin() {
+		return margin;
+	}
+
 	@Override
 	public String toString() {
 		return "Wireframe{" +
@@ -40,6 +46,7 @@ public class Wireframe {
 				", structureType=" + structureType +
 				", shape=" + shape +
 				", sizeStrategy=" + sizeStrategy +
+				", margin=" + margin +
 				'}';
 	}
 }

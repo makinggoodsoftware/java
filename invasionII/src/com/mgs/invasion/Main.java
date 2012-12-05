@@ -5,6 +5,7 @@ import com.mgs.fantasi.structures.Fractions;
 import com.mgs.fantasi.structures.PijamaRowsStructureBuilder;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
+import com.mgs.fantasi.ui.wireframe.Margin;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
 
@@ -42,7 +43,7 @@ public class Main {
 					hexagonsPijamaRows
 				).
 				withLayer(
-					emptyRectangle()
+					emptyRectangle().withMargin(new Margin(0,0,0,0))
 				).
 			build();
 

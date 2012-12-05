@@ -1,10 +1,7 @@
 package com.mgs.fantasi.ui.driver;
 
 import com.mgs.fantasi.ui.profile.UIProfile;
-import com.mgs.fantasi.ui.wireframe.Grid;
-import com.mgs.fantasi.ui.wireframe.Layers;
-import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.profile.UIStyle;
 
@@ -18,6 +15,10 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 		T nativeElement = shape.isRectangular() ?
 			newRectangularNativeElementSkeletonWithStyles(uiStyles):
 			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
+		Margin margin = wireframe.getMargin();
+		if (! margin.isEmpty()){
+			decorateWithMargin (nativeElement, margin);
+		}
 		final Structure content = wireframe.getContent();
 		if (content instanceof Grid) {
 			processGridChilds(nativeElement, (Grid<Wireframe>) content, uiProfile);
@@ -29,6 +30,8 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 		return nativeElement;
 
 	}
+
+	protected abstract void decorateWithMargin(T nativeElement, Margin margin);
 
 	protected abstract void processLayerChilds(T nativeElement, Layers<Wireframe> content, UIProfile uiProfile);
 

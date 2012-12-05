@@ -12,7 +12,7 @@ public class Layers<T> implements Structure {
 	public void iterateInCrescendo(LayerIterator layerIterator) {
 		int zIndex = 0;
 		for (int i = layers.size() - 1; i >= 0; i--){
-			layerIterator.on (zIndex, layers.get(i), new Margin());
+			layerIterator.on (zIndex, layers.get(i), new Margin(0,0,0,0));
 			zIndex++;
 		}
 	}

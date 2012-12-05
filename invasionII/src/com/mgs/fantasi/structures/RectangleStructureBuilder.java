@@ -4,7 +4,7 @@ import com.mgs.fantasi.ui.wireframe.GridFactory;
 import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
-public class RectangleStructureBuilder extends BaseStructureBuilder{
+public class RectangleStructureBuilder extends BaseStructureBuilder<RectangleStructureBuilder>{
 	private StructureBuilder content;
 
 	private RectangleStructureBuilder(StructureBuilder content) {
@@ -37,4 +37,5 @@ public class RectangleStructureBuilder extends BaseStructureBuilder{
 		if (content == null) return GridFactory.empty(Wireframe.class);
 		return GridFactory.withOnlyOneCell(content.build());
 	}
+
 }

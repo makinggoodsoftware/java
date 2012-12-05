@@ -22,6 +22,10 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
+	protected void decorateWithMargin(JPanel nativeElement, Margin margin) {
+	}
+
+	@Override
 	protected void processLayerChilds(final JPanel nativeElement, Layers<Wireframe> layers, final UIProfile uiProfile) {
 		nativeElement.setLayout(new OverlayLayout(nativeElement));
 		layers.iterateInCrescendo (new LayerIterator<Wireframe>(){

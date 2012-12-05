@@ -55,7 +55,9 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 
 	@Override
 	protected JPanel newRectangularNativeElement() {
-		return new JPanel();
+		JPanel jPanel = new JPanel();
+		jPanel.setOpaque(false);
+		return jPanel;
 	}
 
 	@Override
@@ -65,7 +67,11 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 			Border nativeBorder = BorderFactory.createLineBorder(border.getColor(), border.getWidth());
 			nativeElement.setBorder(nativeBorder);
 		}
-		nativeElement.setBackground(uiStyle.getBackgroundColor());
+		Color backgroundColor = uiStyle.getBackgroundColor();
+		if (backgroundColor!=null){
+			nativeElement.setBackground(backgroundColor);
+			nativeElement.setOpaque(true);
+		}
 
 	}
 

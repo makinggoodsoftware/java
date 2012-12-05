@@ -15,7 +15,7 @@ public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 	private final PolygonStructureBuilder hexagonBuilder;
 
 	public HexagonBoardStructureBuilder() {
-		hexagonBuilder = PolygonStructureBuilder.polygonWithShape(new HexagonShape());
+		hexagonBuilder = PolygonStructureBuilder.polygon(new HexagonShape());
 		hexagonRowBuilder = VerticalSlicesStructureBuilder.verticalSlices(hexagonBuilder);
 		emptyRowBuilder = RectangleStructureBuilder.emptyRectangle();
 		oddHexagonRowsLayerBuilder = PijamaRowsStructureBuilder.pijamaRows(hexagonRowBuilder, emptyRowBuilder);

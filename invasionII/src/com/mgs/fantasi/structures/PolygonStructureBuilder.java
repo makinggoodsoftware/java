@@ -11,7 +11,7 @@ public class PolygonStructureBuilder extends BaseStructureBuilder {
 		withShape(polygonPointsIterator);
 	}
 
-	public static PolygonStructureBuilder polygonWithShape(PolygonPointsIterator polygonPointsIterator) {
+	public static PolygonStructureBuilder polygon(PolygonPointsIterator polygonPointsIterator) {
 		return new PolygonStructureBuilder(polygonPointsIterator);
 	}
 

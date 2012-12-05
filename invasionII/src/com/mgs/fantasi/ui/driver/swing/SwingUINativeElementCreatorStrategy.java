@@ -30,7 +30,7 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 		nativeElement.setLayout(new OverlayLayout(nativeElement));
 		layers.iterateInCrescendo (new LayerIterator<Wireframe>(){
 			@Override
-			public void on(int zIndex, Wireframe layer, Margin margin) {
+			public void on(int zIndex, Wireframe layer) {
 				JPanel layerAsNativeElement  = create(layer, uiProfile);
 				nativeElement.add(layerAsNativeElement, zIndex);
 			}

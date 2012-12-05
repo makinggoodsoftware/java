@@ -4,16 +4,11 @@
     <bookmark url="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/TwoLinesStructureBuilder.java" line="27" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af120911-6b5b-47f9-8976-b0f0669cb631" name="Default" comment="">
+    <list default="true" id="af120911-6b5b-47f9-8976-b0f0669cb631" name="Default" comment="REFACTORING: Now everything has a margin of 0">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/BaseStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/BaseStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/RectangleStructureBuilder.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/structures/RectangleStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/BaseUINativeElementCreatorStrategy.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/BaseUINativeElementCreatorStrategy.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/LayerIterator.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/LayerIterator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Layers.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Layers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Margin.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Margin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Wireframe.java" afterPath="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Wireframe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" afterPath="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" />
     </list>
     <list id="3e075d1b-f044-4b8d-b10b-fc50a8e88cca" name="Ignore" comment="" />
     <ignored path="invasionII.iws" />
@@ -121,7 +116,7 @@
       <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="66" selection-start="1578" selection-end="1578" vertical-scroll-proportion="0.0">
+            <state line="45" column="48" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -148,16 +143,7 @@
       <file leaf-file-name="Margin.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Margin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="66" selection-start="411" selection-end="411" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DebugUIProfileFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/mvc/view/DebugUIProfileFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="31" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0">
+            <state line="9" column="13" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -181,19 +167,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Layers.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Layers.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Layers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="71" selection-start="330" selection-end="330" vertical-scroll-proportion="0.0">
+            <state line="14" column="26" selection-start="348" selection-end="348" vertical-scroll-proportion="0.6603774">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SwingUINativeElementCreatorStrategy.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LayerIterator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/LayerIterator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="9" selection-start="81" selection-end="81" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwingUINativeElementCreatorStrategy.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="76" selection-start="868" selection-end="868" vertical-scroll-proportion="0.6393443">
+            <state line="24" column="76" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -226,7 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PijamaRowsStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/VerticalSlicesStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/PolygonStructureBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/structures/LayeredElementStructureBuilder.java" />
@@ -242,6 +236,7 @@
         <option value="$PROJECT_DIR$/src/com/mgs/invasion/Main.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Layers.java" />
         <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java" />
+        <option value="$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/LayerIterator.java" />
       </list>
     </option>
   </component>
@@ -719,7 +714,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.32213742" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.2610687" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67175573" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6778626" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32213742" sideWeight="0.0" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -762,7 +757,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="REFACTORING: Simplified and renamed some code for readability sake" />
+    <option name="LAST_COMMIT_MESSAGE" value="REFACTORING: Now everything has a margin of 0" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -797,6 +792,7 @@
     <MESSAGE value="FIXING: Changed so that the order the layers are stacked is the same as they are defined" />
     <MESSAGE value="FIXING: Changed so that the native element when is created is transparent unless the background is specified" />
     <MESSAGE value="REFACTORING: Simplified and renamed some code for readability sake" />
+    <MESSAGE value="REFACTORING: Now everything has a margin of 0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -806,11 +802,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UINativeElementCreatorStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/VerticalSlicesStructureBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="4" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" />
@@ -853,30 +844,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Margin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="66" selection-start="411" selection-end="411" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/UIDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="61" selection-start="1060" selection-end="1060" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="66" selection-start="1578" selection-end="1578" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Layers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="71" selection-start="330" selection-end="330" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/structures/BaseStructureBuilder.java">
@@ -895,7 +865,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/driver/swing/SwingUINativeElementCreatorStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="76" selection-start="868" selection-end="868" vertical-scroll-proportion="0.6393443">
+        <state line="24" column="76" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Margin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/invasion/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="48" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/LayerIterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="9" selection-start="81" selection-end="81" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mgs/fantasi/ui/wireframe/Layers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="26" selection-start="348" selection-end="348" vertical-scroll-proportion="0.6603774">
           <folding />
         </state>
       </provider>

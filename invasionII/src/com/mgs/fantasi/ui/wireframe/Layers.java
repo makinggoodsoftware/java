@@ -9,14 +9,10 @@ public class Layers<T> implements Structure {
 		this.layers = layers;
 	}
 
-	public List<T> asList() {
-		return layers;
-	}
-
 	public void iterateInCrescendo(LayerIterator layerIterator) {
 		int zIndex = 0;
-		for (T layer : layers) {
-			layerIterator.on (zIndex, layer, new Margin());
+		for (int i = layers.size() - 1; i >= 0; i--){
+			layerIterator.on (zIndex, layers.get(i), new Margin());
 			zIndex++;
 		}
 	}

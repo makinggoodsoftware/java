@@ -1,12 +1,12 @@
 package com.mgs.invasion;
 
 import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.structures.*;
+import com.mgs.fantasi.structures.Fractions;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.ExpandToParent;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
-import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
+import com.mgs.invasion.mvc.view.DebugUIProfileFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +19,8 @@ import static com.mgs.fantasi.structures.VerticalSlicesStructureBuilder.vertical
 
 public class Main {
 	public static void main(String... args) {
-//		new Main().go(new DebugUIProfileFactory());
-		new Main().go(new ProductionUiProfileFactory());
+		new Main().go(new DebugUIProfileFactory());
+//		new Main().go(new ProductionUiProfileFactory());
 	}
 
 	private void go(UIProfileFactory uiProfileFactory) {

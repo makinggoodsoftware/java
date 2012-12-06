@@ -34,6 +34,11 @@ public class RectangleStructureBuilder extends BaseStructureBuilder<RectangleStr
 	}
 
 	@Override
+	public RectangleStructureBuilder copy() {
+		return new RectangleStructureBuilder(content.newCopy());
+	}
+
+	@Override
 	protected Structure buildLayoutAndChilds() {
 		if (content == null) return GridFactory.empty(Wireframe.class);
 		return new SimpleStructure<Wireframe>(content.build());

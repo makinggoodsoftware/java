@@ -33,4 +33,9 @@ public class HexagonBoardStructureBuilder extends BaseStructureBuilder {
 	protected Structure buildLayoutAndChilds() {
 		return GridFactory.empty(Wireframe.class);
 	}
+
+	@Override
+	protected BaseStructureBuilder copy() {
+		return null;
+	}
 }

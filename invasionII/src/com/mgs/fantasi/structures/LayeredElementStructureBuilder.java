@@ -32,4 +32,13 @@ public class LayeredElementStructureBuilder extends BaseStructureBuilder {
 		}
 		return new Layers<Wireframe>(layersAsWireframes);
 	}
+
+	@Override
+	protected BaseStructureBuilder copy() {
+		LayeredElementStructureBuilder copy = new LayeredElementStructureBuilder();
+		for (StructureBuilder layer : layers) {
+			copy.withLayer(layer.newCopy());
+		}
+		return copy;
+	}
 }

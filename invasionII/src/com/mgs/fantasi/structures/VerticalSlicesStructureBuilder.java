@@ -38,4 +38,9 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 		this.numberOfDivisions = numberOVerticalDivisions;
 		return this;
 	}
+
+	@Override
+	public VerticalSlicesStructureBuilder copy() {
+		return new VerticalSlicesStructureBuilder(contentBuilder.newCopy()).withVerticalDivisions(numberOfDivisions);
+	}
 }

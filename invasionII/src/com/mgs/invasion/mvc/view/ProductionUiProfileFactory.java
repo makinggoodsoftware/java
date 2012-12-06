@@ -22,7 +22,7 @@ public class ProductionUiProfileFactory implements UIProfileFactory {
 
 		profile.addStyle(
 				UISelectorFactory.forName("2ndLayerOfHexagons"),
-				new UIStyle().withBorder(new BorderDefinition(Color.BLACK, 30))
+				new UIStyle().withBorder(new BorderDefinition(Color.BLACK, 1))
 		);
 
 		return profile;

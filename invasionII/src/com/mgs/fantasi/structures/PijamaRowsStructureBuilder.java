@@ -45,4 +45,11 @@ public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
 		return layout;
 	}
 
+	@Override
+	protected BaseStructureBuilder copy() {
+		StructureBuilder firstLineBuilder = generationBuilder.getFirstLineBuilder();
+		StructureBuilder secondLineBuilder = generationBuilder.getSecondLineBuilder();
+		return new PijamaRowsStructureBuilder(firstLineBuilder.newCopy(), secondLineBuilder).withNumberOfGerations(numberOfGenerations);
+	}
+
 }

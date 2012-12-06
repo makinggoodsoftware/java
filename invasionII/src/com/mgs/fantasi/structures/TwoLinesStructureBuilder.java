@@ -45,4 +45,16 @@ public class TwoLinesStructureBuilder extends BaseStructureBuilder {
 		return layout;
 	}
 
+	@Override
+	protected BaseStructureBuilder copy() {
+		return new TwoLinesStructureBuilder(firstLineBuilder.newCopy(), secondLineBuilder.newCopy()).withFirstRowSize(firstLineHeighSizeRatio);
+	}
+
+	public StructureBuilder getFirstLineBuilder() {
+		return firstLineBuilder;
+	}
+
+	public StructureBuilder getSecondLineBuilder() {
+		return secondLineBuilder;
+	}
 }

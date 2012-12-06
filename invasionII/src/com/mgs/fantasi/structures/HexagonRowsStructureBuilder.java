@@ -43,6 +43,11 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 		return new SimpleStructure<Wireframe>(pijamaRows.build());
 	}
 
+	@Override
+	protected HexagonRowsStructureBuilder copy() {
+		return new HexagonRowsStructureBuilder(numberOfGerations, numberOVerticalDivisions);
+	}
+
 	public HexagonRowsStructureBuilder newOneColumnSmaller() {
 		return new HexagonRowsStructureBuilder(numberOfGerations, numberOVerticalDivisions-1);
 	}

@@ -1,8 +1,9 @@
 package com.mgs.fantasi.structures;
 
 import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.ui.wireframe.GridFactory;
+import com.mgs.fantasi.ui.wireframe.SimpleStructure;
 import com.mgs.fantasi.ui.wireframe.Structure;
+import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 import static com.mgs.fantasi.structures.PijamaRowsStructureBuilder.pijamaRows;
 import static com.mgs.fantasi.structures.PolygonStructureBuilder.polygon;
@@ -39,6 +40,10 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 
 	@Override
 	protected Structure buildLayoutAndChilds() {
-		return GridFactory.withOnlyOneCell(pijamaRows.build());
+		return new SimpleStructure<Wireframe>(pijamaRows.build());
+	}
+
+	public HexagonRowsStructureBuilder newOneColumnSmaller() {
+		return new HexagonRowsStructureBuilder(numberOfGerations, numberOVerticalDivisions-1);
 	}
 }

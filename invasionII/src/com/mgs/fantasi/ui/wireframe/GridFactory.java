@@ -7,12 +7,6 @@ public class GridFactory {
 		return new EmptyGrid<T>();
 	}
 
-	public static <T> Grid<T> withOnlyOneCell(T content) {
-		Grid<T> grid = new ArrayListGrid<T>(1, 1);
-		grid.setCell (0, 0, CellContent.evenlyDivided(content));
-		return grid;
-	}
-
 	public static Grid<Wireframe> withDimensions(int x, int y) {
 		return new ArrayListGrid<Wireframe>(x, y);
 	}

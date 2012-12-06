@@ -16,4 +16,11 @@ public class Layers<T> implements Structure {
 			zIndex++;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Layers{" +
+				"layers=" + layers +
+				'}';
+	}
 }

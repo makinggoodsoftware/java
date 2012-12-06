@@ -23,6 +23,12 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
+	protected void processSimpleStructure(JPanel nativeElement, Wireframe content, UIProfile uiProfile) {
+		nativeElement.setLayout(new GridBagLayout());
+		nativeElement.add(create(content, uiProfile), intoCoordinates(0, 0, Fractions.all(), Fractions.all()));
+	}
+
+	@Override
 	protected JPanel decorateWithMargin(JPanel nativeElement, Margin margin) {
 		JPanel marginContainer = new JPanel();
 		marginContainer.setOpaque(false);

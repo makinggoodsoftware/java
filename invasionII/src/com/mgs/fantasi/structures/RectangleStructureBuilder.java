@@ -1,6 +1,7 @@
 package com.mgs.fantasi.structures;
 
 import com.mgs.fantasi.ui.wireframe.GridFactory;
+import com.mgs.fantasi.ui.wireframe.SimpleStructure;
 import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
@@ -35,7 +36,7 @@ public class RectangleStructureBuilder extends BaseStructureBuilder<RectangleStr
 	@Override
 	protected Structure buildLayoutAndChilds() {
 		if (content == null) return GridFactory.empty(Wireframe.class);
-		return GridFactory.withOnlyOneCell(content.build());
+		return new SimpleStructure<Wireframe>(content.build());
 	}
 
 }

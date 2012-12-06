@@ -34,7 +34,9 @@ public class Main {
 					hexagonRows
 				).
 				withLayer(
-					emptyRectangle().withMargin(new Margin(10, 10, 10, 10)).withName("2ndLayerOfHexagons")
+					emptyRectangle().withMargin(new Margin(10, 10, 10, 10)).withName("2ndLayerOfHexagons").withContent(
+						hexagonRows.newOneColumnSmaller()
+					)
 				).
 			build();
 

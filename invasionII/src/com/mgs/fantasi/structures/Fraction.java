@@ -22,4 +22,11 @@ public class Fraction {
 	public int getBase() {
 		return from;
 	}
+
+	@Override
+	public String toString() {
+		return "Fraction{ "+
+				from + "/" + take +
+				'}';
+	}
 }

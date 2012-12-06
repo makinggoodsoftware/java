@@ -26,7 +26,7 @@ public abstract class BaseStructureBuilder<T extends StructureBuilder> implement
 		}
 		Structure content = buildLayoutAndChilds();
 		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");
-		return new Wireframe(getClass(), shape, content, sizeStrategy, margin, name);
+		return new Wireframe(getClass(), shape, content, margin, name);
 	}
 
 	protected abstract boolean constraintsAreSatisfied();

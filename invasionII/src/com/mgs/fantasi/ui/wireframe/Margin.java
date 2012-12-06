@@ -37,4 +37,14 @@ public class Margin {
 	public int getLeft() {
 		return left;
 	}
+
+	@Override
+	public String toString() {
+		return "Margin{" +
+				"bottom=" + bottom +
+				", top=" + top +
+				", right=" + right +
+				", left=" + left +
+				'}';
+	}
 }

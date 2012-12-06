@@ -33,4 +33,13 @@ public class CellContent<T> {
 	public Fraction getHeightSizeRatio() {
 		return heightSizeRatio;
 	}
+
+	@Override
+	public String toString() {
+		return "CellContent{" +
+				"content=" + content +
+				", widthSizeRatio=" + widthSizeRatio +
+				", heightSizeRatio=" + heightSizeRatio +
+				'}';
+	}
 }

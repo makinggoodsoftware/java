@@ -2,6 +2,7 @@ package com.mgs.fantasi.ui.driver.swing;
 
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.structures.Fraction;
+import com.mgs.fantasi.structures.Fractions;
 import com.mgs.fantasi.ui.driver.BaseUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.BorderDefinition;
 import com.mgs.fantasi.ui.profile.UIProfile;
@@ -22,25 +23,31 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
-	protected void decorateWithMargin(JPanel nativeElement, Margin margin) {
+	protected JPanel decorateWithMargin(JPanel nativeElement, Margin margin) {
+		JPanel marginContainer = new JPanel();
+		marginContainer.setOpaque(false);
+		marginContainer.setLayout(new GridBagLayout());
+		marginContainer.setBorder(BorderFactory.createEmptyBorder(margin.getTop(), margin.getRight(), margin.getBottom(), margin.getLeft()));
+		marginContainer.add(nativeElement, intoCoordinates(0,0, Fractions.all(), Fractions.all()));
+		return marginContainer;
 	}
 
 	@Override
-	protected void processLayerChilds(final JPanel nativeElement, Layers<Wireframe> layers, final UIProfile uiProfile) {
-		nativeElement.setLayout(new OverlayLayout(nativeElement));
-		layers.iterateInCrescendo (new LayerIterator<Wireframe>(){
+	protected void processLayerChilds(final JPanel parentNativeElement, Layers<Wireframe> childLayers, final UIProfile uiProfile) {
+		parentNativeElement.setLayout(new OverlayLayout(parentNativeElement));
+		childLayers.iterateInCrescendo(new LayerIterator<Wireframe>() {
 			@Override
 			public void on(int zIndex, Wireframe layer) {
-				JPanel layerAsNativeElement  = create(layer, uiProfile);
-				nativeElement.add(layerAsNativeElement, zIndex);
+				JPanel childLayerAsNativeElement = create(layer, uiProfile);
+				parentNativeElement.add(childLayerAsNativeElement, zIndex);
 			}
 		});
 	}
 
 	@Override
-	protected void processGridChilds(final JPanel nativeElement, Grid<Wireframe> content, final UIProfile uiProfile) {
-		nativeElement.setLayout(new GridBagLayout());
-		content.itereateCellsWith(new CellIterator<Wireframe>() {
+	protected void processGridChilds(final JPanel parentNativeElement, Grid<Wireframe> childContent, final UIProfile uiProfile) {
+		parentNativeElement.setLayout(new GridBagLayout());
+		childContent.itereateCellsWith(new CellIterator<Wireframe>() {
 			@Override
 			public void on(int x, int y, CellContent<Wireframe> cell) {
 				if (cell == null) {
@@ -51,7 +58,7 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 				}
 				Wireframe child = cell.getContent();
 				JPanel childAsNativeComponent = create(child, uiProfile);
-				nativeElement.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+				parentNativeElement.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 			}
 		});
 

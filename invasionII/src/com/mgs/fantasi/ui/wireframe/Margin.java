@@ -21,4 +21,20 @@ public class Margin {
 	public boolean isEmpty (){
 		return top == 0 && right == 0 && bottom == 0 && left == 0;
 	}
+
+	public int getTop() {
+		return top;
+	}
+
+	public int getRight() {
+		return right;
+	}
+
+	public int getBottom() {
+		return bottom;
+	}
+
+	public int getLeft() {
+		return left;
+	}
 }

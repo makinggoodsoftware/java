@@ -17,7 +17,7 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
 		Margin margin = wireframe.getMargin();
 		if (! margin.isEmpty()){
-			decorateWithMargin (nativeElement, margin);
+			nativeElement = decorateWithMargin (nativeElement, margin);
 		}
 		final Structure content = wireframe.getContent();
 		if (content instanceof Grid) {
@@ -31,11 +31,11 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 
 	}
 
-	protected abstract void decorateWithMargin(T nativeElement, Margin margin);
+	protected abstract T decorateWithMargin(T nativeElement, Margin margin);
 
-	protected abstract void processLayerChilds(T nativeElement, Layers<Wireframe> content, UIProfile uiProfile);
+	protected abstract void processLayerChilds(T parentNativeElement, Layers<Wireframe> content, UIProfile uiProfile);
 
-	protected abstract void processGridChilds(T nativeElement, Grid<Wireframe> content, UIProfile uiProfile);
+	protected abstract void processGridChilds(T parentNativeElement, Grid<Wireframe> childContent, UIProfile uiProfile);
 
 
 	private T newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {

@@ -1,9 +1,6 @@
 package com.mgs.invasion;
 
-import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.structures.Fractions;
-import com.mgs.fantasi.structures.PijamaRowsStructureBuilder;
-import com.mgs.fantasi.structures.PolygonStructureBuilder;
+import com.mgs.fantasi.structures.HexagonRowsStructureBuilder;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
 import com.mgs.fantasi.ui.wireframe.Margin;
@@ -14,10 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.mgs.fantasi.structures.LayeredElementStructureBuilder.layered;
-import static com.mgs.fantasi.structures.PijamaRowsStructureBuilder.pijamaRows;
-import static com.mgs.fantasi.structures.PolygonStructureBuilder.polygon;
 import static com.mgs.fantasi.structures.RectangleStructureBuilder.emptyRectangle;
-import static com.mgs.fantasi.structures.VerticalSlicesStructureBuilder.verticalSlices;
 
 public class Main {
 	public static void main(String... args) {
@@ -31,28 +25,20 @@ public class Main {
 		int numberOVerticalDivisions = 10;
 		int numberOfGerations = 5;
 
-		PolygonStructureBuilder hexagon = polygon(new HexagonShape());
-		PijamaRowsStructureBuilder hexagonsPijamaRows =
-			pijamaRows(
-				verticalSlices(hexagon).
-				withVerticalDivisions(numberOVerticalDivisions)
-			,
-				emptyRectangle()
-			).
-			withFirstRowSize(Fractions.thwoThirds()).
-			withNumberOfGerations(numberOfGerations);
 
-		Wireframe content =
+		HexagonRowsStructureBuilder hexagonRows = HexagonRowsStructureBuilder.newHexagonRows(numberOVerticalDivisions, numberOfGerations);
+
+		Wireframe board =
 			layered().
 				withLayer(
-					hexagonsPijamaRows
+					hexagonRows
 				).
 				withLayer(
 					emptyRectangle().withMargin(new Margin(10, 10, 10, 10)).withName("2ndLayerOfHexagons")
 				).
 			build();
 
-		uiDriver.show(content, new Dimension(400, 400));
+		uiDriver.show(board, new Dimension(400, 400));
 	}
 
 }

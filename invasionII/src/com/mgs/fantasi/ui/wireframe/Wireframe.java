@@ -10,13 +10,15 @@ public class Wireframe {
 	private final Structure content;
 	private final SizeStrategy sizeStrategy;
 	private final Margin margin;
+	private String name;
 
-	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Structure content, SizeStrategy sizeStrategy, Margin margin) {
+	public Wireframe(Class<? extends StructureBuilder> structureType, PolygonPointsIterator shape, Structure content, SizeStrategy sizeStrategy, Margin margin, String name) {
 		this.structureType = structureType;
 		this.shape = shape;
 		this.content = content;
 		this.sizeStrategy = sizeStrategy;
 		this.margin = margin;
+		this.name = name;
 	}
 
 	public Class<? extends StructureBuilder> getStructureType() {
@@ -47,6 +49,11 @@ public class Wireframe {
 				", shape=" + shape +
 				", sizeStrategy=" + sizeStrategy +
 				", margin=" + margin +
+				", name='" + name + '\'' +
 				'}';
+	}
+
+	public String getName() {
+		return name;
 	}
 }

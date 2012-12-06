@@ -3,6 +3,7 @@ package com.mgs.invasion;
 import com.mgs.fantasi.polygon.HexagonShape;
 import com.mgs.fantasi.structures.Fractions;
 import com.mgs.fantasi.structures.PijamaRowsStructureBuilder;
+import com.mgs.fantasi.structures.PolygonStructureBuilder;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
 import com.mgs.fantasi.ui.wireframe.Margin;
@@ -27,15 +28,19 @@ public class Main {
 	private void go(UIProfileFactory uiProfileFactory) {
 		UIDriver<JPanel> uiDriver = UIDriver.forSwing(uiProfileFactory.getUIProfile());
 
+		int numberOVerticalDivisions = 10;
+		int numberOfGerations = 5;
+
+		PolygonStructureBuilder hexagon = polygon(new HexagonShape());
 		PijamaRowsStructureBuilder hexagonsPijamaRows =
 			pijamaRows(
-				verticalSlices(polygon(new HexagonShape())).
-				withVerticalDivisions(10)
+				verticalSlices(hexagon).
+				withVerticalDivisions(numberOVerticalDivisions)
 			,
 				emptyRectangle()
 			).
 			withFirstRowSize(Fractions.thwoThirds()).
-			withNumberOfGerations(5);
+			withNumberOfGerations(numberOfGerations);
 
 		Wireframe content =
 			layered().
@@ -43,7 +48,7 @@ public class Main {
 					hexagonsPijamaRows
 				).
 				withLayer(
-					emptyRectangle().withMargin(new Margin(0,0,0,0))
+					emptyRectangle().withMargin(new Margin(10, 10, 10, 10)).withName("2ndLayerOfHexagons")
 				).
 			build();
 

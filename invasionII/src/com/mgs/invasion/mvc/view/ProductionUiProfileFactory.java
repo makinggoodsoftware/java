@@ -13,13 +13,18 @@ public class ProductionUiProfileFactory implements UIProfileFactory {
 
 	@Override
 	public UIProfile getUIProfile() {
-		UIProfile debugProfile = new UIProfile();
+		UIProfile profile = new UIProfile();
 
-		debugProfile.addStyle(
+		profile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
 				new UIStyle().withBorder(new BorderDefinition(Color.BLACK, 1))
 		);
 
-		return debugProfile;
+		profile.addStyle(
+				UISelectorFactory.forName("2ndLayerOfHexagons"),
+				new UIStyle().withBorder(new BorderDefinition(Color.BLACK, 30))
+		);
+
+		return profile;
 	}
 }

@@ -12,5 +12,9 @@ public class UISelectorFactory {
 	public static UISelector forShape(Class<? extends PolygonPointsIterator> type) {
 		return new UISelectorBasedOnShape (type);
 	}
+
+	public static UISelector forName(String name) {
+		return new UISelectorBasedOnName (name);
+	}
 }
 

@@ -17,6 +17,7 @@ public abstract class BaseStructureBuilder<T extends StructureBuilder> implement
 	private SizeStrategy sizeStrategy = new NativeDefaultSizeStrategy();
 	private List<BuildingConstraint> constraints = new ArrayList<BuildingConstraint>();
 	private Margin margin = Margin.noMargin();
+	private String name = "";
 
 	@Override
 	public final Wireframe build() {
@@ -25,7 +26,7 @@ public abstract class BaseStructureBuilder<T extends StructureBuilder> implement
 		}
 		Structure content = buildLayoutAndChilds();
 		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");
-		return new Wireframe(getClass(), shape, content, sizeStrategy, margin);
+		return new Wireframe(getClass(), shape, content, sizeStrategy, margin, name);
 	}
 
 	protected abstract boolean constraintsAreSatisfied();
@@ -44,6 +45,11 @@ public abstract class BaseStructureBuilder<T extends StructureBuilder> implement
 
 	public T withMargin(Margin margin) {
 		this.margin = margin;
+		return (T) this;
+	}
+
+	public T withName(String name) {
+		this.name = name;
 		return (T) this;
 	}
 

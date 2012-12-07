@@ -48,7 +48,8 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 		return new HexagonRowsStructureBuilder(numberOfGerations, numberOVerticalDivisions);
 	}
 
-	public HexagonRowsStructureBuilder newOneColumnSmaller() {
-		return new HexagonRowsStructureBuilder(numberOfGerations, numberOVerticalDivisions-1);
+	public HexagonRowsStructureBuilder withOneLessColumn() {
+		this.numberOVerticalDivisions --;
+		return this;
 	}
 }

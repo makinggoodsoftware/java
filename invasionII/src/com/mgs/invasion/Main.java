@@ -31,11 +31,15 @@ public class Main {
 		Wireframe board =
 			layered().
 				withLayer(
-					hexagonRows
+					hexagonRows.
+					withName("OddHexagonRows")
 				).
 				withLayer(
-					emptyRectangle().withMargin(new Margin(10, 10, 10, 10)).withName("2ndLayerOfHexagons").withContent(
-						hexagonRows.newOneColumnSmaller()
+					emptyRectangle().
+					withMargin(new Margin(10, 10, 10, 10)).
+					withName("EvenHexagonRows").
+					withContent(
+						hexagonRows.newCopy().withOneLessColumn()
 					)
 				).
 			build();

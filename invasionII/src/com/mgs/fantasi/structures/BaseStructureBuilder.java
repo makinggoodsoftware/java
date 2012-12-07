@@ -58,7 +58,7 @@ public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> imple
 	}
 
 	@Override
-	public final StructureBuilder newCopy() {
+	public final T newCopy() {
 		T copy = copy ();
 		copy.shape = this.shape;
 		copy.margin = margin;

@@ -1,13 +1,21 @@
 package com.mgs.fantasi.ui.wireframe;
 
+import com.mgs.fantasi.measurements.Measurement;
+
+import static com.mgs.fantasi.measurements.Measurements.simpleMeasurement;
+
 public class Margin {
 
-	private final int top;
-	private final int right;
-	private final int bottom;
-	private final int left;
+	private final Measurement top;
+	private final Measurement right;
+	private final Measurement bottom;
+	private final Measurement left;
 
 	public Margin(int top, int right, int bottom, int left) {
+		this(simpleMeasurement(top), simpleMeasurement(right), simpleMeasurement(bottom), simpleMeasurement(left));
+	}
+
+	public Margin(Measurement top, Measurement right, Measurement bottom, Measurement left) {
 		this.top = top;
 		this.right = right;
 		this.bottom = bottom;
@@ -18,23 +26,19 @@ public class Margin {
 		return new Margin(0, 0, 0, 0);
 	}
 
-	public boolean isEmpty (){
-		return top == 0 && right == 0 && bottom == 0 && left == 0;
-	}
-
-	public int getTop() {
+	public Measurement getTop() {
 		return top;
 	}
 
-	public int getRight() {
+	public Measurement getRight() {
 		return right;
 	}
 
-	public int getBottom() {
+	public Measurement getBottom() {
 		return bottom;
 	}
 
-	public int getLeft() {
+	public Measurement getLeft() {
 		return left;
 	}
 
@@ -46,5 +50,13 @@ public class Margin {
 				", right=" + right +
 				", left=" + left +
 				'}';
+	}
+
+	public Margin withHalfOfItsSize() {
+		return new Margin(top.half(), right.half(), bottom.half(), left.half());
+	}
+
+	public boolean isEmpty() {
+		return top.isZero() && right.isZero() && bottom.isZero() && left.isZero();
 	}
 }

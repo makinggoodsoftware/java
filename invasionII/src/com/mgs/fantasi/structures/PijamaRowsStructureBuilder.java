@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.measurements.Fraction;
 import com.mgs.fantasi.ui.wireframe.*;
 
 public class PijamaRowsStructureBuilder extends BaseStructureBuilder {

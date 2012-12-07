@@ -1,8 +1,9 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.measurements.Fraction;
 import com.mgs.fantasi.ui.wireframe.*;
 
-import static com.mgs.fantasi.structures.Fractions.allWithBase;
+import static com.mgs.fantasi.measurements.Fractions.allWithBase;
 import static com.mgs.fantasi.ui.wireframe.CellContent.withPartialHeight;
 
 public class TwoLinesStructureBuilder extends BaseStructureBuilder {

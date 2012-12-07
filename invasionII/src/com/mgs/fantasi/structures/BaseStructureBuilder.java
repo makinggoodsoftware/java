@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.wireframe.Margin;
 import com.mgs.fantasi.ui.wireframe.Structure;
@@ -14,6 +15,7 @@ public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> imple
 	PolygonPointsIterator shape = new NativeRectanguarShape();
 	private Margin margin = Margin.noMargin();
 	private String name = "";
+	private Measurement measurement;
 
 	@Override
 	public final Wireframe build() {
@@ -41,6 +43,11 @@ public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> imple
 
 	public T withName(String name) {
 		this.name = name;
+		return (T) this;
+	}
+
+	public T withMeasurement(Measurement measurement) {
+		this.measurement = measurement;
 		return (T) this;
 	}
 

@@ -1,9 +1,10 @@
 package com.mgs.invasion;
 
+import com.mgs.fantasi.measurements.Measurement;
+import com.mgs.fantasi.measurements.Measurements;
 import com.mgs.fantasi.structures.HexagonRowsStructureBuilder;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
-import com.mgs.fantasi.ui.wireframe.Margin;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
 
@@ -28,18 +29,22 @@ public class Main {
 
 		HexagonRowsStructureBuilder hexagonRows = HexagonRowsStructureBuilder.newHexagonRows(numberOVerticalDivisions, numberOfGerations);
 
+		Measurement hexagonMeasurement = Measurements.futureMeasurement ();
 		Wireframe board =
 			layered().
 				withLayer(
 					hexagonRows.
-					withName("OddHexagonRows")
+						withName("OddHexagonRows").
+						withHexagonMeasurement(hexagonMeasurement)
 				).
 				withLayer(
 					emptyRectangle().
-					withMargin(new Margin(10, 10, 10, 10)).
+					withMargin(hexagonMeasurement.asMargin().withHalfOfItsSize()).
 					withName("EvenHexagonRows").
 					withContent(
-						hexagonRows.newCopy().withOneLessColumn()
+							hexagonRows.newCopy().
+									withOneLessColumn().
+									withHexagonMeasurement(hexagonMeasurement)
 					)
 				).
 			build();

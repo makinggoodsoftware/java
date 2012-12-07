@@ -29,6 +29,4 @@ public class PolygonStructureBuilder extends BaseStructureBuilder<PolygonStructu
 	public PolygonStructureBuilder copy() {
 		return new PolygonStructureBuilder(getShape());
 	}
-
-
 }

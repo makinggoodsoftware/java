@@ -1,4 +1,4 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.measurements;
 
 public class Fractions {
 	public static Fraction thwoThirds() {
@@ -15,5 +15,9 @@ public class Fractions {
 
 	public static Fraction allWithBase(int base) {
 		return new Fraction(base, base);
+	}
+
+	public static Fraction half() {
+		return new Fraction(1, 2);
 	}
 }

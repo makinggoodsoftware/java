@@ -1,7 +1,7 @@
 package com.mgs.fantasi.ui.wireframe;
 
-import com.mgs.fantasi.structures.Fraction;
-import com.mgs.fantasi.structures.Fractions;
+import com.mgs.fantasi.measurements.Fraction;
+import com.mgs.fantasi.measurements.Fractions;
 
 public class CellContent<T> {
 	private final T content;

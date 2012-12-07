@@ -1,4 +1,4 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.measurements;
 
 public class Fraction {
 	private final int take;

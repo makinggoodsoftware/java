@@ -1,5 +1,7 @@
 package com.mgs.fantasi.structures;
 
+import com.mgs.fantasi.measurements.Fractions;
+import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.polygon.HexagonShape;
 import com.mgs.fantasi.ui.wireframe.SimpleStructure;
 import com.mgs.fantasi.ui.wireframe.Structure;
@@ -14,11 +16,12 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 	private int numberOVerticalDivisions;
 	private int numberOfGerations;
 	private PijamaRowsStructureBuilder pijamaRows;
+	private final PolygonStructureBuilder hexagon;
 
 	public HexagonRowsStructureBuilder(int numberOfGerations, int numberOVerticalDivisions) {
 		this.numberOfGerations = numberOfGerations;
 		this.numberOVerticalDivisions = numberOVerticalDivisions;
-		PolygonStructureBuilder hexagon = polygon(new HexagonShape());
+		hexagon = polygon(new HexagonShape());
 		this.pijamaRows = pijamaRows(
 			verticalSlices(hexagon).
 					withVerticalDivisions(numberOVerticalDivisions)
@@ -50,6 +53,11 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 
 	public HexagonRowsStructureBuilder withOneLessColumn() {
 		this.numberOVerticalDivisions --;
+		return this;
+	}
+
+	public StructureBuilder withHexagonMeasurement(Measurement hexagonMeasurement) {
+		hexagon.withMeasurement (hexagonMeasurement);
 		return this;
 	}
 }

@@ -1,8 +1,10 @@
 package com.mgs.fantasi.ui.driver.swing;
 
+import com.mgs.fantasi.measurements.Fraction;
+import com.mgs.fantasi.measurements.Fractions;
+import com.mgs.fantasi.measurements.Measurement;
+import com.mgs.fantasi.measurements.Measurements;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.structures.Fraction;
-import com.mgs.fantasi.structures.Fractions;
 import com.mgs.fantasi.ui.driver.BaseUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.BorderDefinition;
 import com.mgs.fantasi.ui.profile.UIProfile;
@@ -33,9 +35,20 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 		JPanel marginContainer = new JPanel();
 		marginContainer.setOpaque(false);
 		marginContainer.setLayout(new GridBagLayout());
-		marginContainer.setBorder(BorderFactory.createEmptyBorder(margin.getTop(), margin.getRight(), margin.getBottom(), margin.getLeft()));
+		int top = resolveMeasurement (margin.getTop());
+		int right = resolveMeasurement (margin.getRight());
+		int bottom = resolveMeasurement (margin.getBottom());
+		int left = resolveMeasurement (margin.getLeft());
+		marginContainer.setBorder(BorderFactory.createEmptyBorder(top, right, bottom, left));
 		marginContainer.add(nativeElement, intoCoordinates(0,0, Fractions.all(), Fractions.all()));
 		return marginContainer;
+	}
+
+	private int resolveMeasurement(Measurement measurement) {
+		if (measurement instanceof Measurements.SimpleMeasurement){
+			return ((Measurements.SimpleMeasurement) measurement).getIntValue();
+		}
+		return 0;
 	}
 
 	@Override

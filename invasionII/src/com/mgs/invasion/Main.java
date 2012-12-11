@@ -2,10 +2,10 @@ package com.mgs.invasion;
 
 import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.measurements.Measurements;
-import com.mgs.fantasi.views.HexagonRowsView;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.views.HexagonRowsView;
+import com.mgs.fantasi.views.View;
 import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
 
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class Main {
 		HexagonRowsView hexagonRows = HexagonRowsView.newHexagonRows(numberOVerticalDivisions, numberOfGerations);
 
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
-		Wireframe board =
+		View view =
 			layered().
 				withLayer(
 					hexagonRows.
@@ -46,10 +46,9 @@ public class Main {
 									withOneLessColumn().
 									withHexagonMeasurement(hexagonMeasurement)
 					)
-				).
-		render();
+				);
 
-		uiDriver.show(board, new Dimension(400, 400));
+		uiDriver.show(view, new Dimension(400, 400));
 	}
 
 }

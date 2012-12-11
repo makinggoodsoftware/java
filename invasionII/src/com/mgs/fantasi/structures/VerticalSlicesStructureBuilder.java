@@ -2,7 +2,7 @@ package com.mgs.fantasi.structures;
 
 import com.mgs.fantasi.ui.wireframe.*;
 
-public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
+public class VerticalSlicesStructureBuilder extends BaseStructureBuilder<VerticalSlicesStructureBuilder> {
 
 	private static final int UNDEFINED = -1;
 	private final StructureBuilder contentBuilder;
@@ -43,4 +43,5 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 	public VerticalSlicesStructureBuilder copy() {
 		return new VerticalSlicesStructureBuilder(contentBuilder.newCopy()).withVerticalDivisions(numberOfDivisions);
 	}
+
 }

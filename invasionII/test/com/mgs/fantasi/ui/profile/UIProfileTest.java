@@ -94,7 +94,8 @@ public class UIProfileTest {
 
 
 
-	private static class GivenSetup {
+	private static class
+			GivenSetup {
 		private static final boolean STYLE_MATCHES = true;
 		private static final boolean STYLE_DOESNT_MATCH = false;
 

@@ -7,7 +7,7 @@ public class Measurements {
 		return new SimpleMeasurement (measurement);
 	}
 
-	public static Measurement futureMeasurement() {
+	public static Measurement unit() {
 		return new FutureMeasurement();
 	}
 

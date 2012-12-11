@@ -56,8 +56,8 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 		return this;
 	}
 
-	public StructureBuilder withHexagonMeasurement(Measurement hexagonMeasurement) {
-		hexagon.withMeasurement (hexagonMeasurement);
+	public HexagonRowsStructureBuilder withHexagonSize(Measurement hexagonSize) {
+		hexagon.withSize(hexagonSize);
 		return this;
 	}
 }

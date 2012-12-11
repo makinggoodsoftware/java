@@ -11,6 +11,7 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 	@Override
 	public T create(Wireframe wireframe, UIProfile uiProfile) {
 		Set<UIStyle> uiStyles = uiProfile.findStylesFor(wireframe);
+		uiStyles.add(inlinedStyle(wireframe));
 		PolygonPointsIterator shape = wireframe.getShape();
 		T nativeContainer = shape.isRectangular() ?
 			newRectangularNativeElementSkeletonWithStyles(uiStyles):
@@ -34,6 +35,10 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 			outmostPointer = nativeContainer;
 		}
 		return outmostPointer;
+	}
+
+	private UIStyle inlinedStyle(Wireframe wireframe) {
+		return new UIStyle().withBorder(wireframe.getBorder());
 	}
 
 	protected abstract void processSimpleStructure(T nativeElement, Wireframe content, UIProfile uiProfile);

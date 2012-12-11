@@ -2,6 +2,7 @@ package com.mgs.fantasi.structures;
 
 import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.ui.profile.BorderDefinition;
 import com.mgs.fantasi.ui.wireframe.Margin;
 import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
@@ -15,7 +16,9 @@ public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> imple
 	PolygonPointsIterator shape = new NativeRectanguarShape();
 	private Margin margin = Margin.noMargin();
 	private String name = "";
-	private Measurement measurement;
+	private Measurement size;
+	private BorderDefinition borderDefinition;
+	private SizeConstraintsType sizeConstraintsType = SizeConstraintsType.RELAXED;
 
 	@Override
 	public final Wireframe build() {
@@ -24,7 +27,7 @@ public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> imple
 		}
 		Structure content = buildLayoutAndChilds();
 		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");
-		return new Wireframe(getClass(), shape, content, margin, name);
+		return new Wireframe(getClass(), shape, content, margin, name, borderDefinition, sizeConstraintsType);
 	}
 
 	protected abstract boolean constraintsAreSatisfied();
@@ -46,8 +49,18 @@ public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> imple
 		return (T) this;
 	}
 
-	public T withMeasurement(Measurement measurement) {
-		this.measurement = measurement;
+	public T withSize(Measurement size) {
+		this.size = size;
+		return (T) this;
+	}
+
+	public T withBorder(BorderDefinition borderDefinition) {
+		this.borderDefinition = borderDefinition;
+		return (T) this;
+	}
+
+	public T packed() {
+		this.sizeConstraintsType = SizeConstraintsType.ESTRICT;
 		return (T) this;
 	}
 

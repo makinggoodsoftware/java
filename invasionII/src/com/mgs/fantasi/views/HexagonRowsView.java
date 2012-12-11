@@ -1,4 +1,4 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.measurements.Fractions;
 import com.mgs.fantasi.measurements.Measurement;
@@ -7,18 +7,18 @@ import com.mgs.fantasi.ui.wireframe.SimpleStructure;
 import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
-import static com.mgs.fantasi.structures.PijamaRowsStructureBuilder.pijamaRows;
-import static com.mgs.fantasi.structures.PolygonStructureBuilder.polygon;
-import static com.mgs.fantasi.structures.RectangleStructureBuilder.emptyRectangle;
-import static com.mgs.fantasi.structures.VerticalSlicesStructureBuilder.verticalSlices;
+import static com.mgs.fantasi.views.PijamaRowsView.pijamaRows;
+import static com.mgs.fantasi.views.PolygonView.polygon;
+import static com.mgs.fantasi.views.RectangleView.emptyRectangle;
+import static com.mgs.fantasi.views.VerticalSlicesView.verticalSlices;
 
-public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRowsStructureBuilder>{
+public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	private int numberOVerticalDivisions;
 	private int numberOfGerations;
-	private PijamaRowsStructureBuilder pijamaRows;
-	private final PolygonStructureBuilder hexagon;
+	private PijamaRowsView pijamaRows;
+	private final PolygonView hexagon;
 
-	public HexagonRowsStructureBuilder(int numberOfGerations, int numberOVerticalDivisions) {
+	public HexagonRowsView(int numberOfGerations, int numberOVerticalDivisions) {
 		this.numberOfGerations = numberOfGerations;
 		this.numberOVerticalDivisions = numberOVerticalDivisions;
 		hexagon = polygon(new HexagonShape());
@@ -32,8 +32,8 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 		withNumberOfGerations(numberOfGerations);
 	}
 
-	public static HexagonRowsStructureBuilder newHexagonRows(int numberOVerticalDivisions, int numberOfGerations) {
-		return new HexagonRowsStructureBuilder(numberOfGerations, numberOVerticalDivisions);
+	public static HexagonRowsView newHexagonRows(int numberOVerticalDivisions, int numberOfGerations) {
+		return new HexagonRowsView(numberOfGerations, numberOVerticalDivisions);
 	}
 
 	@Override
@@ -47,17 +47,17 @@ public class HexagonRowsStructureBuilder extends BaseStructureBuilder<HexagonRow
 	}
 
 	@Override
-	protected HexagonRowsStructureBuilder copy() {
-		return new HexagonRowsStructureBuilder(numberOfGerations, numberOVerticalDivisions);
+	protected HexagonRowsView copy() {
+		return new HexagonRowsView(numberOfGerations, numberOVerticalDivisions);
 	}
 
-	public HexagonRowsStructureBuilder withOneLessColumn() {
+	public HexagonRowsView withOneLessColumn() {
 		this.numberOVerticalDivisions --;
 		return this;
 	}
 
 	public StructureBuilder withHexagonMeasurement(Measurement hexagonMeasurement) {
-		hexagon.withMeasurement (hexagonMeasurement);
+		hexagon.withMeasurement(hexagonMeasurement);
 		return this;
 	}
 }

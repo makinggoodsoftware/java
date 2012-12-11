@@ -1,4 +1,4 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> implements StructureBuilder{
+public abstract class BaseView<T extends BaseView> implements StructureBuilder{
 	PolygonPointsIterator shape = new NativeRectanguarShape();
 	private Margin margin = Margin.noMargin();
 	private String name = "";
@@ -29,7 +29,7 @@ public abstract class BaseStructureBuilder<T extends BaseStructureBuilder> imple
 
 	protected abstract boolean constraintsAreSatisfied();
 
-	public final BaseStructureBuilder withShape (PolygonPointsIterator shape){
+	public final BaseView withShape (PolygonPointsIterator shape){
 		this.shape = shape;
 		return this;
 	}

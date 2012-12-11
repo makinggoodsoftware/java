@@ -1,29 +1,29 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.measurements.Fraction;
 import com.mgs.fantasi.ui.wireframe.*;
 
-public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
+public class PijamaRowsView extends BaseView {
 	private static final int UNDEFINED = -1;
 
-	private final TwoLinesStructureBuilder generationBuilder;
+	private final TwoLinesView generationBuilder;
 
 	private int numberOfGenerations = UNDEFINED;
 
-	private PijamaRowsStructureBuilder(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
-		generationBuilder = new TwoLinesStructureBuilder(firstRowBuilder, secondRowBuilder);
+	private PijamaRowsView(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
+		generationBuilder = new TwoLinesView(firstRowBuilder, secondRowBuilder);
 	}
 
-	public static PijamaRowsStructureBuilder pijamaRows(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
-		return new PijamaRowsStructureBuilder(firstRowBuilder, secondRowBuilder);
+	public static PijamaRowsView pijamaRows(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
+		return new PijamaRowsView(firstRowBuilder, secondRowBuilder);
 	}
 
-	public PijamaRowsStructureBuilder withFirstRowSize(Fraction sizeContraints){
+	public PijamaRowsView withFirstRowSize(Fraction sizeContraints){
 		generationBuilder.withFirstRowSize(sizeContraints);
 		return this;
 	}
 
-	public PijamaRowsStructureBuilder withNumberOfGerations (int numberOfGerations){
+	public PijamaRowsView withNumberOfGerations (int numberOfGerations){
 		numberOfGenerations = numberOfGerations;
 		return this;
 	}
@@ -47,10 +47,10 @@ public class PijamaRowsStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected BaseStructureBuilder copy() {
+	protected BaseView copy() {
 		StructureBuilder firstLineBuilder = generationBuilder.getFirstLineBuilder();
 		StructureBuilder secondLineBuilder = generationBuilder.getSecondLineBuilder();
-		return new PijamaRowsStructureBuilder(firstLineBuilder.newCopy(), secondLineBuilder).withNumberOfGerations(numberOfGenerations);
+		return new PijamaRowsView(firstLineBuilder.newCopy(), secondLineBuilder).withNumberOfGerations(numberOfGenerations);
 	}
 
 }

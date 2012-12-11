@@ -1,19 +1,19 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.ui.wireframe.*;
 
-public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
+public class VerticalSlicesView extends BaseView {
 
 	private static final int UNDEFINED = -1;
 	private final StructureBuilder contentBuilder;
 	private int numberOfDivisions = UNDEFINED;
 
-	private VerticalSlicesStructureBuilder(StructureBuilder contentBuilder) {
+	private VerticalSlicesView(StructureBuilder contentBuilder) {
 		this.contentBuilder = contentBuilder;
 	}
 
-	public static VerticalSlicesStructureBuilder verticalSlices(StructureBuilder contentBuilder) {
-		return new VerticalSlicesStructureBuilder(contentBuilder);
+	public static VerticalSlicesView verticalSlices(StructureBuilder contentBuilder) {
+		return new VerticalSlicesView(contentBuilder);
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class VerticalSlicesStructureBuilder extends BaseStructureBuilder {
 		return layout;
 	}
 
-	public VerticalSlicesStructureBuilder withVerticalDivisions (int numberOVerticalDivisions){
+	public VerticalSlicesView withVerticalDivisions (int numberOVerticalDivisions){
 		this.numberOfDivisions = numberOVerticalDivisions;
 		return this;
 	}
 
 	@Override
-	public VerticalSlicesStructureBuilder copy() {
-		return new VerticalSlicesStructureBuilder(contentBuilder.newCopy()).withVerticalDivisions(numberOfDivisions);
+	public VerticalSlicesView copy() {
+		return new VerticalSlicesView(contentBuilder.newCopy()).withVerticalDivisions(numberOfDivisions);
 	}
 }

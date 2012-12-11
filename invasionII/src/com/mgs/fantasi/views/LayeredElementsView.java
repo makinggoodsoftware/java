@@ -1,4 +1,4 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.ui.wireframe.Layers;
 import com.mgs.fantasi.ui.wireframe.Structure;
@@ -7,14 +7,14 @@ import com.mgs.fantasi.ui.wireframe.Wireframe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LayeredElementStructureBuilder extends BaseStructureBuilder {
+public class LayeredElementsView extends BaseView {
 	private List<StructureBuilder> layers = new ArrayList<StructureBuilder>();
 
-	public static LayeredElementStructureBuilder layered() {
-		return new LayeredElementStructureBuilder();
+	public static LayeredElementsView layered() {
+		return new LayeredElementsView();
 	}
 
-	public LayeredElementStructureBuilder withLayer (StructureBuilder layer){
+	public LayeredElementsView withLayer (StructureBuilder layer){
 		layers.add(layer);
 		return this;
 	}
@@ -34,8 +34,8 @@ public class LayeredElementStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected BaseStructureBuilder copy() {
-		LayeredElementStructureBuilder copy = new LayeredElementStructureBuilder();
+	protected BaseView copy() {
+		LayeredElementsView copy = new LayeredElementsView();
 		for (StructureBuilder layer : layers) {
 			copy.withLayer(layer.newCopy());
 		}

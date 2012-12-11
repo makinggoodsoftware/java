@@ -1,4 +1,4 @@
-package com.mgs.fantasi.structures;
+package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.measurements.Fraction;
 import com.mgs.fantasi.ui.wireframe.*;
@@ -6,19 +6,19 @@ import com.mgs.fantasi.ui.wireframe.*;
 import static com.mgs.fantasi.measurements.Fractions.allWithBase;
 import static com.mgs.fantasi.ui.wireframe.CellContent.withPartialHeight;
 
-public class TwoLinesStructureBuilder extends BaseStructureBuilder {
+public class TwoLinesView extends BaseView {
 
 	private final StructureBuilder firstLineBuilder;
 	private final StructureBuilder secondLineBuilder;
 
 	private Fraction firstLineHeighSizeRatio = null;
 
-	public TwoLinesStructureBuilder(StructureBuilder firstLineBuilder, StructureBuilder secondLineBuilder) {
+	public TwoLinesView(StructureBuilder firstLineBuilder, StructureBuilder secondLineBuilder) {
 		this.firstLineBuilder = firstLineBuilder;
 		this.secondLineBuilder = secondLineBuilder;
 	}
 
-	public TwoLinesStructureBuilder withFirstRowSize(Fraction firstLineHeighSizeRatio){
+	public TwoLinesView withFirstRowSize(Fraction firstLineHeighSizeRatio){
 		this.firstLineHeighSizeRatio = firstLineHeighSizeRatio;
 		return this;
 	}
@@ -47,8 +47,8 @@ public class TwoLinesStructureBuilder extends BaseStructureBuilder {
 	}
 
 	@Override
-	protected BaseStructureBuilder copy() {
-		return new TwoLinesStructureBuilder(firstLineBuilder.newCopy(), secondLineBuilder.newCopy()).withFirstRowSize(firstLineHeighSizeRatio);
+	protected BaseView copy() {
+		return new TwoLinesView(firstLineBuilder.newCopy(), secondLineBuilder.newCopy()).withFirstRowSize(firstLineHeighSizeRatio);
 	}
 
 	public StructureBuilder getFirstLineBuilder() {

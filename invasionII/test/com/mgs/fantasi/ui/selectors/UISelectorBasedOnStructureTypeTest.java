@@ -1,7 +1,7 @@
 package com.mgs.fantasi.ui.selectors;
 
 import com.mgs.fantasi.ui.wireframe.Wireframe;
-import com.mgs.fantasi.structures.StructureBuilder;
+import com.mgs.fantasi.views.View;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -20,18 +20,18 @@ public class UISelectorBasedOnStructureTypeTest {
 		Assert.assertFalse(selector.appliesTo(createWireframeMock(MatchingStructureTypeParent.class)));
 	}
 
-	private Wireframe createWireframeMock(Class<? extends StructureBuilder> structureType) {
+	private Wireframe createWireframeMock(Class<? extends View> structureType) {
 		Wireframe wireframe = Mockito.mock(Wireframe.class);
 		Mockito.when(wireframe.getStructureType()).thenAnswer(withClass(structureType));
 		return wireframe;
 	}
 
-	private interface MatchingStructureTypeParent extends StructureBuilder {}
+	private interface MatchingStructureTypeParent extends View {}
 	private interface MatchingStructureType extends MatchingStructureTypeParent {}
 	private interface ExtendingInterface extends MatchingStructureType {}
-	private interface OtherStructureType extends StructureBuilder {}
+	private interface OtherStructureType extends View {}
 
-	private Answer<Object> withClass(final Class<? extends StructureBuilder> matchingStructureTypeClass) {
+	private Answer<Object> withClass(final Class<? extends View> matchingStructureTypeClass) {
 		return new Answer<Object>() {
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {

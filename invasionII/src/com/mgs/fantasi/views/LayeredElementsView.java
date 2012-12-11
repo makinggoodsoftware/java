@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LayeredElementsView extends BaseView {
-	private List<StructureBuilder> layers = new ArrayList<StructureBuilder>();
+	private List<View> layers = new ArrayList<View>();
 
 	public static LayeredElementsView layered() {
 		return new LayeredElementsView();
 	}
 
-	public LayeredElementsView withLayer (StructureBuilder layer){
+	public LayeredElementsView withLayer (View layer){
 		layers.add(layer);
 		return this;
 	}
@@ -27,8 +27,8 @@ public class LayeredElementsView extends BaseView {
 	@Override
 	protected Structure buildLayoutAndChilds() {
 		List<Wireframe> layersAsWireframes = new ArrayList<Wireframe>();
-		for (StructureBuilder layer : layers) {
-			layersAsWireframes.add(layer.build());
+		for (View layer : layers) {
+			layersAsWireframes.add(layer.render());
 		}
 		return new Layers<Wireframe>(layersAsWireframes);
 	}
@@ -36,7 +36,7 @@ public class LayeredElementsView extends BaseView {
 	@Override
 	protected BaseView copy() {
 		LayeredElementsView copy = new LayeredElementsView();
-		for (StructureBuilder layer : layers) {
+		for (View layer : layers) {
 			copy.withLayer(layer.newCopy());
 		}
 		return copy;

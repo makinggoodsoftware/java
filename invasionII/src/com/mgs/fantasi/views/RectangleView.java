@@ -6,16 +6,16 @@ import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 public class RectangleView extends BaseView<RectangleView> {
-	private StructureBuilder content;
+	private View content;
 
-	private RectangleView(StructureBuilder content) {
+	private RectangleView(View content) {
 		this.content = content;
 	}
 
 	private RectangleView() {
 	}
 
-	public static RectangleView rectangleWithContent(StructureBuilder content) {
+	public static RectangleView rectangleWithContent(View content) {
 		return new RectangleView(content);
 	}
 
@@ -23,7 +23,7 @@ public class RectangleView extends BaseView<RectangleView> {
 		return new RectangleView();
 	}
 
-	public RectangleView withContent(StructureBuilder content) {
+	public RectangleView withContent(View content) {
 		this.content = content;
 		return this;
 	}
@@ -41,7 +41,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	@Override
 	protected Structure buildLayoutAndChilds() {
 		if (content == null) return GridFactory.empty(Wireframe.class);
-		return new SimpleStructure<Wireframe>(content.build());
+		return new SimpleStructure<Wireframe>(content.render());
 	}
 
 }

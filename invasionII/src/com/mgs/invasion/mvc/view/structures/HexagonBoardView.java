@@ -7,7 +7,7 @@ import com.mgs.fantasi.ui.wireframe.Structure;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
 
 public class HexagonBoardView extends BaseView {
-	private final LayeredElementView boardStructureBuilder;
+	private final LayeredElementsView boardStructureBuilder;
 	private final PijamaRowsView evenHexagonRowsLayerBuilder;
 	private final PijamaRowsView oddHexagonRowsLayerBuilder;
 	private final RectangleView emptyRowBuilder;
@@ -20,7 +20,7 @@ public class HexagonBoardView extends BaseView {
 		emptyRowBuilder = RectangleView.emptyRectangle();
 		oddHexagonRowsLayerBuilder = PijamaRowsView.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
 		evenHexagonRowsLayerBuilder = PijamaRowsView.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
-		boardStructureBuilder = LayeredElementView.layered().withLayer(oddHexagonRowsLayerBuilder).withLayer(evenHexagonRowsLayerBuilder);
+		boardStructureBuilder = LayeredElementsView.layered().withLayer(oddHexagonRowsLayerBuilder).withLayer(evenHexagonRowsLayerBuilder);
 	}
 
 

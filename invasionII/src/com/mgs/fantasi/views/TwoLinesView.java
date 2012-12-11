@@ -8,12 +8,12 @@ import static com.mgs.fantasi.ui.wireframe.CellContent.withPartialHeight;
 
 public class TwoLinesView extends BaseView {
 
-	private final StructureBuilder firstLineBuilder;
-	private final StructureBuilder secondLineBuilder;
+	private final View firstLineBuilder;
+	private final View secondLineBuilder;
 
 	private Fraction firstLineHeighSizeRatio = null;
 
-	public TwoLinesView(StructureBuilder firstLineBuilder, StructureBuilder secondLineBuilder) {
+	public TwoLinesView(View firstLineBuilder, View secondLineBuilder) {
 		this.firstLineBuilder = firstLineBuilder;
 		this.secondLineBuilder = secondLineBuilder;
 	}
@@ -36,10 +36,10 @@ public class TwoLinesView extends BaseView {
 			@Override
 			public CellContent<Wireframe> generateContentFor(int x, int y) {
 				if (y == 0){
-					return withPartialHeight(firstLineBuilder.build(), firstLineHeighSizeRatio);
+					return withPartialHeight(firstLineBuilder.render(), firstLineHeighSizeRatio);
 				}else{
 					Fraction remainder = allWithBase(firstLineHeighSizeRatio.getBase()).minus(firstLineHeighSizeRatio);
-					return withPartialHeight(secondLineBuilder.build(), remainder);
+					return withPartialHeight(secondLineBuilder.render(), remainder);
 				}
 			}
 		});
@@ -51,11 +51,11 @@ public class TwoLinesView extends BaseView {
 		return new TwoLinesView(firstLineBuilder.newCopy(), secondLineBuilder.newCopy()).withFirstRowSize(firstLineHeighSizeRatio);
 	}
 
-	public StructureBuilder getFirstLineBuilder() {
+	public View getFirstLineBuilder() {
 		return firstLineBuilder;
 	}
 
-	public StructureBuilder getSecondLineBuilder() {
+	public View getSecondLineBuilder() {
 		return secondLineBuilder;
 	}
 }

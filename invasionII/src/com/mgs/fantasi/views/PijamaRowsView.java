@@ -10,11 +10,11 @@ public class PijamaRowsView extends BaseView {
 
 	private int numberOfGenerations = UNDEFINED;
 
-	private PijamaRowsView(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
+	private PijamaRowsView(View firstRowBuilder, View secondRowBuilder) {
 		generationBuilder = new TwoLinesView(firstRowBuilder, secondRowBuilder);
 	}
 
-	public static PijamaRowsView pijamaRows(StructureBuilder firstRowBuilder, StructureBuilder secondRowBuilder) {
+	public static PijamaRowsView pijamaRows(View firstRowBuilder, View secondRowBuilder) {
 		return new PijamaRowsView(firstRowBuilder, secondRowBuilder);
 	}
 
@@ -40,7 +40,7 @@ public class PijamaRowsView extends BaseView {
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override
 			public CellContent<Wireframe> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided(generationBuilder.build());
+				return CellContent.evenlyDivided(generationBuilder.render());
 			}
 		});
 		return layout;
@@ -48,8 +48,8 @@ public class PijamaRowsView extends BaseView {
 
 	@Override
 	protected BaseView copy() {
-		StructureBuilder firstLineBuilder = generationBuilder.getFirstLineBuilder();
-		StructureBuilder secondLineBuilder = generationBuilder.getSecondLineBuilder();
+		View firstLineBuilder = generationBuilder.getFirstLineBuilder();
+		View secondLineBuilder = generationBuilder.getSecondLineBuilder();
 		return new PijamaRowsView(firstLineBuilder.newCopy(), secondLineBuilder).withNumberOfGerations(numberOfGenerations);
 	}
 

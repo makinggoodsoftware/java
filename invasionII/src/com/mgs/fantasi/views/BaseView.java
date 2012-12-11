@@ -11,16 +11,16 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-public abstract class BaseView<T extends BaseView> implements StructureBuilder{
+public abstract class BaseView<T extends BaseView> implements View {
 	PolygonPointsIterator shape = new NativeRectanguarShape();
 	private Margin margin = Margin.noMargin();
 	private String name = "";
 	private Measurement measurement;
 
 	@Override
-	public final Wireframe build() {
+	public final Wireframe render() {
 		if (!constraintsAreSatisfied()){
-			throw new RuntimeException("Can't build " +  this +  " since some of its constraints are not satisfied");
+			throw new RuntimeException("Can't render " +  this +  " since some of its constraints are not satisfied");
 		}
 		Structure content = buildLayoutAndChilds();
 		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");

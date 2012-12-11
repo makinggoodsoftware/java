@@ -73,7 +73,7 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 					throw new RuntimeException
 							("Error building the UI native element when inspecting the content of the original" +
 									" wireframe. This should not happen ever! There must have been an error on the" +
-									" build call previous to the transformation into a native UI element must be badly constructed");
+									" render call previous to the transformation into a native UI element must be badly constructed");
 				}
 				Wireframe child = cell.getContent();
 				JPanel childAsNativeComponent = create(child, uiProfile);

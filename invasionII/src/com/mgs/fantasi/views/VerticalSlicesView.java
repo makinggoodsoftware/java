@@ -5,14 +5,14 @@ import com.mgs.fantasi.ui.wireframe.*;
 public class VerticalSlicesView extends BaseView {
 
 	private static final int UNDEFINED = -1;
-	private final StructureBuilder contentBuilder;
+	private final View contentBuilder;
 	private int numberOfDivisions = UNDEFINED;
 
-	private VerticalSlicesView(StructureBuilder contentBuilder) {
+	private VerticalSlicesView(View contentBuilder) {
 		this.contentBuilder = contentBuilder;
 	}
 
-	public static VerticalSlicesView verticalSlices(StructureBuilder contentBuilder) {
+	public static VerticalSlicesView verticalSlices(View contentBuilder) {
 		return new VerticalSlicesView(contentBuilder);
 	}
 
@@ -28,7 +28,7 @@ public class VerticalSlicesView extends BaseView {
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override
 			public CellContent<Wireframe> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided(contentBuilder.build());
+				return CellContent.evenlyDivided(contentBuilder.render());
 			}
 		});
 		return layout;

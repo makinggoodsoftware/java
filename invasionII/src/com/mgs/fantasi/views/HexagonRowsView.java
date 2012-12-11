@@ -43,7 +43,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 
 	@Override
 	protected Structure buildLayoutAndChilds() {
-		return new SimpleStructure<Wireframe>(pijamaRows.build());
+		return new SimpleStructure<Wireframe>(pijamaRows.render());
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 		return this;
 	}
 
-	public StructureBuilder withHexagonMeasurement(Measurement hexagonMeasurement) {
+	public View withHexagonMeasurement(Measurement hexagonMeasurement) {
 		hexagon.withMeasurement(hexagonMeasurement);
 		return this;
 	}

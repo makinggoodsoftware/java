@@ -2,7 +2,7 @@ package com.mgs.invasion;
 
 import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.measurements.Measurements;
-import com.mgs.fantasi.structures.HexagonRowsStructureBuilder;
+import com.mgs.fantasi.views.HexagonRowsView;
 import com.mgs.fantasi.ui.driver.UIDriver;
 import com.mgs.fantasi.ui.profile.UIProfileFactory;
 import com.mgs.fantasi.ui.wireframe.Wireframe;
@@ -11,8 +11,8 @@ import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.structures.LayeredElementStructureBuilder.layered;
-import static com.mgs.fantasi.structures.RectangleStructureBuilder.emptyRectangle;
+import static com.mgs.fantasi.views.LayeredElementsView.layered;
+import static com.mgs.fantasi.views.RectangleView.emptyRectangle;
 
 public class Main {
 	public static void main(String... args) {
@@ -27,9 +27,9 @@ public class Main {
 		int numberOfGerations = 5;
 
 
-		HexagonRowsStructureBuilder hexagonRows = HexagonRowsStructureBuilder.newHexagonRows(numberOVerticalDivisions, numberOfGerations);
+		HexagonRowsView hexagonRows = HexagonRowsView.newHexagonRows(numberOVerticalDivisions, numberOfGerations);
 
-		Measurement hexagonMeasurement = Measurements.futureMeasurement ();
+		Measurement hexagonMeasurement = Measurements.futureMeasurement();
 		Wireframe board =
 			layered().
 				withLayer(
@@ -47,7 +47,7 @@ public class Main {
 									withHexagonMeasurement(hexagonMeasurement)
 					)
 				).
-			build();
+		render();
 
 		uiDriver.show(board, new Dimension(400, 400));
 	}

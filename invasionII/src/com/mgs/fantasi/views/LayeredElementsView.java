@@ -20,12 +20,12 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		return true;
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		List<Wireframe> layersAsWireframes = new ArrayList<Wireframe>();
 		for (View layer : layers) {
 			layersAsWireframes.add(layer.render());

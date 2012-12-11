@@ -25,12 +25,12 @@ public class TwoLinesView extends BaseView {
 
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		return firstLineHeighSizeRatio != null;
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		Grid<Wireframe> layout = GridFactory.withDimensions(1, 2);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override

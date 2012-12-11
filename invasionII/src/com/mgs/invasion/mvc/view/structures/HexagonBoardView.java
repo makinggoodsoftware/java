@@ -25,12 +25,12 @@ public class HexagonBoardView extends BaseView {
 
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		return false;
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		return GridFactory.empty(Wireframe.class);
 	}
 

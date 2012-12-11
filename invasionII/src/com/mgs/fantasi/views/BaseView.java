@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 public abstract class BaseView<T extends BaseView> implements View {
-	PolygonPointsIterator shape = new NativeRectanguarShape();
+	private PolygonPointsIterator shape = new NativeRectanguarShape();
 	private Margin margin = Margin.noMargin();
 	private String name = "";
 	private Measurement measurement;
@@ -20,35 +20,47 @@ public abstract class BaseView<T extends BaseView> implements View {
 	@Override
 	public final Wireframe render() {
 		if (!constraintsAreSatisfied()){
-			throw new RuntimeException("Can't render " +  this +  " since some of its constraints are not satisfied");
+			throw new RuntimeException("Can't render " + this +  " since some of its constraints are not satisfied");
 		}
 		Structure content = buildLayoutAndChilds();
 		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");
-		return new Wireframe(getClass(), shape, content, margin, name);
+		return new Wireframe(getClass(), getShape(), content, getMargin(), getName());
 	}
 
-	protected abstract boolean constraintsAreSatisfied();
-
 	public final BaseView withShape (PolygonPointsIterator shape){
-		this.shape = shape;
+		this.setShape(shape);
 		return this;
 	}
 
-	protected abstract Structure buildLayoutAndChilds();
-
 	public T withMargin(Margin margin) {
-		this.margin = margin;
+		this.setMargin(margin);
 		return (T) this;
 	}
 
 	public T withName(String name) {
-		this.name = name;
+		this.setName(name);
 		return (T) this;
 	}
 
 	public T withMeasurement(Measurement measurement) {
-		this.measurement = measurement;
+		this.setMeasurement(measurement);
 		return (T) this;
+	}
+
+	public void setShape(PolygonPointsIterator shape) {
+		this.shape = shape;
+	}
+
+	public void setMargin(Margin margin) {
+		this.margin = margin;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setMeasurement(Measurement measurement) {
+		this.measurement = measurement;
 	}
 
 	private class NativeRectanguarShape implements PolygonPointsIterator {
@@ -67,23 +79,30 @@ public abstract class BaseView<T extends BaseView> implements View {
 	@Override
 	public final T newCopy() {
 		T copy = copy ();
-		copy.shape = this.shape;
-		copy.margin = margin;
-		copy.name = name;
+		copy.setShape(getShape());
+		copy.setMargin(getMargin());
+		copy.setName(getName());
 		return copy;
 	}
 
 	protected abstract T copy();
 
+	@Override
 	public Margin getMargin() {
 		return margin;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public PolygonPointsIterator getShape() {
 		return shape;
+	}
+
+	public Measurement getMeasurement() {
+		return measurement;
 	}
 }

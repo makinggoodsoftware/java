@@ -17,13 +17,13 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		if (numberOfDivisions == UNDEFINED) return false;
 		return true;
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		Grid<Wireframe> layout = GridFactory.withDimensions(numberOfDivisions, 1);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override

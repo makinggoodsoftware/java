@@ -29,13 +29,13 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		if (! generationBuilder.constraintsAreSatisfied()) return false;
 		return numberOfGenerations != UNDEFINED;
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		Grid<Wireframe> layout = GridFactory.withDimensions(1, numberOfGenerations);
 		layout.fillCells(new CellContentGenerator<Wireframe>() {
 			@Override

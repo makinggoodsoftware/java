@@ -29,7 +29,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		return true;
 	}
 
@@ -39,7 +39,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		if (content == null) return GridFactory.empty(Wireframe.class);
 		return new SimpleStructure<Wireframe>(content.render());
 	}

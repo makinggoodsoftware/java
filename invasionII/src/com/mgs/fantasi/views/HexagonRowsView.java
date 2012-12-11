@@ -37,12 +37,12 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		return true;
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		return new SimpleStructure<Wireframe>(pijamaRows.render());
 	}
 

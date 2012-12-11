@@ -16,12 +16,12 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	protected boolean constraintsAreSatisfied() {
+	public boolean constraintsAreSatisfied() {
 		return true;
 	}
 
 	@Override
-	protected Structure buildLayoutAndChilds() {
+	public Structure buildLayoutAndChilds() {
 		return GridFactory.empty(Wireframe.class);
 	}
 

@@ -5,8 +5,8 @@ import com.mgs.fantasi.views.ViewRenderer;
 
 import java.awt.*;
 
-public interface ContentStructureStrategy {
+public interface ContentStructureStrategy extends ViewRenderer{
 	public StructureFactory.StructureType getContentStructureType();
 
-	Structure<Renderable> buildFrom(ViewRenderer viewRenderer, UIProfile uiProfile, Dimension dimension);
+	Structure<Renderable> buildFrom(UIProfile uiProfile, Dimension dimension);
 }

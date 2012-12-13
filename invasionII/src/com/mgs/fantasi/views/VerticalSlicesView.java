@@ -2,6 +2,8 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.ui.wireframe.*;
 
+import java.awt.*;
+
 public class VerticalSlicesView extends BaseView {
 
 	private static final int UNDEFINED = -1;
@@ -17,21 +19,40 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	public boolean constraintsAreSatisfied() {
-		if (numberOfDivisions == UNDEFINED) return false;
-		return true;
+	public boolean renderConstraintsAreSatisfied() {
+		return numberOfDivisions != UNDEFINED;
 	}
 
 	@Override
-	public Structure buildLayoutAndChilds() {
-		Grid<Wireframe> layout = GridFactory.withDimensions(numberOfDivisions, 1);
-		layout.fillCells(new CellContentGenerator<Wireframe>() {
+	public Structure<View> getContent() {
+		Grid<View> layout = GridFactory.withDimensions(numberOfDivisions, 1);
+		layout.fillCells(new CellContentGenerator<View>() {
 			@Override
-			public CellContent<Wireframe> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided(contentBuilder.render());
+			public CellContent<View> generateContentFor(int x, int y) {
+				return CellContent.evenlyDivided(contentBuilder);
 			}
 		});
 		return layout;
+	}
+
+	@Override
+	public StructureFactory.StructureType getContentStructureType() {
+		return null;
+	}
+
+	@Override
+	public ContentStructureStrategy getContentStructureStrategy() {
+		return new GridContentStructureStrategy() {
+			@Override
+			public Dimension getDimension() {
+				return new Dimension(numberOfDivisions, 1);
+			}
+
+			@Override
+			public CellContent<View> getCellContentFor(int x, int y) {
+				return CellContent.evenlyDivided(contentBuilder);
+			}
+		};
 	}
 
 	public VerticalSlicesView withVerticalDivisions (int numberOVerticalDivisions){

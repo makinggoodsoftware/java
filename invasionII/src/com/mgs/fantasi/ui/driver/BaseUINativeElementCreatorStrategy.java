@@ -9,22 +9,24 @@ import java.util.Set;
 
 public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeElementCreatorStrategy<T> {
 	@Override
-	public T create(Wireframe wireframe, UIProfile uiProfile) {
-		Set<UIStyle> uiStyles = uiProfile.findStylesFor(wireframe);
-		PolygonPointsIterator shape = wireframe.getShape();
+	public T create(Renderable renderable, UIProfile uiProfile) {
+		Set<UIStyle> uiStyles = uiProfile.findStylesFor(renderable);
+		PolygonPointsIterator shape = renderable.getShape();
 		T nativeContainer = shape.isRectangular() ?
 			newRectangularNativeElementSkeletonWithStyles(uiStyles):
 			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
-		Margin margin = wireframe.getMargin();
-		final Structure content = wireframe.getContent();
+		Margin margin = renderable.getMargin();
+		final Structure content = renderable.getContent();
 		if (content instanceof Grid) {
-			processGridChilds(nativeContainer, (Grid<Wireframe>) content, uiProfile);
+			processGridChilds(nativeContainer, (Grid<Renderable>) content, uiProfile);
 		} else if (content instanceof Layers){
-			processLayerChilds(nativeContainer, (Layers<Wireframe>) content, uiProfile);
+			processLayerChilds(nativeContainer, (Layers<Renderable>) content, uiProfile);
 		} else if (content instanceof SimpleStructure){
-			processSimpleStructure(nativeContainer, ((SimpleStructure<Wireframe>) content).getContent(), uiProfile);
+			processSimpleStructure(nativeContainer, ((SimpleStructure<Renderable>) content).getContent(), uiProfile);
+		} else if (content instanceof EmptyStructure){
+			processEmptyStructure(nativeContainer);
 		}else{
-			throw new RuntimeException("Can't process the wireframe: " + wireframe);
+			throw new RuntimeException("Can't process the renderable: " + renderable);
 		}
 
 		T outmostPointer;
@@ -36,13 +38,15 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 		return outmostPointer;
 	}
 
-	protected abstract void processSimpleStructure(T nativeElement, Wireframe content, UIProfile uiProfile);
+	protected abstract void processEmptyStructure(T nativeContainer);
+
+	protected abstract void processSimpleStructure(T nativeElement, Renderable content, UIProfile uiProfile);
 
 	protected abstract T decorateWithMargin(T nativeElement, Margin margin);
 
-	protected abstract void processLayerChilds(T parentNativeElement, Layers<Wireframe> content, UIProfile uiProfile);
+	protected abstract void processLayerChilds(T parentNativeElement, Layers<Renderable> content, UIProfile uiProfile);
 
-	protected abstract void processGridChilds(T parentNativeElement, Grid<Wireframe> childContent, UIProfile uiProfile);
+	protected abstract void processGridChilds(T parentNativeElement, Grid<Renderable> childContent, UIProfile uiProfile);
 
 
 	private T newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {

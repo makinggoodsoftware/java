@@ -1,6 +1,6 @@
 package com.mgs.fantasi.ui.selectors;
 
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.Renderable;
 import com.mgs.fantasi.views.View;
 
 public class UISelectorBasedOnStructureType implements UISelector {
@@ -11,7 +11,7 @@ public class UISelectorBasedOnStructureType implements UISelector {
 	}
 
 	@Override
-	public boolean appliesTo(Wireframe wireframe) {
-		return wireframe.getStructureType().equals(type);
+	public boolean appliesTo(Renderable renderable) {
+		return renderable.getView().equals(type);
 	}
 }

@@ -1,6 +1,6 @@
 package com.mgs.fantasi.ui.selectors;
 
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.Renderable;
 
 public class UISelectorBasedOnName implements UISelector {
 	private final String name;
@@ -10,7 +10,7 @@ public class UISelectorBasedOnName implements UISelector {
 	}
 
 	@Override
-	public boolean appliesTo(Wireframe wireframe) {
-		return wireframe.getName().equals(name);
+	public boolean appliesTo(Renderable renderable) {
+		return renderable.getName().equals(name);
 	}
 }

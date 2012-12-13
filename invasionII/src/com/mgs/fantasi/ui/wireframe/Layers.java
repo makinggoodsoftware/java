@@ -2,7 +2,7 @@ package com.mgs.fantasi.ui.wireframe;
 
 import java.util.List;
 
-public class Layers<T> implements Structure {
+public class Layers<T extends Structurable> implements Structure<T> {
 	private final List<T> layers;
 
 	public Layers(List<T> layers) {
@@ -23,4 +23,10 @@ public class Layers<T> implements Structure {
 				"layers=" + layers +
 				'}';
 	}
+
+	@Override
+	public <Z extends Structurable> Structure<Z> transformInto(StructureTransformer<T, Z> tzStructureTransformer, Structure<Z> into) {
+		return null;
+	}
+
 }

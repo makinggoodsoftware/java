@@ -1,8 +1,6 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.ui.wireframe.Layers;
-import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +18,36 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public boolean constraintsAreSatisfied() {
+	public boolean renderConstraintsAreSatisfied() {
 		return true;
 	}
 
 	@Override
-	public Structure buildLayoutAndChilds() {
-		List<Wireframe> layersAsWireframes = new ArrayList<Wireframe>();
-		for (View layer : layers) {
-			layersAsWireframes.add(layer.render());
+	public Structure<View> getContent() {
+		List<View> layers = new ArrayList<View>();
+		for (View layer : this.layers) {
+			layers.add(layer);
 		}
-		return new Layers<Wireframe>(layersAsWireframes);
+		return new Layers<View>(layers);
+	}
+
+	@Override
+	public StructureFactory.StructureType getContentStructureType() {
+		return null;
+	}
+
+	@Override
+	public ContentStructureStrategy getContentStructureStrategy() {
+		return new LayeredContentStructureStrategy() {
+			@Override
+			public List<View> getLayers() {
+				List<View> layers = new ArrayList<View>();
+				for (View layer : LayeredElementsView.this.layers) {
+					layers.add(layer);
+				}
+				return layers;
+			}
+		};
 	}
 
 	@Override

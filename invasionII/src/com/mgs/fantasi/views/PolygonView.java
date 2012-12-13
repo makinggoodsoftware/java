@@ -1,9 +1,7 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.ui.wireframe.GridFactory;
-import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 
 public class PolygonView extends BaseView<PolygonView> {
 
@@ -16,13 +14,23 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public boolean constraintsAreSatisfied() {
+	public boolean renderConstraintsAreSatisfied() {
 		return true;
 	}
 
 	@Override
-	public Structure buildLayoutAndChilds() {
-		return GridFactory.empty(Wireframe.class);
+	public Structure<View> getContent() {
+		return GridFactory.empty(View.class);
+	}
+
+	@Override
+	public StructureFactory.StructureType getContentStructureType() {
+		return null;
+	}
+
+	@Override
+	public ContentStructureStrategy getContentStructureStrategy() {
+		return new EmptyContentStructureStrategy();
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package com.mgs.fantasi.ui.profile;
 
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.Renderable;
 import com.mgs.fantasi.ui.selectors.UISelector;
 
 import java.util.HashMap;
@@ -15,10 +15,10 @@ public class UIProfile {
 		styles.put(uiSelector, uiStyle);
 	}
 
-	public Set<UIStyle> findStylesFor(Wireframe wireframe) {
+	public Set<UIStyle> findStylesFor(Renderable renderable) {
 		Set<UIStyle> uiStyles = new HashSet<UIStyle>();
 		for (UISelector matchingStrategy : styles.keySet()) {
-			if (matchingStrategy.appliesTo(wireframe)){
+			if (matchingStrategy.appliesTo(renderable)){
 				uiStyles.add(styles.get(matchingStrategy));
 			}
 		}

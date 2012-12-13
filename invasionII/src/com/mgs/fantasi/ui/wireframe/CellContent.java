@@ -8,7 +8,7 @@ public class CellContent<T> {
 	private final Fraction widthSizeRatio;
 	private final Fraction heightSizeRatio;
 
-	private CellContent(T content, Fraction heightSizeRatio, Fraction widthSizeRatio) {
+	public CellContent(T content, Fraction heightSizeRatio, Fraction widthSizeRatio) {
 		this.content = content;
 		this.heightSizeRatio = heightSizeRatio;
 		this.widthSizeRatio = widthSizeRatio;

@@ -3,6 +3,8 @@ package com.mgs.fantasi.views;
 import com.mgs.fantasi.measurements.Fraction;
 import com.mgs.fantasi.ui.wireframe.*;
 
+import java.awt.*;
+
 public class PijamaRowsView extends BaseView {
 	private static final int UNDEFINED = -1;
 
@@ -29,21 +31,40 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	public boolean constraintsAreSatisfied() {
-		if (! generationBuilder.constraintsAreSatisfied()) return false;
-		return numberOfGenerations != UNDEFINED;
+	public boolean renderConstraintsAreSatisfied() {
+		return generationBuilder.renderConstraintsAreSatisfied() && numberOfGenerations != UNDEFINED;
 	}
 
 	@Override
-	public Structure buildLayoutAndChilds() {
-		Grid<Wireframe> layout = GridFactory.withDimensions(1, numberOfGenerations);
-		layout.fillCells(new CellContentGenerator<Wireframe>() {
+	public Structure<View> getContent() {
+		Grid<View> layout = GridFactory.withDimensions(1, numberOfGenerations);
+		layout.fillCells(new CellContentGenerator<View>() {
 			@Override
-			public CellContent<Wireframe> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided(generationBuilder.render());
+			public CellContent<View> generateContentFor(int x, int y) {
+				return CellContent.evenlyDivided((View) generationBuilder);
 			}
 		});
 		return layout;
+	}
+
+	@Override
+	public StructureFactory.StructureType getContentStructureType() {
+		return null;
+	}
+
+	@Override
+	public ContentStructureStrategy getContentStructureStrategy() {
+		return new GridContentStructureStrategy() {
+			@Override
+			public Dimension getDimension() {
+				return new Dimension(1, numberOfGenerations);
+			}
+
+			@Override
+			public CellContent<View> getCellContentFor(int x, int y) {
+				return CellContent.evenlyDivided((View) generationBuilder);
+			}
+		};
 	}
 
 	@Override

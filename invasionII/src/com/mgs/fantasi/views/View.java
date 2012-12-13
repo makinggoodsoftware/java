@@ -1,16 +1,14 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.ui.wireframe.Margin;
-import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 
-public interface View {
-	public Wireframe render();
+public interface View extends Structurable{
+	public Renderable render();
 
 	public View newCopy();
 
-	boolean constraintsAreSatisfied();
+	boolean renderConstraintsAreSatisfied();
 
 	PolygonPointsIterator getShape();
 
@@ -18,5 +16,9 @@ public interface View {
 
 	String getName();
 
-	Structure buildLayoutAndChilds();
+	Structure<View> getContent();
+
+	StructureFactory.StructureType getContentStructureType();
+
+	ContentStructureStrategy getContentStructureStrategy();
 }

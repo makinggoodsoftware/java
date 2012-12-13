@@ -4,7 +4,7 @@ import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.wireframe.Margin;
 import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.Renderable;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
@@ -18,13 +18,13 @@ public abstract class BaseView<T extends BaseView> implements View {
 	private Measurement measurement;
 
 	@Override
-	public final Wireframe render() {
-		if (!constraintsAreSatisfied()){
-			throw new RuntimeException("Can't render " + this +  " since some of its constraints are not satisfied");
+	public final Renderable render() {
+		if (!renderConstraintsAreSatisfied()){
+			throw new RuntimeException("Can't createRenderable " + this +  " since some of its constraints are not satisfied");
 		}
-		Structure content = buildLayoutAndChilds();
+		Structure content = getContent();
 		if (content == null) throw new RuntimeException("Content can't be null, needs to be at lease GridFactory.empty()");
-		return new Wireframe(getClass(), getShape(), content, getMargin(), getName());
+		return new Renderable(getClass(), getShape(), content, getMargin(), getName());
 	}
 
 	public final BaseView withShape (PolygonPointsIterator shape){

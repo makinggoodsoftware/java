@@ -1,9 +1,10 @@
 package com.mgs.fantasi.ui.wireframe;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListGrid<T> implements Grid<T> {
+public class ArrayListGrid<T extends Structurable> extends BaseStructure<T> implements Grid<T> {
 	private final int divisionsX;
 	private final int divisionsY;
 	private final List<List<CellContent<T>>> cells;
@@ -19,6 +20,10 @@ public class ArrayListGrid<T> implements Grid<T> {
 			}
 			cells.add(columns);
 		}
+	}
+
+	public ArrayListGrid(Dimension dimension) {
+		this (dimension.width, dimension.height);
 	}
 
 	@Override
@@ -59,5 +64,9 @@ public class ArrayListGrid<T> implements Grid<T> {
 				", divisionsX=" + divisionsX +
 				", divisionsY=" + divisionsY +
 				'}';
+	}
+
+	public Dimension getDimension() {
+		return new Dimension(divisionsX, divisionsY);
 	}
 }

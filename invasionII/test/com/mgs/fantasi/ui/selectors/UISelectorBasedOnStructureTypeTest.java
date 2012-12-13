@@ -1,6 +1,6 @@
 package com.mgs.fantasi.ui.selectors;
 
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.Renderable;
 import com.mgs.fantasi.views.View;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,10 +20,10 @@ public class UISelectorBasedOnStructureTypeTest {
 		Assert.assertFalse(selector.appliesTo(createWireframeMock(MatchingStructureTypeParent.class)));
 	}
 
-	private Wireframe createWireframeMock(Class<? extends View> structureType) {
-		Wireframe wireframe = Mockito.mock(Wireframe.class);
-		Mockito.when(wireframe.getStructureType()).thenAnswer(withClass(structureType));
-		return wireframe;
+	private Renderable createWireframeMock(Class<? extends View> structureType) {
+		Renderable renderable = Mockito.mock(Renderable.class);
+		Mockito.when(renderable.getView()).thenAnswer(withClass(structureType));
+		return renderable;
 	}
 
 	private interface MatchingStructureTypeParent extends View {}

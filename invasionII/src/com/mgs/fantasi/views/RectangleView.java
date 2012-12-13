@@ -1,9 +1,6 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.ui.wireframe.GridFactory;
-import com.mgs.fantasi.ui.wireframe.SimpleStructure;
-import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 
 public class RectangleView extends BaseView<RectangleView> {
 	private View content;
@@ -13,10 +10,6 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	private RectangleView() {
-	}
-
-	public static RectangleView rectangleWithContent(View content) {
-		return new RectangleView(content);
 	}
 
 	public static RectangleView emptyRectangle() {
@@ -29,7 +22,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public boolean constraintsAreSatisfied() {
+	public boolean renderConstraintsAreSatisfied() {
 		return true;
 	}
 
@@ -39,9 +32,26 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public Structure buildLayoutAndChilds() {
-		if (content == null) return GridFactory.empty(Wireframe.class);
-		return new SimpleStructure<Wireframe>(content.render());
+	public Structure<View> getContent() {
+		if (content == null) return GridFactory.empty(View.class);
+		return new SimpleStructure<View>(content);
+	}
+
+	@Override
+	public StructureFactory.StructureType getContentStructureType() {
+		return null;
+	}
+
+	@Override
+	public ContentStructureStrategy getContentStructureStrategy() {
+		return content == null ?
+			new EmptyContentStructureStrategy() :
+			new SimpleContentStructureStrategy() {
+				@Override
+				public View getContent() {
+					return content;
+				}
+			};
 	}
 
 }

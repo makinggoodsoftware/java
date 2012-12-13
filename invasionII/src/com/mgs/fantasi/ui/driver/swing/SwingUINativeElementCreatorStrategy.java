@@ -25,7 +25,11 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
-	protected void processSimpleStructure(JPanel nativeElement, Wireframe content, UIProfile uiProfile) {
+	protected void processEmptyStructure(JPanel nativeContainer) {
+	}
+
+	@Override
+	protected void processSimpleStructure(JPanel nativeElement, Renderable content, UIProfile uiProfile) {
 		nativeElement.setLayout(new GridBagLayout());
 		nativeElement.add(create(content, uiProfile), intoCoordinates(0, 0, Fractions.all(), Fractions.all()));
 	}
@@ -52,11 +56,11 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
-	protected void processLayerChilds(final JPanel parentNativeElement, Layers<Wireframe> childLayers, final UIProfile uiProfile) {
+	protected void processLayerChilds(final JPanel parentNativeElement, Layers<Renderable> childLayers, final UIProfile uiProfile) {
 		parentNativeElement.setLayout(new OverlayLayout(parentNativeElement));
-		childLayers.iterateInCrescendo(new LayerIterator<Wireframe>() {
+		childLayers.iterateInCrescendo(new LayerIterator<Renderable>() {
 			@Override
-			public void on(int zIndex, Wireframe layer) {
+			public void on(int zIndex, Renderable layer) {
 				JPanel childLayerAsNativeElement = create(layer, uiProfile);
 				parentNativeElement.add(childLayerAsNativeElement, zIndex);
 			}
@@ -64,18 +68,18 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
-	protected void processGridChilds(final JPanel parentNativeElement, Grid<Wireframe> childContent, final UIProfile uiProfile) {
+	protected void processGridChilds(final JPanel parentNativeElement, Grid<Renderable> childContent, final UIProfile uiProfile) {
 		parentNativeElement.setLayout(new GridBagLayout());
-		childContent.itereateCellsWith(new CellIterator<Wireframe>() {
+		childContent.itereateCellsWith(new CellIterator<Renderable>() {
 			@Override
-			public void on(int x, int y, CellContent<Wireframe> cell) {
+			public void on(int x, int y, CellContent<Renderable> cell) {
 				if (cell == null) {
 					throw new RuntimeException
 							("Error building the UI native element when inspecting the content of the original" +
 									" wireframe. This should not happen ever! There must have been an error on the" +
-									" render call previous to the transformation into a native UI element must be badly constructed");
+									" createRenderable call previous to the transformation into a native UI element must be badly constructed");
 				}
-				Wireframe child = cell.getContent();
+				Renderable child = cell.getContent();
 				JPanel childAsNativeComponent = create(child, uiProfile);
 				parentNativeElement.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 			}

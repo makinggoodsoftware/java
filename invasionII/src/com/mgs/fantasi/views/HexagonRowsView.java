@@ -3,9 +3,7 @@ package com.mgs.fantasi.views;
 import com.mgs.fantasi.measurements.Fractions;
 import com.mgs.fantasi.measurements.Measurement;
 import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.ui.wireframe.SimpleStructure;
-import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.*;
 
 import static com.mgs.fantasi.views.PijamaRowsView.pijamaRows;
 import static com.mgs.fantasi.views.PolygonView.polygon;
@@ -37,13 +35,28 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	public boolean constraintsAreSatisfied() {
+	public boolean renderConstraintsAreSatisfied() {
 		return true;
 	}
 
 	@Override
-	public Structure buildLayoutAndChilds() {
-		return new SimpleStructure<Wireframe>(pijamaRows.render());
+	public Structure<View> getContent() {
+		return new SimpleStructure<View>(pijamaRows);
+	}
+
+	@Override
+	public StructureFactory.StructureType getContentStructureType() {
+		return null;
+	}
+
+	@Override
+	public ContentStructureStrategy getContentStructureStrategy() {
+		return new SimpleContentStructureStrategy() {
+			@Override
+			public View getContent() {
+				return pijamaRows;
+			}
+		};
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package com.mgs.fantasi.ui.wireframe;
 
-public interface Grid<T> extends Structure {
+public interface Grid<T extends Structurable> extends Structure<T> {
 	void setCell(int x, int y, CellContent<T> content);
 
 	CellContent<T> getCell(int x, int y);

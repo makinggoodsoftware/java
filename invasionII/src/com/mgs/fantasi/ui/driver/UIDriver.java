@@ -3,7 +3,7 @@ package com.mgs.fantasi.ui.driver;
 import com.mgs.fantasi.ui.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.ui.driver.swing.SwingUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.UIProfile;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.ui.wireframe.Renderable;
 import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.views.ViewRenderer;
 import com.mgs.fantasi.views.ViewRendererImpl;
@@ -30,8 +30,8 @@ public class UIDriver<T> {
 	}
 
 	public void show(View view, Dimension dimension) {
-		Wireframe wireframe = viewRenderer.render(view, uiProfile, dimension);
-		T uiNativeComponent = uiNativeElementCreatorStrategy.create(wireframe, uiProfile);
+		Renderable renderable = viewRenderer.createRenderable(view, uiProfile, dimension);
+		T uiNativeComponent = uiNativeElementCreatorStrategy.create(renderable, uiProfile);
 		uiDIsplayManager.showPacked(uiNativeComponent, dimension);
 	}
 

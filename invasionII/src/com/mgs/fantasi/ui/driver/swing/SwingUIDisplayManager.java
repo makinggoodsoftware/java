@@ -1,11 +1,11 @@
 package com.mgs.fantasi.ui.driver.swing;
 
-import com.mgs.fantasi.ui.driver.UIDIsplayManager;
+import com.mgs.fantasi.ui.driver.UIDisplayManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SwingUIDisplayManager implements UIDIsplayManager<JPanel> {
+public class SwingUIDisplayManager implements UIDisplayManager<JPanel> {
 
 	public void packed(final JPanel defaultBoard) {
 		JFrame jFrame = new JFrame();

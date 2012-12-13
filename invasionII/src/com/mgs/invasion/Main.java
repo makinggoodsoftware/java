@@ -24,10 +24,10 @@ public class Main {
 		UIDriver<JPanel> uiDriver = UIDriver.forSwing(uiProfileFactory.getUIProfile());
 
 		int numberOVerticalDivisions = 10;
-		int numberOfGerations = 5;
+		int numberOfGenerations = 5;
 
 
-		HexagonRowsView hexagonRows = HexagonRowsView.newHexagonRows(numberOVerticalDivisions, numberOfGerations);
+		HexagonRowsView hexagonRows = HexagonRowsView.newHexagonRows(numberOVerticalDivisions, numberOfGenerations);
 
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
 		View view =

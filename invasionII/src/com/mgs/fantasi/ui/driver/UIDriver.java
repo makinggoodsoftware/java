@@ -14,7 +14,7 @@ import java.awt.*;
 public class UIDriver<T> {
 	private final UIProfile uiProfile;
 	private final UINativeElementCreatorStrategy<T> uiNativeElementCreatorStrategy;
-	private final UIDIsplayManager<T> uiDIsplayManager;
+	private final UIDisplayManager<T> uiDisplayManager;
 	private final ViewRenderer viewRenderer;
 
 
@@ -22,17 +22,17 @@ public class UIDriver<T> {
 		return new UIDriver<JPanel>(uiProfile, new SwingUINativeElementCreatorStrategy(), new SwingUIDisplayManager(), new ViewRendererImpl());
 	}
 
-	private UIDriver(UIProfile uiProfile, UINativeElementCreatorStrategy<T> uiStrategy, UIDIsplayManager<T> uiDIsplayManager, ViewRenderer viewRenderer) {
+	private UIDriver(UIProfile uiProfile, UINativeElementCreatorStrategy<T> uiStrategy, UIDisplayManager<T> uiDisplayManager, ViewRenderer viewRenderer) {
 		this.uiProfile = uiProfile;
 		this.uiNativeElementCreatorStrategy = uiStrategy;
-		this.uiDIsplayManager = uiDIsplayManager;
+		this.uiDisplayManager = uiDisplayManager;
 		this.viewRenderer = viewRenderer;
 	}
 
 	public void show(View view, Dimension dimension) {
 		Renderable renderable = viewRenderer.createRenderable(view, uiProfile, dimension);
 		T uiNativeComponent = uiNativeElementCreatorStrategy.create(renderable, uiProfile);
-		uiDIsplayManager.showPacked(uiNativeComponent, dimension);
+		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}
 
 }

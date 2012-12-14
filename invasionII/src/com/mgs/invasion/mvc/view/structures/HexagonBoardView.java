@@ -1,10 +1,7 @@
 package com.mgs.invasion.mvc.view.structures;
 
 import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.ui.wireframe.ContentStructureStrategy;
-import com.mgs.fantasi.ui.wireframe.GridFactory;
-import com.mgs.fantasi.ui.wireframe.Structure;
-import com.mgs.fantasi.ui.wireframe.StructureFactory;
+import com.mgs.fantasi.ui.wireframe.*;
 import com.mgs.fantasi.views.*;
 
 public class HexagonBoardView extends BaseView {
@@ -43,6 +40,14 @@ public class HexagonBoardView extends BaseView {
 	@Override
 	public ContentStructureStrategy getContentStructureStrategy() {
 		return null;
+	}
+
+	@Override
+	public ReadyForRendering createRenderingStructure() {
+		return
+			new DelegateStructureBuilder().
+			withContent(boardStructureBuilder).
+			produce();
 	}
 
 	@Override

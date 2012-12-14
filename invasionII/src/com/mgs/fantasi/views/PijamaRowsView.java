@@ -68,6 +68,20 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
+	public ReadyForRendering createRenderingStructure() {
+		return 
+			new GridStructureBuilder().
+				withDimension(1, numberOfGenerations).
+				withContent(new CellContentGenerator<View>() {
+					@Override
+					public CellContent<View> generateContentFor(int x, int y) {
+						return CellContent.evenlyDivided((View) generationBuilder);
+					}
+				}).
+				produce();
+	}
+
+	@Override
 	protected BaseView copy() {
 		View firstLineBuilder = generationBuilder.getFirstLineBuilder();
 		View secondLineBuilder = generationBuilder.getSecondLineBuilder();

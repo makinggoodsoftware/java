@@ -51,6 +51,14 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
+	public ReadyForRendering createRenderingStructure() {
+		return
+			new LayeredStructureBuilder().
+			withLayers(layers).
+			produce();
+	}
+
+	@Override
 	protected BaseView copy() {
 		LayeredElementsView copy = new LayeredElementsView();
 		for (View layer : layers) {

@@ -74,6 +74,26 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
+	public ReadyForRendering createRenderingStructure() {
+		return
+			new GridStructureBuilder().
+				withDimension(1, 2).
+				withContent(new CellContentGenerator<View>() {
+					@Override
+					public CellContent<View> generateContentFor(int x, int y) {
+						if (y == 0){
+							return withPartialHeight(firstLineBuilder, firstLineHeighSizeRatio);
+						}else{
+							Fraction remainder = allWithBase(firstLineHeighSizeRatio.getBase()).minus(firstLineHeighSizeRatio);
+							return withPartialHeight(secondLineBuilder, remainder);
+						}
+					}
+				}).
+			produce();
+
+	}
+
+	@Override
 	protected BaseView copy() {
 		return new TwoLinesView(firstLineBuilder.newCopy(), secondLineBuilder.newCopy()).withFirstRowSize(firstLineHeighSizeRatio);
 	}

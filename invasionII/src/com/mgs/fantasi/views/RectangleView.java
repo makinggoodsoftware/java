@@ -54,4 +54,9 @@ public class RectangleView extends BaseView<RectangleView> {
 			};
 	}
 
+	@Override
+	public ReadyForRendering createRenderingStructure() {
+		return StructureType.rectangle().withContent(content).produce();
+	}
+
 }

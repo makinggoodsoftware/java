@@ -21,4 +21,6 @@ public interface View extends Structurable{
 	StructureFactory.StructureType getContentStructureType();
 
 	ContentStructureStrategy getContentStructureStrategy();
+
+	ReadyForRendering createRenderingStructure();
 }

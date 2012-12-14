@@ -55,6 +55,18 @@ public class VerticalSlicesView extends BaseView {
 		};
 	}
 
+	@Override
+	public ReadyForRendering createRenderingStructure() {
+		return StructureType.grid().withDimension(numberOfDivisions, 1).withContent(
+			new CellContentGenerator<View>() {
+				@Override
+				public CellContent<View> generateContentFor(int x, int y) {
+					return CellContent.evenlyDivided(contentBuilder);
+				}
+			}
+		).produce();
+	}
+
 	public VerticalSlicesView withVerticalDivisions (int numberOVerticalDivisions){
 		this.numberOfDivisions = numberOVerticalDivisions;
 		return this;

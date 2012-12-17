@@ -43,10 +43,10 @@ public class HexagonBoardView extends BaseView {
 	}
 
 	@Override
-	public StructureBuilder<View> createRenderingStructure() {
+	public StructureBuilder<View> getChildStructure() {
 		return
 			new DelegateStructureBuilder<View>().
-			withContent(boardStructureBuilder.createRenderingStructure());
+			withContent(boardStructureBuilder.getChildStructure());
 	}
 
 	@Override

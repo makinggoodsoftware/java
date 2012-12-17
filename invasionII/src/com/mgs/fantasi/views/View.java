@@ -22,5 +22,5 @@ public interface View extends Structurable{
 
 	ContentStructureStrategy getContentStructureStrategy();
 
-	StructureBuilder<View> createRenderingStructure();
+	StructureBuilder<View> getChildStructure();
 }

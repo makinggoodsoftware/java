@@ -4,28 +4,26 @@ import com.mgs.fantasi.views.View;
 
 public class MyRenderer {
 	public Renderable render(View view) {
-		System.out.println("Rendering view: " + view);
-		StructureBuilder<Renderable> renderableStructureBuilder = prepareContentWith(view);
+		Structure<Renderable> children = renderChildren(view);
 
 		return new Renderable
 		(
 			view.getClass(),
 			view.getShape(),
-			renderableStructureBuilder.build(),
+			children,
 			view.getMargin(),
 			view.getName()
 		);
 	}
 
-	private StructureBuilder<Renderable> prepareContentWith(View view) {
-		System.out.println("Preparing content for " + view);
-		return view.createRenderingStructure().transform(new StructureBuilderTransformer<View, Renderable>(){
+	private Structure<Renderable> renderChildren(View view) {
+		StructureBuilder<Renderable> builder = view.getChildStructure().transform(new StructureBuilderTransformer<View, Renderable>() {
 			@Override
 			public Renderable transform(View content) {
-				System.out.println("Transforming " + content);
 				return render(content);
 			}
 		});
+		return builder.build();
 	}
 
 

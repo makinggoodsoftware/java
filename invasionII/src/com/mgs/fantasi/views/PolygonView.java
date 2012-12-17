@@ -34,7 +34,7 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public StructureBuilder<View> createRenderingStructure() {
+	public StructureBuilder<View> getChildStructure() {
 		return new EmptyStructureBuilder<View>();
 	}
 

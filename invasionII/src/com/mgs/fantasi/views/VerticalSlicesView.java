@@ -56,7 +56,7 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	public StructureBuilder<View> createRenderingStructure() {
+	public StructureBuilder<View> getChildStructure() {
 		GridStructureBuilder<View> grid = StructureType.grid();
 		return grid.withDimension(numberOfDivisions, 1).withContent(new CellContentGenerator<View>() {
 			@Override

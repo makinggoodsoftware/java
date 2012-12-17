@@ -60,9 +60,9 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	public StructureBuilder<View> createRenderingStructure() {
+	public StructureBuilder<View> getChildStructure() {
 		return new DelegateStructureBuilder<View>().
-				withContent(pijamaRows.createRenderingStructure());
+				withContent(pijamaRows.getChildStructure());
 	}
 
 	@Override

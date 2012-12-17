@@ -3,7 +3,6 @@ package com.mgs.fantasi.ui.driver;
 import com.mgs.fantasi.ui.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.ui.driver.swing.SwingUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.UIProfile;
-import com.mgs.fantasi.ui.wireframe.ContentStructureStrategy;
 import com.mgs.fantasi.ui.wireframe.MyRenderer;
 import com.mgs.fantasi.ui.wireframe.Renderable;
 import com.mgs.fantasi.views.View;
@@ -15,6 +14,7 @@ public class UIDriver<T> {
 	private final UIProfile uiProfile;
 	private final UINativeElementCreatorStrategy<T> uiNativeElementCreatorStrategy;
 	private final UIDisplayManager<T> uiDisplayManager;
+	private final MyRenderer myRenderer;
 
 
 	public static UIDriver<JPanel> forSwing (UIProfile uiProfile){
@@ -25,13 +25,12 @@ public class UIDriver<T> {
 		this.uiProfile = uiProfile;
 		this.uiNativeElementCreatorStrategy = uiStrategy;
 		this.uiDisplayManager = uiDisplayManager;
+		myRenderer = new MyRenderer();
 	}
 
 	public void show(View view, Dimension dimension) {
-		Renderable renderable2 = new MyRenderer().render((View) view);
-		ContentStructureStrategy contentStructureStrategy = view.getContentStructureStrategy();
-//		Renderable renderable = contentStructureStrategy.createRenderable(view, uiProfile, dimension);
-		T uiNativeComponent = uiNativeElementCreatorStrategy.create(renderable2, uiProfile);
+		Renderable renderable = myRenderer.render(view);
+		T uiNativeComponent = uiNativeElementCreatorStrategy.create(renderable, uiProfile);
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}
 

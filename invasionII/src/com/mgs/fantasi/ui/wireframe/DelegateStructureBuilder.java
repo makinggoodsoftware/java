@@ -1,16 +1,19 @@
 package com.mgs.fantasi.ui.wireframe;
 
-import com.mgs.fantasi.views.View;
-
-public class DelegateStructureBuilder implements StructureBuilder{
-	private View content;
+public class DelegateStructureBuilder<T extends Structurable> implements StructureBuilder<T>{
+	private StructureBuilder<T> content;
 
 	@Override
-	public ReadyForRendering produce() {
-		return new ReadyForRendering(this);
+	public Structure<T> build() {
+		return new DelegateStructure<T>(content.build());
 	}
 
-	public DelegateStructureBuilder withContent(View content) {
+	@Override
+	public <Z extends Structurable> StructureBuilder<Z> transform(MyRenderer.StructureBuilderTransformer<T, Z> transformer) {
+		return content.transform(transformer);
+	}
+
+	public DelegateStructureBuilder<T> withContent(StructureBuilder<T> content) {
 		this.content = content;
 		return this;
 	}

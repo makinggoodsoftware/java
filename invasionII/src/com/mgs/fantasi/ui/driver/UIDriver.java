@@ -4,6 +4,7 @@ import com.mgs.fantasi.ui.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.ui.driver.swing.SwingUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.wireframe.ContentStructureStrategy;
+import com.mgs.fantasi.ui.wireframe.MyRenderer;
 import com.mgs.fantasi.ui.wireframe.Renderable;
 import com.mgs.fantasi.views.View;
 
@@ -27,9 +28,10 @@ public class UIDriver<T> {
 	}
 
 	public void show(View view, Dimension dimension) {
+		Renderable renderable2 = new MyRenderer().render((View) view);
 		ContentStructureStrategy contentStructureStrategy = view.getContentStructureStrategy();
-		Renderable renderable = contentStructureStrategy.createRenderable(view, uiProfile, dimension);
-		T uiNativeComponent = uiNativeElementCreatorStrategy.create(renderable, uiProfile);
+//		Renderable renderable = contentStructureStrategy.createRenderable(view, uiProfile, dimension);
+		T uiNativeComponent = uiNativeElementCreatorStrategy.create(renderable2, uiProfile);
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}
 

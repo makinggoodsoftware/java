@@ -1,18 +1,26 @@
 package com.mgs.fantasi.ui.wireframe;
 
-import com.mgs.fantasi.views.View;
-
+import java.util.ArrayList;
 import java.util.List;
 
-public class LayeredStructureBuilder implements StructureBuilder{
-	private List<View> layers;
+public class LayeredStructureBuilder<T extends Structurable> implements StructureBuilder<T>{
+	private List<T> layers;
 
 	@Override
-	public ReadyForRendering produce() {
-		return new ReadyForRendering(this);
+	public Structure<T> build() {
+		return new Layers<T>(layers);
 	}
 
-	public StructureBuilder withLayers(List<View> layers) {
+	@Override
+	public <Z extends Structurable> StructureBuilder<Z> transform(MyRenderer.StructureBuilderTransformer<T, Z> transformer) {
+		List<Z> transformedLayers = new ArrayList<Z>();
+		for (T layer : layers) {
+			transformedLayers.add(transformer.transform(layer));
+		}
+		return new LayeredStructureBuilder<Z>().withLayers(transformedLayers);
+	}
+
+	public StructureBuilder<T> withLayers(List<T> layers) {
 		this.layers = layers;
 		return this;
 	}

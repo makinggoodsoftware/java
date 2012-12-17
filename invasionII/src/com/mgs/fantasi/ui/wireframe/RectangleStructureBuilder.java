@@ -1,17 +1,23 @@
 package com.mgs.fantasi.ui.wireframe;
 
-import com.mgs.fantasi.views.View;
+public class RectangleStructureBuilder<T extends Structurable> implements StructureBuilder<T>{
+	private T content;
 
-public class RectangleStructureBuilder implements StructureBuilder{
-	private View content;
-
-	public RectangleStructureBuilder withContent(View content) {
+	public RectangleStructureBuilder<T> withContent(T content) {
+		if (content==null) throw new IllegalArgumentException("Content can't be null");
 		this.content = content;
 		return this;
 	}
 
 	@Override
-	public ReadyForRendering produce() {
-		return new ReadyForRendering(this);
+	public Structure<T> build() {
+		return new SimpleStructure<T>(content);
+	}
+
+	@Override
+	public <Z extends Structurable> StructureBuilder<Z> transform(MyRenderer.StructureBuilderTransformer<T, Z> transformer) {
+		RectangleStructureBuilder<Z> emptyRectangle = new RectangleStructureBuilder<Z>();
+		if (content == null) return emptyRectangle;
+		return emptyRectangle.withContent(transformer.transform(content));
 	}
 }

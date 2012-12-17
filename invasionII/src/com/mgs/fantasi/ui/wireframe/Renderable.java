@@ -11,6 +11,7 @@ public class Renderable implements Structurable{
 	private String name;
 
 	public Renderable(Class<? extends View> view, PolygonPointsIterator shape, Structure<Renderable> content, Margin margin, String name) {
+		if (shape==null) throw new IllegalArgumentException("The shape of something renderable can't be null");
 		this.view = view;
 		this.shape = shape;
 		this.content = content;
@@ -26,7 +27,7 @@ public class Renderable implements Structurable{
 		return shape;
 	}
 
-	public Structure getContent() {
+	public Structure<Renderable> getContent() {
 		return content;
 	}
 

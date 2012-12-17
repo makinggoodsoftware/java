@@ -74,9 +74,9 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	public ReadyForRendering createRenderingStructure() {
+	public StructureBuilder<View> createRenderingStructure() {
 		return
-			new GridStructureBuilder().
+			new GridStructureBuilder<View>().
 				withDimension(1, 2).
 				withContent(new CellContentGenerator<View>() {
 					@Override
@@ -88,8 +88,7 @@ public class TwoLinesView extends BaseView {
 							return withPartialHeight(secondLineBuilder, remainder);
 						}
 					}
-				}).
-			produce();
+				});
 
 	}
 

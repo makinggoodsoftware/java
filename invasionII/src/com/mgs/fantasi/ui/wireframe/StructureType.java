@@ -5,7 +5,7 @@ public class StructureType {
 		return new RectangleStructureBuilder();
 	}
 
-	public static GridStructureBuilder grid() {
+	public static <T extends Structurable> GridStructureBuilder<T> grid() {
 		return new GridStructureBuilder();
 	}
 }

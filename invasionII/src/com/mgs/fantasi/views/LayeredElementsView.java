@@ -51,11 +51,9 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public ReadyForRendering createRenderingStructure() {
-		return
-			new LayeredStructureBuilder().
-			withLayers(layers).
-			produce();
+	public StructureBuilder<View> createRenderingStructure() {
+		return new LayeredStructureBuilder<View>().
+			withLayers(layers);
 	}
 
 	@Override

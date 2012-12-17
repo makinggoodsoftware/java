@@ -1,9 +1,14 @@
 package com.mgs.fantasi.ui.wireframe;
 
-public class EmptyStructureBuilder implements StructureBuilder
+public class EmptyStructureBuilder<T extends Structurable> implements StructureBuilder <T>
 {
 	@Override
-	public ReadyForRendering produce() {
-		return new ReadyForRendering(this);
+	public Structure<T> build() {
+		return new EmptyStructure<T>();
+	}
+
+	@Override
+	public <Z extends Structurable> StructureBuilder<Z> transform(MyRenderer.StructureBuilderTransformer<T, Z> tzStructureBuilderTransformer) {
+		return new EmptyStructureBuilder<Z>();
 	}
 }

@@ -16,18 +16,7 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 			newRectangularNativeElementSkeletonWithStyles(uiStyles):
 			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
 		Margin margin = renderable.getMargin();
-		final Structure content = renderable.getContent();
-		if (content instanceof Grid) {
-			processGridChilds(nativeContainer, (Grid<Renderable>) content, uiProfile);
-		} else if (content instanceof Layers){
-			processLayerChilds(nativeContainer, (Layers<Renderable>) content, uiProfile);
-		} else if (content instanceof SimpleStructure){
-			processSimpleStructure(nativeContainer, ((SimpleStructure<Renderable>) content).getContent(), uiProfile);
-		} else if (content instanceof EmptyStructure){
-			processEmptyStructure(nativeContainer);
-		}else{
-			throw new RuntimeException("Can't process the renderable: " + renderable);
-		}
+		processStructure(renderable.getContent(), uiProfile, nativeContainer);
 
 		T outmostPointer;
 		if (! margin.isEmpty()){
@@ -36,6 +25,24 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 			outmostPointer = nativeContainer;
 		}
 		return outmostPointer;
+	}
+
+	private void processStructure(Structure<Renderable> content, UIProfile uiProfile, T nativeContainer) {
+		if (content instanceof Grid) {
+			processGridChilds(nativeContainer, (Grid<Renderable>) content, uiProfile);
+		} else if (content instanceof Layers){
+			processLayerChilds(nativeContainer, (Layers<Renderable>) content, uiProfile);
+		} else if (content instanceof SimpleStructure){
+			Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();
+			if (renderable!=null) processSimpleStructure(nativeContainer, renderable, uiProfile);
+		} else if (content instanceof EmptyStructure){
+			processEmptyStructure(nativeContainer);
+		} else if (content instanceof DelegateStructure){
+			Structure<Renderable> delegate = ((DelegateStructure<Renderable>) content).getContent();
+			processStructure(delegate, uiProfile, nativeContainer);
+		}else{
+			throw new RuntimeException("Can't process the structure: " + content);
+		}
 	}
 
 	protected abstract void processEmptyStructure(T nativeContainer);

@@ -55,8 +55,9 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public ReadyForRendering createRenderingStructure() {
-		return StructureType.rectangle().withContent(content).produce();
+	public StructureBuilder createRenderingStructure() {
+		RectangleStructureBuilder emptyRectangle = StructureType.rectangle();
+		if (content==null) return emptyRectangle;
+		return emptyRectangle.withContent(content);
 	}
-
 }

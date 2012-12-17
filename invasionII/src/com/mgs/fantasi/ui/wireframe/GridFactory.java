@@ -1,6 +1,5 @@
 package com.mgs.fantasi.ui.wireframe;
 
-import com.mgs.fantasi.views.View;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class GridFactory {
@@ -8,8 +7,8 @@ public class GridFactory {
 		return new EmptyGrid<T>();
 	}
 
-	public static Grid<View> withDimensions(int x, int y) {
-		return new ArrayListGrid<View>(x, y);
+	public static <T extends Structurable>Grid<T> withDimensions(int x, int y) {
+		return new ArrayListGrid<T>(x, y);
 	}
 
 	public static class EmptyGrid<T extends Structurable> implements Grid<T> {

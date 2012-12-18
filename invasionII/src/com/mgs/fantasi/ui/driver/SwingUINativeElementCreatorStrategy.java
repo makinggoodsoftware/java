@@ -41,20 +41,13 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 	private void processStructure(Structure<Renderable> content, final UIProfile uiProfile, final JPanel nativeContainer) {
 		switch (content.getType()){
 			case GRID:
-				GridLayoutStrategy gridLayoutStrategy = new GridLayoutStrategy();
-				gridLayoutStrategy.prepare(nativeContainer);
+				final GridLayoutConstruction<OnGoingCellLayoutConstruction, GridBagConstraints> onGoingLayoutConstruction = new OnGoingLayoutBuildingStrategyFactory().grid(nativeContainer);
 				((Grid<Renderable>) content).itereateCellsWith(new CellIterator<Renderable>() {
 					@Override
 					public void on(int x, int y, CellContent<Renderable> cell) {
-						if (cell == null) {
-							throw new RuntimeException
-									("Error building the UI native element when inspecting the content of the original" +
-											" wireframe. This should not happen ever! There must have been an error on the" +
-											" createRenderable call previous to the transformation into a native UI element must be badly constructed");
-						}
 						Renderable child = cell.getContent();
 						JPanel childAsNativeComponent = create(child, uiProfile);
-						nativeContainer.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+						onGoingLayoutConstruction.add(childAsNativeComponent).into(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 					}
 				});
 				break;
@@ -83,7 +76,7 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 
 	protected final void processSimpleStructure(JPanel nativeElement, Renderable content, UIProfile uiProfile){
 		nativeElement.setLayout(new GridBagLayout());
-		nativeElement.add(create(content, uiProfile), intoCoordinates(0, 0, Fractions.all(), Fractions.all()));
+		nativeElement.add(create(content, uiProfile), coordinates(0, 0, Fractions.all(), Fractions.all()));
 	}
 
 	protected final JPanel decorateWithMargin(JPanel nativeElement, Margin margin){
@@ -95,7 +88,7 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 		int bottom = resolveMeasurement (margin.getBottom());
 		int left = resolveMeasurement (margin.getLeft());
 		marginContainer.setBorder(BorderFactory.createEmptyBorder(top, right, bottom, left));
-		marginContainer.add(nativeElement, intoCoordinates(0,0, Fractions.all(), Fractions.all()));
+		marginContainer.add(nativeElement, coordinates(0, 0, Fractions.all(), Fractions.all()));
 		return marginContainer;
 	}
 
@@ -149,7 +142,7 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 		}
 	}
 
-	private GridBagConstraints intoCoordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
+	private GridBagConstraints coordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
@@ -160,13 +153,54 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 	}
 
 	private static interface SwingLayoutStrategy {
-		void prepare(JPanel jpanel);
+		GridLayoutConstruction grid(JPanel jpanel);
 	}
 
-	private static class GridLayoutStrategy implements SwingLayoutStrategy {
+	private static class OnGoingLayoutBuildingStrategyFactory implements SwingLayoutStrategy {
 		@Override
-		public void prepare(JPanel jpanel){
-			jpanel.setLayout(new GridBagLayout());
+		public OnGoingGridLayoutConstruction grid(JPanel jpanel){
+			return new OnGoingGridLayoutConstruction(jpanel);
+		}
+	}
+
+	private static interface GridLayoutConstruction <T extends OnGoingChildContentConstruction<Z>, Z>{
+		T add(JPanel childAsNativeComponent);
+	}
+
+	private static class OnGoingGridLayoutConstruction implements GridLayoutConstruction{
+		private final JPanel container;
+
+		public OnGoingGridLayoutConstruction(JPanel container) {
+			this.container = container;
+			container.setLayout(new GridBagLayout());
+		}
+
+		@Override
+		public OnGoingCellLayoutConstruction add(JPanel childAsNativeComponent) {
+			return new OnGoingCellLayoutConstruction(this, childAsNativeComponent);
+		}
+
+		public void doAdd(JPanel cellContent, GridBagConstraints gridBagConstraints) {
+			container.add(cellContent, gridBagConstraints);
+		}
+	}
+
+	private static interface OnGoingChildContentConstruction<T> {
+		void into(T gridBagConstraints);
+	}
+
+	private static class OnGoingCellLayoutConstruction implements OnGoingChildContentConstruction<GridBagConstraints>{
+		private final OnGoingGridLayoutConstruction onGoingGridLayoutConstruction;
+		private final JPanel cellContent;
+
+		public OnGoingCellLayoutConstruction(OnGoingGridLayoutConstruction onGoingGridLayoutConstruction, JPanel cellContent) {
+			this.onGoingGridLayoutConstruction = onGoingGridLayoutConstruction;
+			this.cellContent = cellContent;
+		}
+
+		@Override
+		public void into(GridBagConstraints gridBagConstraints) {
+			onGoingGridLayoutConstruction.doAdd(cellContent, gridBagConstraints);
 		}
 	}
 }

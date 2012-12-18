@@ -69,4 +69,9 @@ public class ArrayListGrid<T extends Structurable> extends BaseStructure<T> impl
 	public Dimension getDimension() {
 		return new Dimension(divisionsX, divisionsY);
 	}
+
+	@Override
+	public StructureFactory.StructureType getType() {
+		return StructureFactory.StructureType.GRID;
+	}
 }

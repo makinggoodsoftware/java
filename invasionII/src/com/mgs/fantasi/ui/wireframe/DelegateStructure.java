@@ -7,12 +7,12 @@ public class DelegateStructure<T extends Structurable> implements Structure<T> {
 		this.content = content;
 	}
 
-	@Override
-	public <Z extends Structurable> Structure<Z> transformInto(StructureTransformer<T, Z> tzStructureTransformer, Structure<Z> into) {
-		return null;
-	}
-
 	public Structure<T> getContent() {
 		return content;
+	}
+
+	@Override
+	public StructureFactory.StructureType getType() {
+		return StructureFactory.StructureType.DELEGATE;
 	}
 }

@@ -5,15 +5,16 @@ import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.profile.UIStyle;
 import com.mgs.fantasi.ui.wireframe.*;
 
+import javax.swing.*;
 import java.util.Set;
 
-public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeElementCreatorStrategy<T> {
+public abstract class BaseUINativeElementCreatorStrategy implements UINativeElementCreatorStrategy<JPanel> {
 	@Override
-	public T create(Renderable renderable, UIProfile uiProfile) {
-		T uiNativeElement = createUINativeElementSkeleton(renderable, uiProfile);
+	public JPanel create(Renderable renderable, UIProfile uiProfile) {
+		JPanel uiNativeElement = createUINativeElementSkeleton(renderable, uiProfile);
 		processStructure(renderable.getContent(), uiProfile, uiNativeElement);
 
-		T outmostPointer = uiNativeElement;
+		JPanel outmostPointer = uiNativeElement;
 		Margin margin = renderable.getMargin();
 		if (! margin.isEmpty()){
 			outmostPointer = decorateWithMargin (uiNativeElement, margin);
@@ -21,7 +22,7 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 		return outmostPointer;
 	}
 
-	private T createUINativeElementSkeleton(Renderable renderable, UIProfile uiProfile) {
+	private JPanel createUINativeElementSkeleton(Renderable renderable, UIProfile uiProfile) {
 		PolygonPointsIterator shape = renderable.getShape();
 		Set<UIStyle> uiStyles = uiProfile.findStylesFor(renderable);
 		return shape.isRectangular() ?
@@ -29,46 +30,52 @@ public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeE
 			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
 	}
 
-	private void processStructure(Structure<Renderable> content, UIProfile uiProfile, T nativeContainer) {
-		if (content instanceof Grid) {
-			processGridChilds(nativeContainer, (Grid<Renderable>) content, uiProfile);
-		} else if (content instanceof Layers){
-			processLayerChilds(nativeContainer, (Layers<Renderable>) content, uiProfile);
-		} else if (content instanceof SimpleStructure){
-			Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();
-			if (renderable!=null) processSimpleStructure(nativeContainer, renderable, uiProfile);
-		} else if (content instanceof EmptyStructure){
-			processEmptyStructure(nativeContainer);
-		} else if (content instanceof DelegateStructure){
-			Structure<Renderable> delegate = ((DelegateStructure<Renderable>) content).getContent();
-			processStructure(delegate, uiProfile, nativeContainer);
-		}else{
-			throw new RuntimeException("Can't process the structure: " + content);
+	private void processStructure(Structure<Renderable> content, UIProfile uiProfile, JPanel nativeContainer) {
+		switch (content.getType()){
+			case GRID:
+				processGridChilds(nativeContainer, (Grid<Renderable>) content, uiProfile);
+				break;
+			case LAYERS:
+				processLayerChilds(nativeContainer, (Layers<Renderable>) content, uiProfile);
+				break;
+			case SIMPLE:
+				Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();
+				if (renderable!=null) processSimpleStructure(nativeContainer, renderable, uiProfile);
+				break;
+			case EMPTY:
+				processEmptyStructure(nativeContainer);
+				break;
+			case DELEGATE:
+				Structure<Renderable> delegate = ((DelegateStructure<Renderable>) content).getContent();
+				processStructure(delegate, uiProfile, nativeContainer);
+				break;
+			default:
+				throw new RuntimeException("Can't process the structure: " + content);
 		}
 	}
 
-	protected abstract void processEmptyStructure(T nativeContainer);
+	protected abstract void processEmptyStructure(JPanel nativeContainer);
 
-	protected abstract void processSimpleStructure(T nativeElement, Renderable content, UIProfile uiProfile);
+	protected abstract void processSimpleStructure(JPanel nativeElement, Renderable content, UIProfile uiProfile);
 
-	protected abstract T decorateWithMargin(T nativeElement, Margin margin);
+	protected abstract JPanel decorateWithMargin(JPanel nativeElement, Margin margin);
 
-	protected abstract void processLayerChilds(T parentNativeElement, Layers<Renderable> content, UIProfile uiProfile);
+	protected abstract void processLayerChilds(JPanel parentNativeElement, Layers<Renderable> content, UIProfile uiProfile);
 
-	protected abstract void processGridChilds(T parentNativeElement, Grid<Renderable> childContent, UIProfile uiProfile);
+	protected abstract void processGridChilds(JPanel parentNativeElement, Grid<Renderable> childContent, UIProfile uiProfile);
 
 
-	private T newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {
-		T jPanel = newRectangularNativeElement();
+	private JPanel newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {
+		JPanel jPanel = newRectangularNativeElement();
 		for (UIStyle uiStyle : uiStyles) {
 			applyStyle(uiStyle, jPanel);
 		}
 		return jPanel;
 	}
 
-	protected abstract T newRectangularNativeElement();
+	protected abstract JPanel newRectangularNativeElement();
 
-	protected abstract T newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, Set<UIStyle> uiStyles);
+	protected abstract JPanel newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, Set<UIStyle> uiStyles);
 
-	public abstract void applyStyle(UIStyle uiStyle, T nativeElement);
+	public abstract void applyStyle(UIStyle uiStyle, JPanel nativeElement);
 }

@@ -16,7 +16,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Set;
 
-public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCreatorStrategy<JPanel> {
+public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCreatorStrategy{
 
 
 	@Override

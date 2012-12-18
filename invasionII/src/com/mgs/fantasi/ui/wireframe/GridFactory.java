@@ -33,8 +33,8 @@ public class GridFactory {
 		}
 
 		@Override
-		public <Z extends Structurable> Structure<Z> transformInto(StructureTransformer<T, Z> tzStructureTransformer, Structure<Z> into) {
-			return null;
+		public StructureFactory.StructureType getType() {
+			return StructureFactory.StructureType.EMPTY;
 		}
 	}
 }

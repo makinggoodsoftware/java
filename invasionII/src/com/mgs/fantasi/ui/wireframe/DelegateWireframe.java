@@ -9,7 +9,7 @@ public class DelegateWireframe<T extends Structurable> implements Wireframe<T> {
 	}
 
 	@Override
-	public <Z extends Structurable> Wireframe<Z> transformContent(MyRenderer.WireframeTransformer<T, Z> transformer) {
+	public <Z extends Structurable> Wireframe<Z> transformContent(MyViewPreprocessor.WireframeTransformer<T, Z> transformer) {
 		return content.transformContent(transformer);
 	}
 

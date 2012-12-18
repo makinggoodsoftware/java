@@ -24,7 +24,7 @@ public class GridWireframe<T extends Structurable>  implements Wireframe<T> {
 	}
 
 	@Override
-	public <Z extends Structurable> Wireframe<Z> transformContent(final MyRenderer.WireframeTransformer<T, Z> transformer) {
+	public <Z extends Structurable> Wireframe<Z> transformContent(final MyViewPreprocessor.WireframeTransformer<T, Z> transformer) {
 		return new GridWireframe<Z>().
 					withDimension(dimension.width, dimension.height).
 					withContent(new CellContentGenerator<Z>() {

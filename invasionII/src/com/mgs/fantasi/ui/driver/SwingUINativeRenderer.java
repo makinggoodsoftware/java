@@ -16,9 +16,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Set;
 
-public final class SwingUINativeElementCreatorStrategy implements UINativeElementCreatorStrategy<JPanel> {
+public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
-	public JPanel create(Renderable renderable, UIProfile uiProfile) {
+	public JPanel render(Renderable renderable, UIProfile uiProfile) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable, uiProfile);
 		processStructure(renderable.getContent().build(), uiProfile, uiNativeElement);
 
@@ -46,7 +46,7 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 					@Override
 					public void on(int x, int y, CellContent<Renderable> cell) {
 						Renderable child = cell.getContent();
-						JPanel childAsNativeComponent = create(child, uiProfile);
+						JPanel childAsNativeComponent = render(child, uiProfile);
 						onGoingLayoutConstruction.add(childAsNativeComponent).into(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 					}
 				});
@@ -76,7 +76,7 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 
 	protected final void processSimpleStructure(JPanel nativeElement, Renderable content, UIProfile uiProfile){
 		nativeElement.setLayout(new GridBagLayout());
-		nativeElement.add(create(content, uiProfile), coordinates(0, 0, Fractions.all(), Fractions.all()));
+		nativeElement.add(render(content, uiProfile), coordinates(0, 0, Fractions.all(), Fractions.all()));
 	}
 
 	protected final JPanel decorateWithMargin(JPanel nativeElement, Margin margin){
@@ -104,7 +104,7 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 		content.iterateInCrescendo(new LayerIterator<Renderable>() {
 			@Override
 			public void on(int zIndex, Renderable layer) {
-				JPanel childLayerAsNativeElement = create(layer, uiProfile);
+				JPanel childLayerAsNativeElement = render(layer, uiProfile);
 				parentNativeElement.add(childLayerAsNativeElement, zIndex);
 			}
 		});

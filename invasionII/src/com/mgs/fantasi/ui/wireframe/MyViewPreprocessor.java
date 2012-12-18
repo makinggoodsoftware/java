@@ -2,9 +2,9 @@ package com.mgs.fantasi.ui.wireframe;
 
 import com.mgs.fantasi.views.View;
 
-public class MyRenderer implements Renderer {
+public class MyViewPreprocessor implements ViewPreprocessor {
 	@Override
-	public Renderable render(View view) {
+	public Renderable prepareForRendering(View view) {
 		Wireframe<Renderable> children = view.toWireframe().transformContent(toRenderables());
 
 		return new Renderable
@@ -21,7 +21,7 @@ public class MyRenderer implements Renderer {
 		return new WireframeTransformer<View, Renderable>() {
 			@Override
 			public Renderable transform(View content) {
-				return render(content);
+				return prepareForRendering(content);
 			}
 		};
 	}

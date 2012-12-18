@@ -15,7 +15,7 @@ public class RectangleWireframe<T extends Structurable> implements Wireframe<T> 
 	}
 
 	@Override
-	public <Z extends Structurable> Wireframe<Z> transformContent(MyRenderer.WireframeTransformer<T, Z> transformer) {
+	public <Z extends Structurable> Wireframe<Z> transformContent(MyViewPreprocessor.WireframeTransformer<T, Z> transformer) {
 		RectangleWireframe<Z> emptyRectangle = new RectangleWireframe<Z>();
 		if (content == null) return emptyRectangle;
 		return emptyRectangle.withContent(transformer.transform(content));

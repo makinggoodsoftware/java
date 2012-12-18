@@ -4,7 +4,6 @@ import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.wireframe.*;
 
 public class PolygonView extends BaseView<PolygonView> {
-
 	private PolygonView(PolygonPointsIterator polygonPointsIterator) {
 		getUiProperties().setShape(polygonPointsIterator);
 	}

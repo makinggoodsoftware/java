@@ -10,10 +10,8 @@ public class MyViewPreprocessor implements ViewPreprocessor {
 		return new Renderable
 		(
 			view.getClass(),
-			view.getUiProperties().getShape(),
-			children,
-			view.getUiProperties().getMargin(),
-			view.getUiProperties().getName()
+				children,
+				view.getUiProperties().copy()
 		);
 	}
 

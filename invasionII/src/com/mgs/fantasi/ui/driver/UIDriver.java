@@ -1,7 +1,6 @@
 package com.mgs.fantasi.ui.driver;
 
 import com.mgs.fantasi.ui.driver.swing.SwingUIDisplayManager;
-import com.mgs.fantasi.ui.driver.swing.SwingUINativeElementCreatorStrategy;
 import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.wireframe.MyRenderer;
 import com.mgs.fantasi.ui.wireframe.Renderable;
@@ -19,7 +18,7 @@ public class UIDriver<T> {
 
 
 	public static UIDriver<JPanel> forSwing (UIProfile uiProfile){
-		return new UIDriver<JPanel>(uiProfile, new SwingUINativeElementCreatorStrategy(), new SwingUIDisplayManager(), new MyRenderer());
+		return new UIDriver<JPanel>(uiProfile, new BaseUINativeElementCreatorStrategy(), new SwingUIDisplayManager(), new MyRenderer());
 	}
 
 	private UIDriver(UIProfile uiProfile, UINativeElementCreatorStrategy<T> uiStrategy, UIDisplayManager<T> uiDisplayManager, Renderer renderer) {

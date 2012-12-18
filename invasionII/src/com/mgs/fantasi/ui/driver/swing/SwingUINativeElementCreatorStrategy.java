@@ -56,19 +56,6 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 	}
 
 	@Override
-	protected void processLayerChilds(final JPanel parentNativeElement, Layers<Renderable> childLayers, final UIProfile uiProfile) {
-		parentNativeElement.setLayout(new OverlayLayout(parentNativeElement));
-		childLayers.iterateInCrescendo(new LayerIterator<Renderable>() {
-			@Override
-			public void on(int zIndex, Renderable layer) {
-				JPanel childLayerAsNativeElement = create(layer, uiProfile);
-				parentNativeElement.add(childLayerAsNativeElement, zIndex);
-			}
-		});
-	}
-
-
-	@Override
 	protected JPanel newRectangularNativeElement() {
 		JPanel jPanel = new JPanel();
 		jPanel.setOpaque(false);

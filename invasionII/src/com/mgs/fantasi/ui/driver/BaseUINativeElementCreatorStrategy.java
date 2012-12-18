@@ -62,7 +62,16 @@ public abstract class BaseUINativeElementCreatorStrategy implements UINativeElem
 
 	protected abstract JPanel decorateWithMargin(JPanel nativeElement, Margin margin);
 
-	protected abstract void processLayerChilds(JPanel parentNativeElement, Layers<Renderable> content, UIProfile uiProfile);
+	protected final void processLayerChilds(final JPanel parentNativeElement, Layers<Renderable> content, final UIProfile uiProfile){
+		parentNativeElement.setLayout(new OverlayLayout(parentNativeElement));
+		content.iterateInCrescendo(new LayerIterator<Renderable>() {
+			@Override
+			public void on(int zIndex, Renderable layer) {
+				JPanel childLayerAsNativeElement = create(layer, uiProfile);
+				parentNativeElement.add(childLayerAsNativeElement, zIndex);
+			}
+		});
+	}
 
 	protected final void processGridChilds(final JPanel parentNativeElement, Grid<Renderable> childContent, final UIProfile uiProfile){
 		parentNativeElement.setLayout(new GridBagLayout());

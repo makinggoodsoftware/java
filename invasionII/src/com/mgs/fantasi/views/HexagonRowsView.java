@@ -35,11 +35,6 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return true;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new DelegateStructureBuilder<View>().
 				withContent(pijamaRows.getChildStructure());

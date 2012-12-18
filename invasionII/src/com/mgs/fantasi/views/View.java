@@ -7,8 +7,6 @@ public interface View extends Structurable{
 
 	public View newCopy();
 
-	boolean renderConstraintsAreSatisfied();
-
 	PolygonPointsIterator getShape();
 
 	Margin getMargin();

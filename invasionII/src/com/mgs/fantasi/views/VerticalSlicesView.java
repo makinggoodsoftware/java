@@ -17,11 +17,6 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return numberOfDivisions != UNDEFINED;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		GridStructureBuilder<View> grid = StructureType.grid();
 		return grid.withDimension(numberOfDivisions, 1).withContent(new CellContentGenerator<View>() {

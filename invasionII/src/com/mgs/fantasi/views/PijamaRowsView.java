@@ -29,11 +29,6 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return generationBuilder.renderConstraintsAreSatisfied() && numberOfGenerations != UNDEFINED;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new GridStructureBuilder<View>().
 				withDimension(1, numberOfGenerations).

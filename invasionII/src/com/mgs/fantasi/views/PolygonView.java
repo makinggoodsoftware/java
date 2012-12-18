@@ -14,11 +14,6 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return true;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new EmptyStructureBuilder<View>();
 	}

@@ -22,11 +22,6 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return true;
-	}
-
-	@Override
 	public RectangleView copy() {
 		return new RectangleView(content.newCopy());
 	}

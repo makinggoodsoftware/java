@@ -21,12 +21,6 @@ public class HexagonBoardView extends BaseView {
 		boardStructureBuilder = LayeredElementsView.layered().withLayer(oddHexagonRowsLayerBuilder).withLayer(evenHexagonRowsLayerBuilder);
 	}
 
-
-	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return false;
-	}
-
 	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return

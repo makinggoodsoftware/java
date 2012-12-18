@@ -18,11 +18,6 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return true;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new LayeredStructureBuilder<View>().
 			withLayers(layers);

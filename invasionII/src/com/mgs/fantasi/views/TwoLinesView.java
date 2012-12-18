@@ -23,12 +23,6 @@ public class TwoLinesView extends BaseView {
 		return this;
 	}
 
-
-	@Override
-	public boolean renderConstraintsAreSatisfied() {
-		return firstLineHeighSizeRatio != null;
-	}
-
 	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return

@@ -35,9 +35,9 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	public StructureBuilder<View> getChildStructure() {
-		return new DelegateStructureBuilder<View>().
-				withContent(pijamaRows.getChildStructure());
+	public Wireframe<View> toWireframe() {
+		return new DelegateWireframe<View>().
+				withContent(pijamaRows.toWireframe());
 	}
 
 	@Override

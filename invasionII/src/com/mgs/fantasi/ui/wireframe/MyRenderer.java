@@ -5,7 +5,7 @@ import com.mgs.fantasi.views.View;
 public class MyRenderer implements Renderer {
 	@Override
 	public Renderable render(View view) {
-		Structure<Renderable> children = renderChildren(view);
+		Wireframe<Renderable> children = view.toWireframe().transformContent(toRenderables());
 
 		return new Renderable
 		(
@@ -17,18 +17,17 @@ public class MyRenderer implements Renderer {
 		);
 	}
 
-	private Structure<Renderable> renderChildren(View view) {
-		StructureBuilder<Renderable> builder = view.getChildStructure().transform(new StructureBuilderTransformer<View, Renderable>() {
+	private WireframeTransformer<View, Renderable> toRenderables() {
+		return new WireframeTransformer<View, Renderable>() {
 			@Override
 			public Renderable transform(View content) {
 				return render(content);
 			}
-		});
-		return builder.build();
+		};
 	}
 
 
-	public static interface StructureBuilderTransformer<T, Z> {
+	public static interface WireframeTransformer<T, Z> {
 		public Z transform(T content);
 	}
 }

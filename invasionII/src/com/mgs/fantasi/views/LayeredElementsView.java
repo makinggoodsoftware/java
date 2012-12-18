@@ -18,8 +18,8 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public StructureBuilder<View> getChildStructure() {
-		return new LayeredStructureBuilder<View>().
+	public Wireframe<View> toWireframe() {
+		return new LayeredWireframe<View>().
 			withLayers(layers);
 	}
 

@@ -14,8 +14,8 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public StructureBuilder<View> getChildStructure() {
-		return new EmptyStructureBuilder<View>();
+	public Wireframe<View> toWireframe() {
+		return new EmptyWireframe<View>();
 	}
 
 	@Override

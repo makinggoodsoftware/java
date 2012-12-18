@@ -3,7 +3,7 @@ package com.mgs.fantasi.ui.wireframe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LayeredStructureBuilder<T extends Structurable> implements StructureBuilder<T>{
+public class LayeredWireframe<T extends Structurable> implements Wireframe<T> {
 	private List<T> layers;
 
 	@Override
@@ -12,15 +12,15 @@ public class LayeredStructureBuilder<T extends Structurable> implements Structur
 	}
 
 	@Override
-	public <Z extends Structurable> StructureBuilder<Z> transform(MyRenderer.StructureBuilderTransformer<T, Z> transformer) {
+	public <Z extends Structurable> Wireframe<Z> transformContent(MyRenderer.WireframeTransformer<T, Z> transformer) {
 		List<Z> transformedLayers = new ArrayList<Z>();
 		for (T layer : layers) {
 			transformedLayers.add(transformer.transform(layer));
 		}
-		return new LayeredStructureBuilder<Z>().withLayers(transformedLayers);
+		return new LayeredWireframe<Z>().withLayers(transformedLayers);
 	}
 
-	public StructureBuilder<T> withLayers(List<T> layers) {
+	public Wireframe<T> withLayers(List<T> layers) {
 		this.layers = layers;
 		return this;
 	}

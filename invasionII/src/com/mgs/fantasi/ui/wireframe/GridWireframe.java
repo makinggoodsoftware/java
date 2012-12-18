@@ -2,16 +2,16 @@ package com.mgs.fantasi.ui.wireframe;
 
 import java.awt.*;
 
-public class GridStructureBuilder<T extends Structurable>  implements StructureBuilder <T>{
+public class GridWireframe<T extends Structurable>  implements Wireframe<T> {
 	private Dimension dimension;
 	private CellContentGenerator<T> cellContentGenerator;
 
-	public GridStructureBuilder<T> withDimension(int x, int y) {
+	public GridWireframe<T> withDimension(int x, int y) {
 		this.dimension = new Dimension(x, y);
 		return this;
 	}
 
-	public GridStructureBuilder<T> withContent(CellContentGenerator<T> cellContentGenerator) {
+	public GridWireframe<T> withContent(CellContentGenerator<T> cellContentGenerator) {
 		this.cellContentGenerator = cellContentGenerator;
 		return this;
 	}
@@ -24,8 +24,8 @@ public class GridStructureBuilder<T extends Structurable>  implements StructureB
 	}
 
 	@Override
-	public <Z extends Structurable> StructureBuilder<Z> transform(final MyRenderer.StructureBuilderTransformer<T, Z> transformer) {
-		return new GridStructureBuilder<Z>().
+	public <Z extends Structurable> Wireframe<Z> transformContent(final MyRenderer.WireframeTransformer<T, Z> transformer) {
+		return new GridWireframe<Z>().
 					withDimension(dimension.width, dimension.height).
 					withContent(new CellContentGenerator<Z>() {
 						@Override

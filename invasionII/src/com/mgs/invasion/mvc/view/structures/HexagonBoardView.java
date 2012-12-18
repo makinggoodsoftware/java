@@ -22,10 +22,10 @@ public class HexagonBoardView extends BaseView {
 	}
 
 	@Override
-	public StructureBuilder<View> getChildStructure() {
+	public Wireframe<View> toWireframe() {
 		return
-			new DelegateStructureBuilder<View>().
-			withContent(boardStructureBuilder.getChildStructure());
+			new DelegateWireframe<View>().
+			withContent(boardStructureBuilder.toWireframe());
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 	@Override
 	public JPanel create(Renderable renderable, UIProfile uiProfile) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable, uiProfile);
-		processStructure(renderable.getContent(), uiProfile, uiNativeElement);
+		processStructure(renderable.getContent().build(), uiProfile, uiNativeElement);
 
 		JPanel outmostPointer = uiNativeElement;
 		Margin margin = renderable.getMargin();

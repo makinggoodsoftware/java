@@ -24,9 +24,9 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	public StructureBuilder<View> getChildStructure() {
+	public Wireframe<View> toWireframe() {
 		return
-			new GridStructureBuilder<View>().
+			new GridWireframe<View>().
 				withDimension(1, 2).
 				withContent(new CellContentGenerator<View>() {
 					@Override

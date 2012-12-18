@@ -4,7 +4,6 @@ import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.wireframe.*;
 
 public interface View extends Structurable{
-
 	public View newCopy();
 
 	PolygonPointsIterator getShape();
@@ -13,5 +12,5 @@ public interface View extends Structurable{
 
 	String getName();
 
-	StructureBuilder<View> getChildStructure();
+	Wireframe<View> toWireframe();
 }

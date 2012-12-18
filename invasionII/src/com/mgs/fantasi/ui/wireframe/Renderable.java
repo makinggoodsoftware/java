@@ -6,11 +6,11 @@ import com.mgs.fantasi.views.View;
 public class Renderable implements Structurable{
 	private final Class<? extends View> view;
 	private final PolygonPointsIterator shape;
-	private final Structure content;
+	private final Wireframe<Renderable> content;
 	private final Margin margin;
 	private String name;
 
-	public Renderable(Class<? extends View> view, PolygonPointsIterator shape, Structure<Renderable> content, Margin margin, String name) {
+	public Renderable(Class<? extends View> view, PolygonPointsIterator shape, Wireframe<Renderable> content, Margin margin, String name) {
 		if (shape==null) throw new IllegalArgumentException("The shape of something renderable can't be null");
 		this.view = view;
 		this.shape = shape;
@@ -27,7 +27,7 @@ public class Renderable implements Structurable{
 		return shape;
 	}
 
-	public Structure<Renderable> getContent() {
+	public Wireframe<Renderable> getContent() {
 		return content;
 	}
 

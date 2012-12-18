@@ -2,10 +2,10 @@ package com.mgs.fantasi.ui.wireframe;
 
 public class ReadyForRendering {
 
-	private final StructureBuilder structureBuilder;
+	private final Wireframe wireframe;
 
-	public ReadyForRendering(StructureBuilder structureBuilder) {
-		this.structureBuilder = structureBuilder;
+	public ReadyForRendering(Wireframe wireframe) {
+		this.wireframe = wireframe;
 	}
 
 }

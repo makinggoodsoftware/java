@@ -1,9 +1,9 @@
 package com.mgs.fantasi.ui.wireframe;
 
-public class RectangleStructureBuilder<T extends Structurable> implements StructureBuilder<T>{
+public class RectangleWireframe<T extends Structurable> implements Wireframe<T> {
 	private T content;
 
-	public RectangleStructureBuilder<T> withContent(T content) {
+	public RectangleWireframe<T> withContent(T content) {
 		if (content==null) throw new IllegalArgumentException("Content can't be null");
 		this.content = content;
 		return this;
@@ -15,8 +15,8 @@ public class RectangleStructureBuilder<T extends Structurable> implements Struct
 	}
 
 	@Override
-	public <Z extends Structurable> StructureBuilder<Z> transform(MyRenderer.StructureBuilderTransformer<T, Z> transformer) {
-		RectangleStructureBuilder<Z> emptyRectangle = new RectangleStructureBuilder<Z>();
+	public <Z extends Structurable> Wireframe<Z> transformContent(MyRenderer.WireframeTransformer<T, Z> transformer) {
+		RectangleWireframe<Z> emptyRectangle = new RectangleWireframe<Z>();
 		if (content == null) return emptyRectangle;
 		return emptyRectangle.withContent(transformer.transform(content));
 	}

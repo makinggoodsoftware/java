@@ -29,8 +29,8 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	public StructureBuilder<View> getChildStructure() {
-		return new GridStructureBuilder<View>().
+	public Wireframe<View> toWireframe() {
+		return new GridWireframe<View>().
 				withDimension(1, numberOfGenerations).
 				withContent(new CellContentGenerator<View>() {
 					@Override

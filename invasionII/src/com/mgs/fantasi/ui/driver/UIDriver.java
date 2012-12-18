@@ -18,7 +18,7 @@ public class UIDriver<T> {
 
 
 	public static UIDriver<JPanel> forSwing (UIProfile uiProfile){
-		return new UIDriver<JPanel>(uiProfile, new BaseUINativeElementCreatorStrategy(), new SwingUIDisplayManager(), new MyRenderer());
+		return new UIDriver<JPanel>(uiProfile, new SwingUINativeElementCreatorStrategy(), new SwingUIDisplayManager(), new MyRenderer());
 	}
 
 	private UIDriver(UIProfile uiProfile, UINativeElementCreatorStrategy<T> uiStrategy, UIDisplayManager<T> uiDisplayManager, Renderer renderer) {

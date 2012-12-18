@@ -16,7 +16,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Set;
 
-public final class BaseUINativeElementCreatorStrategy implements UINativeElementCreatorStrategy<JPanel> {
+public final class SwingUINativeElementCreatorStrategy implements UINativeElementCreatorStrategy<JPanel> {
 	@Override
 	public JPanel create(Renderable renderable, UIProfile uiProfile) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable, uiProfile);

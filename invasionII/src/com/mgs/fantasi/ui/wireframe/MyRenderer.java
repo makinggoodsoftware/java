@@ -2,7 +2,8 @@ package com.mgs.fantasi.ui.wireframe;
 
 import com.mgs.fantasi.views.View;
 
-public class MyRenderer {
+public class MyRenderer implements Renderer {
+	@Override
 	public Renderable render(View view) {
 		Structure<Renderable> children = renderChildren(view);
 

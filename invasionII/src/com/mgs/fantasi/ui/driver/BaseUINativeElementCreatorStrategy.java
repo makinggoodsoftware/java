@@ -10,21 +10,23 @@ import java.util.Set;
 public abstract class BaseUINativeElementCreatorStrategy<T> implements UINativeElementCreatorStrategy<T> {
 	@Override
 	public T create(Renderable renderable, UIProfile uiProfile) {
-		Set<UIStyle> uiStyles = uiProfile.findStylesFor(renderable);
-		PolygonPointsIterator shape = renderable.getShape();
-		T nativeContainer = shape.isRectangular() ?
-			newRectangularNativeElementSkeletonWithStyles(uiStyles):
-			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
-		Margin margin = renderable.getMargin();
-		processStructure(renderable.getContent(), uiProfile, nativeContainer);
+		T uiNativeElement = createUINativeElementSkeleton(renderable, uiProfile);
+		processStructure(renderable.getContent(), uiProfile, uiNativeElement);
 
-		T outmostPointer;
+		T outmostPointer = uiNativeElement;
+		Margin margin = renderable.getMargin();
 		if (! margin.isEmpty()){
-			outmostPointer = decorateWithMargin (nativeContainer, margin);
-		}else {
-			outmostPointer = nativeContainer;
+			outmostPointer = decorateWithMargin (uiNativeElement, margin);
 		}
 		return outmostPointer;
+	}
+
+	private T createUINativeElementSkeleton(Renderable renderable, UIProfile uiProfile) {
+		PolygonPointsIterator shape = renderable.getShape();
+		Set<UIStyle> uiStyles = uiProfile.findStylesFor(renderable);
+		return shape.isRectangular() ?
+			newRectangularNativeElementSkeletonWithStyles(uiStyles):
+			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
 	}
 
 	private void processStructure(Structure<Renderable> content, UIProfile uiProfile, T nativeContainer) {

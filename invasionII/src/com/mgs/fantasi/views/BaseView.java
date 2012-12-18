@@ -10,48 +10,45 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 public abstract class BaseView<T extends BaseView> implements View {
-	private PolygonPointsIterator shape = new NativeRectanguarShape();
-	private Margin margin = Margin.noMargin();
-	private String name = "";
-	private Measurement measurement;
+	private final UIProperties uiProperties = new UIProperties();
 
 	public final BaseView withShape (PolygonPointsIterator shape){
-		this.setShape(shape);
+		uiProperties.setShape(shape);
 		return this;
 	}
 
 	public T withMargin(Margin margin) {
-		this.setMargin(margin);
+		uiProperties.setMargin(margin);
 		return (T) this;
 	}
 
 	public T withName(String name) {
-		this.setName(name);
+		uiProperties.setName(name);
 		return (T) this;
 	}
 
 	public T withMeasurement(Measurement measurement) {
-		this.setMeasurement(measurement);
+		uiProperties.setMeasurement(measurement);
 		return (T) this;
 	}
 
 	public void setShape(PolygonPointsIterator shape) {
-		this.shape = shape;
+		uiProperties.setShape(shape);
 	}
 
 	public void setMargin(Margin margin) {
-		this.margin = margin;
+		uiProperties.setMargin(margin);
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		uiProperties.setName(name);
 	}
 
 	public void setMeasurement(Measurement measurement) {
-		this.measurement = measurement;
+		uiProperties.setMeasurement(measurement);
 	}
 
-	private class NativeRectanguarShape implements PolygonPointsIterator {
+	public static class NativeRectanguarShape implements PolygonPointsIterator {
 		@Override
 		public boolean isRectangular() {
 			return true;
@@ -67,10 +64,10 @@ public abstract class BaseView<T extends BaseView> implements View {
 	@Override
 	public final T newCopy() {
 		T copy = copy ();
-		copy.setShape(getShape());
-		copy.setMargin(getMargin());
-		copy.setName(getName());
-		copy.setMeasurement(getMeasurement());
+		copy.setShape(uiProperties.getShape());
+		copy.setMargin(uiProperties.getMargin());
+		copy.setName(uiProperties.getName());
+		copy.setMeasurement(uiProperties.getMeasurement());
 		return copy;
 	}
 
@@ -78,20 +75,20 @@ public abstract class BaseView<T extends BaseView> implements View {
 
 	@Override
 	public Margin getMargin() {
-		return margin;
+		return uiProperties.getMargin();
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return uiProperties.getName();
 	}
 
 	@Override
 	public PolygonPointsIterator getShape() {
-		return shape;
+		return uiProperties.getShape();
 	}
 
 	public Measurement getMeasurement() {
-		return measurement;
+		return uiProperties.getMeasurement();
 	}
 }

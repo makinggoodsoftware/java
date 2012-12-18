@@ -67,25 +67,6 @@ public class SwingUINativeElementCreatorStrategy extends BaseUINativeElementCrea
 		});
 	}
 
-	@Override
-	protected void processGridChilds(final JPanel parentNativeElement, Grid<Renderable> childContent, final UIProfile uiProfile) {
-		parentNativeElement.setLayout(new GridBagLayout());
-		childContent.itereateCellsWith(new CellIterator<Renderable>() {
-			@Override
-			public void on(int x, int y, CellContent<Renderable> cell) {
-				if (cell == null) {
-					throw new RuntimeException
-							("Error building the UI native element when inspecting the content of the original" +
-									" wireframe. This should not happen ever! There must have been an error on the" +
-									" createRenderable call previous to the transformation into a native UI element must be badly constructed");
-				}
-				Renderable child = cell.getContent();
-				JPanel childAsNativeComponent = create(child, uiProfile);
-				parentNativeElement.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
-			}
-		});
-
-	}
 
 	@Override
 	protected JPanel newRectangularNativeElement() {

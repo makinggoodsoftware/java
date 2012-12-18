@@ -1,11 +1,13 @@
 package com.mgs.fantasi.ui.driver;
 
+import com.mgs.fantasi.measurements.Fraction;
 import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.profile.UIProfile;
 import com.mgs.fantasi.ui.profile.UIStyle;
 import com.mgs.fantasi.ui.wireframe.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Set;
 
 public abstract class BaseUINativeElementCreatorStrategy implements UINativeElementCreatorStrategy<JPanel> {
@@ -62,7 +64,23 @@ public abstract class BaseUINativeElementCreatorStrategy implements UINativeElem
 
 	protected abstract void processLayerChilds(JPanel parentNativeElement, Layers<Renderable> content, UIProfile uiProfile);
 
-	protected abstract void processGridChilds(JPanel parentNativeElement, Grid<Renderable> childContent, UIProfile uiProfile);
+	protected final void processGridChilds(final JPanel parentNativeElement, Grid<Renderable> childContent, final UIProfile uiProfile){
+		parentNativeElement.setLayout(new GridBagLayout());
+		childContent.itereateCellsWith(new CellIterator<Renderable>() {
+			@Override
+			public void on(int x, int y, CellContent<Renderable> cell) {
+				if (cell == null) {
+					throw new RuntimeException
+							("Error building the UI native element when inspecting the content of the original" +
+									" wireframe. This should not happen ever! There must have been an error on the" +
+									" createRenderable call previous to the transformation into a native UI element must be badly constructed");
+				}
+				Renderable child = cell.getContent();
+				JPanel childAsNativeComponent = create(child, uiProfile);
+				parentNativeElement.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+			}
+		});
+	}
 
 
 	private JPanel newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {
@@ -78,4 +96,14 @@ public abstract class BaseUINativeElementCreatorStrategy implements UINativeElem
 	protected abstract JPanel newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, Set<UIStyle> uiStyles);
 
 	public abstract void applyStyle(UIStyle uiStyle, JPanel nativeElement);
+
+	private GridBagConstraints intoCoordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = x;
+		gbc.gridy = y;
+		gbc.weightx = widthSizeRatio.toDouble();
+		gbc.weighty = heightSizeRatio.toDouble();
+		gbc.fill = GridBagConstraints.BOTH;
+		return gbc;
+	}
 }

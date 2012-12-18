@@ -11,7 +11,7 @@ import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.Set;
 
-class JPanelWithDifferentShape extends JPanel {
+public class JPanelWithDifferentShape extends JPanel {
 	private final PolygonPointsIterator shape;
 	private final Set<UIStyle> uiStyles;
 

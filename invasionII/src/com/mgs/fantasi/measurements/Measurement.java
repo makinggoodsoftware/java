@@ -8,4 +8,6 @@ public interface Measurement {
 	Measurement half();
 
 	boolean isZero();
+
+	Measurement copy();
 }

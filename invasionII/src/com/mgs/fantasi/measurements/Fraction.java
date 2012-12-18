@@ -29,4 +29,8 @@ public class Fraction {
 				from + "/" + take +
 				'}';
 	}
+
+	public Fraction copy() {
+		return new Fraction(take, from);
+	}
 }

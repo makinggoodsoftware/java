@@ -33,9 +33,16 @@ public class Measurements {
 			return measurement == 0;
 		}
 
+		@Override
+		public Measurement copy() {
+			return new SimpleMeasurement(measurement);
+		}
+
 		public int getIntValue() {
 			return measurement;
 		}
+
+
 	}
 
 	public static class FutureMeasurement implements Measurement {
@@ -52,6 +59,11 @@ public class Measurements {
 		@Override
 		public boolean isZero() {
 			return false;
+		}
+
+		@Override
+		public Measurement copy() {
+			return new FutureMeasurement();
 		}
 	}
 
@@ -77,6 +89,11 @@ public class Measurements {
 		@Override
 		public boolean isZero() {
 			return false;
+		}
+
+		@Override
+		public Measurement copy() {
+			return new FractionOfAMeasurement((FutureMeasurement) from.copy(), fraction.copy());
 		}
 	}
 }

@@ -6,7 +6,7 @@ import com.mgs.fantasi.ui.wireframe.*;
 public class PolygonView extends BaseView<PolygonView> {
 
 	private PolygonView(PolygonPointsIterator polygonPointsIterator) {
-		withShape(polygonPointsIterator);
+		getUiProperties().setShape(polygonPointsIterator);
 	}
 
 	public static PolygonView polygon(PolygonPointsIterator polygonPointsIterator) {
@@ -20,6 +20,6 @@ public class PolygonView extends BaseView<PolygonView> {
 
 	@Override
 	public PolygonView copy() {
-		return new PolygonView(getShape());
+		return new PolygonView(getUiProperties().getShape());
 	}
 }

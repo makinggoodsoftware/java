@@ -59,4 +59,8 @@ public class Margin {
 	public boolean isEmpty() {
 		return top.isZero() && right.isZero() && bottom.isZero() && left.isZero();
 	}
+
+	public Margin copy() {
+		return new Margin(top.copy(), right.copy(), bottom.copy(), left.copy());
+	}
 }

@@ -44,4 +44,23 @@ public class UIProperties {
 	public Measurement getMeasurement() {
 		return measurement;
 	}
+
+	public UIProperties copy() {
+		UIProperties copy = new UIProperties();
+		copy.setMargin(getMargin().copy());
+		if (getMeasurement()!=null){
+			copy.setMeasurement(getMeasurement().copy());
+		}
+		copy.setName(name);
+		copy.setShape(shape.copy());
+		return copy;
+	}
+
+	public void copyFrom(UIProperties that) {
+		UIProperties copyOfThat = that.copy();
+		this.shape = copyOfThat.shape;
+		this.margin = copyOfThat.margin;
+		this.name = copyOfThat.name;
+		this.measurement = copyOfThat.measurement;
+	}
 }

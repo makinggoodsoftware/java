@@ -35,4 +35,9 @@ public class HexagonShape implements PolygonPointsIterator {
 		hexPoints.add(new Point2D.Double(xCenter,			yBottom));
 		return hexPoints;
 	}
+
+	@Override
+	public PolygonPointsIterator copy() {
+		return new HexagonShape();
+	}
 }

@@ -11,6 +11,7 @@ import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
 import javax.swing.*;
 import java.awt.*;
 
+import static com.mgs.fantasi.views.HexagonRowsView.hexagonRows;
 import static com.mgs.fantasi.views.LayeredElementsView.layered;
 import static com.mgs.fantasi.views.RectangleView.emptyRectangle;
 
@@ -27,7 +28,7 @@ public class Main {
 		int numberOfGenerations = 5;
 
 
-		HexagonRowsView hexagonRows = HexagonRowsView.newHexagonRows(numberOVerticalDivisions, numberOfGenerations);
+		HexagonRowsView hexagonRows = hexagonRows(numberOVerticalDivisions, numberOfGenerations);
 
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
 		View view =

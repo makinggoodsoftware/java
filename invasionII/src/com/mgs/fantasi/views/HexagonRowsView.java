@@ -30,7 +30,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 		withNumberOfGerations(numberOfGerations);
 	}
 
-	public static HexagonRowsView newHexagonRows(int numberOVerticalDivisions, int numberOfGerations) {
+	public static HexagonRowsView hexagonRows(int numberOVerticalDivisions, int numberOfGerations) {
 		return new HexagonRowsView(numberOfGerations, numberOVerticalDivisions);
 	}
 

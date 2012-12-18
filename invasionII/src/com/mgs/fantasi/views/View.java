@@ -4,7 +4,6 @@ import com.mgs.fantasi.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.ui.wireframe.*;
 
 public interface View extends Structurable{
-	public Renderable render();
 
 	public View newCopy();
 

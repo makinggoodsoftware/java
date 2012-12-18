@@ -38,10 +38,25 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
 	}
 
-	private void processStructure(Structure<Renderable> content, UIProfile uiProfile, JPanel nativeContainer) {
+	private void processStructure(Structure<Renderable> content, final UIProfile uiProfile, final JPanel nativeContainer) {
 		switch (content.getType()){
 			case GRID:
-				processGridChilds(nativeContainer, (Grid<Renderable>) content, uiProfile);
+				GridLayoutStrategy gridLayoutStrategy = new GridLayoutStrategy();
+				gridLayoutStrategy.prepare(nativeContainer);
+				((Grid<Renderable>) content).itereateCellsWith(new CellIterator<Renderable>() {
+					@Override
+					public void on(int x, int y, CellContent<Renderable> cell) {
+						if (cell == null) {
+							throw new RuntimeException
+									("Error building the UI native element when inspecting the content of the original" +
+											" wireframe. This should not happen ever! There must have been an error on the" +
+											" createRenderable call previous to the transformation into a native UI element must be badly constructed");
+						}
+						Renderable child = cell.getContent();
+						JPanel childAsNativeComponent = create(child, uiProfile);
+						nativeContainer.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+					}
+				});
 				break;
 			case LAYERS:
 				processLayerChilds(nativeContainer, (Layers<Renderable>) content, uiProfile);
@@ -102,24 +117,6 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 		});
 	}
 
-	protected final void processGridChilds(final JPanel parentNativeElement, Grid<Renderable> childContent, final UIProfile uiProfile){
-		parentNativeElement.setLayout(new GridBagLayout());
-		childContent.itereateCellsWith(new CellIterator<Renderable>() {
-			@Override
-			public void on(int x, int y, CellContent<Renderable> cell) {
-				if (cell == null) {
-					throw new RuntimeException
-							("Error building the UI native element when inspecting the content of the original" +
-									" wireframe. This should not happen ever! There must have been an error on the" +
-									" createRenderable call previous to the transformation into a native UI element must be badly constructed");
-				}
-				Renderable child = cell.getContent();
-				JPanel childAsNativeComponent = create(child, uiProfile);
-				parentNativeElement.add(childAsNativeComponent, intoCoordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
-			}
-		});
-	}
-
 
 	private JPanel newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {
 		JPanel jPanel = newRectangularNativeElement();
@@ -160,5 +157,16 @@ public final class SwingUINativeElementCreatorStrategy implements UINativeElemen
 		gbc.weighty = heightSizeRatio.toDouble();
 		gbc.fill = GridBagConstraints.BOTH;
 		return gbc;
+	}
+
+	private static interface SwingLayoutStrategy {
+		void prepare(JPanel jpanel);
+	}
+
+	private static class GridLayoutStrategy implements SwingLayoutStrategy {
+		@Override
+		public void prepare(JPanel jpanel){
+			jpanel.setLayout(new GridBagLayout());
+		}
 	}
 }

@@ -53,21 +53,6 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	public ContentStructureStrategy getContentStructureStrategy() {
-		return new GridContentStructureStrategy() {
-			@Override
-			public Dimension getDimension() {
-				return new Dimension(1, numberOfGenerations);
-			}
-
-			@Override
-			public CellContent<View> getCellContentFor(int x, int y) {
-				return CellContent.evenlyDivided((View) generationBuilder);
-			}
-		};
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new GridStructureBuilder<View>().
 				withDimension(1, numberOfGenerations).

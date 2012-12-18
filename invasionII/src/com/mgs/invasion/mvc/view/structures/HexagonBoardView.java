@@ -38,11 +38,6 @@ public class HexagonBoardView extends BaseView {
 	}
 
 	@Override
-	public ContentStructureStrategy getContentStructureStrategy() {
-		return null;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return
 			new DelegateStructureBuilder<View>().

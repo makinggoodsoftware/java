@@ -2,8 +2,6 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.ui.wireframe.*;
 
-import java.awt.*;
-
 public class VerticalSlicesView extends BaseView {
 
 	private static final int UNDEFINED = -1;
@@ -40,20 +38,6 @@ public class VerticalSlicesView extends BaseView {
 		return null;
 	}
 
-	@Override
-	public ContentStructureStrategy getContentStructureStrategy() {
-		return new GridContentStructureStrategy() {
-			@Override
-			public Dimension getDimension() {
-				return new Dimension(numberOfDivisions, 1);
-			}
-
-			@Override
-			public CellContent<View> getCellContentFor(int x, int y) {
-				return CellContent.evenlyDivided(contentBuilder);
-			}
-		};
-	}
 
 	@Override
 	public StructureBuilder<View> getChildStructure() {

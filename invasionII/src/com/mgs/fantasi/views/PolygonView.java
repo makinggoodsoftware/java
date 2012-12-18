@@ -29,11 +29,6 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public ContentStructureStrategy getContentStructureStrategy() {
-		return new EmptyContentStructureStrategy();
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new EmptyStructureBuilder<View>();
 	}

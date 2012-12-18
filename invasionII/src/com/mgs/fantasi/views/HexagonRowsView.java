@@ -50,16 +50,6 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	public ContentStructureStrategy getContentStructureStrategy() {
-		return new SimpleContentStructureStrategy() {
-			@Override
-			public View getContent() {
-				return pijamaRows;
-			}
-		};
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new DelegateStructureBuilder<View>().
 				withContent(pijamaRows.getChildStructure());

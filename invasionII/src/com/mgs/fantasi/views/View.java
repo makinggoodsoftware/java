@@ -19,7 +19,5 @@ public interface View extends Structurable{
 
 	StructureFactory.StructureType getContentStructureType();
 
-	ContentStructureStrategy getContentStructureStrategy();
-
 	StructureBuilder<View> getChildStructure();
 }

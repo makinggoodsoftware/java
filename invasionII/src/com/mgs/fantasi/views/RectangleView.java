@@ -43,18 +43,6 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public ContentStructureStrategy getContentStructureStrategy() {
-		return content == null ?
-			new EmptyContentStructureStrategy() :
-			new SimpleContentStructureStrategy() {
-				@Override
-				public View getContent() {
-					return content;
-				}
-			};
-	}
-
-	@Override
 	public StructureBuilder getChildStructure() {
 		RectangleStructureBuilder emptyRectangle = StructureType.rectangle();
 		if (content==null) return emptyRectangle;

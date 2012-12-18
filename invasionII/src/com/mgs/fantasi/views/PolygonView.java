@@ -19,16 +19,6 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public Structure<View> getContent() {
-		return GridFactory.empty(View.class);
-	}
-
-	@Override
-	public StructureFactory.StructureType getContentStructureType() {
-		return null;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new EmptyStructureBuilder<View>();
 	}

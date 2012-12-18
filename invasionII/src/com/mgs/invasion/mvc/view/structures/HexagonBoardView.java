@@ -28,16 +28,6 @@ public class HexagonBoardView extends BaseView {
 	}
 
 	@Override
-	public Structure<View> getContent() {
-		return GridFactory.empty(View.class);
-	}
-
-	@Override
-	public StructureFactory.StructureType getContentStructureType() {
-		return null;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return
 			new DelegateStructureBuilder<View>().

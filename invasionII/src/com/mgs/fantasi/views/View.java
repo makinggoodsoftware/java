@@ -15,9 +15,5 @@ public interface View extends Structurable{
 
 	String getName();
 
-	Structure<View> getContent();
-
-	StructureFactory.StructureType getContentStructureType();
-
 	StructureBuilder<View> getChildStructure();
 }

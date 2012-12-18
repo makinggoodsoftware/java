@@ -22,24 +22,6 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	public Structure<View> getContent() {
-		Grid<View> layout = GridFactory.withDimensions(numberOfDivisions, 1);
-		layout.fillCells(new CellContentGenerator<View>() {
-			@Override
-			public CellContent<View> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided(contentBuilder);
-			}
-		});
-		return layout;
-	}
-
-	@Override
-	public StructureFactory.StructureType getContentStructureType() {
-		return null;
-	}
-
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		GridStructureBuilder<View> grid = StructureType.grid();
 		return grid.withDimension(numberOfDivisions, 1).withContent(new CellContentGenerator<View>() {

@@ -32,17 +32,6 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public Structure<View> getContent() {
-		if (content == null) return GridFactory.empty(View.class);
-		return new SimpleStructure<View>(content);
-	}
-
-	@Override
-	public StructureFactory.StructureType getContentStructureType() {
-		return null;
-	}
-
-	@Override
 	public StructureBuilder getChildStructure() {
 		RectangleStructureBuilder emptyRectangle = StructureType.rectangle();
 		if (content==null) return emptyRectangle;

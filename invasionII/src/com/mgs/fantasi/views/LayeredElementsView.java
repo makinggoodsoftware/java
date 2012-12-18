@@ -23,20 +23,6 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public Structure<View> getContent() {
-		List<View> layers = new ArrayList<View>();
-		for (View layer : this.layers) {
-			layers.add(layer);
-		}
-		return new Layers<View>(layers);
-	}
-
-	@Override
-	public StructureFactory.StructureType getContentStructureType() {
-		return null;
-	}
-
-	@Override
 	public StructureBuilder<View> getChildStructure() {
 		return new LayeredStructureBuilder<View>().
 			withLayers(layers);

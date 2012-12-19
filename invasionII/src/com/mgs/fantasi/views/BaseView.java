@@ -1,8 +1,9 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.measurements.Measurement;
-import com.mgs.fantasi.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.ui.wireframe.Margin;
+import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.measurements.Measurement;
+import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.rendering.Margin;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;

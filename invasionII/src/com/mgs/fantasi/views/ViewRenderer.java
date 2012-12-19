@@ -1,7 +1,7 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.ui.profile.UIProfile;
-import com.mgs.fantasi.ui.wireframe.Renderable;
+import com.mgs.fantasi.profile.UIProfile;
+import com.mgs.fantasi.rendering.Renderable;
 
 import java.awt.*;
 

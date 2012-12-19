@@ -1,7 +1,8 @@
 package com.mgs.invasion.mvc.view.structures;
 
-import com.mgs.fantasi.polygon.HexagonShape;
-import com.mgs.fantasi.ui.wireframe.*;
+import com.mgs.fantasi.properties.polygon.HexagonShape;
+import com.mgs.fantasi.rendering.wireframe.DelegateWireframe;
+import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.views.*;
 
 public class HexagonBoardView extends BaseView {
@@ -22,10 +23,10 @@ public class HexagonBoardView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> toWireframe() {
+	public Wireframe<View> buildChildViews() {
 		return
 			new DelegateWireframe<View>().
-			withContent(boardStructureBuilder.toWireframe());
+			withContent(boardStructureBuilder.buildChildViews());
 	}
 
 	@Override

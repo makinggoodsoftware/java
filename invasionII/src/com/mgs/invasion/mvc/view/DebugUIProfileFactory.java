@@ -1,12 +1,12 @@
 package com.mgs.invasion.mvc.view;
 
-import com.mgs.fantasi.polygon.HexagonShape;
+import com.mgs.fantasi.profile.UIProfile;
+import com.mgs.fantasi.profile.UIProfileFactory;
+import com.mgs.fantasi.profile.UIStyle;
+import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.polygon.HexagonShape;
+import com.mgs.fantasi.properties.selectors.UISelectorFactory;
 import com.mgs.fantasi.views.RectangleView;
-import com.mgs.fantasi.ui.profile.BorderDefinition;
-import com.mgs.fantasi.ui.profile.UIProfile;
-import com.mgs.fantasi.ui.profile.UIProfileFactory;
-import com.mgs.fantasi.ui.profile.UIStyle;
-import com.mgs.fantasi.ui.selectors.UISelectorFactory;
 
 import java.awt.*;
 

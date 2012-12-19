@@ -1,7 +1,10 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.measurements.Fraction;
-import com.mgs.fantasi.ui.wireframe.*;
+import com.mgs.fantasi.properties.measurements.Fraction;
+import com.mgs.fantasi.rendering.structure.grid.CellContent;
+import com.mgs.fantasi.rendering.structure.grid.CellContentGenerator;
+import com.mgs.fantasi.rendering.wireframe.GridWireframe;
+import com.mgs.fantasi.rendering.wireframe.Wireframe;
 
 public class PijamaRowsView extends BaseView {
 	private static final int UNDEFINED = -1;
@@ -29,7 +32,7 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> toWireframe() {
+	public Wireframe<View> buildChildViews() {
 		return new GridWireframe<View>().
 				withDimension(1, numberOfGenerations).
 				withContent(new CellContentGenerator<View>() {

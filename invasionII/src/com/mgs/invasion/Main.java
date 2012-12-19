@@ -1,19 +1,19 @@
 package com.mgs.invasion;
 
-import com.mgs.fantasi.measurements.Measurement;
-import com.mgs.fantasi.measurements.Measurements;
-import com.mgs.fantasi.ui.driver.UIDriver;
-import com.mgs.fantasi.ui.profile.UIProfileFactory;
-import com.mgs.fantasi.views.HexagonRowsView;
+import com.mgs.fantasi.driver.UIDriver;
+import com.mgs.fantasi.profile.UIProfileFactory;
+import com.mgs.fantasi.properties.measurements.Measurement;
+import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.views.View;
+import com.mgs.invasion.mvc.view.HexagonRowsView;
 import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.views.HexagonRowsView.hexagonRows;
 import static com.mgs.fantasi.views.LayeredElementsView.layered;
 import static com.mgs.fantasi.views.RectangleView.emptyRectangle;
+import static com.mgs.invasion.mvc.view.HexagonRowsView.hexagonRows;
 
 public class Main {
 	public static void main(String... args) {

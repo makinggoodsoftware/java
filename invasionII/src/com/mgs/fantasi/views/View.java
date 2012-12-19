@@ -1,12 +1,13 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.ui.wireframe.Structurable;
-import com.mgs.fantasi.ui.wireframe.Wireframe;
+import com.mgs.fantasi.Structurable;
+import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.rendering.wireframe.Wireframe;
 
-public interface View extends Structurable{
+public interface View extends Structurable {
 	View newCopy();
 
-	Wireframe<View> toWireframe();
+	Wireframe<View> buildChildViews();
 
 	UIProperties getUiProperties ();
 }

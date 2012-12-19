@@ -1,6 +1,9 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.ui.wireframe.*;
+import com.mgs.fantasi.rendering.structure.grid.CellContent;
+import com.mgs.fantasi.rendering.structure.grid.CellContentGenerator;
+import com.mgs.fantasi.rendering.wireframe.GridWireframe;
+import com.mgs.fantasi.rendering.wireframe.Wireframe;
 
 public class VerticalSlicesView extends BaseView {
 
@@ -17,8 +20,8 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> toWireframe() {
-		GridWireframe<View> grid = StructureType.grid();
+	public Wireframe<View> buildChildViews() {
+		GridWireframe<View> grid = new GridWireframe();
 		return grid.withDimension(numberOfDivisions, 1).withContent(new CellContentGenerator<View>() {
 			@Override
 			public CellContent<View> generateContentFor(int x, int y) {

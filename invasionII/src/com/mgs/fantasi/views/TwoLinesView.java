@@ -1,10 +1,13 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.measurements.Fraction;
-import com.mgs.fantasi.ui.wireframe.*;
+import com.mgs.fantasi.properties.measurements.Fraction;
+import com.mgs.fantasi.properties.measurements.Fractions;
+import com.mgs.fantasi.rendering.structure.grid.CellContent;
+import com.mgs.fantasi.rendering.structure.grid.CellContentGenerator;
+import com.mgs.fantasi.rendering.wireframe.GridWireframe;
+import com.mgs.fantasi.rendering.wireframe.Wireframe;
 
-import static com.mgs.fantasi.measurements.Fractions.allWithBase;
-import static com.mgs.fantasi.ui.wireframe.CellContent.withPartialHeight;
+import static com.mgs.fantasi.rendering.structure.grid.CellContent.withPartialHeight;
 
 public class TwoLinesView extends BaseView {
 
@@ -24,7 +27,7 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> toWireframe() {
+	public Wireframe<View> buildChildViews() {
 		return
 			new GridWireframe<View>().
 				withDimension(1, 2).
@@ -34,7 +37,7 @@ public class TwoLinesView extends BaseView {
 						if (y == 0){
 							return withPartialHeight(firstLineBuilder, firstLineHeighSizeRatio);
 						}else{
-							Fraction remainder = allWithBase(firstLineHeighSizeRatio.getBase()).minus(firstLineHeighSizeRatio);
+							Fraction remainder = Fractions.allWithBase(firstLineHeighSizeRatio.getBase()).minus(firstLineHeighSizeRatio);
 							return withPartialHeight(secondLineBuilder, remainder);
 						}
 					}

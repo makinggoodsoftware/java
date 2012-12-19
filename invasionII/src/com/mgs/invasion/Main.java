@@ -5,7 +5,6 @@ import com.mgs.fantasi.profile.UIProfileFactory;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.views.View;
-import com.mgs.invasion.mvc.views.HexagonRowsView;
 import com.mgs.invasion.mvc.views.ProductionUiProfileFactory;
 
 import javax.swing.*;
@@ -28,13 +27,11 @@ public class Main {
 		int numberOfGenerations = 5;
 
 
-		HexagonRowsView hexagonRows = hexagonRows(numberOVerticalDivisions, numberOfGenerations);
-
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
 		View view =
 			layered().
 				withLayer(
-					hexagonRows.
+					hexagonRows(numberOVerticalDivisions, numberOfGenerations).
 						withName("OddHexagonRows").
 						withHexagonMeasurement(hexagonMeasurement)
 				).
@@ -43,7 +40,7 @@ public class Main {
 					withMargin(hexagonMeasurement.asMargin().withHalfOfItsSize()).
 					withName("EvenHexagonRows").
 					withContent(
-							hexagonRows.newCopy().
+							hexagonRows(numberOVerticalDivisions, numberOfGenerations).
 									withOneLessColumn().
 									withHexagonMeasurement(hexagonMeasurement)
 					)

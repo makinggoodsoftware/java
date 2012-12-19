@@ -1,6 +1,5 @@
 package com.mgs.fantasi.properties.selectors;
 
-import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.views.View;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -14,16 +13,16 @@ public class UISelectorBasedOnStructureTypeTest {
 	public void testAppliesTo() throws Exception {
 		UISelectorBasedOnStructureType selector = new UISelectorBasedOnStructureType(MatchingStructureType.class);
 
-		Assert.assertTrue(selector.appliesTo(createWireframeMock(MatchingStructureType.class)));
-		Assert.assertFalse(selector.appliesTo(createWireframeMock(OtherStructureType.class)));
-		Assert.assertFalse(selector.appliesTo(createWireframeMock(ExtendingInterface.class)));
-		Assert.assertFalse(selector.appliesTo(createWireframeMock(MatchingStructureTypeParent.class)));
+		Assert.assertTrue(selector.appliesTo(createViewMock(MatchingStructureType.class)));
+		Assert.assertFalse(selector.appliesTo(createViewMock(OtherStructureType.class)));
+		Assert.assertFalse(selector.appliesTo(createViewMock(ExtendingInterface.class)));
+		Assert.assertFalse(selector.appliesTo(createViewMock(MatchingStructureTypeParent.class)));
 	}
 
-	private Renderable createWireframeMock(Class<? extends View> structureType) {
-		Renderable renderable = Mockito.mock(Renderable.class);
-		Mockito.when(renderable.getView()).thenAnswer(withClass(structureType));
-		return renderable;
+	private View createViewMock(Class<? extends View> structureType) {
+		View view = Mockito.mock(View.class);
+		Mockito.when(view.getClass()).thenAnswer(withClass(structureType));
+		return view;
 	}
 
 	private interface MatchingStructureTypeParent extends View {}

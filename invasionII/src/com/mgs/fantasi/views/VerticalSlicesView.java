@@ -36,7 +36,7 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	public VerticalSlicesView copy() {
+	public VerticalSlicesView copySpecifics() {
 		return new VerticalSlicesView(contentBuilder.newCopy()).withVerticalDivisions(numberOfDivisions);
 	}
 }

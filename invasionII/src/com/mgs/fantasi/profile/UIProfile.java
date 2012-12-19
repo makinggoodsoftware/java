@@ -1,7 +1,7 @@
 package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.properties.selectors.UISelector;
-import com.mgs.fantasi.rendering.Renderable;
+import com.mgs.fantasi.views.View;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class UIProfile {
 		styles.put(uiSelector, uiStyle);
 	}
 
-	public Set<UIStyle> findStylesFor(Renderable renderable) {
+	public Set<UIStyle> findStylesFor(View renderable) {
 		Set<UIStyle> uiStyles = new HashSet<UIStyle>();
 		for (UISelector matchingStrategy : styles.keySet()) {
 			if (matchingStrategy.appliesTo(renderable)){

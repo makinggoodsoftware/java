@@ -1,9 +1,8 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.UINativeRenderer;
-import com.mgs.fantasi.profile.UIProfile;
-import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
@@ -23,13 +22,12 @@ import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.Set;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
-	public JPanel render(Renderable renderable, UIProfile uiProfile) {
-		JPanel uiNativeElement = createUINativeElementSkeleton(renderable, uiProfile);
-		processStructure(renderable.getContent().build(), uiProfile, uiNativeElement);
+	public JPanel render(Renderable renderable) {
+		JPanel uiNativeElement = createUINativeElementSkeleton(renderable);
+		processStructure(renderable.getContent(), uiNativeElement);
 
 		JPanel outmostPointer = uiNativeElement;
 		Margin margin = renderable.getMargin();
@@ -39,15 +37,14 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return outmostPointer;
 	}
 
-	private JPanel createUINativeElementSkeleton(Renderable renderable, UIProfile uiProfile) {
+	private JPanel createUINativeElementSkeleton(Renderable renderable) {
 		PolygonPointsIterator shape = renderable.getShape();
-		Set<UIStyle> uiStyles = uiProfile.findStylesFor(renderable);
 		return shape.isRectangular() ?
-			newRectangularNativeElementSkeletonWithStyles(uiStyles):
-			newNonRectangularNativeElementSkeletonWithStyles(shape, uiStyles);
+			newRectangularNativeElementSkeletonWithStyles(renderable.getUIProperties()):
+			newNonRectangularNativeElementSkeletonWithStyles(shape, renderable.getUIProperties());
 	}
 
-	private void processStructure(Structure<Renderable> content, final UIProfile uiProfile, final JPanel nativeContainer) {
+	private void processStructure(Structure<Renderable> content, final JPanel nativeContainer) {
 		switch (content.getType()){
 			case GRID:
 				final GridLayoutConstruction<OnGoingCellLayoutConstruction, GridBagConstraints> onGoingLayoutConstruction = new OnGoingLayoutBuildingStrategyFactory().grid(nativeContainer);
@@ -55,24 +52,24 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 					@Override
 					public void on(int x, int y, CellContent<Renderable> cell) {
 						Renderable child = cell.getContent();
-						JPanel childAsNativeComponent = render(child, uiProfile);
+						JPanel childAsNativeComponent = render(child);
 						onGoingLayoutConstruction.add(childAsNativeComponent).into(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 					}
 				});
 				break;
 			case LAYERS:
-				processLayerChilds(nativeContainer, (LayeredStructure<Renderable>) content, uiProfile);
+				processLayerChilds(nativeContainer, (LayeredStructure<Renderable>) content);
 				break;
 			case SIMPLE:
 				Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();
-				if (renderable!=null) processSimpleStructure(nativeContainer, renderable, uiProfile);
+				if (renderable!=null) processSimpleStructure(nativeContainer, renderable);
 				break;
 			case EMPTY:
 				processEmptyStructure(nativeContainer);
 				break;
 			case DELEGATE:
 				Structure<Renderable> delegate = ((DelegateStructure<Renderable>) content).getContent();
-				processStructure(delegate, uiProfile, nativeContainer);
+				processStructure(delegate, nativeContainer);
 				break;
 			default:
 				throw new RuntimeException("Can't process the structure: " + content);
@@ -83,9 +80,9 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 
 	}
 
-	protected final void processSimpleStructure(JPanel nativeElement, Renderable content, UIProfile uiProfile){
+	protected final void processSimpleStructure(JPanel nativeElement, Renderable content){
 		nativeElement.setLayout(new GridBagLayout());
-		nativeElement.add(render(content, uiProfile), coordinates(0, 0, Fractions.all(), Fractions.all()));
+		nativeElement.add(render(content), coordinates(0, 0, Fractions.all(), Fractions.all()));
 	}
 
 	protected final JPanel decorateWithMargin(JPanel nativeElement, Margin margin){
@@ -108,24 +105,34 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return 0;
 	}
 
-	protected final void processLayerChilds(final JPanel parentNativeElement, LayeredStructure<Renderable> content, final UIProfile uiProfile){
+	protected final void processLayerChilds(final JPanel parentNativeElement, LayeredStructure<Renderable> content){
 		parentNativeElement.setLayout(new OverlayLayout(parentNativeElement));
 		content.iterateInCrescendo(new LayerIterator<Renderable>() {
 			@Override
 			public void on(int zIndex, Renderable layer) {
-				JPanel childLayerAsNativeElement = render(layer, uiProfile);
+				JPanel childLayerAsNativeElement = render(layer);
 				parentNativeElement.add(childLayerAsNativeElement, zIndex);
 			}
 		});
 	}
 
 
-	private JPanel newRectangularNativeElementSkeletonWithStyles(Set<UIStyle> uiStyles) {
+	private JPanel newRectangularNativeElementSkeletonWithStyles(UIProperties uiProperties) {
 		JPanel jPanel = newRectangularNativeElement();
-		for (UIStyle uiStyle : uiStyles) {
-			applyStyle(uiStyle, jPanel);
-		}
+		applyUIProperties (jPanel, uiProperties);
 		return jPanel;
+	}
+
+	private void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
+		jPanel.setBackground(uiProperties.getBackgroundColor());
+		BorderDefinition border = uiProperties.getBorder();
+		if (border!=null){
+			Border lineBorder = BorderFactory.createLineBorder(border.getColor(), border.getWidth());
+			jPanel.setBorder(lineBorder);
+		}else{
+			jPanel.setBorder(null);
+		}
+
 	}
 
 	protected final JPanel newRectangularNativeElement(){
@@ -134,21 +141,8 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return jPanel;
 	}
 
-	protected final JPanel newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, Set<UIStyle> uiStyles){
-		return new JPanelWithDifferentShape(shape, uiStyles);
-	}
-
-	public final void applyStyle(UIStyle uiStyle, JPanel nativeElement){
-		BorderDefinition border = uiStyle.getBorder();
-		if (border != null){
-			Border nativeBorder = BorderFactory.createLineBorder(border.getColor(), border.getWidth());
-			nativeElement.setBorder(nativeBorder);
-		}
-		Color backgroundColor = uiStyle.getBackgroundColor();
-		if (backgroundColor!=null){
-			nativeElement.setBackground(backgroundColor);
-			nativeElement.setOpaque(true);
-		}
+	protected final JPanel newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, UIProperties uiProperties){
+		return new JPanelWithDifferentShape(shape, uiProperties);
 	}
 
 	private GridBagConstraints coordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {

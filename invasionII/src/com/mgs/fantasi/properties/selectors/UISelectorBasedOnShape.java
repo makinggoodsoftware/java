@@ -1,7 +1,7 @@
 package com.mgs.fantasi.properties.selectors;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.rendering.Renderable;
+import com.mgs.fantasi.views.View;
 
 public class UISelectorBasedOnShape implements UISelector {
 	private final Class<? extends PolygonPointsIterator> type;
@@ -11,7 +11,7 @@ public class UISelectorBasedOnShape implements UISelector {
 	}
 
 	@Override
-	public boolean appliesTo(Renderable renderable) {
-		return renderable.getShape().getClass().equals(type);
+	public boolean appliesTo(View renderable) {
+		return renderable.getUiProperties().getShape().getClass().equals(type);
 	}
 }

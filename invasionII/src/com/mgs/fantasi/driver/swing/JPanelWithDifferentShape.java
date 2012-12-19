@@ -1,23 +1,21 @@
 package com.mgs.fantasi.driver.swing;
 
-import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
-import java.util.Iterator;
-import java.util.Set;
 
 public class JPanelWithDifferentShape extends JPanel {
 	private final PolygonPointsIterator shape;
-	private final Set<UIStyle> uiStyles;
+	private final UIProperties uiProperties;
 
-	public JPanelWithDifferentShape(PolygonPointsIterator shape, Set<UIStyle> uiStyles) {
+	public JPanelWithDifferentShape(PolygonPointsIterator shape, UIProperties uiProperties) {
 		this.shape = shape;
-		this.uiStyles = uiStyles;
+		this.uiProperties = uiProperties;
 		setOpaque(false);
 	}
 
@@ -25,18 +23,15 @@ public class JPanelWithDifferentShape extends JPanel {
 	public void paint(Graphics graphics) {
 		super.paint(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
-		Iterator<UIStyle> iterator = uiStyles.iterator();
-		if (! iterator.hasNext()) return;
-		UIStyle currentStyle = iterator.next();
-		BorderDefinition border = currentStyle.getBorder();
+		BorderDefinition border = uiProperties.getBorder();
 		float borderThickness = 0;
 		Color foregroundColor = g2d.getColor();
 		if (border !=null){
 			borderThickness = border.getWidth();
 			foregroundColor = border.getColor();
 		}
-		Color backgroundColor = currentStyle.getBackgroundColor() != null ?
-				currentStyle.getBackgroundColor() :
+		Color backgroundColor = uiProperties.getBackgroundColor() != null ?
+				uiProperties.getBackgroundColor() :
 				Color.WHITE;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);

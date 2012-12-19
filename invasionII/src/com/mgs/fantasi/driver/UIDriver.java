@@ -3,7 +3,7 @@ package com.mgs.fantasi.driver;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.profile.UIProfile;
-import com.mgs.fantasi.rendering.MyViewPreprocessor;
+import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
 import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.ViewPreprocessor;
 import com.mgs.fantasi.views.View;
@@ -19,7 +19,7 @@ public class UIDriver<T> {
 
 
 	public static UIDriver<JPanel> forSwing (UIProfile uiProfile){
-		return new UIDriver<JPanel>(uiProfile, new SwingUINativeRenderer(), new SwingUIDisplayManager(), new MyViewPreprocessor());
+		return new UIDriver<JPanel>(uiProfile, new SwingUINativeRenderer(), new SwingUIDisplayManager(), new ViewPreprocessorImpl());
 	}
 
 	private UIDriver(UIProfile uiProfile, UINativeRenderer<T> uiStrategy, UIDisplayManager<T> uiDisplayManager, ViewPreprocessor viewPreprocessor) {
@@ -30,8 +30,8 @@ public class UIDriver<T> {
 	}
 
 	public void show(View view, Dimension dimension) {
-		Renderable renderable = viewPreprocessor.prepareForRendering(view);
-		T uiNativeComponent = uiNativeRenderer.render(renderable, uiProfile);
+		Renderable renderable = viewPreprocessor.prepareForRendering(view, uiProfile);
+		T uiNativeComponent = uiNativeRenderer.render(renderable);
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}
 

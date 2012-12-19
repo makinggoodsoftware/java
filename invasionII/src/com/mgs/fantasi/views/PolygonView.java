@@ -19,7 +19,7 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public PolygonView copy() {
+	public PolygonView copySpecifics() {
 		return new PolygonView(getUiProperties().getShape());
 	}
 }

@@ -46,7 +46,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	protected HexagonRowsView copy() {
+	protected HexagonRowsView copySpecifics() {
 		return new HexagonRowsView(numberOfGerations, numberOVerticalDivisions);
 	}
 

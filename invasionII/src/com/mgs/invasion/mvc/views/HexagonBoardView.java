@@ -30,7 +30,7 @@ public class HexagonBoardView extends BaseView {
 	}
 
 	@Override
-	protected BaseView copy() {
+	protected BaseView copySpecifics() {
 		return null;
 	}
 }

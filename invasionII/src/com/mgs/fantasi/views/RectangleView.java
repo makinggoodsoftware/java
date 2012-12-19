@@ -23,7 +23,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public RectangleView copy() {
+	public RectangleView copySpecifics() {
 		return new RectangleView(content.newCopy());
 	}
 

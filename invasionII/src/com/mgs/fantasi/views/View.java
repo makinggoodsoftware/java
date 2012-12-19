@@ -10,4 +10,6 @@ public interface View extends Structurable {
 	Wireframe<View> buildChildViews();
 
 	UIProperties getUiProperties ();
+
+	UIProperties takeUiPropertiesSnapshot();
 }

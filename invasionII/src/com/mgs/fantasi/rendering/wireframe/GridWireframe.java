@@ -1,7 +1,8 @@
 package com.mgs.fantasi.rendering.wireframe;
 
 import com.mgs.fantasi.Structurable;
-import com.mgs.fantasi.rendering.MyViewPreprocessor;
+import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
+import com.mgs.fantasi.rendering.structure.StructureType;
 import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 import com.mgs.fantasi.rendering.structure.Structure;
 import com.mgs.fantasi.rendering.structure.grid.*;
@@ -31,16 +32,21 @@ public class GridWireframe<T extends Structurable>  implements Wireframe<T> {
 	}
 
 	@Override
-	public <Z extends Structurable> Wireframe<Z> transform(final MyViewPreprocessor.WireframeTransformer<T, Z> transformer) {
+	public <Z extends Structurable> Wireframe<Z> transform(final ViewPreprocessorImpl.WireframeTransformer<T, Z> transformer) {
 		return new GridWireframe<Z>().
-					withDimension(dimension.width, dimension.height).
-					withContent(new CellContentGenerator<Z>() {
-						@Override
-						public CellContent<Z> generateContentFor(int x, int y) {
-							CellContent<T> tCellContent = cellContentGenerator.generateContentFor(x, y);
-							Z transform = transformer.transform(tCellContent.getContent());
-							return new CellContent<Z>(transform, tCellContent.getHeightSizeRatio(), tCellContent.getWidthSizeRatio());
-						}
-					});
+			withDimension(dimension.width, dimension.height).
+			withContent(new CellContentGenerator<Z>() {
+				@Override
+				public CellContent<Z> generateContentFor(int x, int y) {
+					CellContent<T> tCellContent = cellContentGenerator.generateContentFor(x, y);
+					Z transform = transformer.transform(tCellContent.getContent());
+					return new CellContent<Z>(transform, tCellContent.getHeightSizeRatio(), tCellContent.getWidthSizeRatio());
+				}
+			});
+	}
+
+	@Override
+	public StructureType getType() {
+		return StructureType.GRID;
 	}
 }

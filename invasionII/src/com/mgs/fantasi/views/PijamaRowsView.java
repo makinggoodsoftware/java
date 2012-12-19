@@ -44,7 +44,7 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	protected BaseView copy() {
+	protected BaseView copySpecifics() {
 		View firstLineBuilder = generationBuilder.getFirstLineBuilder();
 		View secondLineBuilder = generationBuilder.getSecondLineBuilder();
 		return new PijamaRowsView(firstLineBuilder.newCopy(), secondLineBuilder).withNumberOfGerations(numberOfGenerations);

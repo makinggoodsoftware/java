@@ -46,7 +46,7 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	protected BaseView copy() {
+	protected BaseView copySpecifics() {
 		return new TwoLinesView(firstLineBuilder.newCopy(), secondLineBuilder.newCopy()).withFirstRowSize(firstLineHeighSizeRatio);
 	}
 

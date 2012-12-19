@@ -25,7 +25,7 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	protected BaseView copy() {
+	protected BaseView copySpecifics() {
 		LayeredElementsView copy = new LayeredElementsView();
 		for (View layer : layers) {
 			copy.withLayer(layer.newCopy());

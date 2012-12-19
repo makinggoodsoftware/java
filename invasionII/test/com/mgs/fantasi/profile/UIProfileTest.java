@@ -1,7 +1,7 @@
 package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.properties.selectors.UISelector;
-import com.mgs.fantasi.rendering.Renderable;
+import com.mgs.fantasi.views.View;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Set;
 
 public class UIProfileTest {
-	public static final Renderable RENDERABLE_NOT_IN_CONTEXT = Mockito.mock(Renderable.class);
+	public static final View VIEW_NOT_IN_CONTEXT = Mockito.mock(View.class);
 	private UIProfile uiProfile;
-	private Renderable renderable;
+	private View view;
 	private UIStyle uiStyle1;
 	private List<UIStyle> threeUiStyles;
 	private UIStyle uiStyle2;
@@ -24,7 +24,7 @@ public class UIProfileTest {
 	@Before
 	public void setup(){
 		uiProfile = new UIProfile();
-		renderable = Mockito.mock(Renderable.class);
+		view = Mockito.mock(View.class);
 		uiStyle1 = Mockito.mock(UIStyle.class);
 		uiStyle2 = Mockito.mock(UIStyle.class);
 		uiStyle3 = Mockito.mock(UIStyle.class);
@@ -35,15 +35,15 @@ public class UIProfileTest {
 	
 	@Test
 	public void testFindStylesFor_noStylesAdded() throws Exception {
-		Set<UIStyle> styles = uiProfile.findStylesFor(RENDERABLE_NOT_IN_CONTEXT);
+		Set<UIStyle> styles = uiProfile.findStylesFor(VIEW_NOT_IN_CONTEXT);
 		Assert.assertEquals(0, styles.size());
 	}
 
 	@Test
 	public void testFindStylesFor_oneStyleButNotMatching() throws Exception {
-		GivenSetup.onlyOneAndNotMatchingStyle(uiProfile, renderable, uiStyle1);
+		GivenSetup.onlyOneAndNotMatchingStyle(uiProfile, view, uiStyle1);
 
-		Set<UIStyle> styles = uiProfile.findStylesFor(renderable);
+		Set<UIStyle> styles = uiProfile.findStylesFor(view);
 
 		Assert.assertEquals(0, styles.size());
 	}
@@ -51,9 +51,9 @@ public class UIProfileTest {
 
 	@Test
 	public void testFindStylesFor_oneMatchingStyle() throws Exception {
-		GivenSetup.onlyOneMatchingStyle(uiProfile, renderable, uiStyle1);
+		GivenSetup.onlyOneMatchingStyle(uiProfile, view, uiStyle1);
 
-		Set<UIStyle> styles = uiProfile.findStylesFor(renderable);
+		Set<UIStyle> styles = uiProfile.findStylesFor(view);
 
 		Assert.assertEquals(1, styles.size());
 		Assert.assertEquals(uiStyle1, styles.iterator().next());
@@ -61,18 +61,18 @@ public class UIProfileTest {
 
 	@Test
 	public void testFindStylesFor_manyStylesButNoneMatching() throws Exception {
-		GivenSetup.manyStylesButNoneMatching(uiProfile, renderable, threeUiStyles);
+		GivenSetup.manyStylesButNoneMatching(uiProfile, view, threeUiStyles);
 
-		Set<UIStyle> styles = uiProfile.findStylesFor(renderable);
+		Set<UIStyle> styles = uiProfile.findStylesFor(view);
 
 		Assert.assertEquals(0, styles.size());
 	}
 
 	@Test
 	public void testFindStylesFor_manyStylesOneMatching() throws Exception {
-		GivenSetup.manyStylesManyMatching(uiProfile, renderable, threeUiStyles, uiStyle1);
+		GivenSetup.manyStylesManyMatching(uiProfile, view, threeUiStyles, uiStyle1);
 
-		Set<UIStyle> styles = uiProfile.findStylesFor(renderable);
+		Set<UIStyle> styles = uiProfile.findStylesFor(view);
 
 		Assert.assertEquals(1, styles.size());
 		Assert.assertTrue(styles.contains(uiStyle1));
@@ -82,9 +82,9 @@ public class UIProfileTest {
 
 	@Test
 	public void testFindStylesFor_manyStylesManyMatching() throws Exception {
-		GivenSetup.manyStylesManyMatching(uiProfile, renderable, threeUiStyles, uiStyle1, uiStyle2);
+		GivenSetup.manyStylesManyMatching(uiProfile, view, threeUiStyles, uiStyle1, uiStyle2);
 
-		Set<UIStyle> styles = uiProfile.findStylesFor(renderable);
+		Set<UIStyle> styles = uiProfile.findStylesFor(view);
 
 		Assert.assertEquals(2, styles.size());
 		Assert.assertTrue(styles.contains(uiStyle1));
@@ -98,23 +98,23 @@ public class UIProfileTest {
 		private static final boolean STYLE_MATCHES = true;
 		private static final boolean STYLE_DOESNT_MATCH = false;
 
-		public static void onlyOneMatchingStyle(UIProfile uiProfile, Renderable renderable, UIStyle uiStyle) {
-			addStyleExpectation(uiProfile, renderable, uiStyle, STYLE_MATCHES);
+		public static void onlyOneMatchingStyle(UIProfile uiProfile, View view, UIStyle uiStyle) {
+			addStyleExpectation(uiProfile, view, uiStyle, STYLE_MATCHES);
 		}
 
-		public static void onlyOneAndNotMatchingStyle(UIProfile uiProfile, Renderable renderable, UIStyle uiStyle) {
-			addStyleExpectation(uiProfile, renderable, uiStyle, STYLE_DOESNT_MATCH);
+		public static void onlyOneAndNotMatchingStyle(UIProfile uiProfile, View view, UIStyle uiStyle) {
+			addStyleExpectation(uiProfile, view, uiStyle, STYLE_DOESNT_MATCH);
 		}
 
-		public static void manyStylesButNoneMatching(UIProfile uiProfile, Renderable renderable, List<UIStyle> uiStyles) {
+		public static void manyStylesButNoneMatching(UIProfile uiProfile, View view, List<UIStyle> uiStyles) {
 			for (UIStyle uiStyle : uiStyles) {
-				addStyleExpectation(uiProfile, renderable, uiStyle, STYLE_DOESNT_MATCH);
+				addStyleExpectation(uiProfile, view, uiStyle, STYLE_DOESNT_MATCH);
 			}
 		}
 
-		public static void manyStylesManyMatching(UIProfile uiProfile, Renderable renderable, List<UIStyle> uiStyles, UIStyle... matchingStyles) {
+		public static void manyStylesManyMatching(UIProfile uiProfile, View view, List<UIStyle> uiStyles, UIStyle... matchingStyles) {
 			for (UIStyle uiStyle : uiStyles) {
-				addStyleExpectation(uiProfile, renderable, uiStyle, anyAreEqual (matchingStyles, uiStyle));
+				addStyleExpectation(uiProfile, view, uiStyle, anyAreEqual (matchingStyles, uiStyle));
 			}
 		}
 
@@ -125,10 +125,10 @@ public class UIProfileTest {
 			return false;
 		}
 
-		private static void addStyleExpectation(UIProfile uiProfile, Renderable renderable, UIStyle uiStyle, boolean value) {
+		private static void addStyleExpectation(UIProfile uiProfile, View view, UIStyle uiStyle, boolean value) {
 			UISelector byClassSelectorMock = Mockito.mock(UISelector.class);
 			uiProfile.addStyle(byClassSelectorMock, uiStyle);
-			Mockito.when(byClassSelectorMock.appliesTo(renderable)).thenReturn(value);
+			Mockito.when(byClassSelectorMock.appliesTo(view)).thenReturn(value);
 		}
 	}
 }

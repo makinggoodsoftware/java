@@ -1,4 +1,4 @@
-package com.mgs.invasion.mvc.view;
+package com.mgs.invasion.mvc.views;
 
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.profile.UIProfileFactory;

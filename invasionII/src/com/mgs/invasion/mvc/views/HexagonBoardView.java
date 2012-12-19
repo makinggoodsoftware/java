@@ -1,4 +1,4 @@
-package com.mgs.invasion.mvc.view.structures;
+package com.mgs.invasion.mvc.views;
 
 import com.mgs.fantasi.properties.polygon.HexagonShape;
 import com.mgs.fantasi.rendering.wireframe.DelegateWireframe;

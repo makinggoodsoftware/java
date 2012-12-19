@@ -5,15 +5,15 @@ import com.mgs.fantasi.profile.UIProfileFactory;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.views.View;
-import com.mgs.invasion.mvc.view.HexagonRowsView;
-import com.mgs.invasion.mvc.view.ProductionUiProfileFactory;
+import com.mgs.invasion.mvc.views.HexagonRowsView;
+import com.mgs.invasion.mvc.views.ProductionUiProfileFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static com.mgs.fantasi.views.LayeredElementsView.layered;
 import static com.mgs.fantasi.views.RectangleView.emptyRectangle;
-import static com.mgs.invasion.mvc.view.HexagonRowsView.hexagonRows;
+import static com.mgs.invasion.mvc.views.HexagonRowsView.hexagonRows;
 
 public class Main {
 	public static void main(String... args) {

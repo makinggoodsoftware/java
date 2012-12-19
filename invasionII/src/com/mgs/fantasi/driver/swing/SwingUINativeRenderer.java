@@ -49,7 +49,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	private void processStructure(Structure<Renderable> content, final JPanel nativeContainer) {
 		switch (content.getType()){
 			case GRID:
-				final OnGoingLayoutConstruction<OnGoingCellLayoutConstruction, GridBagConstraints> onGoingLayoutConstruction = new OnGoingLayoutBuildingStrategyFactory().grid();
+				final OnGoingLayoutConstruction<GridBagConstraints> onGoingLayoutConstruction = new OnGoingLayoutBuildingStrategyFactory().grid();
 				((GridStructure<Renderable>) content).itereateCellsWith(new CellIterator<Renderable>() {
 					@Override
 					public void on(int x, int y, CellContent<Renderable> cell) {
@@ -155,66 +155,59 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
 	private static class OnGoingLayoutBuildingStrategyFactory {
-		public OnGoingOnGoingLayoutConstruction grid(){
-			return new OnGoingOnGoingLayoutConstruction();
+		public OnGoingLayoutConstruction grid(){
+			return new OnGoingLayoutConstruction<GridBagConstraints>(new GridBagLayout());
 		}
 	}
 
-	private static interface OnGoingLayoutConstruction<T extends OnGoingChildContentConstruction<Z>, Z>{
-		T add(JPanel childAsNativeComponent);
+	private static class OnGoingLayoutConstruction<T>{
+		private final LayoutManager layout;
+		private List<OnGoingChildContentConstruction<T>> toBeAdded = new ArrayList<OnGoingChildContentConstruction<T>>();
 
-		void buildInto(JPanel container);
-	}
-
-	private static class OnGoingOnGoingLayoutConstruction implements OnGoingLayoutConstruction {
-		private List<OnGoingCellLayoutConstruction> toBeAdded = new ArrayList<OnGoingCellLayoutConstruction>();
-
-		public OnGoingOnGoingLayoutConstruction() {
+		private OnGoingLayoutConstruction(LayoutManager layout) {
+			this.layout = layout;
 		}
 
-		@Override
-		public OnGoingCellLayoutConstruction add(JPanel childAsNativeComponent) {
-			return new OnGoingCellLayoutConstruction(this, childAsNativeComponent);
+		public OnGoingChildContentConstruction<T> add(JPanel childAsNativeComponent) {
+			return new OnGoingChildContentConstruction(this, childAsNativeComponent);
 		}
 
-		@Override
 		public void buildInto(JPanel container){
-			container.setLayout(new GridBagLayout());
-			for (OnGoingCellLayoutConstruction onGoingCellLayoutConstruction : toBeAdded) {
-				container.add(onGoingCellLayoutConstruction.getCellContent(), onGoingCellLayoutConstruction.getGridBagConstraints());
+			container.setLayout(getSwingLayout());
+			for (OnGoingChildContentConstruction onGoingCellLayoutConstruction : toBeAdded) {
+				container.add(onGoingCellLayoutConstruction.getCellContent(), onGoingCellLayoutConstruction.getSpecifics());
 			}
 		}
 
-		public void doAdd(OnGoingCellLayoutConstruction onGoingCellLayoutConstruction) {
+		private LayoutManager getSwingLayout() {
+			return layout;
+		}
+
+		public void doAdd(OnGoingChildContentConstruction<T> onGoingCellLayoutConstruction) {
 			toBeAdded.add(onGoingCellLayoutConstruction);
 		}
 	}
 
-	private static interface OnGoingChildContentConstruction<T> {
-		void into(T gridBagConstraints);
-	}
-
-	private static class OnGoingCellLayoutConstruction implements OnGoingChildContentConstruction<GridBagConstraints>{
-		private final OnGoingOnGoingLayoutConstruction onGoingGridLayoutConstruction;
+	private static class OnGoingChildContentConstruction <T>{
+		private final OnGoingLayoutConstruction onGoingLayoutConstruction;
 		private final JPanel cellContent;
-		private GridBagConstraints gridBagConstraints;
+		private T gridBagConstraints;
 
-		public OnGoingCellLayoutConstruction(OnGoingOnGoingLayoutConstruction onGoingGridLayoutConstruction, JPanel cellContent) {
-			this.onGoingGridLayoutConstruction = onGoingGridLayoutConstruction;
+		public OnGoingChildContentConstruction(OnGoingLayoutConstruction onGoingLayoutConstruction, JPanel cellContent) {
+			this.onGoingLayoutConstruction = onGoingLayoutConstruction;
 			this.cellContent = cellContent;
 		}
 
-		@Override
-		public void into(GridBagConstraints gridBagConstraints) {
+		public void into(T gridBagConstraints) {
 			this.gridBagConstraints = gridBagConstraints;
-			onGoingGridLayoutConstruction.doAdd(this);
+			onGoingLayoutConstruction.doAdd(this);
 		}
 
 		public JPanel getCellContent() {
 			return cellContent;
 		}
 
-		public GridBagConstraints getGridBagConstraints() {
+		public T getSpecifics() {
 			return gridBagConstraints;
 		}
 	}

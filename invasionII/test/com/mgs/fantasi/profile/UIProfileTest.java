@@ -1,7 +1,5 @@
-package com.mgs.fantasi.ui.profile;
+package com.mgs.fantasi.profile;
 
-import com.mgs.fantasi.profile.UIProfile;
-import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.selectors.UISelector;
 import com.mgs.fantasi.rendering.Renderable;
 import junit.framework.Assert;
@@ -120,8 +118,8 @@ public class UIProfileTest {
 			}
 		}
 
-		private static boolean anyAreEqual(UIStyle[] listTocompareTo, UIStyle uiStyle) {
-			for (UIStyle toCompareTo : listTocompareTo) {
+		private static boolean anyAreEqual(UIStyle[] listToCompareTo, UIStyle uiStyle) {
+			for (UIStyle toCompareTo : listToCompareTo) {
 				if (uiStyle.equals(toCompareTo)) return true;
 			}
 			return false;

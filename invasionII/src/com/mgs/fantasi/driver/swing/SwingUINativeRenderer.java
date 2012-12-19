@@ -26,7 +26,7 @@ import java.awt.*;
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
 	public JPanel render(Renderable renderable) {
-		JPanel uiNativeElement = createUINativeElementSkeleton(renderable);
+		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
 		processStructure(renderable.getContent(), uiNativeElement);
 
 		JPanel outmostPointer = uiNativeElement;
@@ -37,11 +37,11 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return outmostPointer;
 	}
 
-	private JPanel createUINativeElementSkeleton(Renderable renderable) {
-		PolygonPointsIterator shape = renderable.getShape();
+	private JPanel createUINativeElementSkeleton(UIProperties uiProperties) {
+		PolygonPointsIterator shape = uiProperties.getShape();
 		return shape.isRectangular() ?
-			newRectangularNativeElementSkeletonWithStyles(renderable.getUIProperties()):
-			newNonRectangularNativeElementSkeletonWithStyles(shape, renderable.getUIProperties());
+			newRectangularNativeElementSkeletonWithStyles(uiProperties):
+			newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
 	}
 
 	private void processStructure(Structure<Renderable> content, final JPanel nativeContainer) {
@@ -141,8 +141,8 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return jPanel;
 	}
 
-	protected final JPanel newNonRectangularNativeElementSkeletonWithStyles(PolygonPointsIterator shape, UIProperties uiProperties){
-		return new JPanelWithDifferentShape(shape, uiProperties);
+	protected final JPanel newNonRectangularNativeElementSkeletonWithStyles(UIProperties uiProperties){
+		return new JPanelWithDifferentShape(uiProperties.getShape(), uiProperties);
 	}
 
 	private GridBagConstraints coordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {

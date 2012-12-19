@@ -22,6 +22,8 @@ import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
@@ -47,7 +49,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	private void processStructure(Structure<Renderable> content, final JPanel nativeContainer) {
 		switch (content.getType()){
 			case GRID:
-				final GridLayoutConstruction<OnGoingCellLayoutConstruction, GridBagConstraints> onGoingLayoutConstruction = new OnGoingLayoutBuildingStrategyFactory().grid(nativeContainer);
+				final OnGoingLayoutConstruction<OnGoingCellLayoutConstruction, GridBagConstraints> onGoingLayoutConstruction = new OnGoingLayoutBuildingStrategyFactory().grid();
 				((GridStructure<Renderable>) content).itereateCellsWith(new CellIterator<Renderable>() {
 					@Override
 					public void on(int x, int y, CellContent<Renderable> cell) {
@@ -56,9 +58,17 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 						onGoingLayoutConstruction.add(childAsNativeComponent).into(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 					}
 				});
+				onGoingLayoutConstruction.buildInto(nativeContainer);
 				break;
 			case LAYERS:
-				processLayerChilds(nativeContainer, (LayeredStructure<Renderable>) content);
+				nativeContainer.setLayout(new OverlayLayout(nativeContainer));
+				((LayeredStructure<Renderable>) content).iterateInCrescendo(new LayerIterator<Renderable>() {
+					@Override
+					public void on(int zIndex, Renderable layer) {
+						JPanel childLayerAsNativeElement = render(layer);
+						nativeContainer.add(childLayerAsNativeElement, zIndex);
+					}
+				});
 				break;
 			case SIMPLE:
 				Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();
@@ -105,17 +115,6 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return 0;
 	}
 
-	protected final void processLayerChilds(final JPanel parentNativeElement, LayeredStructure<Renderable> content){
-		parentNativeElement.setLayout(new OverlayLayout(parentNativeElement));
-		content.iterateInCrescendo(new LayerIterator<Renderable>() {
-			@Override
-			public void on(int zIndex, Renderable layer) {
-				JPanel childLayerAsNativeElement = render(layer);
-				parentNativeElement.add(childLayerAsNativeElement, zIndex);
-			}
-		});
-	}
-
 
 	private JPanel newRectangularNativeElementSkeletonWithStyles(UIProperties uiProperties) {
 		JPanel jPanel = newRectangularNativeElement();
@@ -155,27 +154,22 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return gbc;
 	}
 
-	private static interface SwingLayoutStrategy {
-		GridLayoutConstruction grid(JPanel jpanel);
-	}
-
-	private static class OnGoingLayoutBuildingStrategyFactory implements SwingLayoutStrategy {
-		@Override
-		public OnGoingGridLayoutConstruction grid(JPanel jpanel){
-			return new OnGoingGridLayoutConstruction(jpanel);
+	private static class OnGoingLayoutBuildingStrategyFactory {
+		public OnGoingOnGoingLayoutConstruction grid(){
+			return new OnGoingOnGoingLayoutConstruction();
 		}
 	}
 
-	private static interface GridLayoutConstruction <T extends OnGoingChildContentConstruction<Z>, Z>{
+	private static interface OnGoingLayoutConstruction<T extends OnGoingChildContentConstruction<Z>, Z>{
 		T add(JPanel childAsNativeComponent);
+
+		void buildInto(JPanel container);
 	}
 
-	private static class OnGoingGridLayoutConstruction implements GridLayoutConstruction{
-		private final JPanel container;
+	private static class OnGoingOnGoingLayoutConstruction implements OnGoingLayoutConstruction {
+		private List<OnGoingCellLayoutConstruction> toBeAdded = new ArrayList<OnGoingCellLayoutConstruction>();
 
-		public OnGoingGridLayoutConstruction(JPanel container) {
-			this.container = container;
-			container.setLayout(new GridBagLayout());
+		public OnGoingOnGoingLayoutConstruction() {
 		}
 
 		@Override
@@ -183,8 +177,16 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 			return new OnGoingCellLayoutConstruction(this, childAsNativeComponent);
 		}
 
-		public void doAdd(JPanel cellContent, GridBagConstraints gridBagConstraints) {
-			container.add(cellContent, gridBagConstraints);
+		@Override
+		public void buildInto(JPanel container){
+			container.setLayout(new GridBagLayout());
+			for (OnGoingCellLayoutConstruction onGoingCellLayoutConstruction : toBeAdded) {
+				container.add(onGoingCellLayoutConstruction.getCellContent(), onGoingCellLayoutConstruction.getGridBagConstraints());
+			}
+		}
+
+		public void doAdd(OnGoingCellLayoutConstruction onGoingCellLayoutConstruction) {
+			toBeAdded.add(onGoingCellLayoutConstruction);
 		}
 	}
 
@@ -193,17 +195,27 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
 	private static class OnGoingCellLayoutConstruction implements OnGoingChildContentConstruction<GridBagConstraints>{
-		private final OnGoingGridLayoutConstruction onGoingGridLayoutConstruction;
+		private final OnGoingOnGoingLayoutConstruction onGoingGridLayoutConstruction;
 		private final JPanel cellContent;
+		private GridBagConstraints gridBagConstraints;
 
-		public OnGoingCellLayoutConstruction(OnGoingGridLayoutConstruction onGoingGridLayoutConstruction, JPanel cellContent) {
+		public OnGoingCellLayoutConstruction(OnGoingOnGoingLayoutConstruction onGoingGridLayoutConstruction, JPanel cellContent) {
 			this.onGoingGridLayoutConstruction = onGoingGridLayoutConstruction;
 			this.cellContent = cellContent;
 		}
 
 		@Override
 		public void into(GridBagConstraints gridBagConstraints) {
-			onGoingGridLayoutConstruction.doAdd(cellContent, gridBagConstraints);
+			this.gridBagConstraints = gridBagConstraints;
+			onGoingGridLayoutConstruction.doAdd(this);
+		}
+
+		public JPanel getCellContent() {
+			return cellContent;
+		}
+
+		public GridBagConstraints getGridBagConstraints() {
+			return gridBagConstraints;
 		}
 	}
 }

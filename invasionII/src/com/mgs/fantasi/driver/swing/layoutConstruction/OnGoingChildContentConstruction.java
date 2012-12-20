@@ -1,13 +1,13 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
-import javax.swing.*;
+import com.mgs.fantasi.rendering.Renderable;
 
 public class OnGoingChildContentConstruction<T>{
 	private final OnGoingLayoutConstructionImpl onGoingLayoutConstruction;
-	private final JPanel cellContent;
+	private final Renderable cellContent;
 	private T specifics;
 
-	public OnGoingChildContentConstruction(OnGoingLayoutConstructionImpl onGoingLayoutConstruction, JPanel cellContent) {
+	public OnGoingChildContentConstruction(OnGoingLayoutConstructionImpl onGoingLayoutConstruction, Renderable cellContent) {
 		this.onGoingLayoutConstruction = onGoingLayoutConstruction;
 		this.cellContent = cellContent;
 	}
@@ -17,7 +17,7 @@ public class OnGoingChildContentConstruction<T>{
 		onGoingLayoutConstruction.doAdd(this);
 	}
 
-	public JPanel getCellContent() {
+	public Renderable getCellContent() {
 		return cellContent;
 	}
 

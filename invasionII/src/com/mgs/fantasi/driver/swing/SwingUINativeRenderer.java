@@ -30,7 +30,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	public JPanel render(Renderable renderable) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
 		OnGoingLayoutConstruction<?> onGoingLayoutConstruction = processStructure(renderable.getContent());
-		onGoingLayoutConstruction.buildInto(uiNativeElement);
+		onGoingLayoutConstruction.buildInto(uiNativeElement, this);
 
 		JPanel outmostPointer = uiNativeElement;
 		Margin margin = renderable.getMargin();
@@ -50,23 +50,13 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	public OnGoingLayoutConstruction<?> processStructure(Structure<Renderable> content) {
 		switch (content.getType()){
 			case GRID:
-				final OnGoingLayoutConstruction<GridBagConstraints> onGoingLayoutConstruction= new OnGoingLayoutBuildingStrategyFactory().grid();
-				((GridStructure<Renderable>) content).itereateCellsWith(new CellIterator<Renderable>() {
-					@Override
-					public void on(int x, int y, CellContent<Renderable> cell) {
-						Renderable child = cell.getContent();
-						JPanel childAsNativeComponent = render(child);
-						onGoingLayoutConstruction.add(childAsNativeComponent).into(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
-					}
-				});
-				return onGoingLayoutConstruction;
+				return processGridStructure((GridStructure<Renderable>) content, new OnGoingLayoutBuildingStrategyFactory().grid());
 			case LAYERS:
 				final OnGoingLayoutConstruction<Integer> onGoingLayoutConstruction2 = new OnGoingLayoutBuildingStrategyFactory().layers();
 				((LayeredStructure<Renderable>) content).iterateInCrescendo(new LayerIterator<Renderable>() {
 					@Override
 					public void on(int zIndex, Renderable layer) {
-						JPanel childLayerAsNativeElement = render(layer);
-						onGoingLayoutConstruction2.add(childLayerAsNativeElement).into(zIndex);
+						onGoingLayoutConstruction2.add(layer).into(zIndex);
 					}
 				});
 				return onGoingLayoutConstruction2;
@@ -74,7 +64,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 				final OnGoingLayoutConstruction<GridBagConstraints> onGoingLayoutConstruction3= new OnGoingLayoutBuildingStrategyFactory().grid();
 				Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();
 				if (renderable!=null) {
-					onGoingLayoutConstruction3.add(render(renderable)).into(coordinates(0, 0, Fractions.all(), Fractions.all()));
+					onGoingLayoutConstruction3.add(renderable).into(coordinates(0, 0, Fractions.all(), Fractions.all()));
 				}
 				return onGoingLayoutConstruction3;
 			case DELEGATE:
@@ -85,6 +75,16 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 			default:
 				throw new RuntimeException("Can't process the structure: " + content);
 		}
+	}
+
+	private OnGoingLayoutConstruction<GridBagConstraints> processGridStructure(GridStructure<Renderable> structure, final OnGoingLayoutConstruction<GridBagConstraints> onGoingLayoutConstruction) {
+		structure.itereateCellsWith(new CellIterator<Renderable>() {
+			@Override
+			public void on(int x, int y, CellContent<Renderable> cell) {
+				onGoingLayoutConstruction.add(cell.getContent()).into(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+			}
+		});
+		return onGoingLayoutConstruction;
 	}
 
 	protected final JPanel decorateWithMargin(JPanel nativeElement, Margin margin){

@@ -1,5 +1,8 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
+import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
+import com.mgs.fantasi.rendering.Renderable;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +16,17 @@ public class OnGoingLayoutConstructionImpl<T> implements OnGoingLayoutConstructi
 	}
 
 	@Override
-	public OnGoingChildContentConstruction<T> add(JPanel childAsNativeComponent) {
-		return new OnGoingChildContentConstruction<T>(this, childAsNativeComponent);
+	public OnGoingChildContentConstruction<T> add(Renderable child) {
+		return new OnGoingChildContentConstruction<T>(this, child);
 	}
 
 	@Override
-	public void buildInto(JPanel container){
+	public void buildInto(JPanel container, SwingUINativeRenderer renderer){
 		container.setLayout(layoutProvider.getLayoutManager(container));
-		for (OnGoingChildContentConstruction onGoingCellLayoutConstruction : toBeAdded) {
-			container.add(onGoingCellLayoutConstruction.getCellContent(), onGoingCellLayoutConstruction.getSpecifics());
+		for (OnGoingChildContentConstruction onGoingChildContentConstruction : toBeAdded) {
+			Renderable content = onGoingChildContentConstruction.getCellContent();
+			JPanel uiNativeElement = renderer.render(content);
+			container.add(uiNativeElement, onGoingChildContentConstruction.getSpecifics());
 		}
 	}
 

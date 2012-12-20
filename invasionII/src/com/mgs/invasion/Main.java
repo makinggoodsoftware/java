@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.mgs.fantasi.views.LayeredElementsView.layered;
-import static com.mgs.fantasi.views.RectangleView.emptyRectangle;
+import static com.mgs.fantasi.views.RectangleView.rectangle;
 import static com.mgs.invasion.mvc.views.HexagonRowsView.hexagonRows;
 
 public class Main {
@@ -36,15 +36,14 @@ public class Main {
 						withHexagonMeasurement(hexagonMeasurement)
 				).
 				withLayer(
-					emptyRectangle().
-					withMargin(hexagonMeasurement.asMargin().withHalfOfItsSize()).
-					withName("EvenHexagonRows").
-					withContent(
-							hexagonRows(numberOVerticalDivisions, numberOfGenerations).
-									withOneLessColumn().
-									withHexagonMeasurement(hexagonMeasurement)
-					)
-				);
+					rectangle().
+						withPadding(hexagonMeasurement.asMargin().withHalfOfItsSize()).
+						withName("EvenHexagonRows").
+						withContent(hexagonRows(numberOVerticalDivisions, numberOfGenerations).
+							withOneLessColumn().
+							withHexagonMeasurement(hexagonMeasurement)
+				)
+			);
 
 		uiDriver.show(view, new Dimension(400, 400));
 	}

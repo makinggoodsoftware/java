@@ -13,7 +13,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	private RectangleView() {
 	}
 
-	public static RectangleView emptyRectangle() {
+	public static RectangleView rectangle() {
 		return new RectangleView();
 	}
 

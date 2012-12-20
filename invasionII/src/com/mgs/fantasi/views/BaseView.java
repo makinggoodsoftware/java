@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class BaseView<T extends BaseView> implements View {
 	private final UIProperties uiProperties = new UIProperties();
 
-	public T withMargin(Margin margin) {
+	public T withPadding(Margin margin) {
 		getUiProperties().setMargin(margin);
 		return (T) this;
 	}

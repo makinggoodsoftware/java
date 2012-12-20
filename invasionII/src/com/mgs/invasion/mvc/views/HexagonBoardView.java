@@ -16,7 +16,7 @@ public class HexagonBoardView extends BaseView {
 	public HexagonBoardView() {
 		hexagonBuilder = PolygonView.polygon(new HexagonShape());
 		hexagonRowBuilder = VerticalSlicesView.verticalSlices(hexagonBuilder);
-		emptyRowBuilder = RectangleView.emptyRectangle();
+		emptyRowBuilder = RectangleView.rectangle();
 		oddHexagonRowsLayerBuilder = PijamaRowsView.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
 		evenHexagonRowsLayerBuilder = PijamaRowsView.pijamaRows(hexagonRowBuilder, emptyRowBuilder);
 		boardStructureBuilder = LayeredElementsView.layered().withLayer(oddHexagonRowsLayerBuilder).withLayer(evenHexagonRowsLayerBuilder);

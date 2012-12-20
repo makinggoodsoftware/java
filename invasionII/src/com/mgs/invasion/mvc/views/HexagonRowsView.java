@@ -12,7 +12,7 @@ import com.mgs.fantasi.views.View;
 
 import static com.mgs.fantasi.views.PijamaRowsView.pijamaRows;
 import static com.mgs.fantasi.views.PolygonView.polygon;
-import static com.mgs.fantasi.views.RectangleView.emptyRectangle;
+import static com.mgs.fantasi.views.RectangleView.rectangle;
 import static com.mgs.fantasi.views.VerticalSlicesView.verticalSlices;
 
 public class HexagonRowsView extends BaseView<HexagonRowsView> {
@@ -29,7 +29,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 			verticalSlices(hexagon).
 					withVerticalDivisions(numberOVerticalDivisions)
 			,
-			emptyRectangle()
+			rectangle()
 		).
 		withFirstRowSize(Fractions.thwoThirds()).
 		withNumberOfGerations(numberOfGerations);

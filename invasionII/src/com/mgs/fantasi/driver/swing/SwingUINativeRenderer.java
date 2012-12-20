@@ -15,8 +15,6 @@ import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.structure.DelegateStructure;
 import com.mgs.fantasi.rendering.structure.SimpleStructure;
 import com.mgs.fantasi.rendering.structure.Structure;
-import com.mgs.fantasi.rendering.structure.grid.CellContent;
-import com.mgs.fantasi.rendering.structure.grid.CellIterator;
 import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 import com.mgs.fantasi.rendering.structure.layer.LayerIterator;
 import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
@@ -26,6 +24,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
+
+	private final OnGoingLayoutBuildingStrategyFactory onGoingLayoutBuildingStrategyFactory = new OnGoingLayoutBuildingStrategyFactory();
+
 	@Override
 	public JPanel render(Renderable renderable) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
@@ -50,7 +51,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	public OnGoingLayoutConstruction<?> processStructure(Structure<Renderable> content) {
 		switch (content.getType()){
 			case GRID:
-				return processGridStructure((GridStructure<Renderable>) content, new OnGoingLayoutBuildingStrategyFactory().grid());
+				return onGoingLayoutBuildingStrategyFactory.grid().processGridStructure((GridStructure<Renderable>) content);
 			case LAYERS:
 				final OnGoingLayoutConstruction<Integer> onGoingLayoutConstruction2 = new OnGoingLayoutBuildingStrategyFactory().layers();
 				((LayeredStructure<Renderable>) content).iterateInCrescendo(new LayerIterator<Renderable>() {
@@ -75,16 +76,6 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 			default:
 				throw new RuntimeException("Can't process the structure: " + content);
 		}
-	}
-
-	private OnGoingLayoutConstruction<GridBagConstraints> processGridStructure(GridStructure<Renderable> structure, final OnGoingLayoutConstruction<GridBagConstraints> onGoingLayoutConstruction) {
-		structure.itereateCellsWith(new CellIterator<Renderable>() {
-			@Override
-			public void on(int x, int y, CellContent<Renderable> cell) {
-				onGoingLayoutConstruction.add(cell.getContent()).into(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
-			}
-		});
-		return onGoingLayoutConstruction;
 	}
 
 	protected final JPanel decorateWithMargin(JPanel nativeElement, Margin margin){
@@ -136,7 +127,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return new JPanelWithDifferentShape(uiProperties.getShape(), uiProperties);
 	}
 
-	private GridBagConstraints coordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
+	public static GridBagConstraints coordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;

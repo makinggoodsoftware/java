@@ -2,8 +2,12 @@ package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.rendering.Renderable;
+import com.mgs.fantasi.rendering.structure.grid.CellContent;
+import com.mgs.fantasi.rendering.structure.grid.CellIterator;
+import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +17,17 @@ public class OnGoingLayoutConstructionImpl<T> implements OnGoingLayoutConstructi
 
 	public OnGoingLayoutConstructionImpl(LayoutProvider layoutProvider) {
 		this.layoutProvider = layoutProvider;
+	}
+
+	public OnGoingLayoutConstruction<T> processGridStructure(GridStructure<Renderable> structure) {
+		structure.itereateCellsWith(new CellIterator<Renderable>() {
+			@Override
+			public void on(int x, int y, CellContent<Renderable> cell) {
+				GridBagConstraints coordinates = SwingUINativeRenderer.coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio());
+				add(cell.getContent()).into((T) coordinates);
+			}
+		});
+		return this;
 	}
 
 	@Override

@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OnGoingLayoutBuildingStrategyFactory {
-	public GridLayoutConstructionImpl grid(){
-		return new GridLayoutConstructionImpl (new LayoutProvider(){
+	public GridBaseLayoutConstructionStrategyImpl grid(){
+		return new GridBaseLayoutConstructionStrategyImpl(new LayoutProvider(){
 			@Override
 			public LayoutManager getLayoutManager(JPanel container){
 				return new GridBagLayout();
@@ -17,8 +17,8 @@ public class OnGoingLayoutBuildingStrategyFactory {
 		});
 	}
 
-	public LayerLayoutConstructionImpl layers() {
-		return new LayerLayoutConstructionImpl (new LayoutProvider() {
+	public LayerBaseLayoutConstructionStrategyImpl layers() {
+		return new LayerBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
 			@Override
 			public LayoutManager getLayoutManager(JPanel container) {
 				return new OverlayLayout(container);
@@ -27,14 +27,23 @@ public class OnGoingLayoutBuildingStrategyFactory {
 	}
 
 
-	public OnGoingLayoutConstruction<Void> empty() {
-		return new OnGoingLayoutConstruction<Void>() {
-			public OnGoingLayoutConstruction<Void> processGridStructure(GridStructure<Renderable> structure) {
+	public SimpleBaseLayoutConstructionStrategyImpl simple() {
+		return new SimpleBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
+			@Override
+			public LayoutManager getLayoutManager(JPanel container) {
+				return new GridBagLayout();
+			}
+		});
+	}
+
+	public LayoutConstructionStrategy<Void> empty() {
+		return new LayoutConstructionStrategy<Void>() {
+			public LayoutConstructionStrategy<Void> processGridStructure(GridStructure<Renderable> structure) {
 				throw new RuntimeException("This ongoing construction is empty, nothing can be added to it");
 			}
 
 			@Override
-			public OnGoingChildContentConstruction<Void> add(Renderable child) {
+			public OnGoingChildAddition<Void> queueForAddition(Renderable child) {
 				throw new RuntimeException("This ongoing construction is empty, nothing can be added to it");
 			}
 

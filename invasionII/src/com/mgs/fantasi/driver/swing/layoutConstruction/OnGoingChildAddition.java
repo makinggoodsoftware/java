@@ -2,19 +2,19 @@ package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.rendering.Renderable;
 
-public class OnGoingChildContentConstruction<T>{
-	private final OnGoingLayoutConstructionBaseImpl<T> onGoingLayoutConstruction;
+public class OnGoingChildAddition<T>{
+	private final BaseLayoutConstructionStrategyStrategy<T> baseLayoutConstruction;
 	private final Renderable cellContent;
 	private T specifics;
 
-	public OnGoingChildContentConstruction(OnGoingLayoutConstructionBaseImpl<T> onGoingLayoutConstruction, Renderable cellContent) {
-		this.onGoingLayoutConstruction = onGoingLayoutConstruction;
+	public OnGoingChildAddition(BaseLayoutConstructionStrategyStrategy<T> baseLayoutConstruction, Renderable cellContent) {
+		this.baseLayoutConstruction = baseLayoutConstruction;
 		this.cellContent = cellContent;
 	}
 
 	public void into(T specifics) {
 		this.specifics = specifics;
-		onGoingLayoutConstruction.doAdd(this);
+		baseLayoutConstruction.doAdd(this);
 	}
 
 	public Renderable getCellContent() {

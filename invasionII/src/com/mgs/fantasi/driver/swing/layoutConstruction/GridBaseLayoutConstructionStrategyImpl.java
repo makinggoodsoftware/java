@@ -8,17 +8,17 @@ import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 
 import java.awt.*;
 
-public class GridLayoutConstructionImpl extends OnGoingLayoutConstructionBaseImpl<GridBagConstraints> {
+public class GridBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategyStrategy<GridBagConstraints> {
 
-	public GridLayoutConstructionImpl(LayoutProvider layoutProvider) {
+	public GridBaseLayoutConstructionStrategyImpl(LayoutProvider layoutProvider) {
 		super(layoutProvider);
 	}
 
-	public OnGoingLayoutConstruction<GridBagConstraints> from(GridStructure<Renderable> structure) {
+	public LayoutConstructionStrategy<GridBagConstraints> from(GridStructure<Renderable> structure) {
 		structure.itereateCellsWith(new CellIterator<Renderable>() {
 			@Override
 			public void on(int x, int y, CellContent<Renderable> cell) {
-				add(cell.getContent()).into(SwingUINativeRenderer.coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+				queueForAddition(cell.getContent()).into(SwingUINativeRenderer.coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 			}
 		});
 		return this;

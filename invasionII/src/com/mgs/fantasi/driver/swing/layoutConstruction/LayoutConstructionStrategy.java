@@ -5,10 +5,8 @@ import com.mgs.fantasi.rendering.Renderable;
 
 import javax.swing.*;
 
-public interface OnGoingLayoutConstruction<T> {
-	OnGoingChildContentConstruction<T> add(Renderable child);
+public interface LayoutConstructionStrategy<T> {
+	OnGoingChildAddition<T> queueForAddition(Renderable child);
 
 	void buildInto(JPanel container, SwingUINativeRenderer renderer);
-
-
 }

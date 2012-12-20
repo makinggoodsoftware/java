@@ -1,8 +1,8 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.UINativeRenderer;
+import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
-import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutConstruction;
 import com.mgs.fantasi.properties.BorderDefinition;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Fraction;
@@ -29,8 +29,8 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
 	public JPanel render(Renderable renderable) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
-		OnGoingLayoutConstruction<?> onGoingLayoutConstruction = processStructure(renderable.getContent());
-		onGoingLayoutConstruction.buildInto(uiNativeElement, this);
+		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.getContent());
+		layoutConstructionStrategy.buildInto(uiNativeElement, this);
 
 		JPanel outmostPointer = uiNativeElement;
 		Margin margin = renderable.getMargin();
@@ -47,19 +47,14 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 			newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
 	}
 
-	public OnGoingLayoutConstruction<?> processStructure(Structure<Renderable> content) {
+	public LayoutConstructionStrategy<?> processStructure(Structure<Renderable> content) {
 		switch (content.getType()){
 			case GRID:
 				return layoutStrategyFactory.grid().from((GridStructure<Renderable>) content);
 			case LAYERS:
 				return layoutStrategyFactory.layers().from((LayeredStructure<Renderable>) content);
 			case SIMPLE:
-				final OnGoingLayoutConstruction<GridBagConstraints> onGoingLayoutConstruction3= new OnGoingLayoutBuildingStrategyFactory().grid();
-				Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();
-				if (renderable!=null) {
-					onGoingLayoutConstruction3.add(renderable).into(coordinates(0, 0, Fractions.all(), Fractions.all()));
-				}
-				return onGoingLayoutConstruction3;
+				return layoutStrategyFactory.simple().from((SimpleStructure<Renderable>) content);
 			case DELEGATE:
 				Structure<Renderable> delegate = ((DelegateStructure<Renderable>) content).getContent();
 				return processStructure(delegate);

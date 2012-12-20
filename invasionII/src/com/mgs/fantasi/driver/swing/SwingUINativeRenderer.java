@@ -16,7 +16,6 @@ import com.mgs.fantasi.rendering.structure.DelegateStructure;
 import com.mgs.fantasi.rendering.structure.SimpleStructure;
 import com.mgs.fantasi.rendering.structure.Structure;
 import com.mgs.fantasi.rendering.structure.grid.GridStructure;
-import com.mgs.fantasi.rendering.structure.layer.LayerIterator;
 import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
 
 import javax.swing.*;
@@ -25,7 +24,7 @@ import java.awt.*;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 
-	private final OnGoingLayoutBuildingStrategyFactory onGoingLayoutBuildingStrategyFactory = new OnGoingLayoutBuildingStrategyFactory();
+	private final OnGoingLayoutBuildingStrategyFactory layoutStrategyFactory = new OnGoingLayoutBuildingStrategyFactory();
 
 	@Override
 	public JPanel render(Renderable renderable) {
@@ -51,16 +50,9 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	public OnGoingLayoutConstruction<?> processStructure(Structure<Renderable> content) {
 		switch (content.getType()){
 			case GRID:
-				return onGoingLayoutBuildingStrategyFactory.grid().processGridStructure((GridStructure<Renderable>) content);
+				return layoutStrategyFactory.grid().from((GridStructure<Renderable>) content);
 			case LAYERS:
-				final OnGoingLayoutConstruction<Integer> onGoingLayoutConstruction2 = new OnGoingLayoutBuildingStrategyFactory().layers();
-				((LayeredStructure<Renderable>) content).iterateInCrescendo(new LayerIterator<Renderable>() {
-					@Override
-					public void on(int zIndex, Renderable layer) {
-						onGoingLayoutConstruction2.add(layer).into(zIndex);
-					}
-				});
-				return onGoingLayoutConstruction2;
+				return layoutStrategyFactory.layers().from((LayeredStructure<Renderable>) content);
 			case SIMPLE:
 				final OnGoingLayoutConstruction<GridBagConstraints> onGoingLayoutConstruction3= new OnGoingLayoutBuildingStrategyFactory().grid();
 				Renderable renderable = ((SimpleStructure<Renderable>) content).getContent();

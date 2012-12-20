@@ -3,11 +3,11 @@ package com.mgs.fantasi.driver.swing.layoutConstruction;
 import com.mgs.fantasi.rendering.Renderable;
 
 public class OnGoingChildContentConstruction<T>{
-	private final OnGoingLayoutConstructionImpl onGoingLayoutConstruction;
+	private final OnGoingLayoutConstructionBaseImpl<T> onGoingLayoutConstruction;
 	private final Renderable cellContent;
 	private T specifics;
 
-	public OnGoingChildContentConstruction(OnGoingLayoutConstructionImpl onGoingLayoutConstruction, Renderable cellContent) {
+	public OnGoingChildContentConstruction(OnGoingLayoutConstructionBaseImpl<T> onGoingLayoutConstruction, Renderable cellContent) {
 		this.onGoingLayoutConstruction = onGoingLayoutConstruction;
 		this.cellContent = cellContent;
 	}

@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OnGoingLayoutBuildingStrategyFactory {
-	public OnGoingLayoutConstruction<GridBagConstraints> grid(){
-		return new OnGoingLayoutConstructionImpl<GridBagConstraints>(new LayoutProvider(){
+	public GridLayoutConstructionImpl grid(){
+		return new GridLayoutConstructionImpl (new LayoutProvider(){
 			@Override
 			public LayoutManager getLayoutManager(JPanel container){
 				return new GridBagLayout();
@@ -17,8 +17,8 @@ public class OnGoingLayoutBuildingStrategyFactory {
 		});
 	}
 
-	public OnGoingLayoutConstruction<Integer> layers() {
-		return new OnGoingLayoutConstructionImpl<Integer>(new LayoutProvider() {
+	public LayerLayoutConstructionImpl layers() {
+		return new LayerLayoutConstructionImpl (new LayoutProvider() {
 			@Override
 			public LayoutManager getLayoutManager(JPanel container) {
 				return new OverlayLayout(container);

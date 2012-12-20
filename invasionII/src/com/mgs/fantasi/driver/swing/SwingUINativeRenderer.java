@@ -9,7 +9,6 @@ import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.rendering.Margin;
 import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.structure.DelegateStructure;
@@ -31,20 +30,20 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
 		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.getContent());
 		layoutConstructionStrategy.buildInto(uiNativeElement, this);
-
-		JPanel outmostPointer = uiNativeElement;
-		Margin margin = renderable.getMargin();
-		if (! margin.isEmpty()){
-			outmostPointer = decorateWithMargin (uiNativeElement, margin);
-		}
-		return outmostPointer;
+		return uiNativeElement;
 	}
 
 	public JPanel createUINativeElementSkeleton(UIProperties uiProperties) {
-		PolygonPointsIterator shape = uiProperties.getShape();
-		return shape.isRectangular() ?
-			newRectangularNativeElementSkeletonWithStyles(uiProperties):
-			newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
+		JPanel content = uiProperties.getShape().isRectangular() ?
+				newRectangularNativeElementSkeletonWithStyles(uiProperties) :
+				newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
+
+		JPanel outmostPointer = content;
+		Margin margin = uiProperties.getMargin();
+		if (! margin.isEmpty()){
+			outmostPointer = decorateWithMargin (content, margin);
+		}
+		return outmostPointer;
 	}
 
 	public LayoutConstructionStrategy<?> processStructure(Structure<Renderable> content) {

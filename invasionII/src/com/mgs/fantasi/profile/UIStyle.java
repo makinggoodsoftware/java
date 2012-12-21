@@ -17,11 +17,11 @@ public class UIStyle {
 		return this;
 	}
 
-	public UIPropertiesModifier<BorderDefinition> getBorder() {
+	public UIPropertiesModifier<BorderDefinition> getBorderModifier() {
 		return border;
 	}
 
-	public UIPropertiesModifier<ColorDefinition> getBackgroundColor() {
+	public UIPropertiesModifier<ColorDefinition> getBackgroundColorModifier() {
 		return backgroundColor;
 	}
 

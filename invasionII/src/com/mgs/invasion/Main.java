@@ -8,6 +8,7 @@ import com.mgs.fantasi.properties.polygon.HexagonShape;
 import com.mgs.fantasi.properties.polygon.TriangleShape;
 import com.mgs.fantasi.views.TwoLinesView;
 import com.mgs.fantasi.views.View;
+import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
 import com.mgs.invasion.mvc.views.ProductionUiProfileFactory;
 
 import javax.swing.*;
@@ -20,8 +21,8 @@ import static com.mgs.invasion.mvc.views.HexagonRowsView.hexagonRows;
 
 public class Main {
 	public static void main(String... args) {
-//		new Main().go(new DebugUIProfileFactory());
-		new Main().go(new ProductionUiProfileFactory());
+		new Main().go(new DebugUIProfileFactory());
+//		new Main().go(new ProductionUiProfileFactory());
 //		new Main().showEsther();
 	}
 

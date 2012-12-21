@@ -1,6 +1,6 @@
 package com.mgs.fantasi.profile;
 
-public class UIPropertiesModifierImpl<T extends Mergeable> implements UIPropertiesModifier<T> {
+public class UIPropertiesModifierImpl<T extends PropertyDefinition<T>> implements UIPropertiesModifier<T> {
 	private final T definition;
 
 	public UIPropertiesModifierImpl(T definition) {
@@ -8,7 +8,7 @@ public class UIPropertiesModifierImpl<T extends Mergeable> implements UIProperti
 	}
 
 	@Override
-	public void apply(T into) {
-		definition.merge(into);
+	public T apply(T into) {
+		return definition.produce();
 	}
 }

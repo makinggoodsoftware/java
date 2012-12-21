@@ -1,8 +1,8 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.Mergeable;
+import com.mgs.fantasi.profile.PropertyDefinition;
 
-public class BorderDefinition implements Mergeable<BorderDefinition> {
+public class BorderDefinition implements PropertyDefinition<BorderDefinition> {
 	private ColorDefinition color;
 	private int width;
 
@@ -44,8 +44,7 @@ public class BorderDefinition implements Mergeable<BorderDefinition> {
 	}
 
 	@Override
-	public void merge(BorderDefinition into) {
-		into.color = this.color;
-		into.width = this.width;
+	public BorderDefinition produce() {
+		return new BorderDefinition(color, width);
 	}
 }

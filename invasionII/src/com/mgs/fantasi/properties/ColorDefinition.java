@@ -1,10 +1,10 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.Mergeable;
+import com.mgs.fantasi.profile.PropertyDefinition;
 
 import java.awt.*;
 
-public class ColorDefinition implements Mergeable<ColorDefinition> {
+public class ColorDefinition implements PropertyDefinition<ColorDefinition> {
 	private Color color;
 
 	private ColorDefinition(Color color) {
@@ -45,7 +45,7 @@ public class ColorDefinition implements Mergeable<ColorDefinition> {
 	}
 
 	@Override
-	public void merge(ColorDefinition into) {
-		into.color = this.color;
+	public ColorDefinition produce() {
+		return new ColorDefinition(color);
 	}
 }

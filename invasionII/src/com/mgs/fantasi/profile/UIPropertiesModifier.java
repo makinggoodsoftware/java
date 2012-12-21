@@ -1,5 +1,5 @@
 package com.mgs.fantasi.profile;
 
-public interface UIPropertiesModifier<T extends Mergeable> {
-	void apply(T border);
+public interface UIPropertiesModifier<T extends PropertyDefinition<T>> {
+	T apply(T border);
 }

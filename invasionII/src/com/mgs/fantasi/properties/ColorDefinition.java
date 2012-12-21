@@ -1,9 +1,11 @@
 package com.mgs.fantasi.properties;
 
+import com.mgs.fantasi.profile.Mergeable;
+
 import java.awt.*;
 
-public class ColorDefinition {
-	private final Color color;
+public class ColorDefinition implements Mergeable<ColorDefinition> {
+	private Color color;
 
 	private ColorDefinition(Color color) {
 		this.color = color;
@@ -40,5 +42,10 @@ public class ColorDefinition {
 	@Override
 	public int hashCode() {
 		return color != null ? color.hashCode() : 0;
+	}
+
+	@Override
+	public void merge(ColorDefinition into) {
+		into.color = this.color;
 	}
 }

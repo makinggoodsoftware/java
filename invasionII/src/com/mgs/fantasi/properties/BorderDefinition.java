@@ -1,8 +1,10 @@
 package com.mgs.fantasi.properties;
 
-public class BorderDefinition {
-	private final ColorDefinition color;
-	private final int width;
+import com.mgs.fantasi.profile.Mergeable;
+
+public class BorderDefinition implements Mergeable<BorderDefinition> {
+	private ColorDefinition color;
+	private int width;
 
 	public static BorderDefinition noBorder (){
 		return new BorderDefinition(ColorDefinition.noColor(), 0);
@@ -39,5 +41,11 @@ public class BorderDefinition {
 		int result = color != null ? color.hashCode() : 0;
 		result = 31 * result + width;
 		return result;
+	}
+
+	@Override
+	public void merge(BorderDefinition into) {
+		into.color = this.color;
+		into.width = this.width;
 	}
 }

@@ -22,11 +22,11 @@ public class UIProperties {
 	}
 
 	public void applyStyle(UIStyle uiStyle){
-		setBorder(uiStyle.getBorder());
-		setBackgroundColor(uiStyle.getBackgroundColor());
+		uiStyle.getBorder().apply(border);
+		uiStyle.getBackgroundColor().apply(backgroundColor);
 	}
 
-	private void setBorder(BorderDefinition border) {
+	public void setBorder(BorderDefinition border) {
 		this.border = border;
 	}
 

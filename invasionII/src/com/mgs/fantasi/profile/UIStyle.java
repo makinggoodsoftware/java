@@ -3,32 +3,32 @@ package com.mgs.fantasi.profile;
 import com.mgs.fantasi.properties.BorderDefinition;
 import com.mgs.fantasi.properties.ColorDefinition;
 
-import static com.mgs.fantasi.properties.BorderDefinition.noBorder;
-import static com.mgs.fantasi.properties.ColorDefinition.noColor;
+import static com.mgs.fantasi.profile.UIPropertiesModifierFactory.forDefinition;
+import static com.mgs.fantasi.profile.UIPropertiesModifierFactory.ignore;
 
 public class UIStyle {
-	private BorderDefinition border = noBorder();
-	private ColorDefinition backgroundColor = noColor();
+	private UIPropertiesModifier<BorderDefinition> border = ignore();
+	private UIPropertiesModifier<ColorDefinition> backgroundColor = ignore();
 
 	public UIStyle withBorder(BorderDefinition border) {
 		if (border == null) throw new IllegalArgumentException();
 
-		this.border = border;
+		this.border = forDefinition(border);
 		return this;
 	}
 
-	public BorderDefinition getBorder() {
+	public UIPropertiesModifier<BorderDefinition> getBorder() {
 		return border;
 	}
 
-	public ColorDefinition getBackgroundColor() {
+	public UIPropertiesModifier<ColorDefinition> getBackgroundColor() {
 		return backgroundColor;
 	}
 
 	public UIStyle withBackground(ColorDefinition color) {
 		if (color == null) throw new IllegalArgumentException();
 
-		this.backgroundColor = color;
+		this.backgroundColor = forDefinition(color);
 		return this;
 	}
 }

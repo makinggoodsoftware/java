@@ -9,6 +9,7 @@ import static com.mgs.fantasi.properties.ColorDefinition.colorFromAwtColor;
 import static com.mgs.fantasi.properties.ColorDefinition.noColor;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 import static com.mgs.fantasi.rendering.Padding.noPadding;
+import static java.awt.Color.BLACK;
 import static java.awt.Color.RED;
 import static java.awt.Color.YELLOW;
 import static junit.framework.Assert.assertEquals;
@@ -49,5 +50,30 @@ public class UIPropertiesTest {
 		assertEquals(uiProperties.getBorder().getWidth(), 3);
 	}
 
+	@Test
+	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsPartiallyDefined(){
+		UIProperties uiProperties = new UIProperties();
+		UIStyle uiStyle = new UIStyle().
+				withBackground(colorFromAwtColor(YELLOW));
+		uiProperties.applyStyle(uiStyle);
 
+		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(YELLOW));
+		assertEquals(uiProperties.getBorder(), noBorder());
+	}
+
+
+	@Test
+	public void testApplyStyle_whenPropertiesAreFullyPopulatedAndStyleIsPartiallyDefined (){
+		UIProperties uiProperties = new UIProperties();
+		uiProperties.setBackgroundColor(colorFromAwtColor(RED));
+		uiProperties.setBorder(new BorderDefinition(colorFromAwtColor(YELLOW), 4));
+
+		UIStyle uiStyle = new UIStyle().
+				withBackground(colorFromAwtColor(BLACK));
+		uiProperties.applyStyle(uiStyle);
+
+		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(BLACK));
+		assertEquals(uiProperties.getBorder().getColor(), colorFromAwtColor(YELLOW));
+		assertEquals(uiProperties.getBorder().getWidth(), 4);
+	}
 }

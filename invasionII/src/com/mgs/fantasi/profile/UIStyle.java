@@ -1,14 +1,18 @@
 package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.ColorDefinition;
 
-import java.awt.*;
+import static com.mgs.fantasi.properties.BorderDefinition.noBorder;
+import static com.mgs.fantasi.properties.ColorDefinition.noColor;
 
 public class UIStyle {
-	private BorderDefinition border;
-	private Color backgroundColor;
+	private BorderDefinition border = noBorder();
+	private ColorDefinition backgroundColor = noColor();
 
 	public UIStyle withBorder(BorderDefinition border) {
+		if (border == null) throw new IllegalArgumentException();
+
 		this.border = border;
 		return this;
 	}
@@ -17,11 +21,13 @@ public class UIStyle {
 		return border;
 	}
 
-	public Color getBackgroundColor() {
+	public ColorDefinition getBackgroundColor() {
 		return backgroundColor;
 	}
 
-	public UIStyle withBackground(Color color) {
+	public UIStyle withBackground(ColorDefinition color) {
+		if (color == null) throw new IllegalArgumentException();
+
 		this.backgroundColor = color;
 		return this;
 	}

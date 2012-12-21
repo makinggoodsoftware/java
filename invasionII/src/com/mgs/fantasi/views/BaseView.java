@@ -3,7 +3,7 @@ package com.mgs.fantasi.views;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.rendering.Margin;
+import com.mgs.fantasi.rendering.Padding;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
@@ -13,8 +13,8 @@ import java.util.List;
 public abstract class BaseView<T extends BaseView> implements View {
 	private final UIProperties uiProperties = new UIProperties();
 
-	public T withPadding(Margin margin) {
-		getUiProperties().setMargin(margin);
+	public T withPadding(Padding padding) {
+		getUiProperties().setPadding(padding);
 		return (T) this;
 	}
 

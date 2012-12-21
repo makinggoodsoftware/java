@@ -31,4 +31,8 @@ public class RectangleWireframe<T extends Structurable> implements Wireframe<T> 
 	public StructureType getType() {
 		return StructureType.SIMPLE;
 	}
+
+	public T getContent() {
+		return content;
+	}
 }

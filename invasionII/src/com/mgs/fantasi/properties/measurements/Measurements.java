@@ -1,6 +1,6 @@
 package com.mgs.fantasi.properties.measurements;
 
-import com.mgs.fantasi.rendering.Margin;
+import com.mgs.fantasi.rendering.Padding;
 
 public class Measurements {
 	public static Measurement simpleMeasurement (int measurement){
@@ -19,8 +19,8 @@ public class Measurements {
 		}
 
 		@Override
-		public Margin asMargin() {
-			return new Margin(measurement, measurement, measurement, measurement);
+		public Padding asPadding() {
+			return new Padding(measurement, measurement, measurement, measurement);
 		}
 
 		@Override
@@ -42,13 +42,28 @@ public class Measurements {
 			return measurement;
 		}
 
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (!(o instanceof SimpleMeasurement)) return false;
 
+			SimpleMeasurement that = (SimpleMeasurement) o;
+
+			if (measurement != that.measurement) return false;
+
+			return true;
+		}
+
+		@Override
+		public int hashCode() {
+			return measurement;
+		}
 	}
 
 	public static class FutureMeasurement implements Measurement {
 		@Override
-		public Margin asMargin() {
-			return new Margin(this, this, this, this);
+		public Padding asPadding() {
+			return new Padding(this, this, this, this);
 		}
 
 		@Override
@@ -77,7 +92,7 @@ public class Measurements {
 		}
 
 		@Override
-		public Margin asMargin() {
+		public Padding asPadding() {
 			return null;
 		}
 
@@ -94,6 +109,26 @@ public class Measurements {
 		@Override
 		public Measurement copy() {
 			return new FractionOfAMeasurement((FutureMeasurement) from.copy(), fraction.copy());
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (!(o instanceof FractionOfAMeasurement)) return false;
+
+			FractionOfAMeasurement that = (FractionOfAMeasurement) o;
+
+			if (fraction != null ? !fraction.equals(that.fraction) : that.fraction != null) return false;
+			if (from != null ? !from.equals(that.from) : that.from != null) return false;
+
+			return true;
+		}
+
+		@Override
+		public int hashCode() {
+			int result = from != null ? from.hashCode() : 0;
+			result = 31 * result + (fraction != null ? fraction.hashCode() : 0);
+			return result;
 		}
 	}
 }

@@ -9,6 +9,8 @@ import com.mgs.fantasi.properties.selectors.UISelectorFactory;
 
 import java.awt.*;
 
+import static com.mgs.fantasi.properties.ColorDefinition.colorFromAwtColor;
+
 public class ProductionUiProfileFactory implements UIProfileFactory {
 
 	@Override
@@ -17,12 +19,12 @@ public class ProductionUiProfileFactory implements UIProfileFactory {
 
 		profile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
-				new UIStyle().withBorder(new BorderDefinition(Color.BLACK, 1))
+				new UIStyle().withBorder(new BorderDefinition(colorFromAwtColor(Color.BLACK), 1))
 		);
 
 		profile.addStyle(
 				UISelectorFactory.forName("2ndLayerOfHexagons"),
-				new UIStyle().withBorder(new BorderDefinition(Color.BLACK, 1))
+				new UIStyle().withBorder(new BorderDefinition(colorFromAwtColor(Color.BLACK), 1))
 		);
 
 		return profile;

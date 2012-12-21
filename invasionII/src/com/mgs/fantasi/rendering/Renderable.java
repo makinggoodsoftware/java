@@ -22,8 +22,8 @@ public class Renderable implements Structurable {
 		return content;
 	}
 
-	public Margin getMargin() {
-		return uiProperties.getMargin();
+	public Padding getMargin() {
+		return uiProperties.getPadding();
 	}
 
 	@Override

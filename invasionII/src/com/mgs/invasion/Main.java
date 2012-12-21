@@ -37,7 +37,7 @@ public class Main {
 				).
 				withLayer(
 					rectangle().
-						withPadding(hexagonMeasurement.asMargin().withHalfOfItsSize()).
+						withPadding(hexagonMeasurement.asPadding().withHalfOfItsSize()).
 						withName("EvenHexagonRows").
 						withContent(hexagonRows(numberOVerticalDivisions, numberOfGenerations).
 							withOneLessColumn().

@@ -3,19 +3,20 @@ package com.mgs.fantasi.properties;
 import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.rendering.Margin;
+import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.views.BaseView;
 
-import java.awt.*;
 import java.util.Set;
+
+import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
 	PolygonPointsIterator shape = new BaseView.NativeRectanguarShape();
-	Margin margin = Margin.noMargin();
+	Padding padding = Padding.noPadding();
 	String name = "";
-	Measurement measurement;
-	private BorderDefinition border;
-	private Color backgroundColor;
+	Measurement measurement = emptyMeasurement();
+	private BorderDefinition border = BorderDefinition.noBorder();
+	private ColorDefinition backgroundColor = ColorDefinition.noColor();
 
 	public UIProperties() {
 	}
@@ -33,8 +34,8 @@ public class UIProperties {
 		this.shape = shape;
 	}
 
-	public void setMargin(Margin margin) {
-		this.margin = margin;
+	public void setPadding(Padding padding) {
+		this.padding = padding;
 	}
 
 	public void setName(String name) {
@@ -45,8 +46,8 @@ public class UIProperties {
 		this.measurement = measurement;
 	}
 
-	public Margin getMargin() {
-		return margin;
+	public Padding getPadding() {
+		return padding;
 	}
 
 	public String getName() {
@@ -63,7 +64,7 @@ public class UIProperties {
 
 	public UIProperties copy() {
 		UIProperties copy = new UIProperties();
-		copy.setMargin(getMargin().copy());
+		copy.setPadding(getPadding().copy());
 		if (getMeasurement()!=null){
 			copy.setMeasurement(getMeasurement().copy());
 		}
@@ -75,12 +76,12 @@ public class UIProperties {
 	public void copyFrom(UIProperties that) {
 		UIProperties copyOfThat = that.copy();
 		this.shape = copyOfThat.shape;
-		this.margin = copyOfThat.margin;
+		this.padding = copyOfThat.padding;
 		this.name = copyOfThat.name;
 		this.measurement = copyOfThat.measurement;
 	}
 
-	public void setBackgroundColor(Color backgroundColor) {
+	public void setBackgroundColor(ColorDefinition backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 
@@ -95,7 +96,7 @@ public class UIProperties {
 		}
 	}
 
-	public Color getBackgroundColor() {
+	public ColorDefinition getBackgroundColor() {
 		return backgroundColor;
 	}
 

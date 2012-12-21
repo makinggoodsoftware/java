@@ -1,6 +1,7 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.ColorDefinition;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 
@@ -25,19 +26,19 @@ public class JPanelWithDifferentShape extends JPanel {
 		Graphics2D g2d = (Graphics2D) graphics;
 		BorderDefinition border = uiProperties.getBorder();
 		float borderThickness = 0;
-		Color foregroundColor = g2d.getColor();
+		ColorDefinition foregroundColor = ColorDefinition.colorFromAwtColor(g2d.getColor());
 		if (border !=null){
 			borderThickness = border.getWidth();
 			foregroundColor = border.getColor();
 		}
-		Color backgroundColor = uiProperties.getBackgroundColor() != null ?
+		ColorDefinition backgroundColor = uiProperties.getBackgroundColor().isDefined() ?
 				uiProperties.getBackgroundColor() :
-				Color.WHITE;
+				ColorDefinition.colorFromAwtColor(Color.WHITE);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);
 	}
 
-	private void drawHexagon(Graphics2D g2d, Dimension size, Color foregroundColor, Color backgroundColor, float thickness) {
+	private void drawHexagon(Graphics2D g2d, Dimension size, ColorDefinition foregroundColor, ColorDefinition backgroundColor, float thickness) {
 		int insetSpace = (int) thickness;
 		Dimension sizeWithoutBorders = new Dimension(size.width - insetSpace, size.height - insetSpace);
 		if (sizeWithoutBorders.getWidth()<0 || sizeWithoutBorders.getHeight()<0) return;
@@ -48,10 +49,10 @@ public class JPanelWithDifferentShape extends JPanel {
 			nextLine(path, hexagonPoints.get(i), thickness);
 		}
 		path.closePath();
-		g2d.setColor(foregroundColor);
+		g2d.setColor(foregroundColor.asAwtColor());
 		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g2d.draw(path);
-		g2d.setColor(backgroundColor);
+		g2d.setColor(backgroundColor.asAwtColor());
 		g2d.fill(path);
 	}
 

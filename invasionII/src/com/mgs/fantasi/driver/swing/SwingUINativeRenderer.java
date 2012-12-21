@@ -9,7 +9,7 @@ import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
-import com.mgs.fantasi.rendering.Margin;
+import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.structure.DelegateStructure;
 import com.mgs.fantasi.rendering.structure.SimpleStructure;
@@ -39,9 +39,9 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 				newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
 
 		JPanel outmostPointer = content;
-		Margin margin = uiProperties.getMargin();
-		if (! margin.isEmpty()){
-			outmostPointer = decorateWithMargin (content, margin);
+		Padding padding = uiProperties.getPadding();
+		if (! padding.isEmpty()){
+			outmostPointer = decorateWithMargin (content, padding);
 		}
 		return outmostPointer;
 	}
@@ -64,14 +64,14 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		}
 	}
 
-	protected final JPanel decorateWithMargin(JPanel nativeElement, Margin margin){
+	protected final JPanel decorateWithMargin(JPanel nativeElement, Padding padding){
 		JPanel marginContainer = new JPanel();
 		marginContainer.setOpaque(false);
 		marginContainer.setLayout(new GridBagLayout());
-		int top = resolveMeasurement (margin.getTop());
-		int right = resolveMeasurement (margin.getRight());
-		int bottom = resolveMeasurement (margin.getBottom());
-		int left = resolveMeasurement (margin.getLeft());
+		int top = resolveMeasurement (padding.getTop());
+		int right = resolveMeasurement (padding.getRight());
+		int bottom = resolveMeasurement (padding.getBottom());
+		int left = resolveMeasurement (padding.getLeft());
 		marginContainer.setBorder(BorderFactory.createEmptyBorder(top, right, bottom, left));
 		marginContainer.add(nativeElement, coordinates(0, 0, Fractions.all(), Fractions.all()));
 		return marginContainer;
@@ -92,10 +92,10 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
 	private void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
-		jPanel.setBackground(uiProperties.getBackgroundColor());
+		jPanel.setBackground(uiProperties.getBackgroundColor().asAwtColor());
 		BorderDefinition border = uiProperties.getBorder();
 		if (border!=null){
-			Border lineBorder = BorderFactory.createLineBorder(border.getColor(), border.getWidth());
+			Border lineBorder = BorderFactory.createLineBorder(border.getColor().asAwtColor(), border.getWidth());
 			jPanel.setBorder(lineBorder);
 		}else{
 			jPanel.setBorder(null);

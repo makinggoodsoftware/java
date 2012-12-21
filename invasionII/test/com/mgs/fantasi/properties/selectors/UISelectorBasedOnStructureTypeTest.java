@@ -5,9 +5,6 @@ import com.mgs.fantasi.views.BaseView;
 import com.mgs.fantasi.views.View;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 public class UISelectorBasedOnStructureTypeTest {
 
@@ -19,12 +16,6 @@ public class UISelectorBasedOnStructureTypeTest {
 		Assert.assertFalse(selector.appliesTo(new OtherStructureType()));
 		Assert.assertFalse(selector.appliesTo(new ExtendingInterface()));
 		Assert.assertFalse(selector.appliesTo(new MatchingStructureTypeParent()));
-	}
-
-	private View createViewMock(Class<? extends View> structureType) {
-		View view = Mockito.mock(View.class);
-		Mockito.when(view.getClass()).thenAnswer(withClass(structureType));
-		return view;
 	}
 
 	private class MatchingStructureTypeParent extends BaseView {
@@ -52,12 +43,4 @@ public class UISelectorBasedOnStructureTypeTest {
 		}
 	}
 
-	private Answer<Object> withClass(final Class<? extends View> matchingStructureTypeClass) {
-		return new Answer<Object>() {
-			@Override
-			public Object answer(InvocationOnMock invocation) throws Throwable {
-				return matchingStructureTypeClass;
-			}
-		};
-	}
 }

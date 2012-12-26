@@ -20,21 +20,21 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 				UISelectorFactory.forType(RectangleView.class),
 				new UIStyle().
 						withBorder(new BorderDefinition(colorFromAwtColor(BLUE), 5)).
-						withBackground(colorFromAwtColor(GREEN))
+						withBackgroundColor(colorFromAwtColor(GREEN))
 		);
 //
 //		debugProfile.addStyle(
 //				UISelectorFactory.forType(TwoLinesView.class),
 //				new UIStyle().
 //						withBorder(new BorderDefinition(Color.ORANGE, 5)).
-//						withBackground(Color.BLACK)
+//						withBackgroundColor(Color.BLACK)
 //		);
 //
 //		debugProfile.addStyle(
 //				UISelectorFactory.forType(VerticalSlicesView.class),
 //				new UIStyle().
 //						withBorder(new BorderDefinition(Color.CYAN, 5)).
-//						withBackground(Color.MAGENTA)
+//						withBackgroundColor(Color.MAGENTA)
 //		);
 
 
@@ -42,7 +42,7 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 				UISelectorFactory.forShape(HexagonShape.class),
 				new UIStyle().
 						withBorder(new BorderDefinition(colorFromAwtColor(YELLOW), 10)).
-						withBackground(colorFromAwtColor(RED))
+						withBackgroundColor(colorFromAwtColor(RED))
 		);
 
 		return debugProfile;

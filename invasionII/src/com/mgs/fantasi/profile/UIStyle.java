@@ -25,7 +25,7 @@ public class UIStyle {
 		return backgroundColor;
 	}
 
-	public UIStyle withBackground(ColorDefinition color) {
+	public UIStyle withBackgroundColor(ColorDefinition color) {
 		if (color == null) throw new IllegalArgumentException();
 
 		this.backgroundColor = forDefinition(color);

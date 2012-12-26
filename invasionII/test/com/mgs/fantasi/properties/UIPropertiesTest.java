@@ -41,7 +41,7 @@ public class UIPropertiesTest {
 	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsFullyDefined(){
 		UIProperties uiProperties = new UIProperties();
 		UIStyle uiStyle = new UIStyle().
-			withBackground(colorFromAwtColor(YELLOW)).
+				withBackgroundColor(colorFromAwtColor(YELLOW)).
 			withBorder(new BorderDefinition(colorFromAwtColor(RED), 3));
 		uiProperties.applyStyle(uiStyle);
 
@@ -54,7 +54,7 @@ public class UIPropertiesTest {
 	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsPartiallyDefined(){
 		UIProperties uiProperties = new UIProperties();
 		UIStyle uiStyle = new UIStyle().
-				withBackground(colorFromAwtColor(YELLOW));
+				withBackgroundColor(colorFromAwtColor(YELLOW));
 		uiProperties.applyStyle(uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(YELLOW));
@@ -69,11 +69,26 @@ public class UIPropertiesTest {
 		uiProperties.setBorder(new BorderDefinition(colorFromAwtColor(YELLOW), 4));
 
 		UIStyle uiStyle = new UIStyle().
-				withBackground(colorFromAwtColor(BLACK));
+				withBackgroundColor(colorFromAwtColor(BLACK));
 		uiProperties.applyStyle(uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(BLACK));
 		assertEquals(uiProperties.getBorder().getColor(), colorFromAwtColor(YELLOW));
 		assertEquals(uiProperties.getBorder().getWidth(), 4);
+	}
+
+	@Test
+	public void testApplyStyle_whenPropertiesArePartiallyPopulatedAndStyleIsPartiallyDefined (){
+		UIProperties uiProperties = new UIProperties();
+		uiProperties.setBackgroundColor(colorFromAwtColor(RED));
+
+		UIStyle uiStyle = new UIStyle().
+				withBorder(new BorderDefinition(colorFromAwtColor(BLACK), 2));
+		uiProperties.applyStyle(uiStyle);
+
+		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(RED));
+		assertEquals(uiProperties.getBorder().getColor(), colorFromAwtColor(BLACK));
+		assertEquals(uiProperties.getBorder().getWidth(), 2);
+
 	}
 }

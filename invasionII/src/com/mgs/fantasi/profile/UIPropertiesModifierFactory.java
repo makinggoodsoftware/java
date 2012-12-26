@@ -1,18 +1,18 @@
 package com.mgs.fantasi.profile;
 
 public class UIPropertiesModifierFactory {
-	public static <T extends PropertyDefinition<T>> UIPropertiesModifier<T> ignore() {
-		return new UIPropertiesKeepCurrentValueModifier<T>();
+	public static <T extends PropertyDefinition<T>> UIPropertiesMerger<T> ignore() {
+		return new UIPropertiesKeepCurrentValueMerger<T>();
 	}
 
-	public static <T extends PropertyDefinition<T>> UIPropertiesModifier<T> forDefinition(T definition) {
-		return new UIPropertiesModifierImpl<T> (definition);
+	public static <T extends PropertyDefinition<T>> UIPropertiesMerger<T> forDefinition(T definition) {
+		return new UIPropertiesMergerImpl<T>(definition);
 	}
 
-	private static class UIPropertiesKeepCurrentValueModifier<T extends PropertyDefinition<T>> implements UIPropertiesModifier<T> {
+	private static class UIPropertiesKeepCurrentValueMerger<T extends PropertyDefinition<T>> implements UIPropertiesMerger<T> {
 		@Override
-		public T apply(T definition) {
-			return definition;
+		public T merge(T original, T modifier) {
+			return modifier;
 		}
 	}
 }

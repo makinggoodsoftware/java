@@ -7,8 +7,8 @@ import static com.mgs.fantasi.profile.UIPropertiesModifierFactory.forDefinition;
 import static com.mgs.fantasi.profile.UIPropertiesModifierFactory.ignore;
 
 public class UIStyle {
-	private UIPropertiesModifier<BorderDefinition> border = ignore();
-	private UIPropertiesModifier<ColorDefinition> backgroundColor = ignore();
+	private UIPropertiesMerger<BorderDefinition> border = ignore();
+	private UIPropertiesMerger<ColorDefinition> backgroundColor = ignore();
 
 	public UIStyle withBorder(BorderDefinition border) {
 		if (border == null) throw new IllegalArgumentException();
@@ -17,11 +17,11 @@ public class UIStyle {
 		return this;
 	}
 
-	public UIPropertiesModifier<BorderDefinition> getBorderModifier() {
+	public UIPropertiesMerger<BorderDefinition> getBorderModifier() {
 		return border;
 	}
 
-	public UIPropertiesModifier<ColorDefinition> getBackgroundColorModifier() {
+	public UIPropertiesMerger<ColorDefinition> getBackgroundColorModifier() {
 		return backgroundColor;
 	}
 

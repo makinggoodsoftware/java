@@ -12,7 +12,7 @@ public class UIPropertiesModifierFactory {
 	private static class UIPropertiesKeepCurrentValueMerger<T extends PropertyDefinition<T>> implements UIPropertiesMerger<T> {
 		@Override
 		public T merge(T original, T modifier) {
-			return modifier;
+			return original;
 		}
 	}
 }

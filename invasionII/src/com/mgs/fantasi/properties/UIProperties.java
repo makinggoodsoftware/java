@@ -22,8 +22,8 @@ public class UIProperties {
 	}
 
 	public void applyStyle(UIStyle uiStyle){
-		border = uiStyle.getBorderModifier().merge(border, null);
-		backgroundColor = uiStyle.getBackgroundColorModifier().merge(backgroundColor, null);
+		border = uiStyle.getBorderModifier().merge(border, uiStyle.getBorderProperty());
+		backgroundColor = uiStyle.getBackgroundColorModifier().merge(backgroundColor, uiStyle.getBackgroundColorProperty());
 	}
 
 	public void setBorder(BorderDefinition border) {

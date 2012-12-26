@@ -6,7 +6,7 @@ public class UIPropertiesModifierFactory {
 	}
 
 	public static <T extends PropertyDefinition<T>> UIPropertiesMerger<T> forDefinition(T definition) {
-		return new UIPropertiesMergerImpl<T>(definition);
+		return new UIPropertiesMergerImpl<T>();
 	}
 
 	private static class UIPropertiesKeepCurrentValueMerger<T extends PropertyDefinition<T>> implements UIPropertiesMerger<T> {

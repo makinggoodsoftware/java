@@ -45,7 +45,7 @@ public class ColorDefinition implements PropertyDefinition<ColorDefinition> {
 	}
 
 	@Override
-	public ColorDefinition produce() {
+	public ColorDefinition copy() {
 		return new ColorDefinition(color);
 	}
 }

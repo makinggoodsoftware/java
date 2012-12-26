@@ -44,7 +44,7 @@ public class BorderDefinition implements PropertyDefinition<BorderDefinition> {
 	}
 
 	@Override
-	public BorderDefinition produce() {
+	public BorderDefinition copy() {
 		return new BorderDefinition(color, width);
 	}
 }

@@ -9,9 +9,12 @@ import static com.mgs.fantasi.profile.UIPropertiesModifierFactory.ignore;
 public class UIStyle {
 	private UIPropertiesMerger<BorderDefinition> border = ignore();
 	private UIPropertiesMerger<ColorDefinition> backgroundColor = ignore();
+	private ColorDefinition backgroundColorProperty;
+	private BorderDefinition borderProperty;
 
 	public UIStyle withBorder(BorderDefinition border) {
 		if (border == null) throw new IllegalArgumentException();
+		this.borderProperty = border;
 
 		this.border = forDefinition(border);
 		return this;
@@ -27,8 +30,17 @@ public class UIStyle {
 
 	public UIStyle withBackgroundColor(ColorDefinition color) {
 		if (color == null) throw new IllegalArgumentException();
+		this.backgroundColorProperty = color;
 
 		this.backgroundColor = forDefinition(color);
 		return this;
+	}
+
+	public ColorDefinition getBackgroundColorProperty() {
+		return backgroundColorProperty;
+	}
+
+	public BorderDefinition getBorderProperty() {
+		return borderProperty;
 	}
 }

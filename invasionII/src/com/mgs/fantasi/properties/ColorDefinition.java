@@ -11,7 +11,7 @@ public class ColorDefinition implements PropertyDefinition<ColorDefinition> {
 		this.color = color;
 	}
 
-	public static ColorDefinition noColor() {
+	public static ColorDefinition transparent() {
 		return new ColorDefinition(null);
 	}
 	

@@ -14,7 +14,7 @@ public class EmptyMeasurement implements Measurement{
 
 	@Override
 	public Padding asPadding() {
-		return Padding.noPadding();
+		return Padding.zero();
 	}
 
 	@Override

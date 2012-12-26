@@ -12,19 +12,21 @@ import static com.mgs.fantasi.profile.UIPropertiesModifierFactory.merge;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
+	public static final String EMPTY_NAME = "";
+
 	PolygonPointsIterator shape = new BaseView.NativeRectanguarShape();
-	Padding padding = Padding.noPadding();
-	String name = "";
+	Padding padding = Padding.zero();
+	String name = EMPTY_NAME;
 	Measurement measurement = emptyMeasurement();
-	private BorderDefinition border = BorderDefinition.noBorder();
-	private ColorDefinition backgroundColor = ColorDefinition.noColor();
+	private BorderDefinition border = BorderDefinition.zero();
+	private ColorDefinition backgroundColor = ColorDefinition.transparent();
 
 	public UIProperties() {
 	}
 
 	public void applyStyle(UIStyle uiStyle){
-		border = merge(uiStyle.getBorderProperty()).with(border);
-		backgroundColor = uiStyle.getBackgroundColorModifier().with(backgroundColor, uiStyle.getBackgroundColorProperty());
+		border = merge(border, uiStyle.getBorderProperty());
+		backgroundColor = merge(backgroundColor, uiStyle.getBackgroundColorProperty());
 	}
 
 	public void setBorder(BorderDefinition border) {

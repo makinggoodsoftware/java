@@ -6,8 +6,8 @@ public class BorderDefinition implements PropertyDefinition<BorderDefinition> {
 	private ColorDefinition color;
 	private int width;
 
-	public static BorderDefinition noBorder (){
-		return new BorderDefinition(ColorDefinition.noColor(), 0);
+	public static BorderDefinition zero(){
+		return new BorderDefinition(ColorDefinition.transparent(), 0);
 	}
 
 	public BorderDefinition(ColorDefinition color, int width) {

@@ -1,14 +1,14 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.profile.UIStyle;
+import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.views.BaseView;
 import org.junit.Test;
 
-import static com.mgs.fantasi.properties.BorderDefinition.noBorder;
+import static com.mgs.fantasi.properties.BorderDefinition.zero;
 import static com.mgs.fantasi.properties.ColorDefinition.colorFromAwtColor;
-import static com.mgs.fantasi.properties.ColorDefinition.noColor;
+import static com.mgs.fantasi.properties.ColorDefinition.transparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
-import static com.mgs.fantasi.rendering.Padding.noPadding;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.RED;
 import static java.awt.Color.YELLOW;
@@ -20,11 +20,11 @@ public class UIPropertiesTest {
 	public void testDefaultValues (){
 		UIProperties uiProperties = new UIProperties();
 
-		assertEquals(uiProperties.getBackgroundColor(), noColor());
-		assertEquals(uiProperties.getBorder(), noBorder());
+		assertEquals(uiProperties.getBackgroundColor(), transparent());
+		assertEquals(uiProperties.getBorder(), zero());
 		assertEquals(uiProperties.getMeasurement(), emptyMeasurement());
 		assertEquals(uiProperties.getName(), "");
-		assertEquals(uiProperties.getPadding(), noPadding());
+		assertEquals(uiProperties.getPadding(), Padding.zero());
 		assertTrue(uiProperties.getShape() instanceof BaseView.NativeRectanguarShape);
 	}
 
@@ -33,8 +33,8 @@ public class UIPropertiesTest {
 		UIProperties uiProperties = new UIProperties();
 		uiProperties.applyStyle(new UIStyle());
 
-		assertEquals(uiProperties.getBackgroundColor(), noColor());
-		assertEquals(uiProperties.getBorder(), noBorder());
+		assertEquals(uiProperties.getBackgroundColor(), transparent());
+		assertEquals(uiProperties.getBorder(), zero());
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class UIPropertiesTest {
 		uiProperties.applyStyle(uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(YELLOW));
-		assertEquals(uiProperties.getBorder(), noBorder());
+		assertEquals(uiProperties.getBorder(), zero());
 	}
 
 

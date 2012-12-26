@@ -23,7 +23,7 @@ public class Padding {
 		this.left = left;
 	}
 
-	public static Padding noPadding() {
+	public static Padding zero() {
 		return new Padding(0, 0, 0, 0);
 	}
 

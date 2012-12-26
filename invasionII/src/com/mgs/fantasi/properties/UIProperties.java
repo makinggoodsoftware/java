@@ -8,6 +8,7 @@ import com.mgs.fantasi.views.BaseView;
 
 import java.util.Set;
 
+import static com.mgs.fantasi.profile.UIPropertiesModifierFactory.merge;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
@@ -22,8 +23,8 @@ public class UIProperties {
 	}
 
 	public void applyStyle(UIStyle uiStyle){
-		border = uiStyle.getBorderModifier().merge(border, uiStyle.getBorderProperty());
-		backgroundColor = uiStyle.getBackgroundColorModifier().merge(backgroundColor, uiStyle.getBackgroundColorProperty());
+		border = merge(uiStyle.getBorderProperty()).with(border);
+		backgroundColor = uiStyle.getBackgroundColorModifier().with(backgroundColor, uiStyle.getBackgroundColorProperty());
 	}
 
 	public void setBorder(BorderDefinition border) {

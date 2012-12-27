@@ -3,9 +3,11 @@ package com.mgs.fantasi.profile;
 import com.mgs.fantasi.properties.BorderDefinition;
 import com.mgs.fantasi.properties.ColorDefinition;
 
+import static com.mgs.fantasi.profile.PropertyDefinitionBase.NullPropertyDefinition.nullPropertyDefinition;
+
 public class UIStyle {
-	private PropertyDefinition<ColorDefinition> backgroundColorProperty = new PropertyDefinitionBase.NullPropertyDefinition<ColorDefinition>();
-	private PropertyDefinition<BorderDefinition> borderProperty = new PropertyDefinitionBase.NullPropertyDefinition<BorderDefinition>();
+	private PropertyDefinition<ColorDefinition> backgroundColorProperty = nullPropertyDefinition();
+	private PropertyDefinition<BorderDefinition> borderProperty = nullPropertyDefinition();
 
 	public UIStyle withBorder(BorderDefinition border) {
 		if (border == null) throw new IllegalArgumentException();

@@ -16,7 +16,13 @@ public abstract class PropertyDefinitionBase<T extends PropertyDefinition> imple
 	}
 
 	public static class NullPropertyDefinition<T extends PropertyDefinition> extends PropertyDefinitionBase<T> {
-		@Override
+        private NullPropertyDefinition() {}
+
+        public static <T extends PropertyDefinition> NullPropertyDefinition<T> nullPropertyDefinition (){
+            return new NullPropertyDefinition<T>();
+        }
+
+        @Override
 		public final boolean isDefined() {
 			return false;
 		}

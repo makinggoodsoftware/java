@@ -1,5 +1,6 @@
 package com.mgs.fantasi.properties;
 
+import com.mgs.fantasi.profile.PropertyDefinition;
 import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
@@ -17,18 +18,18 @@ public class UIProperties {
 	Padding padding = Padding.zero();
 	String name = EMPTY_NAME;
 	Measurement measurement = emptyMeasurement();
-	private BorderDefinition border = BorderDefinition.zero();
-	private ColorDefinition backgroundColor = ColorDefinition.transparent();
+	private PropertyDefinition<BorderDefinition.BorderDefinitionBean> border = BorderDefinition.zero();
+	private PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor = ColorDefinition.newTransparent();
 
 	public UIProperties() {
 	}
 
 	public void applyStyle(UIStyle uiStyle){
-		border = uiStyle.getBorderProperty().merge(border);
+        border = uiStyle.getBorderProperty().merge(border);
 		backgroundColor = uiStyle.getBackgroundColorProperty().merge(backgroundColor);
 	}
 
-	public void setBorder(BorderDefinition border) {
+	public void setBorder(PropertyDefinition<BorderDefinition.BorderDefinitionBean> border) {
 		this.border = border;
 	}
 
@@ -83,7 +84,7 @@ public class UIProperties {
 		this.measurement = copyOfThat.measurement;
 	}
 
-	public void setBackgroundColor(ColorDefinition backgroundColor) {
+	public void setBackgroundColor(PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 
@@ -98,11 +99,11 @@ public class UIProperties {
 		}
 	}
 
-	public ColorDefinition getBackgroundColor() {
+	public PropertyDefinition<ColorDefinition.ColorDefinitionBean> getBackgroundColor() {
 		return backgroundColor;
 	}
 
-	public BorderDefinition getBorder() {
+	public PropertyDefinition<BorderDefinition.BorderDefinitionBean> getBorder() {
 		return border;
 	}
 }

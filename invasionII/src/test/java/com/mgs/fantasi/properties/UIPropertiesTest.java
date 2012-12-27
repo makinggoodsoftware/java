@@ -5,9 +5,10 @@ import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.views.BaseView;
 import org.junit.Test;
 
+import static com.mgs.fantasi.properties.BorderDefinition.newBorder;
 import static com.mgs.fantasi.properties.BorderDefinition.zero;
-import static com.mgs.fantasi.properties.ColorDefinition.colorFromAwtColor;
-import static com.mgs.fantasi.properties.ColorDefinition.transparent;
+import static com.mgs.fantasi.properties.ColorDefinition.newColor;
+import static com.mgs.fantasi.properties.ColorDefinition.newTransparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.RED;
@@ -20,7 +21,7 @@ public class UIPropertiesTest {
 	public void testDefaultValues (){
 		UIProperties uiProperties = new UIProperties();
 
-		assertEquals(uiProperties.getBackgroundColor(), transparent());
+		assertEquals(uiProperties.getBackgroundColor(), newTransparent());
 		assertEquals(uiProperties.getBorder(), zero());
 		assertEquals(uiProperties.getMeasurement(), emptyMeasurement());
 		assertEquals(uiProperties.getName(), "");
@@ -33,7 +34,7 @@ public class UIPropertiesTest {
 		UIProperties uiProperties = new UIProperties();
 		uiProperties.applyStyle(new UIStyle());
 
-		assertEquals(uiProperties.getBackgroundColor(), transparent());
+		assertEquals(uiProperties.getBackgroundColor(), newTransparent());
 		assertEquals(uiProperties.getBorder(), zero());
 	}
 
@@ -41,23 +42,23 @@ public class UIPropertiesTest {
 	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsFullyDefined(){
 		UIProperties uiProperties = new UIProperties();
 		UIStyle uiStyle = new UIStyle().
-				withBackgroundColor(colorFromAwtColor(YELLOW)).
-			withBorder(new BorderDefinition(colorFromAwtColor(RED), 3));
+			withBackgroundColor(newColor(YELLOW)).
+			withBorder(newBorder(newColor(RED), 3));
 		uiProperties.applyStyle(uiStyle);
 
-		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(YELLOW));
-		assertEquals(uiProperties.getBorder().getColor(), colorFromAwtColor(RED));
-		assertEquals(uiProperties.getBorder().getWidth(), 3);
+		assertEquals(uiProperties.getBackgroundColor(), newColor(YELLOW));
+		assertEquals(uiProperties.getBorder().getData().getColor(), newColor(RED));
+		assertEquals(uiProperties.getBorder().getData().getWidth(), 3);
 	}
 
 	@Test
 	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsPartiallyDefined(){
 		UIProperties uiProperties = new UIProperties();
 		UIStyle uiStyle = new UIStyle().
-				withBackgroundColor(colorFromAwtColor(YELLOW));
+			withBackgroundColor(newColor(YELLOW));
 		uiProperties.applyStyle(uiStyle);
 
-		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(YELLOW));
+		assertEquals(uiProperties.getBackgroundColor(), newColor(YELLOW));
 		assertEquals(uiProperties.getBorder(), zero());
 	}
 
@@ -65,30 +66,30 @@ public class UIPropertiesTest {
 	@Test
 	public void testApplyStyle_whenPropertiesAreFullyPopulatedAndStyleIsPartiallyDefined (){
 		UIProperties uiProperties = new UIProperties();
-		uiProperties.setBackgroundColor(colorFromAwtColor(RED));
-		uiProperties.setBorder(new BorderDefinition(colorFromAwtColor(YELLOW), 4));
+		uiProperties.setBackgroundColor(newColor(RED));
+		uiProperties.setBorder(newBorder(newColor(YELLOW), 4));
 
 		UIStyle uiStyle = new UIStyle().
-				withBackgroundColor(colorFromAwtColor(BLACK));
+			withBackgroundColor(newColor(BLACK));
 		uiProperties.applyStyle(uiStyle);
 
-		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(BLACK));
-		assertEquals(uiProperties.getBorder().getColor(), colorFromAwtColor(YELLOW));
-		assertEquals(uiProperties.getBorder().getWidth(), 4);
+		assertEquals(uiProperties.getBackgroundColor(), newColor(BLACK));
+		assertEquals(uiProperties.getBorder().getData().getColor(), newColor(YELLOW));
+		assertEquals(uiProperties.getBorder().getData().getWidth(), 4);
 	}
 
 	@Test
 	public void testApplyStyle_whenPropertiesArePartiallyPopulatedAndStyleIsPartiallyDefined (){
 		UIProperties uiProperties = new UIProperties();
-		uiProperties.setBackgroundColor(colorFromAwtColor(RED));
+		uiProperties.setBackgroundColor(newColor(RED));
 
 		UIStyle uiStyle = new UIStyle().
-				withBorder(new BorderDefinition(colorFromAwtColor(BLACK), 2));
+			withBorder(newBorder(newColor(BLACK), 2));
 		uiProperties.applyStyle(uiStyle);
 
-		assertEquals(uiProperties.getBackgroundColor(), colorFromAwtColor(RED));
-		assertEquals(uiProperties.getBorder().getColor(), colorFromAwtColor(BLACK));
-		assertEquals(uiProperties.getBorder().getWidth(), 2);
+		assertEquals(uiProperties.getBackgroundColor(), newColor(RED));
+		assertEquals(uiProperties.getBorder().getData().getColor(), newColor(BLACK));
+		assertEquals(uiProperties.getBorder().getData().getWidth(), 2);
 
 	}
 }

@@ -1,55 +1,67 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.PropertyDefinitionBase;
-import com.mgs.fantasi.profile.PropertyDefinitionBean;
+import com.mgs.fantasi.profile.*;
+import org.apache.commons.beanutils.BeanUtils;
 
-public class BorderDefinition extends PropertyDefinitionBase<BorderDefinition, BorderDefinition.BorderDefinitionBean> {
-	private ColorDefinition color;
-	private int width;
-
-	public static BorderDefinition zero(){
-		return new BorderDefinition(ColorDefinition.transparent(), 0);
+public abstract class BorderDefinition {
+    public static PropertyDefinition<BorderDefinitionBean> zero(){
+        return new NotNullProperty<BorderDefinitionBean>(new BorderDefinitionBean(new NullProperty<ColorDefinition.ColorDefinitionBean>(), 0));
 	}
 
-	public BorderDefinition(ColorDefinition color, int width) {
-        super(new BorderDefinitionBean());
-        this.color = color;
-		this.width = width;
+	public static PropertyDefinition<BorderDefinitionBean> newBorder(PropertyDefinition<ColorDefinition.ColorDefinitionBean> color, int width) {
+        return new NotNullProperty<BorderDefinitionBean>(new BorderDefinitionBean(color, width));
 	}
 
-	public ColorDefinition getColor() {
-		return color;
-	}
+    public static class BorderDefinitionBean implements PropertyDefinitionBean {
+        private final PropertyDefinition<ColorDefinition.ColorDefinitionBean> color;
+        private final int width;
 
-	public int getWidth() {
-		return width;
-	}
+        public BorderDefinitionBean(PropertyDefinition<ColorDefinition.ColorDefinitionBean> color, int width) {
+            if (!color.isDefined() && width!=0) throw new RuntimeException("Invalid combination!!");
+            this.color = color;
+            this.width = width;
+        }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof BorderDefinition)) return false;
+        public PropertyDefinition<ColorDefinition.ColorDefinitionBean> getColor() {
+            return color;
+        }
 
-		BorderDefinition that = (BorderDefinition) o;
+        public int getWidth() {
+            return width;
+        }
 
-		if (width != that.width) return false;
-		if (color != null ? !color.equals(that.color) : that.color != null) return false;
+        @Override
+        public PropertyDefinitionBean copy() {
+            try {
+                return (PropertyDefinitionBean) BeanUtils.cloneBean(this);
+            } catch (Exception e) {
+                throw new RuntimeException("Unhandled exception", e);
+            }
+        }
 
-		return true;
-	}
+        @Override
+        public boolean isDefined() {
+            return color.isDefined();
+        }
 
-	@Override
-	public int hashCode() {
-		int result = color != null ? color.hashCode() : 0;
-		result = 31 * result + width;
-		return result;
-	}
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
 
-	@Override
-	public BorderDefinition copy() {
-		return new BorderDefinition(color, width);
-	}
+            BorderDefinitionBean that = (BorderDefinitionBean) o;
 
-    public static class BorderDefinitionBean extends PropertyDefinitionBean {
+            if (width != that.width) return false;
+            if (color != null ? !color.equals(that.color) : that.color != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = color != null ? color.hashCode() : 0;
+            result = 31 * result + width;
+            return result;
+        }
     }
 }

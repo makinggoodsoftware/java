@@ -3,13 +3,13 @@ package com.mgs.invasion.mvc.views;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.profile.UIProfileFactory;
 import com.mgs.fantasi.profile.UIStyle;
-import com.mgs.fantasi.properties.BorderDefinition;
 import com.mgs.fantasi.properties.polygon.HexagonShape;
 import com.mgs.fantasi.properties.selectors.UISelectorFactory;
 
 import java.awt.*;
 
-import static com.mgs.fantasi.properties.ColorDefinition.colorFromAwtColor;
+import static com.mgs.fantasi.properties.BorderDefinition.newBorder;
+import static com.mgs.fantasi.properties.ColorDefinition.newColor;
 
 public class ProductionUiProfileFactory implements UIProfileFactory {
 
@@ -19,12 +19,12 @@ public class ProductionUiProfileFactory implements UIProfileFactory {
 
 		profile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
-				new UIStyle().withBorder(new BorderDefinition(colorFromAwtColor(Color.BLACK), 1))
+				new UIStyle().withBorder(newBorder(newColor(Color.BLACK), 1))
 		);
 
 		profile.addStyle(
 				UISelectorFactory.forName("2ndLayerOfHexagons"),
-				new UIStyle().withBorder(new BorderDefinition(colorFromAwtColor(Color.BLACK), 1))
+				new UIStyle().withBorder(newBorder(newColor(Color.BLACK), 1))
 		);
 
 		return profile;

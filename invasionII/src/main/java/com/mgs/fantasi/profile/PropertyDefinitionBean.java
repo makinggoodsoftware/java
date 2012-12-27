@@ -1,4 +1,7 @@
 package com.mgs.fantasi.profile;
 
-public class PropertyDefinitionBean {
+public interface PropertyDefinitionBean {
+    PropertyDefinitionBean copy();
+
+    boolean isDefined();
 }

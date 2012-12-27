@@ -1,5 +1,6 @@
 package com.mgs.fantasi.driver.swing;
 
+import com.mgs.fantasi.profile.PropertyDefinition;
 import com.mgs.fantasi.properties.BorderDefinition;
 import com.mgs.fantasi.properties.ColorDefinition;
 import com.mgs.fantasi.properties.UIProperties;
@@ -24,21 +25,22 @@ public class JPanelWithDifferentShape extends JPanel {
 	public void paint(Graphics graphics) {
 		super.paint(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
-		BorderDefinition border = uiProperties.getBorder();
+		PropertyDefinition<BorderDefinition.BorderDefinitionBean> border = uiProperties.getBorder();
 		float borderThickness = 0;
-		ColorDefinition foregroundColor = ColorDefinition.colorFromAwtColor(g2d.getColor());
-		if (border !=null){
-			borderThickness = border.getWidth();
-			foregroundColor = border.getColor();
+		PropertyDefinition<ColorDefinition.ColorDefinitionBean> foregroundColor = ColorDefinition.newColor(g2d.getColor());
+		if (border.isDefined()){
+			borderThickness = border.getData().getWidth();
+            PropertyDefinition<ColorDefinition.ColorDefinitionBean> color = border.getData().getColor();
+            if (color.isDefined()){
+                foregroundColor = color;
+            }
 		}
-		ColorDefinition backgroundColor = uiProperties.getBackgroundColor().isDefined() ?
-				uiProperties.getBackgroundColor() :
-				ColorDefinition.colorFromAwtColor(Color.WHITE);
+        PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor = uiProperties.getBackgroundColor();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);
 	}
 
-	private void drawHexagon(Graphics2D g2d, Dimension size, ColorDefinition foregroundColor, ColorDefinition backgroundColor, float thickness) {
+	private void drawHexagon(Graphics2D g2d, Dimension size, PropertyDefinition<ColorDefinition.ColorDefinitionBean> foregroundColor, PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor, float thickness) {
 		int insetSpace = (int) thickness;
 		Dimension sizeWithoutBorders = new Dimension(size.width - insetSpace, size.height - insetSpace);
 		if (sizeWithoutBorders.getWidth()<0 || sizeWithoutBorders.getHeight()<0) return;
@@ -49,10 +51,14 @@ public class JPanelWithDifferentShape extends JPanel {
 			nextLine(path, hexagonPoints.get(i), thickness);
 		}
 		path.closePath();
-		g2d.setColor(foregroundColor.asAwtColor());
+        if (foregroundColor.isDefined()){
+		    g2d.setColor(foregroundColor.getData().getColor());
+        }
 		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g2d.draw(path);
-		g2d.setColor(backgroundColor.asAwtColor());
+        if (backgroundColor.isDefined()){
+		    g2d.setColor(backgroundColor.getData().getColor());
+        }
 		g2d.fill(path);
 	}
 

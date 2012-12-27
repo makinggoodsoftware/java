@@ -3,7 +3,9 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.UINativeRenderer;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
+import com.mgs.fantasi.profile.PropertyDefinition;
 import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.ColorDefinition;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
@@ -92,11 +94,20 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
 	private void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
-		jPanel.setBackground(uiProperties.getBackgroundColor().asAwtColor());
-		BorderDefinition border = uiProperties.getBorder();
-		if (border!=null){
-			Border lineBorder = BorderFactory.createLineBorder(border.getColor().asAwtColor(), border.getWidth());
-			jPanel.setBorder(lineBorder);
+        PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor = uiProperties.getBackgroundColor();
+        if (backgroundColor.isDefined()){
+            jPanel.setBackground(backgroundColor.getData().getColor());
+        }
+		PropertyDefinition<BorderDefinition.BorderDefinitionBean> border = uiProperties.getBorder();
+		if (border.isDefined()){
+            PropertyDefinition<ColorDefinition.ColorDefinitionBean> colorDefinition = border.getData().getColor();
+            if (colorDefinition.isDefined()){
+                Border lineBorder = BorderFactory.createLineBorder(colorDefinition.getData().getColor(), border.getData().getWidth());
+			    jPanel.setBorder(lineBorder);
+            }else{
+                throw new RuntimeException("Can't paint the border without a color!!!");
+            }
+
 		}else{
 			jPanel.setBorder(null);
 		}

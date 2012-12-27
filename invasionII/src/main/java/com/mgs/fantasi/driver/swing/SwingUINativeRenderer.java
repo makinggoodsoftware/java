@@ -5,7 +5,7 @@ import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrateg
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
 import com.mgs.fantasi.profile.PropertyDefinition;
 import com.mgs.fantasi.properties.BorderDefinition;
-import com.mgs.fantasi.properties.ColorDefinition;
+import com.mgs.fantasi.properties.ColorFactory;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
@@ -94,15 +94,15 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
 	private void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
-        PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor = uiProperties.getBackgroundColor();
+        PropertyDefinition<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
         if (backgroundColor.isDefined()){
-            jPanel.setBackground(backgroundColor.getData().getColor());
+            jPanel.setBackground(backgroundColor.getData().getColorAsAwt());
         }
-		PropertyDefinition<BorderDefinition.BorderDefinitionBean> border = uiProperties.getBorder();
+		PropertyDefinition<BorderDefinition.BorderUI> border = uiProperties.getBorder();
 		if (border.isDefined()){
-            PropertyDefinition<ColorDefinition.ColorDefinitionBean> colorDefinition = border.getData().getColor();
+            PropertyDefinition<ColorFactory.Color> colorDefinition = border.getData().getColor();
             if (colorDefinition.isDefined()){
-                Border lineBorder = BorderFactory.createLineBorder(colorDefinition.getData().getColor(), border.getData().getWidth());
+                Border lineBorder = BorderFactory.createLineBorder(colorDefinition.getData().getColorAsAwt(), border.getData().getWidth());
 			    jPanel.setBorder(lineBorder);
             }else{
                 throw new RuntimeException("Can't paint the border without a color!!!");

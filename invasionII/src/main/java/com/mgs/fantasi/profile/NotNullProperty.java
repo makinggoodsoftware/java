@@ -1,6 +1,8 @@
 package com.mgs.fantasi.profile;
 
-public class NotNullProperty<Z extends PropertyDefinitionBean> implements PropertyDefinition<Z>{
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+public class NotNullProperty<Z extends UIProperty> implements PropertyDefinition<Z>{
     private final Z data;
 
     public NotNullProperty(Z data) {
@@ -14,7 +16,7 @@ public class NotNullProperty<Z extends PropertyDefinitionBean> implements Proper
 
     @Override
     public boolean isDefined() {
-        return data.isDefined();
+        return data.isFullyDefined();
     }
 
     @Override
@@ -38,4 +40,11 @@ public class NotNullProperty<Z extends PropertyDefinitionBean> implements Proper
     public int hashCode() {
         return data != null ? data.hashCode() : 0;
     }
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).
+				append("data", data).
+				toString();
+	}
 }

@@ -1,28 +1,33 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.*;
+import com.mgs.fantasi.profile.NotNullProperty;
+import com.mgs.fantasi.profile.PropertyDefinition;
+import com.mgs.fantasi.profile.UIProperty;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import static com.mgs.fantasi.profile.NullProperty.nullProperty;
 
 public abstract class BorderDefinition {
-    public static PropertyDefinition<BorderDefinitionBean> zero(){
-        return new NotNullProperty<BorderDefinitionBean>(new BorderDefinitionBean(new NullProperty<ColorDefinition.ColorDefinitionBean>(), 0));
+    public static PropertyDefinition<BorderUI> zero(){
+        return new NotNullProperty<BorderUI>(new BorderUI(nullProperty(ColorFactory.Color.class), 0));
 	}
 
-	public static PropertyDefinition<BorderDefinitionBean> newBorder(PropertyDefinition<ColorDefinition.ColorDefinitionBean> color, int width) {
-        return new NotNullProperty<BorderDefinitionBean>(new BorderDefinitionBean(color, width));
+	public static PropertyDefinition<BorderUI> newBorder(PropertyDefinition<ColorFactory.Color> color, int width) {
+        return new NotNullProperty<BorderUI>(new BorderUI(color, width));
 	}
 
-    public static class BorderDefinitionBean implements PropertyDefinitionBean {
-        private final PropertyDefinition<ColorDefinition.ColorDefinitionBean> color;
+    public static class BorderUI implements UIProperty {
+        private final PropertyDefinition<ColorFactory.Color> color;
         private final int width;
 
-        public BorderDefinitionBean(PropertyDefinition<ColorDefinition.ColorDefinitionBean> color, int width) {
+        public BorderUI(PropertyDefinition<ColorFactory.Color> color, int width) {
             if (!color.isDefined() && width!=0) throw new RuntimeException("Invalid combination!!");
             this.color = color;
             this.width = width;
         }
 
-        public PropertyDefinition<ColorDefinition.ColorDefinitionBean> getColor() {
+        public PropertyDefinition<ColorFactory.Color> getColor() {
             return color;
         }
 
@@ -31,37 +36,45 @@ public abstract class BorderDefinition {
         }
 
         @Override
-        public PropertyDefinitionBean copy() {
+        public UIProperty copy() {
             try {
-                return (PropertyDefinitionBean) BeanUtils.cloneBean(this);
+                return (UIProperty) BeanUtils.cloneBean(this);
             } catch (Exception e) {
                 throw new RuntimeException("Unhandled exception", e);
             }
         }
 
         @Override
-        public boolean isDefined() {
+        public boolean isFullyDefined() {
             return color.isDefined();
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (!(o instanceof BorderUI)) return false;
 
-            BorderDefinitionBean that = (BorderDefinitionBean) o;
+			BorderUI borderUI = (BorderUI) o;
 
-            if (width != that.width) return false;
-            if (color != null ? !color.equals(that.color) : that.color != null) return false;
+			if (width != borderUI.width) return false;
+			if (color != null ? !color.equals(borderUI.color) : borderUI.color != null) return false;
 
-            return true;
-        }
+			return true;
+		}
 
-        @Override
-        public int hashCode() {
-            int result = color != null ? color.hashCode() : 0;
-            result = 31 * result + width;
-            return result;
-        }
-    }
+		@Override
+		public int hashCode() {
+			int result = color != null ? color.hashCode() : 0;
+			result = 31 * result + width;
+			return result;
+		}
+
+		@Override
+		public String toString() {
+			return new ToStringBuilder(this).
+					append("color", color).
+					append("width", width).
+					toString();
+		}
+	}
 }

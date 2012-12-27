@@ -18,8 +18,8 @@ public class UIProperties {
 	Padding padding = Padding.zero();
 	String name = EMPTY_NAME;
 	Measurement measurement = emptyMeasurement();
-	private PropertyDefinition<BorderDefinition.BorderDefinitionBean> border = BorderDefinition.zero();
-	private PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor = ColorDefinition.newTransparent();
+	private PropertyDefinition<BorderDefinition.BorderUI> border = BorderDefinition.zero();
+	private PropertyDefinition<ColorFactory.Color> backgroundColor = ColorFactory.newTransparentColor();
 
 	public UIProperties() {
 	}
@@ -29,7 +29,7 @@ public class UIProperties {
 		backgroundColor = uiStyle.getBackgroundColorProperty().merge(backgroundColor);
 	}
 
-	public void setBorder(PropertyDefinition<BorderDefinition.BorderDefinitionBean> border) {
+	public void setBorder(PropertyDefinition<BorderDefinition.BorderUI> border) {
 		this.border = border;
 	}
 
@@ -84,7 +84,7 @@ public class UIProperties {
 		this.measurement = copyOfThat.measurement;
 	}
 
-	public void setBackgroundColor(PropertyDefinition<ColorDefinition.ColorDefinitionBean> backgroundColor) {
+	public void setBackgroundColor(PropertyDefinition<ColorFactory.Color> backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 
@@ -99,11 +99,11 @@ public class UIProperties {
 		}
 	}
 
-	public PropertyDefinition<ColorDefinition.ColorDefinitionBean> getBackgroundColor() {
+	public PropertyDefinition<ColorFactory.Color> getBackgroundColor() {
 		return backgroundColor;
 	}
 
-	public PropertyDefinition<BorderDefinition.BorderDefinitionBean> getBorder() {
+	public PropertyDefinition<BorderDefinition.BorderUI> getBorder() {
 		return border;
 	}
 }

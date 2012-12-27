@@ -8,7 +8,7 @@ import com.mgs.fantasi.properties.selectors.UISelectorFactory;
 import com.mgs.fantasi.views.RectangleView;
 
 import static com.mgs.fantasi.properties.BorderDefinition.newBorder;
-import static com.mgs.fantasi.properties.ColorDefinition.newColor;
+import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;
 import static java.awt.Color.*;
 
 public class DebugUIProfileFactory implements UIProfileFactory {
@@ -19,8 +19,8 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 		debugProfile.addStyle(
 				UISelectorFactory.forType(RectangleView.class),
 				new UIStyle().
-						withBorder(newBorder(newColor(BLUE), 5)).
-						withBackgroundColor(newColor(GREEN))
+						withBorder(newBorder(newColorFromAwt(BLUE), 5)).
+						withBackgroundColor(newColorFromAwt(GREEN))
 		);
 //
 //		debugProfile.addStyle(
@@ -41,8 +41,8 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 		debugProfile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
 				new UIStyle().
-						withBorder(newBorder(newColor(YELLOW), 10)).
-						withBackgroundColor(newColor(RED))
+						withBorder(newBorder(newColorFromAwt(YELLOW), 10)).
+						withBackgroundColor(newColorFromAwt(RED))
 		);
 
 		return debugProfile;

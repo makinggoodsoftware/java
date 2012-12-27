@@ -1,8 +1,8 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.PropertyDefinition;
+import com.mgs.fantasi.profile.PropertyDefinitionBase;
 
-public class BorderDefinition implements PropertyDefinition<BorderDefinition> {
+public class BorderDefinition extends PropertyDefinitionBase<BorderDefinition> {
 	private ColorDefinition color;
 	private int width;
 

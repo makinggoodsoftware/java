@@ -4,8 +4,8 @@ import com.mgs.fantasi.properties.BorderDefinition;
 import com.mgs.fantasi.properties.ColorDefinition;
 
 public class UIStyle {
-	private ColorDefinition backgroundColorProperty;
-	private BorderDefinition borderProperty;
+	private PropertyDefinition<ColorDefinition> backgroundColorProperty = new PropertyDefinitionBase.NullPropertyDefinition<ColorDefinition>();
+	private PropertyDefinition<BorderDefinition> borderProperty = new PropertyDefinitionBase.NullPropertyDefinition<BorderDefinition>();
 
 	public UIStyle withBorder(BorderDefinition border) {
 		if (border == null) throw new IllegalArgumentException();
@@ -21,11 +21,11 @@ public class UIStyle {
 		return this;
 	}
 
-	public ColorDefinition getBackgroundColorProperty() {
+	public PropertyDefinition<ColorDefinition> getBackgroundColorProperty() {
 		return backgroundColorProperty;
 	}
 
-	public BorderDefinition getBorderProperty() {
+	public PropertyDefinition<BorderDefinition> getBorderProperty() {
 		return borderProperty;
 	}
 }

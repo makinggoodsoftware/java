@@ -1,10 +1,10 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.PropertyDefinition;
+import com.mgs.fantasi.profile.PropertyDefinitionBase;
 
 import java.awt.*;
 
-public class ColorDefinition implements PropertyDefinition<ColorDefinition> {
+public class ColorDefinition extends PropertyDefinitionBase<ColorDefinition> {
 	private Color color;
 
 	private ColorDefinition(Color color) {
@@ -21,10 +21,6 @@ public class ColorDefinition implements PropertyDefinition<ColorDefinition> {
 
 	public Color asAwtColor (){
 		return color;
-	}
-
-	public boolean isDefined() {
-		return color != null;
 	}
 
 	@Override

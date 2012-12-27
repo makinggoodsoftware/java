@@ -1,8 +1,9 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.profile.PropertyDefinitionBase;
+import com.mgs.fantasi.profile.PropertyDefinitionBean;
 
-public class BorderDefinition extends PropertyDefinitionBase<BorderDefinition> {
+public class BorderDefinition extends PropertyDefinitionBase<BorderDefinition, BorderDefinition.BorderDefinitionBean> {
 	private ColorDefinition color;
 	private int width;
 
@@ -11,7 +12,8 @@ public class BorderDefinition extends PropertyDefinitionBase<BorderDefinition> {
 	}
 
 	public BorderDefinition(ColorDefinition color, int width) {
-		this.color = color;
+        super(new BorderDefinitionBean());
+        this.color = color;
 		this.width = width;
 	}
 
@@ -47,4 +49,7 @@ public class BorderDefinition extends PropertyDefinitionBase<BorderDefinition> {
 	public BorderDefinition copy() {
 		return new BorderDefinition(color, width);
 	}
+
+    public static class BorderDefinitionBean extends PropertyDefinitionBean {
+    }
 }

@@ -1,14 +1,16 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.profile.PropertyDefinitionBase;
+import com.mgs.fantasi.profile.PropertyDefinitionBean;
 
 import java.awt.*;
 
-public class ColorDefinition extends PropertyDefinitionBase<ColorDefinition> {
+public class ColorDefinition extends PropertyDefinitionBase<ColorDefinition, ColorDefinition.ColorDefinitionBean> {
 	private Color color;
 
 	private ColorDefinition(Color color) {
-		this.color = color;
+        super(new ColorDefinitionBean());
+        this.color = color;
 	}
 
 	public static ColorDefinition transparent() {
@@ -44,4 +46,7 @@ public class ColorDefinition extends PropertyDefinitionBase<ColorDefinition> {
 	public ColorDefinition copy() {
 		return new ColorDefinition(color);
 	}
+
+    public static class ColorDefinitionBean extends PropertyDefinitionBean {
+    }
 }

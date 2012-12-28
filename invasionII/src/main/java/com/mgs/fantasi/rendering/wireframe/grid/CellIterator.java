@@ -1,6 +1,6 @@
 package com.mgs.fantasi.rendering.wireframe.grid;
 
-public interface CellIterator<T> {
+public interface CellIterator {
 
-	void on(int x, int y, CellContent<T> cell);
+	void on(int x, int y, CellContent cell);
 }

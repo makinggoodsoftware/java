@@ -13,7 +13,7 @@ public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstruc
 		super(layoutProvider);
 	}
 
-	public SimpleBaseLayoutConstructionStrategyImpl from(RectangleWireframe<View> content) {
+	public SimpleBaseLayoutConstructionStrategyImpl from(RectangleWireframe content) {
 		View renderable = content.getContent();
 		if (renderable!=null) {
 			queueForAddition(renderable).into(coordinates(0, 0, Fractions.all(), Fractions.all()));

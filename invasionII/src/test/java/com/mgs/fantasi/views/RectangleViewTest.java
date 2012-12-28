@@ -14,7 +14,7 @@ public class RectangleViewTest {
 	@Test
 	public void childViews_forEmptyRectangleView_shouldReturnAnEmptyRectangleWireframe(){
 		RectangleView rectangle = rectangle();
-		RectangleWireframe<View> wireframe = (RectangleWireframe<View>) rectangle.buildContent();
+		RectangleWireframe wireframe = (RectangleWireframe) rectangle.buildContent();
 
 		Assert.assertEquals(wireframe.getType(), WireframeType.SIMPLE);
 		Assert.assertNull(wireframe.getContent());
@@ -23,7 +23,7 @@ public class RectangleViewTest {
 	@Test
 	public void childViews_forRectangleViewWithContent_shouldReturnRectangleWireframeWithContent(){
 		RectangleView rectangle = rectangle().withContent(contentMock);
-		RectangleWireframe<View> wireframe = (RectangleWireframe<View>) rectangle.buildContent();
+		RectangleWireframe wireframe = (RectangleWireframe) rectangle.buildContent();
 
 		Assert.assertEquals(wireframe.getType(), WireframeType.SIMPLE);
 		Assert.assertSame(wireframe.getContent(), contentMock);

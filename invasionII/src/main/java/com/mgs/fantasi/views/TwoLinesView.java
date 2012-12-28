@@ -27,13 +27,13 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
+	public Wireframe buildContent() {
 		return
-			new GridWireframe<View>().
+			new GridWireframe().
 				withDimension(1, 2).
-				withContent(new CellContentGenerator<View>() {
+				withContent(new CellContentGenerator() {
 					@Override
-					public CellContent<View> generateContentFor(int x, int y) {
+					public CellContent generateContentFor(int x, int y) {
 						if (y == 0){
 							return withPartialHeight(firstLineBuilder, firstLineHeighSizeRatio);
 						}else{

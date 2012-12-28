@@ -1,39 +1,22 @@
 package com.mgs.fantasi.rendering.wireframe;
 
-import com.mgs.fantasi.Structurable;
-import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
-import com.mgs.fantasi.rendering.wireframe.grid.CellContent;
 import com.mgs.fantasi.rendering.wireframe.grid.CellContentGenerator;
 import com.mgs.fantasi.rendering.wireframe.grid.CellIterator;
 
 import java.awt.*;
 
-public class GridWireframe<T extends Structurable>  implements Wireframe<T> {
+public class GridWireframe  implements Wireframe {
 	private Dimension dimension;
-	private CellContentGenerator<T> cellContentGenerator;
+	private CellContentGenerator cellContentGenerator;
 
-	public GridWireframe<T> withDimension(int x, int y) {
+	public GridWireframe withDimension(int x, int y) {
 		this.dimension = new Dimension(x, y);
 		return this;
 	}
 
-	public GridWireframe<T> withContent(CellContentGenerator<T> cellContentGenerator) {
+	public GridWireframe withContent(CellContentGenerator cellContentGenerator) {
 		this.cellContentGenerator = cellContentGenerator;
 		return this;
-	}
-
-	@Override
-	public <Z extends Structurable> Wireframe<Z> transform(final ViewPreprocessorImpl.WireframeTransformer<T, Z> transformer) {
-		return new GridWireframe<Z>().
-			withDimension(dimension.width, dimension.height).
-			withContent(new CellContentGenerator<Z>() {
-				@Override
-				public CellContent<Z> generateContentFor(int x, int y) {
-					CellContent<T> tCellContent = cellContentGenerator.generateContentFor(x, y);
-					Z transform = transformer.transform(tCellContent.getContent());
-					return new CellContent<Z>(transform, tCellContent.getHeightSizeRatio(), tCellContent.getWidthSizeRatio());
-				}
-			});
 	}
 
 	@Override
@@ -41,7 +24,7 @@ public class GridWireframe<T extends Structurable>  implements Wireframe<T> {
 		return WireframeType.GRID;
 	}
 
-    public void itereateCellsWith(CellIterator<T> cellIterator) {
+    public void itereateCellsWith(CellIterator cellIterator) {
         for (int x=0; x < dimension.width; x++){
             for (int y=0; y < dimension.height; y++){
                 cellIterator.on(x, y, cellContentGenerator.generateContentFor(x, y));

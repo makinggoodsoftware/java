@@ -1,35 +1,24 @@
 package com.mgs.fantasi.rendering.wireframe;
 
-import com.mgs.fantasi.Structurable;
-import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
 import com.mgs.fantasi.rendering.wireframe.layer.LayerIterator;
+import com.mgs.fantasi.views.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class LayeredWireframe<T extends Structurable> implements Wireframe<T> {
-    private List<T> layers;
-
-    @Override
-    public <Z extends Structurable> Wireframe<Z> transform(ViewPreprocessorImpl.WireframeTransformer<T, Z> transformer) {
-        List<Z> transformedLayers = new ArrayList<Z>();
-        for (T layer : layers) {
-            transformedLayers.add(transformer.transform(layer));
-        }
-        return new LayeredWireframe<Z>().withLayers(transformedLayers);
-    }
+public class LayeredWireframe implements Wireframe {
+    private List<View> layers;
 
     @Override
     public WireframeType getType() {
         return WireframeType.LAYERS;
     }
 
-    public Wireframe<T> withLayers(List<T> layers) {
+    public Wireframe withLayers(List<View> layers) {
         this.layers = layers;
         return this;
     }
 
-    public void iterateInCrescendo(LayerIterator<T> layerIterator) {
+    public void iterateInCrescendo(LayerIterator layerIterator) {
         int zIndex = 0;
         for (int i = layers.size() - 1; i >= 0; i--) {
             layerIterator.on(zIndex, layers.get(i));

@@ -32,13 +32,13 @@ public class PijamaRowsView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
-		return new GridWireframe<View>().
+	public Wireframe buildContent() {
+		return new GridWireframe().
 			withDimension(1, numberOfGenerations).
-			withContent(new CellContentGenerator<View>() {
+			withContent(new CellContentGenerator() {
 				@Override
-				public CellContent<View> generateContentFor(int x, int y) {
-					return CellContent.evenlyDivided((View) generationBuilder);
+				public CellContent generateContentFor(int x, int y) {
+					return CellContent.evenlyDivided(generationBuilder);
 				}
 			});
 	}

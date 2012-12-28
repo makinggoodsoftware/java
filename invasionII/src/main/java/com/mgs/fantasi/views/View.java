@@ -5,7 +5,7 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.rendering.wireframe.Wireframe;
 
 public interface View extends Structurable {
-	Wireframe<View> buildContent();
+	Wireframe buildContent();
 
 	UIProperties getUiProperties ();
 

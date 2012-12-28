@@ -14,7 +14,7 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
-		return new EmptyWireframe<View>();
+	public Wireframe buildContent() {
+		return new EmptyWireframe();
 	}
 }

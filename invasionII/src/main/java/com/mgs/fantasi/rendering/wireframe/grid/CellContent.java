@@ -2,27 +2,28 @@ package com.mgs.fantasi.rendering.wireframe.grid;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
+import com.mgs.fantasi.views.View;
 
-public class CellContent<T> {
-	private final T content;
+public class CellContent {
+	private final View content;
 	private final Fraction widthSizeRatio;
 	private final Fraction heightSizeRatio;
 
-	public CellContent(T content, Fraction heightSizeRatio, Fraction widthSizeRatio) {
+	public CellContent(View content, Fraction heightSizeRatio, Fraction widthSizeRatio) {
 		this.content = content;
 		this.heightSizeRatio = heightSizeRatio;
 		this.widthSizeRatio = widthSizeRatio;
 	}
 
-	public static <T> CellContent<T> evenlyDivided(T content) {
-		return new CellContent<T>(content, Fractions.all(), Fractions.all());
+	public static CellContent evenlyDivided(View content) {
+		return new CellContent (content, Fractions.all(), Fractions.all());
 	}
 
-	public static <T> CellContent<T> withPartialHeight(T content, Fraction heightRatio) {
-		return new CellContent<T>(content, heightRatio, Fractions.allWithBase(heightRatio.getBase()));
+	public static CellContent withPartialHeight(View content, Fraction heightRatio) {
+		return new CellContent(content, heightRatio, Fractions.allWithBase(heightRatio.getBase()));
 	}
 
-	public T getContent() {
+	public View getContent() {
 		return content;
 	}
 

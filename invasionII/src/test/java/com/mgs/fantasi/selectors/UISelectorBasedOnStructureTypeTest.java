@@ -2,7 +2,6 @@ package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.views.BaseView;
-import com.mgs.fantasi.views.View;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ public class UISelectorBasedOnStructureTypeTest {
 
 	private class MatchingStructureTypeParent extends BaseView {
 		@Override
-		public Wireframe<View> buildContent() {
+		public Wireframe buildContent() {
 			return null;
 		}
 	}
@@ -27,7 +26,7 @@ public class UISelectorBasedOnStructureTypeTest {
 	private class ExtendingInterface extends MatchingStructureType {}
 	private class OtherStructureType extends BaseView {
 		@Override
-		public Wireframe<View> buildContent() {
+		public Wireframe buildContent() {
 			return null;
 		}
 	}

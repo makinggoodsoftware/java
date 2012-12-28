@@ -44,16 +44,16 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return outmostPointer;
 	}
 
-	public LayoutConstructionStrategy<?> processStructure(Wireframe<View> content) {
+	public LayoutConstructionStrategy<?> processStructure(Wireframe content) {
 		switch (content.getType()){
 			case GRID:
-				return layoutStrategyFactory.grid().from((GridWireframe<View>) content);
+				return layoutStrategyFactory.grid().from((GridWireframe) content);
 			case LAYERS:
-				return layoutStrategyFactory.layers().from((LayeredWireframe<View>) content);
+				return layoutStrategyFactory.layers().from((LayeredWireframe) content);
 			case SIMPLE:
-				return layoutStrategyFactory.simple().from((RectangleWireframe<View>) content);
+				return layoutStrategyFactory.simple().from((RectangleWireframe) content);
 			case DELEGATE:
-				Wireframe<View> delegate = ((DelegateWireframe<View>) content).getContent();
+				Wireframe delegate = ((DelegateWireframe) content).getContent();
 				return processStructure(delegate);
 			case EMPTY:
 				return new OnGoingLayoutBuildingStrategyFactory().empty();

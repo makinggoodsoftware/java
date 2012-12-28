@@ -20,11 +20,11 @@ public class VerticalSlicesView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
-		GridWireframe<View> grid = new GridWireframe<View>();
-		return grid.withDimension(numberOfDivisions, 1).withContent(new CellContentGenerator<View>() {
+	public Wireframe buildContent() {
+		GridWireframe grid = new GridWireframe();
+		return grid.withDimension(numberOfDivisions, 1).withContent(new CellContentGenerator() {
 			@Override
-			public CellContent<View> generateContentFor(int x, int y) {
+			public CellContent generateContentFor(int x, int y) {
 				return CellContent.evenlyDivided(contentBuilder);
 			}
 		});

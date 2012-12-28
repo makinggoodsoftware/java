@@ -9,8 +9,8 @@ public class LayerBaseLayoutConstructionStrategyImpl extends BaseLayoutConstruct
 		super(layoutProvider);
 	}
 
-	public LayerBaseLayoutConstructionStrategyImpl from(LayeredWireframe<View> content) {
-		content.iterateInCrescendo(new LayerIterator<View>() {
+	public LayerBaseLayoutConstructionStrategyImpl from(LayeredWireframe content) {
+		content.iterateInCrescendo(new LayerIterator() {
 			@Override
 			public void on(int zIndex, View layer) {
 				queueForAddition(layer).into(zIndex);

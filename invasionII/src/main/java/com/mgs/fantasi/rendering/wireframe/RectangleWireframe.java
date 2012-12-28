@@ -1,22 +1,14 @@
 package com.mgs.fantasi.rendering.wireframe;
 
-import com.mgs.fantasi.Structurable;
-import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
+import com.mgs.fantasi.views.View;
 
-public class RectangleWireframe<T extends Structurable> implements Wireframe<T> {
-	private T content;
+public class RectangleWireframe implements Wireframe {
+	private View content;
 
-	public RectangleWireframe<T> withContent(T content) {
+	public RectangleWireframe withContent(View content) {
 		if (content==null) throw new IllegalArgumentException("Content can't be null");
 		this.content = content;
 		return this;
-	}
-
-	@Override
-	public <Z extends Structurable> Wireframe<Z> transform(ViewPreprocessorImpl.WireframeTransformer<T, Z> transformer) {
-		RectangleWireframe<Z> emptyRectangle = new RectangleWireframe<Z>();
-		if (content == null) return emptyRectangle;
-		return emptyRectangle.withContent(transformer.transform(content));
 	}
 
 	@Override
@@ -24,7 +16,7 @@ public class RectangleWireframe<T extends Structurable> implements Wireframe<T> 
 		return WireframeType.SIMPLE;
 	}
 
-	public T getContent() {
+	public View getContent() {
 		return content;
 	}
 }

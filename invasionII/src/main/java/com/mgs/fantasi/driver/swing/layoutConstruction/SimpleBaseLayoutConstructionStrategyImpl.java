@@ -1,8 +1,8 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.wireframe.RectangleWireframe;
+import com.mgs.fantasi.views.View;
 
 import java.awt.*;
 
@@ -13,8 +13,8 @@ public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstruc
 		super(layoutProvider);
 	}
 
-	public SimpleBaseLayoutConstructionStrategyImpl from(RectangleWireframe<Renderable> content) {
-		Renderable renderable = content.getContent();
+	public SimpleBaseLayoutConstructionStrategyImpl from(RectangleWireframe<View> content) {
+		View renderable = content.getContent();
 		if (renderable!=null) {
 			queueForAddition(renderable).into(coordinates(0, 0, Fractions.all(), Fractions.all()));
 		}

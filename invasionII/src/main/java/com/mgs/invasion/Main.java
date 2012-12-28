@@ -22,7 +22,7 @@ public class Main {
 	}
 
 	private void go(UIProfileFactory uiProfileFactory) {
-		UIDriver<JPanel> uiDriver = UIDriver.forSwing(uiProfileFactory.getUIProfile());
+		UIDriver<JPanel> uiDriver = UIDriver.forSwing();
 
 		int numberOVerticalDivisions = 10;
 		int numberOfGenerations = 5;
@@ -46,7 +46,7 @@ public class Main {
 				)
 			);
 
-		uiDriver.show(view, new Dimension(400, 400));
+		uiDriver.show(view, new Dimension(400, 400), uiProfileFactory);
 	}
 
 }

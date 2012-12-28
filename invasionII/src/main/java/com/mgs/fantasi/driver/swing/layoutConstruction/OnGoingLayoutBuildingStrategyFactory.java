@@ -1,7 +1,8 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
-import com.mgs.fantasi.rendering.Renderable;
+import com.mgs.fantasi.profile.UIProfileFactory;
+import com.mgs.fantasi.views.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,12 +40,12 @@ public class OnGoingLayoutBuildingStrategyFactory {
 		return new LayoutConstructionStrategy<Void>() {
 
             @Override
-			public OnGoingChildAddition<Void> queueForAddition(Renderable child) {
+			public OnGoingChildAddition<Void> queueForAddition(View child) {
 				throw new RuntimeException("This ongoing construction is empty, nothing can be added to it");
 			}
 
 			@Override
-			public void buildInto(JPanel container, SwingUINativeRenderer renderer) {
+			public void buildInto(JPanel container, SwingUINativeRenderer renderer, UIProfileFactory uiProfileFactory) {
 				//do nothing
 			}
 		};

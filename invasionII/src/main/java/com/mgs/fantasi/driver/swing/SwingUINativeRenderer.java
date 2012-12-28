@@ -3,27 +3,31 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.UINativeRenderer;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
+import com.mgs.fantasi.profile.UIProfileFactory;
+import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.*;
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
-import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.wireframe.*;
+import com.mgs.fantasi.views.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 
 	private final OnGoingLayoutBuildingStrategyFactory layoutStrategyFactory = new OnGoingLayoutBuildingStrategyFactory();
 
 	@Override
-	public JPanel render(Renderable renderable) {
-		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
-		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.getContent());
-		layoutConstructionStrategy.buildInto(uiNativeElement, this);
+	public JPanel render(View renderable, UIProfileFactory uiProfileFactory) {
+        Set<UIStyle> propertiesWithStyles = uiProfileFactory.getUIProfile().findStylesFor(renderable);
+        JPanel uiNativeElement = createUINativeElementSkeleton(renderable.takeUiPropertiesSnapshot().withStyles(propertiesWithStyles));
+		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.buildContent());
+		layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfileFactory);
 		return uiNativeElement;
 	}
 
@@ -40,16 +44,16 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return outmostPointer;
 	}
 
-	public LayoutConstructionStrategy<?> processStructure(Wireframe<Renderable> content) {
+	public LayoutConstructionStrategy<?> processStructure(Wireframe<View> content) {
 		switch (content.getType()){
 			case GRID:
-				return layoutStrategyFactory.grid().from((GridWireframe<Renderable>) content);
+				return layoutStrategyFactory.grid().from((GridWireframe<View>) content);
 			case LAYERS:
-				return layoutStrategyFactory.layers().from((LayeredWireframe<Renderable>) content);
+				return layoutStrategyFactory.layers().from((LayeredWireframe<View>) content);
 			case SIMPLE:
-				return layoutStrategyFactory.simple().from((RectangleWireframe<Renderable>) content);
+				return layoutStrategyFactory.simple().from((RectangleWireframe<View>) content);
 			case DELEGATE:
-				Wireframe<Renderable> delegate = ((DelegateWireframe<Renderable>) content).getContent();
+				Wireframe<View> delegate = ((DelegateWireframe<View>) content).getContent();
 				return processStructure(delegate);
 			case EMPTY:
 				return new OnGoingLayoutBuildingStrategyFactory().empty();

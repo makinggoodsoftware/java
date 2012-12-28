@@ -51,12 +51,13 @@ public class JPanelWithDifferentShape extends JPanel {
 			nextLine(path, hexagonPoints.get(i), thickness);
 		}
 		path.closePath();
-        if (foregroundColor.isDefined()){
-		    g2d.setColor(foregroundColor.getData().getColorAsAwt());
+        if (foregroundColor.isDefined() && !foregroundColor.getData().isTransparent()) {
+            g2d.setColor(foregroundColor.getData().getColorAsAwt());
+
         }
 		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g2d.draw(path);
-        if (backgroundColor.isDefined()){
+        if (backgroundColor.isDefined() && !backgroundColor.getData().isTransparent()){
 		    g2d.setColor(backgroundColor.getData().getColorAsAwt());
         }
 		g2d.fill(path);

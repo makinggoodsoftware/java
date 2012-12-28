@@ -1,8 +1,6 @@
 package com.mgs.fantasi.rendering.wireframe;
 
-import com.mgs.fantasi.Structurable;
-
-public class DelegateWireframe<T extends Structurable> implements Wireframe {
+public class DelegateWireframe implements Wireframe {
 	private Wireframe content;
 
 	@Override
@@ -10,7 +8,7 @@ public class DelegateWireframe<T extends Structurable> implements Wireframe {
 		return WireframeType.DELEGATE;
 	}
 
-	public DelegateWireframe<T> withContent(Wireframe content) {
+	public DelegateWireframe withContent(Wireframe content) {
 		this.content = content;
 		return this;
 	}

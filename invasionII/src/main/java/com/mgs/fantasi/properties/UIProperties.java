@@ -2,8 +2,8 @@ package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.measurements.Measurement;
+import com.mgs.fantasi.properties.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.views.BaseView;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.Set;
@@ -14,7 +14,7 @@ import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeas
 
 public class UIProperties {
 
-    PolygonPointsIterator shape = new BaseView.NativeRectanguarShape();
+    PolygonPointsIterator shape = new NativeRectanguarShape();
 	Padding padding = Padding.zero();
 	Measurement measurement = emptyMeasurement();
 	private UIPropertyProvider<BorderFactory.Border> border = noBorder();

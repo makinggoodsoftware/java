@@ -1,7 +1,7 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.profile.UIStyle;
-import com.mgs.fantasi.views.BaseView;
+import com.mgs.fantasi.properties.polygon.NativeRectanguarShape;
 import org.junit.Test;
 
 import static com.mgs.fantasi.properties.BorderFactory.newBorder;
@@ -22,7 +22,7 @@ public class UIPropertiesTest {
 		assertEquals(uiProperties.getBorder(), noBorder());
 		assertEquals(uiProperties.getMeasurement(), emptyMeasurement());
 		assertEquals(uiProperties.getPadding(), Padding.zero());
-		assertTrue(uiProperties.getShape() instanceof BaseView.NativeRectanguarShape);
+		assertTrue(uiProperties.getShape() instanceof NativeRectanguarShape);
 	}
 
 	@Test

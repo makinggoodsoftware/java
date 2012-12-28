@@ -2,7 +2,7 @@ package com.mgs.fantasi.driver;
 
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
-import com.mgs.fantasi.profile.UIProfileFactory;
+import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.views.View;
 
 import javax.swing.*;

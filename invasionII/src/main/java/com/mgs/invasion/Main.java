@@ -1,9 +1,9 @@
 package com.mgs.invasion;
 
 import com.mgs.fantasi.driver.UIDriver;
-import com.mgs.fantasi.profile.UIProfileFactory;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
+import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.views.View;
 import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
 

@@ -1,6 +1,8 @@
 package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.selectors.UISelector;
+import com.mgs.fantasi.styles.UIProfile;
+import com.mgs.fantasi.styles.UIStyle;
 import com.mgs.fantasi.views.View;
 import junit.framework.Assert;
 import org.junit.Before;

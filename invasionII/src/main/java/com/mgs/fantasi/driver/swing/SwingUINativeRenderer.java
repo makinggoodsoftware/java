@@ -3,8 +3,6 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.UINativeRenderer;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
-import com.mgs.fantasi.profile.UIProfileFactory;
-import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.*;
 import com.mgs.fantasi.properties.measurements.Fraction;
@@ -12,6 +10,8 @@ import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.rendering.wireframe.*;
+import com.mgs.fantasi.styles.UIProfileFactory;
+import com.mgs.fantasi.styles.UIStyle;
 import com.mgs.fantasi.views.View;
 
 import javax.swing.*;

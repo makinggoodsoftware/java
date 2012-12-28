@@ -1,4 +1,4 @@
-package com.mgs.fantasi.profile;
+package com.mgs.fantasi.styles;
 
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;

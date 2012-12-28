@@ -1,9 +1,10 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.styles.StyleManager;
+import com.mgs.fantasi.styles.UIStyle;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.Set;
@@ -13,7 +14,6 @@ import static com.mgs.fantasi.properties.ColorFactory.transparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
-
     PolygonPointsIterator shape = new NativeRectanguarShape();
 	Padding padding = Padding.zero();
 	Measurement measurement = emptyMeasurement();
@@ -21,11 +21,6 @@ public class UIProperties {
 	private UIPropertyProvider<ColorFactory.Color> backgroundColor = transparent();
 
 	public UIProperties() {
-	}
-
-	public void applyStyle(UIStyle uiStyle){
-        border = uiStyle.getBorderUIProperty().merge(border);
-		backgroundColor = uiStyle.getBackgroundColorUIProperty().merge(backgroundColor);
 	}
 
 	public void setBorder(UIPropertyProvider<BorderFactory.Border> border) {
@@ -75,7 +70,7 @@ public class UIProperties {
 
 	public void applyStyles(Set<UIStyle> styles) {
 		for (UIStyle style : styles) {
-			applyStyle(style);
+			StyleManager.applyStyle(style, this);
 		}
 	}
 

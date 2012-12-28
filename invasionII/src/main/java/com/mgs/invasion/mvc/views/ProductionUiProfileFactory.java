@@ -1,10 +1,10 @@
 package com.mgs.invasion.mvc.views;
 
-import com.mgs.fantasi.profile.UIProfile;
-import com.mgs.fantasi.profile.UIProfileFactory;
-import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.polygon.HexagonShape;
 import com.mgs.fantasi.selectors.UISelectorFactory;
+import com.mgs.fantasi.styles.UIProfile;
+import com.mgs.fantasi.styles.UIProfileFactory;
+import com.mgs.fantasi.styles.UIStyle;
 
 import java.awt.*;
 

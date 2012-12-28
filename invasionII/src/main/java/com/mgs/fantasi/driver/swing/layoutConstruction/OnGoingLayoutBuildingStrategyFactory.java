@@ -1,7 +1,7 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
-import com.mgs.fantasi.styles.UIProfileFactory;
+import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
 
 import javax.swing.*;
@@ -45,7 +45,7 @@ public class OnGoingLayoutBuildingStrategyFactory {
 			}
 
 			@Override
-			public void buildInto(JPanel container, SwingUINativeRenderer renderer, UIProfileFactory uiProfileFactory) {
+			public void buildInto(JPanel container, SwingUINativeRenderer renderer, UIProfile uiProfile) {
 				//do nothing
 			}
 		};

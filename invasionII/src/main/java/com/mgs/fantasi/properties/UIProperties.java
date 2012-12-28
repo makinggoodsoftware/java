@@ -3,11 +3,7 @@ package com.mgs.fantasi.properties;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.styles.StyleManager;
-import com.mgs.fantasi.styles.UIStyle;
 import org.apache.commons.beanutils.BeanUtils;
-
-import java.util.Set;
 
 import static com.mgs.fantasi.properties.BorderFactory.noBorder;
 import static com.mgs.fantasi.properties.ColorFactory.transparent;
@@ -61,17 +57,6 @@ public class UIProperties {
 
 	public void setBackgroundColor(UIPropertyProvider<ColorFactory.Color> backgroundColor) {
 		this.backgroundColor = backgroundColor;
-	}
-
-	public UIProperties withStyles (Set<UIStyle> styles){
-		applyStyles(styles);
-		return this;
-	}
-
-	public void applyStyles(Set<UIStyle> styles) {
-		for (UIStyle style : styles) {
-			StyleManager.applyStyle(style, this);
-		}
 	}
 
 	public UIPropertyProvider<ColorFactory.Color> getBackgroundColor() {

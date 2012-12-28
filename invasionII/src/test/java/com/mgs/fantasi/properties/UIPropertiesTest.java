@@ -1,7 +1,7 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.properties.polygon.NativeRectanguarShape;
-import com.mgs.fantasi.styles.StyleManager;
+import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIStyle;
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class UIPropertiesTest {
 	@Test
 	public void testApplyStyle_whenPropertiesAndStyleAreCompletelyEmpty(){
 		UIProperties uiProperties = new UIProperties();
-		StyleManager.applyStyle(new UIStyle(), uiProperties);
+		new StyleManagerImpl().applyStyle(uiProperties, new UIStyle());
 
 		assertEquals(uiProperties.getBackgroundColor(), transparent());
 		assertEquals(uiProperties.getBorder(), noBorder());
@@ -41,7 +41,7 @@ public class UIPropertiesTest {
 		UIStyle uiStyle = new UIStyle().
 			withBackgroundColor(newColorFromAwt(YELLOW)).
 			withBorder(newBorder(newColorFromAwt(RED), 3));
-		StyleManager.applyStyle(uiStyle, uiProperties);
+		new StyleManagerImpl().applyStyle(uiProperties, uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), newColorFromAwt(YELLOW));
 		assertEquals(uiProperties.getBorder().getData().getColor(), newColorFromAwt(RED));
@@ -53,7 +53,7 @@ public class UIPropertiesTest {
 		UIProperties uiProperties = new UIProperties();
 		UIStyle uiStyle = new UIStyle().
 			withBackgroundColor(newColorFromAwt(YELLOW));
-		StyleManager.applyStyle(uiStyle, uiProperties);
+		new StyleManagerImpl().applyStyle(uiProperties, uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), newColorFromAwt(YELLOW));
 		assertEquals(uiProperties.getBorder(), noBorder());
@@ -68,7 +68,7 @@ public class UIPropertiesTest {
 
 		UIStyle uiStyle = new UIStyle().
 			withBackgroundColor(newColorFromAwt(BLACK));
-		StyleManager.applyStyle(uiStyle, uiProperties);
+		new StyleManagerImpl().applyStyle(uiProperties, uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), newColorFromAwt(BLACK));
 		assertEquals(uiProperties.getBorder().getData().getColor(), newColorFromAwt(YELLOW));
@@ -82,7 +82,7 @@ public class UIPropertiesTest {
 
 		UIStyle uiStyle = new UIStyle().
 			withBorder(newBorder(newColorFromAwt(BLACK), 2));
-		StyleManager.applyStyle(uiStyle, uiProperties);
+		new StyleManagerImpl().applyStyle(uiProperties, uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), newColorFromAwt(RED));
 		assertEquals(uiProperties.getBorder().getData().getColor(), newColorFromAwt(BLACK));

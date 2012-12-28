@@ -10,24 +10,27 @@ import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.rendering.wireframe.*;
-import com.mgs.fantasi.styles.UIProfileFactory;
-import com.mgs.fantasi.styles.UIStyle;
+import com.mgs.fantasi.styles.StyleManager;
+import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Set;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
-
 	private final OnGoingLayoutBuildingStrategyFactory layoutStrategyFactory = new OnGoingLayoutBuildingStrategyFactory();
+	private final StyleManager styleManager;
+
+	public SwingUINativeRenderer(StyleManager styleManager) {
+		this.styleManager = styleManager;
+	}
 
 	@Override
-	public JPanel render(View renderable, UIProfileFactory uiProfileFactory) {
-        Set<UIStyle> propertiesWithStyles = uiProfileFactory.getUIProfile().findStylesFor(renderable);
-        JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUiProperties().copy().withStyles(propertiesWithStyles));
-		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.buildContent());
-		layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfileFactory);
+	public JPanel render(View view, UIProfile uiProfile) {
+		UIProperties uiPropertiesWitStyles = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
+		JPanel uiNativeElement = createUINativeElementSkeleton(uiPropertiesWitStyles);
+		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(view.buildContent());
+		layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
 		return uiNativeElement;
 	}
 

@@ -1,7 +1,7 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
-import com.mgs.fantasi.styles.UIProfileFactory;
+import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
 
 import javax.swing.*;
@@ -22,11 +22,11 @@ public abstract class BaseLayoutConstructionStrategyStrategy<T> implements Layou
 	}
 
 	@Override
-	public void buildInto(JPanel container, SwingUINativeRenderer renderer, UIProfileFactory uiProfileFactory){
+	public void buildInto(JPanel container, SwingUINativeRenderer renderer, UIProfile uiProfile){
 		container.setLayout(layoutProvider.getLayoutManager(container));
 		for (OnGoingChildAddition onGoingChildAddition : toBeAdded) {
 			View content = onGoingChildAddition.getCellContent();
-			JPanel uiNativeElement = renderer.render(content, uiProfileFactory);
+			JPanel uiNativeElement = renderer.render(content, uiProfile);
 			container.add(uiNativeElement, onGoingChildAddition.getSpecifics());
 		}
 	}

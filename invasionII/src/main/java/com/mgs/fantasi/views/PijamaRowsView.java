@@ -1,8 +1,8 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
-import com.mgs.fantasi.rendering.structure.grid.CellContent;
-import com.mgs.fantasi.rendering.structure.grid.CellContentGenerator;
+import com.mgs.fantasi.rendering.wireframe.grid.CellContent;
+import com.mgs.fantasi.rendering.wireframe.grid.CellContentGenerator;
 import com.mgs.fantasi.rendering.wireframe.GridWireframe;
 import com.mgs.fantasi.rendering.wireframe.Wireframe;
 

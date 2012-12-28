@@ -2,7 +2,6 @@ package com.mgs.fantasi.rendering.wireframe;
 
 import com.mgs.fantasi.Structurable;
 import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
-import com.mgs.fantasi.rendering.structure.StructureType;
 
 public class RectangleWireframe<T extends Structurable> implements Wireframe<T> {
 	private T content;
@@ -21,8 +20,8 @@ public class RectangleWireframe<T extends Structurable> implements Wireframe<T> 
 	}
 
 	@Override
-	public StructureType getType() {
-		return StructureType.SIMPLE;
+	public WireframeType getType() {
+		return WireframeType.SIMPLE;
 	}
 
 	public T getContent() {

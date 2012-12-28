@@ -1,6 +1,6 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.rendering.structure.StructureType;
+import com.mgs.fantasi.rendering.wireframe.WireframeType;
 import com.mgs.fantasi.rendering.wireframe.RectangleWireframe;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class RectangleViewTest {
 		RectangleView rectangle = rectangle();
 		RectangleWireframe<View> wireframe = (RectangleWireframe<View>) rectangle.buildContent();
 
-		Assert.assertEquals(wireframe.getType(), StructureType.SIMPLE);
+		Assert.assertEquals(wireframe.getType(), WireframeType.SIMPLE);
 		Assert.assertNull(wireframe.getContent());
 	}
 
@@ -25,7 +25,7 @@ public class RectangleViewTest {
 		RectangleView rectangle = rectangle().withContent(contentMock);
 		RectangleWireframe<View> wireframe = (RectangleWireframe<View>) rectangle.buildContent();
 
-		Assert.assertEquals(wireframe.getType(), StructureType.SIMPLE);
+		Assert.assertEquals(wireframe.getType(), WireframeType.SIMPLE);
 		Assert.assertSame(wireframe.getContent(), contentMock);
 	}
 

@@ -1,7 +1,7 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.rendering.Renderable;
-import com.mgs.fantasi.rendering.structure.layer.LayerIterator;
+import com.mgs.fantasi.rendering.wireframe.layer.LayerIterator;
 import com.mgs.fantasi.rendering.wireframe.LayeredWireframe;
 
 public class LayerBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategyStrategy<Integer> {

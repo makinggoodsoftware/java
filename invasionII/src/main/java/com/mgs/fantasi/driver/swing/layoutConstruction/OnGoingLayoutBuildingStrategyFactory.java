@@ -2,7 +2,6 @@ package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.rendering.Renderable;
-import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,11 +37,8 @@ public class OnGoingLayoutBuildingStrategyFactory {
 
 	public LayoutConstructionStrategy<Void> empty() {
 		return new LayoutConstructionStrategy<Void>() {
-			public LayoutConstructionStrategy<Void> processGridStructure(GridStructure<Renderable> structure) {
-				throw new RuntimeException("This ongoing construction is empty, nothing can be added to it");
-			}
 
-			@Override
+            @Override
 			public OnGoingChildAddition<Void> queueForAddition(Renderable child) {
 				throw new RuntimeException("This ongoing construction is empty, nothing can be added to it");
 			}

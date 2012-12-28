@@ -2,8 +2,8 @@ package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.rendering.Renderable;
-import com.mgs.fantasi.rendering.structure.grid.CellContent;
-import com.mgs.fantasi.rendering.structure.grid.CellIterator;
+import com.mgs.fantasi.rendering.wireframe.grid.CellContent;
+import com.mgs.fantasi.rendering.wireframe.grid.CellIterator;
 import com.mgs.fantasi.rendering.wireframe.GridWireframe;
 
 import java.awt.*;

@@ -1,4 +1,4 @@
-package com.mgs.fantasi.rendering.structure.grid;
+package com.mgs.fantasi.rendering.wireframe.grid;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;

@@ -12,4 +12,6 @@ public interface View extends Structurable {
 	UIProperties getUiProperties ();
 
 	UIProperties takeUiPropertiesSnapshot();
+
+    String getName();
 }

@@ -12,17 +12,21 @@ import java.util.List;
 
 public abstract class BaseView<T extends BaseView> implements View {
 	private final UIProperties uiProperties = new UIProperties();
+    private String name = "";
 
-	public T withPadding(Padding padding) {
+    @SuppressWarnings(value = "unchecked")
+    public T withPadding(Padding padding) {
 		getUiProperties().setPadding(padding);
 		return (T) this;
 	}
 
+    @SuppressWarnings(value = "unchecked")
 	public T withName(String name) {
-		getUiProperties().setName(name);
+		this.name = name;
 		return (T) this;
 	}
 
+    @SuppressWarnings(value = "unchecked")
 	public T withMeasurement(Measurement measurement) {
 		getUiProperties().setMeasurement(measurement);
 		return (T) this;
@@ -63,6 +67,11 @@ public abstract class BaseView<T extends BaseView> implements View {
 		return getUiProperties().copy();
 	}
 
-	protected abstract T copySpecifics();
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    protected abstract T copySpecifics();
 
 }

@@ -21,7 +21,6 @@ public class UIPropertiesTest {
 		assertEquals(uiProperties.getBackgroundColor(), transparent());
 		assertEquals(uiProperties.getBorder(), noBorder());
 		assertEquals(uiProperties.getMeasurement(), emptyMeasurement());
-		assertEquals(uiProperties.getName(), "");
 		assertEquals(uiProperties.getPadding(), Padding.zero());
 		assertTrue(uiProperties.getShape() instanceof BaseView.NativeRectanguarShape);
 	}

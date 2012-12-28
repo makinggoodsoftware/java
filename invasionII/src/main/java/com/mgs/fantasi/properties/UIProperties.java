@@ -14,11 +14,9 @@ import static com.mgs.fantasi.properties.ColorFactory.transparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
-	public static final String EMPTY_NAME = "";
 
-	PolygonPointsIterator shape = new BaseView.NativeRectanguarShape();
+    PolygonPointsIterator shape = new BaseView.NativeRectanguarShape();
 	Padding padding = Padding.zero();
-	String name = EMPTY_NAME;
 	Measurement measurement = emptyMeasurement();
 	private PropertyDefinition<BorderFactory.Border> border = noBorder();
 	private PropertyDefinition<ColorFactory.Color> backgroundColor = transparent();
@@ -43,20 +41,12 @@ public class UIProperties {
 		this.padding = padding;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setMeasurement(Measurement measurement) {
 		this.measurement = measurement;
 	}
 
 	public Padding getPadding() {
 		return padding;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public PolygonPointsIterator getShape() {
@@ -73,7 +63,6 @@ public class UIProperties {
 		if (getMeasurement()!=null){
 			copy.setMeasurement(getMeasurement().copy());
 		}
-		copy.setName(name);
 		copy.setShape(shape.copy());
 		return copy;
 	}
@@ -82,7 +71,6 @@ public class UIProperties {
 		UIProperties copyOfThat = that.copy();
 		this.shape = copyOfThat.shape;
 		this.padding = copyOfThat.padding;
-		this.name = copyOfThat.name;
 		this.measurement = copyOfThat.measurement;
 	}
 

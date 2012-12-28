@@ -11,6 +11,6 @@ public class UISelectorBasedOnName implements UISelector {
 
 	@Override
 	public boolean appliesTo(View renderable) {
-		return renderable.getUiProperties().getName().equals(name);
+		return renderable.getName().equals(name);
 	}
 }

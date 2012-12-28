@@ -16,6 +16,7 @@ public class ViewPreprocessorImpl implements ViewPreprocessor {
 
         return new Renderable
 		(
+            wireframeOfRenderables,
             structureOfRenderables,
             uiPropertiesWithStylesApplied
 		);

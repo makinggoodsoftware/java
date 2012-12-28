@@ -10,11 +10,7 @@ import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.rendering.Renderable;
-import com.mgs.fantasi.rendering.structure.DelegateStructure;
-import com.mgs.fantasi.rendering.structure.SimpleStructure;
-import com.mgs.fantasi.rendering.structure.Structure;
-import com.mgs.fantasi.rendering.structure.grid.GridStructure;
-import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
+import com.mgs.fantasi.rendering.wireframe.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +22,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
 	public JPanel render(Renderable renderable) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
-		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.getContent());
+		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.getContentAsWireframes());
 		layoutConstructionStrategy.buildInto(uiNativeElement, this);
 		return uiNativeElement;
 	}
@@ -44,16 +40,16 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return outmostPointer;
 	}
 
-	public LayoutConstructionStrategy<?> processStructure(Structure<Renderable> content) {
+	public LayoutConstructionStrategy<?> processStructure(Wireframe<Renderable> content) {
 		switch (content.getType()){
 			case GRID:
-				return layoutStrategyFactory.grid().from((GridStructure<Renderable>) content);
+				return layoutStrategyFactory.grid().from((GridWireframe<Renderable>) content);
 			case LAYERS:
-				return layoutStrategyFactory.layers().from((LayeredStructure<Renderable>) content);
+				return layoutStrategyFactory.layers().from((LayeredWireframe<Renderable>) content);
 			case SIMPLE:
-				return layoutStrategyFactory.simple().from((SimpleStructure<Renderable>) content);
+				return layoutStrategyFactory.simple().from((RectangleWireframe<Renderable>) content);
 			case DELEGATE:
-				Structure<Renderable> delegate = ((DelegateStructure<Renderable>) content).getContent();
+				Wireframe<Renderable> delegate = ((DelegateWireframe<Renderable>) content).getContent();
 				return processStructure(delegate);
 			case EMPTY:
 				return new OnGoingLayoutBuildingStrategyFactory().empty();

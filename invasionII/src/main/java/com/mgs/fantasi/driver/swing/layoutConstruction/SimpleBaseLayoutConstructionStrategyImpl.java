@@ -2,7 +2,7 @@ package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.rendering.Renderable;
-import com.mgs.fantasi.rendering.structure.SimpleStructure;
+import com.mgs.fantasi.rendering.wireframe.RectangleWireframe;
 
 import java.awt.*;
 
@@ -13,7 +13,7 @@ public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstruc
 		super(layoutProvider);
 	}
 
-	public SimpleBaseLayoutConstructionStrategyImpl from(SimpleStructure<Renderable> content) {
+	public SimpleBaseLayoutConstructionStrategyImpl from(RectangleWireframe<Renderable> content) {
 		Renderable renderable = content.getContent();
 		if (renderable!=null) {
 			queueForAddition(renderable).into(coordinates(0, 0, Fractions.all(), Fractions.all()));

@@ -28,4 +28,8 @@ public class DelegateWireframe<T extends Structurable> implements Wireframe<T> {
 		this.content = content;
 		return this;
 	}
+
+    public Wireframe<T> getContent() {
+        return content;
+    }
 }

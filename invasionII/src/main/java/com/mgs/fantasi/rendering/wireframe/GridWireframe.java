@@ -4,10 +4,7 @@ import com.mgs.fantasi.Structurable;
 import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
 import com.mgs.fantasi.rendering.structure.Structure;
 import com.mgs.fantasi.rendering.structure.StructureType;
-import com.mgs.fantasi.rendering.structure.grid.ArrayListGridStructure;
-import com.mgs.fantasi.rendering.structure.grid.CellContent;
-import com.mgs.fantasi.rendering.structure.grid.CellContentGenerator;
-import com.mgs.fantasi.rendering.structure.grid.GridStructure;
+import com.mgs.fantasi.rendering.structure.grid.*;
 
 import java.awt.*;
 
@@ -50,4 +47,12 @@ public class GridWireframe<T extends Structurable>  implements Wireframe<T> {
 	public StructureType getType() {
 		return StructureType.GRID;
 	}
+
+    public void itereateCellsWith(CellIterator<T> cellIterator) {
+        for (int x=0; x < dimension.width; x++){
+            for (int y=0; y < dimension.height; y++){
+                cellIterator.on(x, y, cellContentGenerator.generateContentFor(x, y));
+            }
+        }
+    }
 }

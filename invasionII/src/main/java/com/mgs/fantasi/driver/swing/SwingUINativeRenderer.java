@@ -25,7 +25,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
 	public JPanel render(View renderable, UIProfileFactory uiProfileFactory) {
         Set<UIStyle> propertiesWithStyles = uiProfileFactory.getUIProfile().findStylesFor(renderable);
-        JPanel uiNativeElement = createUINativeElementSkeleton(renderable.takeUiPropertiesSnapshot().withStyles(propertiesWithStyles));
+        JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUiProperties().copy().withStyles(propertiesWithStyles));
 		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.buildContent());
 		layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfileFactory);
 		return uiNativeElement;

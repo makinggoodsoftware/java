@@ -55,11 +55,6 @@ public abstract class BaseView<T extends BaseView> implements View {
 
 	}
 
-	@Override
-	public UIProperties takeUiPropertiesSnapshot() {
-		return getUiProperties().copy();
-	}
-
     @Override
     public String getName() {
         return name;

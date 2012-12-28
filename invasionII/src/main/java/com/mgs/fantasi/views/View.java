@@ -8,7 +8,5 @@ public interface View{
 
 	UIProperties getUiProperties ();
 
-	UIProperties takeUiPropertiesSnapshot();
-
     String getName();
 }

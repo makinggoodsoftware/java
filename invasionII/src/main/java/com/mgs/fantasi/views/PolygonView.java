@@ -17,9 +17,4 @@ public class PolygonView extends BaseView<PolygonView> {
 	public Wireframe<View> buildChildViews() {
 		return new EmptyWireframe<View>();
 	}
-
-	@Override
-	public PolygonView copySpecifics() {
-		return new PolygonView(getUiProperties().getShape());
-	}
 }

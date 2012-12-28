@@ -44,17 +44,4 @@ public class TwoLinesView extends BaseView {
 				});
 
 	}
-
-	@Override
-	protected BaseView copySpecifics() {
-		return new TwoLinesView(firstLineBuilder.newCopy(), secondLineBuilder.newCopy()).withFirstRowSize(firstLineHeighSizeRatio);
-	}
-
-	public View getFirstLineBuilder() {
-		return firstLineBuilder;
-	}
-
-	public View getSecondLineBuilder() {
-		return secondLineBuilder;
-	}
 }

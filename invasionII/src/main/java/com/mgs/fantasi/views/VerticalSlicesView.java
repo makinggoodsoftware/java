@@ -21,7 +21,7 @@ public class VerticalSlicesView extends BaseView {
 
 	@Override
 	public Wireframe<View> buildChildViews() {
-		GridWireframe<View> grid = new GridWireframe();
+		GridWireframe<View> grid = new GridWireframe<View>();
 		return grid.withDimension(numberOfDivisions, 1).withContent(new CellContentGenerator<View>() {
 			@Override
 			public CellContent<View> generateContentFor(int x, int y) {
@@ -33,10 +33,5 @@ public class VerticalSlicesView extends BaseView {
 	public VerticalSlicesView withVerticalDivisions (int numberOVerticalDivisions){
 		this.numberOfDivisions = numberOVerticalDivisions;
 		return this;
-	}
-
-	@Override
-	public VerticalSlicesView copySpecifics() {
-		return new VerticalSlicesView(contentBuilder.newCopy()).withVerticalDivisions(numberOfDivisions);
 	}
 }

@@ -16,15 +16,11 @@ import static com.mgs.fantasi.views.RectangleView.rectangle;
 import static com.mgs.fantasi.views.VerticalSlicesView.verticalSlices;
 
 public class HexagonRowsView extends BaseView<HexagonRowsView> {
-	private int numberOVerticalDivisions;
-	private int numberOfGerations;
-	private PijamaRowsView pijamaRows;
+    private PijamaRowsView pijamaRows;
 	private final PolygonView hexagon;
 
 	public HexagonRowsView(int numberOfGerations, int numberOVerticalDivisions) {
-		this.numberOfGerations = numberOfGerations;
-		this.numberOVerticalDivisions = numberOVerticalDivisions;
-		hexagon = polygon(new HexagonShape());
+        hexagon = polygon(new HexagonShape());
 		this.pijamaRows = pijamaRows(
 			verticalSlices(hexagon).
 					withVerticalDivisions(numberOVerticalDivisions)
@@ -45,17 +41,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 				withContent(pijamaRows.buildChildViews());
 	}
 
-	@Override
-	protected HexagonRowsView copySpecifics() {
-		return new HexagonRowsView(numberOfGerations, numberOVerticalDivisions);
-	}
-
-	public HexagonRowsView withOneLessColumn() {
-		this.numberOVerticalDivisions --;
-		return this;
-	}
-
-	public View withHexagonMeasurement(Measurement hexagonMeasurement) {
+    public View withHexagonMeasurement(Measurement hexagonMeasurement) {
 		hexagon.withMeasurement(hexagonMeasurement);
 		return this;
 	}

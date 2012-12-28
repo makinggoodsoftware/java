@@ -56,13 +56,6 @@ public abstract class BaseView<T extends BaseView> implements View {
 	}
 
 	@Override
-	public final T newCopy() {
-		T copy = copySpecifics();
-		copy.getUiProperties().copyFrom(getUiProperties());
-		return copy;
-	}
-
-	@Override
 	public UIProperties takeUiPropertiesSnapshot() {
 		return getUiProperties().copy();
 	}
@@ -71,7 +64,4 @@ public abstract class BaseView<T extends BaseView> implements View {
     public String getName() {
         return name;
     }
-
-    protected abstract T copySpecifics();
-
 }

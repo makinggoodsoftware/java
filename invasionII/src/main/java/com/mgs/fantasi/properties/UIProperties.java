@@ -6,6 +6,7 @@ import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.views.BaseView;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.Set;
 
@@ -58,21 +59,12 @@ public class UIProperties {
 	}
 
 	public UIProperties copy() {
-		UIProperties copy = new UIProperties();
-		copy.setPadding(getPadding().copy());
-		if (getMeasurement()!=null){
-			copy.setMeasurement(getMeasurement().copy());
-		}
-		copy.setShape(shape.copy());
-		return copy;
-	}
-
-	public void copyFrom(UIProperties that) {
-		UIProperties copyOfThat = that.copy();
-		this.shape = copyOfThat.shape;
-		this.padding = copyOfThat.padding;
-		this.measurement = copyOfThat.measurement;
-	}
+        try {
+            return (UIProperties) BeanUtils.cloneBean(this);
+        } catch (Exception e) {
+            throw new RuntimeException("Unexpected exception copying UIProperties", e);
+        }
+    }
 
 	public void setBackgroundColor(PropertyDefinition<ColorFactory.Color> backgroundColor) {
 		this.backgroundColor = backgroundColor;

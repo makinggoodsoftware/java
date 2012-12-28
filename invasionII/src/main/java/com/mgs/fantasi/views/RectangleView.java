@@ -6,11 +6,7 @@ import com.mgs.fantasi.rendering.wireframe.Wireframe;
 public class RectangleView extends BaseView<RectangleView> {
 	private View content;
 
-	private RectangleView(View content) {
-		this.content = content;
-	}
-
-	private RectangleView() {
+    private RectangleView() {
 	}
 
 	public static RectangleView rectangle() {
@@ -23,13 +19,8 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public RectangleView copySpecifics() {
-		return new RectangleView(content.newCopy());
-	}
-
-	@Override
-	public Wireframe buildChildViews() {
-		RectangleWireframe emptyRectangle = new RectangleWireframe();
+	public Wireframe<View> buildChildViews() {
+		RectangleWireframe<View> emptyRectangle = new RectangleWireframe<View>();
 		if (content==null) return emptyRectangle;
 		return emptyRectangle.withContent(content);
 	}

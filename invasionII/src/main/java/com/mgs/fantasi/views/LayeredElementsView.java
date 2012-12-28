@@ -23,13 +23,4 @@ public class LayeredElementsView extends BaseView {
 		return new LayeredWireframe<View>().
 			withLayers(layers);
 	}
-
-	@Override
-	protected BaseView copySpecifics() {
-		LayeredElementsView copy = new LayeredElementsView();
-		for (View layer : layers) {
-			copy.withLayer(layer.newCopy());
-		}
-		return copy;
-	}
 }

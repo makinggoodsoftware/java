@@ -7,7 +7,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 public class UISelectorBasedOnStructureTypeTest {
-
 	@Test
 	public void testAppliesTo() throws Exception {
 		UISelectorBasedOnStructureType selector = new UISelectorBasedOnStructureType(MatchingStructureType.class);
@@ -23,11 +22,6 @@ public class UISelectorBasedOnStructureTypeTest {
 		public Wireframe<View> buildChildViews() {
 			return null;
 		}
-
-		@Override
-		protected BaseView copySpecifics() {
-			return null;
-		}
 	}
 	private class MatchingStructureType extends MatchingStructureTypeParent {}
 	private class ExtendingInterface extends MatchingStructureType {}
@@ -36,11 +30,5 @@ public class UISelectorBasedOnStructureTypeTest {
 		public Wireframe<View> buildChildViews() {
 			return null;
 		}
-
-		@Override
-		protected BaseView copySpecifics() {
-			return null;
-		}
 	}
-
 }

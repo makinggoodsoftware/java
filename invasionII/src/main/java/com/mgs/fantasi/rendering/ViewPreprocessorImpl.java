@@ -9,7 +9,7 @@ public class ViewPreprocessorImpl implements ViewPreprocessor {
 	public Renderable prepareForRendering(View view, UIProfile uiProfile) {
 		return new Renderable
 		(
-			view.buildChildViews().transform(toRenderables(uiProfile)).build(),
+			view.buildContent().transform(toRenderables(uiProfile)).build(),
 			view.takeUiPropertiesSnapshot().withStyles(uiProfile.findStylesFor(view))
 		);
 	}

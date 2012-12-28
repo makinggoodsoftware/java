@@ -19,7 +19,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public Wireframe<View> buildChildViews() {
+	public Wireframe<View> buildContent() {
 		RectangleWireframe<View> emptyRectangle = new RectangleWireframe<View>();
 		if (content==null) return emptyRectangle;
 		return emptyRectangle.withContent(content);

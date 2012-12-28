@@ -2,7 +2,6 @@ package com.mgs.fantasi.rendering;
 
 import com.mgs.fantasi.Structurable;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.rendering.structure.Structure;
 
 public class Renderable implements Structurable {
@@ -14,19 +13,11 @@ public class Renderable implements Structurable {
 		this.content = content;
 	}
 
-	public PolygonPointsIterator getShape() {
-		return uiProperties.getShape();
-	}
-
-	public Structure<Renderable> getContent() {
+    public Structure<Renderable> getContent() {
 		return content;
 	}
 
-	public Padding getMargin() {
-		return uiProperties.getPadding();
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return "Renderable{" +
 				", uiProperties=" + uiProperties +

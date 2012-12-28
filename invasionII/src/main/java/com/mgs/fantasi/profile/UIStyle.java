@@ -2,35 +2,36 @@ package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;
+import com.mgs.fantasi.properties.UIPropertyProvider;
 
-import static com.mgs.fantasi.profile.NullProperty.nullProperty;
+import static com.mgs.fantasi.properties.NullUIProperty.nullProperty;
 
 
 public class UIStyle {
-	private PropertyDefinition<ColorFactory.Color> backgroundColorProperty = nullProperty(ColorFactory.Color.class);
-    private PropertyDefinition<BorderFactory.Border> borderProperty = nullProperty(BorderFactory.Border.class);
+	private UIPropertyProvider<ColorFactory.Color> backgroundColorUIProperty = nullProperty(ColorFactory.Color.class);
+    private UIPropertyProvider<BorderFactory.Border> borderUIProperty = nullProperty(BorderFactory.Border.class);
 
 
-	public UIStyle withBorder(PropertyDefinition<BorderFactory.Border> border) {
+	public UIStyle withBorder(UIPropertyProvider<BorderFactory.Border> border) {
 		if (border == null) throw new IllegalArgumentException();
-		this.borderProperty = border;
+		this.borderUIProperty = border;
 
 		return this;
 	}
 
-	public UIStyle withBackgroundColor(PropertyDefinition<ColorFactory.Color> color) {
+	public UIStyle withBackgroundColor(UIPropertyProvider<ColorFactory.Color> color) {
 		if (color == null) throw new IllegalArgumentException();
-		this.backgroundColorProperty = color;
+		this.backgroundColorUIProperty = color;
 
 		return this;
 	}
 
-	public PropertyDefinition<ColorFactory.Color> getBackgroundColorProperty() {
-		return backgroundColorProperty;
+	public UIPropertyProvider<ColorFactory.Color> getBackgroundColorUIProperty() {
+		return backgroundColorUIProperty;
 	}
 
-	public PropertyDefinition<BorderFactory.Border> getBorderProperty() {
-		return borderProperty;
+	public UIPropertyProvider<BorderFactory.Border> getBorderUIProperty() {
+		return borderUIProperty;
 	}
 
 }

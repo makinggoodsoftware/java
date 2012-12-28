@@ -1,4 +1,4 @@
-package com.mgs.fantasi.profile;
+package com.mgs.fantasi.properties;
 
 public interface UIProperty {
     UIProperty copy();

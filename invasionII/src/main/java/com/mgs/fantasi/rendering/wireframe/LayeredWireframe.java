@@ -1,10 +1,10 @@
 package com.mgs.fantasi.rendering.wireframe;
 
 import com.mgs.fantasi.Structurable;
-import com.mgs.fantasi.rendering.structure.StructureType;
-import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
 import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
 import com.mgs.fantasi.rendering.structure.Structure;
+import com.mgs.fantasi.rendering.structure.StructureType;
+import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
 
 import java.util.ArrayList;
 import java.util.List;

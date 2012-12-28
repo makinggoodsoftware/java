@@ -1,11 +1,11 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.profile.UIStyle;
-import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.views.BaseView;
 import org.junit.Test;
 
-import static com.mgs.fantasi.properties.BorderFactory.*;
+import static com.mgs.fantasi.properties.BorderFactory.newBorder;
+import static com.mgs.fantasi.properties.BorderFactory.noBorder;
 import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;
 import static com.mgs.fantasi.properties.ColorFactory.transparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;

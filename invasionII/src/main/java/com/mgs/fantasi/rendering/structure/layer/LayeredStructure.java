@@ -13,7 +13,7 @@ public class LayeredStructure<T extends Structurable> implements Structure<T> {
 		this.layers = layers;
 	}
 
-	public void iterateInCrescendo(LayerIterator layerIterator) {
+	public void iterateInCrescendo(LayerIterator<T> layerIterator) {
 		int zIndex = 0;
 		for (int i = layers.size() - 1; i >= 0; i--){
 			layerIterator.on (zIndex, layers.get(i));

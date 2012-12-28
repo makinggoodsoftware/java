@@ -4,13 +4,14 @@ import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.profile.UIProfileFactory;
 import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.polygon.HexagonShape;
-import com.mgs.fantasi.properties.selectors.UISelectorFactory;
+import com.mgs.fantasi.selectors.UISelectorFactory;
 
 import java.awt.*;
 
 import static com.mgs.fantasi.properties.BorderFactory.newBorder;
 import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;
 
+@SuppressWarnings("unused")
 public class ProductionUiProfileFactory implements UIProfileFactory {
 
 	@Override

@@ -1,43 +1,40 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.NotNullProperty;
-import com.mgs.fantasi.profile.NullProperty;
-import com.mgs.fantasi.profile.PropertyDefinition;
-import com.mgs.fantasi.profile.UIProperty;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import static com.mgs.fantasi.profile.NullProperty.nullProperty;
 import static com.mgs.fantasi.properties.ColorFactory.transparent;
+import static com.mgs.fantasi.properties.NullUIProperty.nullProperty;
 
 public abstract class BorderFactory {
-	public static final NullProperty<Border> BORDER_NULL_PROPERTY = nullProperty(Border.class);
-	public static final PropertyDefinition<Border> BORDER_EMPTY_PROPERTY = newBorder(transparent(), 0);
+	public static final NullUIProperty<Border> BORDER_NULL_PROPERTY = nullProperty(Border.class);
+	public static final UIPropertyProvider<Border> BORDER_EMPTY_UI_PROPERTY = newBorder(transparent(), 0);
 
-	public static PropertyDefinition<Border> nullBorder(){
+    @SuppressWarnings("unused")
+    public static UIPropertyProvider<Border> nullBorder(){
         return BORDER_NULL_PROPERTY;
 	}
 
-	public static PropertyDefinition<Border> noBorder(){
-		return BORDER_EMPTY_PROPERTY;
+	public static UIPropertyProvider<Border> noBorder(){
+		return BORDER_EMPTY_UI_PROPERTY;
 	}
 
-	public static PropertyDefinition<Border> newBorder(PropertyDefinition<ColorFactory.Color> color, int width) {
+	public static UIPropertyProvider<Border> newBorder(UIPropertyProvider<ColorFactory.Color> color, int width) {
 		if (! color.isDefined()) throw new RuntimeException("Can't define a border without color");
-        return new NotNullProperty<Border>(new Border(color, width));
+        return new NotNullUIProperty<Border>(new Border(color, width));
 	}
 
     public static class Border implements UIProperty {
-        private final PropertyDefinition<ColorFactory.Color> color;
+        private final UIPropertyProvider<ColorFactory.Color> color;
         private final int width;
 
-        public Border(PropertyDefinition<ColorFactory.Color> color, int width) {
+        public Border(UIPropertyProvider<ColorFactory.Color> color, int width) {
             if (!color.isDefined() && width!=0) throw new RuntimeException("Invalid combination!!");
             this.color = color;
             this.width = width;
         }
 
-        public PropertyDefinition<ColorFactory.Color> getColor() {
+        public UIPropertyProvider<ColorFactory.Color> getColor() {
             return color;
         }
 
@@ -66,11 +63,9 @@ public abstract class BorderFactory {
 
 			Border border = (Border) o;
 
-			if (width != border.width) return false;
-			if (color != null ? !color.equals(border.color) : border.color != null) return false;
+            return width == border.width && !(color != null ? !color.equals(border.color) : border.color != null);
 
-			return true;
-		}
+        }
 
 		@Override
 		public int hashCode() {

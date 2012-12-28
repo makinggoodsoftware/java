@@ -1,4 +1,4 @@
-package com.mgs.fantasi.properties.selectors;
+package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.views.BaseView;
@@ -19,7 +19,7 @@ public class UISelectorBasedOnStructureTypeTest {
 
 	private class MatchingStructureTypeParent extends BaseView {
 		@Override
-		public Wireframe<View> buildChildViews() {
+		public Wireframe<View> buildContent() {
 			return null;
 		}
 	}
@@ -27,7 +27,7 @@ public class UISelectorBasedOnStructureTypeTest {
 	private class ExtendingInterface extends MatchingStructureType {}
 	private class OtherStructureType extends BaseView {
 		@Override
-		public Wireframe<View> buildChildViews() {
+		public Wireframe<View> buildContent() {
 			return null;
 		}
 	}

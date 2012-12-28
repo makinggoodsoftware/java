@@ -3,15 +3,12 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.UINativeRenderer;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
-import com.mgs.fantasi.profile.PropertyDefinition;
 import com.mgs.fantasi.properties.BorderFactory;
-import com.mgs.fantasi.properties.ColorFactory;
-import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.*;
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
-import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.structure.DelegateStructure;
 import com.mgs.fantasi.rendering.structure.SimpleStructure;
@@ -93,15 +90,15 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
 	private void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
-        PropertyDefinition<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
+        UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
         if (backgroundColor.isDefined() &&  ! backgroundColor.getData().isTransparent()){
             jPanel.setBackground(backgroundColor.getData().getColorAsAwt());
         }
-		PropertyDefinition<BorderFactory.Border> border = uiProperties.getBorder();
+		UIPropertyProvider<BorderFactory.Border> border = uiProperties.getBorder();
 		if (border.isDefined() && border.getData().getWidth() > 0){
-            PropertyDefinition<ColorFactory.Color> colorDefinition = border.getData().getColor();
-            if (colorDefinition.isDefined()){
-                ColorFactory.Color colorData = colorDefinition.getData();
+            UIPropertyProvider<ColorFactory.Color> colorProviderUI = border.getData().getColor();
+            if (colorProviderUI.isDefined()){
+                ColorFactory.Color colorData = colorProviderUI.getData();
                 Color lineColor = colorData.isTransparent() ? Color.ORANGE : colorData.getColorAsAwt();
                 javax.swing.border.Border lineBorder = javax.swing.BorderFactory.createLineBorder(lineColor, border.getData().getWidth());
 			    jPanel.setBorder(lineBorder);

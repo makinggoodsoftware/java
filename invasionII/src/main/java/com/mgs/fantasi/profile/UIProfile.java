@@ -1,6 +1,6 @@
 package com.mgs.fantasi.profile;
 
-import com.mgs.fantasi.properties.selectors.UISelector;
+import com.mgs.fantasi.selectors.UISelector;
 import com.mgs.fantasi.views.View;
 
 import java.util.HashMap;

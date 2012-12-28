@@ -1,6 +1,7 @@
 package com.mgs.fantasi.properties.measurements;
 
-import com.mgs.fantasi.rendering.Padding;
+import com.mgs.fantasi.properties.Padding;
+import org.apache.commons.lang.builder.EqualsBuilder;
 
 public class EmptyMeasurement implements Measurement{
 	public static final EmptyMeasurement EMPTY_MEASUREMENT = new EmptyMeasurement();
@@ -34,7 +35,6 @@ public class EmptyMeasurement implements Measurement{
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) return false;
-		return o instanceof EmptyMeasurement;
-	}
+        return EqualsBuilder.reflectionEquals(this, o);
+    }
 }

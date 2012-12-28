@@ -1,27 +1,25 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.NotNullProperty;
-import com.mgs.fantasi.profile.NullProperty;
-import com.mgs.fantasi.profile.PropertyDefinition;
-import com.mgs.fantasi.profile.UIProperty;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import static com.mgs.fantasi.profile.NullProperty.nullProperty;
+import static com.mgs.fantasi.properties.NullUIProperty.nullProperty;
 
 public abstract class ColorFactory {
-	private static final NullProperty<Color> COLOR_NULL_PROPERTY = nullProperty(Color.class);
-	private static final NotNullProperty<Color> COLOR_TRANSPARENT_PROPERTY = new NotNullProperty<Color>(new TransparentColor());
+	private static final NullUIProperty<Color> COLOR_NULL_PROPERTY = nullProperty(Color.class);
+	private static final NotNullUIProperty<Color> COLOR_TRANSPARENT_PROPERTY = new NotNullUIProperty<Color>(new TransparentColor());
 
-	public static PropertyDefinition<Color> newColorFromAwt(java.awt.Color color) {
-        return new NotNullProperty<Color>(new Color(color));
+	public static UIPropertyProvider<Color> newColorFromAwt(java.awt.Color color) {
+        return new NotNullUIProperty<Color>(new Color(color));
 	}
 
-    public static PropertyDefinition<Color> nullColor() {
+    @SuppressWarnings("unused")
+    public static UIPropertyProvider<Color> nullColor() {
 		return COLOR_NULL_PROPERTY;
 	}
 
-	public static PropertyDefinition<Color> transparent() {
+	public static UIPropertyProvider<Color> transparent() {
 		return COLOR_TRANSPARENT_PROPERTY;
 	}
 	
@@ -52,15 +50,7 @@ public abstract class ColorFactory {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Color that = (Color) o;
-
-            if (color != null ? !color.equals(that.color) : that.color != null) return false;
-
-            return true;
-        }
+            return EqualsBuilder.reflectionEquals(this, o);        }
 
         @Override
         public int hashCode() {

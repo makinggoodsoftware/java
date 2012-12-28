@@ -1,16 +1,17 @@
-package com.mgs.fantasi.profile;
+package com.mgs.fantasi.properties;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class NotNullProperty<Z extends UIProperty> implements PropertyDefinition<Z>{
+public class NotNullUIProperty<Z extends UIProperty> implements UIPropertyProvider<Z> {
     private final Z data;
 
-    public NotNullProperty(Z data) {
+    public NotNullUIProperty(Z data) {
         this.data = data;
     }
 
     @Override
-    public PropertyDefinition<Z> merge(PropertyDefinition<Z> original) {
+    public UIPropertyProvider<Z> merge(UIPropertyProvider<Z> original) {
         return this;
     }
 
@@ -26,14 +27,7 @@ public class NotNullProperty<Z extends UIProperty> implements PropertyDefinition
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        NotNullProperty that = (NotNullProperty) o;
-
-        if (data != null ? !data.equals(that.data) : that.data != null) return false;
-
-        return true;
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     @Override

@@ -1,6 +1,5 @@
-package com.mgs.fantasi.properties.selectors;
+package com.mgs.fantasi.selectors;
 
-import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.views.View;
 
 public interface UISelector {

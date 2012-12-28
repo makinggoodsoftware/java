@@ -27,7 +27,7 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildChildViews() {
+	public Wireframe<View> buildContent() {
 		return
 			new GridWireframe<View>().
 				withDimension(1, 2).

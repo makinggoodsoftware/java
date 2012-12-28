@@ -1,6 +1,7 @@
-package com.mgs.fantasi.rendering;
+package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.properties.measurements.Measurement;
+import org.apache.commons.lang.builder.EqualsBuilder;
 
 import static com.mgs.fantasi.properties.measurements.Measurements.simpleMeasurement;
 
@@ -65,21 +66,11 @@ public class Padding {
 		return new Padding(top.copy(), right.copy(), bottom.copy(), left.copy());
 	}
 
-	@Override
-	public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
 
-		if (this == o) return true;
-		if (!(o instanceof Padding)) return false;
-
-		Padding padding = (Padding) o;
-
-		if (bottom != null ? !bottom.equals(padding.bottom) : padding.bottom != null) return false;
-		if (left != null ? !left.equals(padding.left) : padding.left != null) return false;
-		if (right != null ? !right.equals(padding.right) : padding.right != null) return false;
-		if (top != null ? !top.equals(padding.top) : padding.top != null) return false;
-
-		return true;
-	}
+        return EqualsBuilder.reflectionEquals(this, o);
+    }
 
 	@Override
 	public int hashCode() {

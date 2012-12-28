@@ -1,10 +1,8 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.profile.PropertyDefinition;
 import com.mgs.fantasi.profile.UIStyle;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.views.BaseView;
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -19,18 +17,18 @@ public class UIProperties {
     PolygonPointsIterator shape = new BaseView.NativeRectanguarShape();
 	Padding padding = Padding.zero();
 	Measurement measurement = emptyMeasurement();
-	private PropertyDefinition<BorderFactory.Border> border = noBorder();
-	private PropertyDefinition<ColorFactory.Color> backgroundColor = transparent();
+	private UIPropertyProvider<BorderFactory.Border> border = noBorder();
+	private UIPropertyProvider<ColorFactory.Color> backgroundColor = transparent();
 
 	public UIProperties() {
 	}
 
 	public void applyStyle(UIStyle uiStyle){
-        border = uiStyle.getBorderProperty().merge(border);
-		backgroundColor = uiStyle.getBackgroundColorProperty().merge(backgroundColor);
+        border = uiStyle.getBorderUIProperty().merge(border);
+		backgroundColor = uiStyle.getBackgroundColorUIProperty().merge(backgroundColor);
 	}
 
-	public void setBorder(PropertyDefinition<BorderFactory.Border> border) {
+	public void setBorder(UIPropertyProvider<BorderFactory.Border> border) {
 		this.border = border;
 	}
 
@@ -66,7 +64,7 @@ public class UIProperties {
         }
     }
 
-	public void setBackgroundColor(PropertyDefinition<ColorFactory.Color> backgroundColor) {
+	public void setBackgroundColor(UIPropertyProvider<ColorFactory.Color> backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 
@@ -81,11 +79,11 @@ public class UIProperties {
 		}
 	}
 
-	public PropertyDefinition<ColorFactory.Color> getBackgroundColor() {
+	public UIPropertyProvider<ColorFactory.Color> getBackgroundColor() {
 		return backgroundColor;
 	}
 
-	public PropertyDefinition<BorderFactory.Border> getBorder() {
+	public UIPropertyProvider<BorderFactory.Border> getBorder() {
 		return border;
 	}
 }

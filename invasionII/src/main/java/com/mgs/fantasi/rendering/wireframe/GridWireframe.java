@@ -2,11 +2,12 @@ package com.mgs.fantasi.rendering.wireframe;
 
 import com.mgs.fantasi.Structurable;
 import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
-import com.mgs.fantasi.rendering.structure.StructureType;
-import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 import com.mgs.fantasi.rendering.structure.Structure;
-import com.mgs.fantasi.rendering.structure.grid.*;
+import com.mgs.fantasi.rendering.structure.StructureType;
 import com.mgs.fantasi.rendering.structure.grid.ArrayListGridStructure;
+import com.mgs.fantasi.rendering.structure.grid.CellContent;
+import com.mgs.fantasi.rendering.structure.grid.CellContentGenerator;
+import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 
 import java.awt.*;
 

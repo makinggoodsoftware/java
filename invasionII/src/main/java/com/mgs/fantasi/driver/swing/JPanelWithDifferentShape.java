@@ -1,8 +1,9 @@
 package com.mgs.fantasi.driver.swing;
 
-import com.mgs.fantasi.profile.PropertyDefinition;
-import com.mgs.fantasi.properties.*;
 import com.mgs.fantasi.properties.BorderFactory;
+import com.mgs.fantasi.properties.ColorFactory;
+import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIPropertyProvider;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 
 import javax.swing.*;
@@ -24,22 +25,22 @@ public class JPanelWithDifferentShape extends JPanel {
 	public void paint(Graphics graphics) {
 		super.paint(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
-		PropertyDefinition<BorderFactory.Border> border = uiProperties.getBorder();
+		UIPropertyProvider<BorderFactory.Border> border = uiProperties.getBorder();
 		float borderThickness = 0;
-		PropertyDefinition<ColorFactory.Color> foregroundColor = ColorFactory.newColorFromAwt(g2d.getColor());
+		UIPropertyProvider<ColorFactory.Color> foregroundColor = ColorFactory.newColorFromAwt(g2d.getColor());
 		if (border.isDefined()){
 			borderThickness = border.getData().getWidth();
-            PropertyDefinition<ColorFactory.Color> color = border.getData().getColor();
+            UIPropertyProvider<ColorFactory.Color> color = border.getData().getColor();
             if (color.isDefined()){
                 foregroundColor = color;
             }
 		}
-        PropertyDefinition<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
+        UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);
 	}
 
-	private void drawHexagon(Graphics2D g2d, Dimension size, PropertyDefinition<ColorFactory.Color> foregroundColor, PropertyDefinition<ColorFactory.Color> backgroundColor, float thickness) {
+	private void drawHexagon(Graphics2D g2d, Dimension size, UIPropertyProvider<ColorFactory.Color> foregroundColor, UIPropertyProvider<ColorFactory.Color> backgroundColor, float thickness) {
 		int insetSpace = (int) thickness;
 		Dimension sizeWithoutBorders = new Dimension(size.width - insetSpace, size.height - insetSpace);
 		if (sizeWithoutBorders.getWidth()<0 || sizeWithoutBorders.getHeight()<0) return;

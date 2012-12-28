@@ -3,9 +3,9 @@ package com.mgs.fantasi.driver;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.profile.UIProfile;
-import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
 import com.mgs.fantasi.rendering.Renderable;
 import com.mgs.fantasi.rendering.ViewPreprocessor;
+import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
 import com.mgs.fantasi.views.View;
 
 import javax.swing.*;

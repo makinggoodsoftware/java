@@ -9,8 +9,8 @@ import com.mgs.fantasi.views.BaseView;
 
 import java.util.Set;
 
-import static com.mgs.fantasi.properties.BorderFactory.nullBorder;
-import static com.mgs.fantasi.properties.ColorFactory.nullColor;
+import static com.mgs.fantasi.properties.BorderFactory.noBorder;
+import static com.mgs.fantasi.properties.ColorFactory.transparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
@@ -20,8 +20,8 @@ public class UIProperties {
 	Padding padding = Padding.zero();
 	String name = EMPTY_NAME;
 	Measurement measurement = emptyMeasurement();
-	private PropertyDefinition<BorderFactory.Border> border = nullBorder();
-	private PropertyDefinition<ColorFactory.Color> backgroundColor = nullColor();
+	private PropertyDefinition<BorderFactory.Border> border = noBorder();
+	private PropertyDefinition<ColorFactory.Color> backgroundColor = transparent();
 
 	public UIProperties() {
 	}

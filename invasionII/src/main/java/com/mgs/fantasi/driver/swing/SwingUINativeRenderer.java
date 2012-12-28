@@ -94,14 +94,16 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 
 	private void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
         PropertyDefinition<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
-        if (backgroundColor.isDefined()){
+        if (backgroundColor.isDefined() &&  ! backgroundColor.getData().isTransparent()){
             jPanel.setBackground(backgroundColor.getData().getColorAsAwt());
         }
 		PropertyDefinition<BorderFactory.Border> border = uiProperties.getBorder();
-		if (border.isDefined()){
+		if (border.isDefined() && border.getData().getWidth() > 0){
             PropertyDefinition<ColorFactory.Color> colorDefinition = border.getData().getColor();
             if (colorDefinition.isDefined()){
-                javax.swing.border.Border lineBorder = javax.swing.BorderFactory.createLineBorder(colorDefinition.getData().getColorAsAwt(), border.getData().getWidth());
+                ColorFactory.Color colorData = colorDefinition.getData();
+                Color lineColor = colorData.isTransparent() ? Color.ORANGE : colorData.getColorAsAwt();
+                javax.swing.border.Border lineBorder = javax.swing.BorderFactory.createLineBorder(lineColor, border.getData().getWidth());
 			    jPanel.setBorder(lineBorder);
             }else{
                 throw new RuntimeException("Can't paint the border without a color!!!");

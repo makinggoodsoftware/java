@@ -5,14 +5,11 @@ import com.mgs.fantasi.rendering.Padding;
 import com.mgs.fantasi.views.BaseView;
 import org.junit.Test;
 
-import static com.mgs.fantasi.properties.BorderFactory.newBorder;
-import static com.mgs.fantasi.properties.BorderFactory.nullBorder;
+import static com.mgs.fantasi.properties.BorderFactory.*;
 import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;
-import static com.mgs.fantasi.properties.ColorFactory.nullColor;
+import static com.mgs.fantasi.properties.ColorFactory.transparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
-import static java.awt.Color.BLACK;
-import static java.awt.Color.RED;
-import static java.awt.Color.YELLOW;
+import static java.awt.Color.*;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
@@ -21,8 +18,8 @@ public class UIPropertiesTest {
 	public void testDefaultValues (){
 		UIProperties uiProperties = new UIProperties();
 
-		assertEquals(uiProperties.getBackgroundColor(), nullColor());
-		assertEquals(uiProperties.getBorder(), nullBorder());
+		assertEquals(uiProperties.getBackgroundColor(), transparent());
+		assertEquals(uiProperties.getBorder(), noBorder());
 		assertEquals(uiProperties.getMeasurement(), emptyMeasurement());
 		assertEquals(uiProperties.getName(), "");
 		assertEquals(uiProperties.getPadding(), Padding.zero());
@@ -34,8 +31,8 @@ public class UIPropertiesTest {
 		UIProperties uiProperties = new UIProperties();
 		uiProperties.applyStyle(new UIStyle());
 
-		assertEquals(uiProperties.getBackgroundColor(), nullColor());
-		assertEquals(uiProperties.getBorder(), nullBorder());
+		assertEquals(uiProperties.getBackgroundColor(), transparent());
+		assertEquals(uiProperties.getBorder(), noBorder());
 	}
 
 	@Test
@@ -59,7 +56,7 @@ public class UIPropertiesTest {
 		uiProperties.applyStyle(uiStyle);
 
 		assertEquals(uiProperties.getBackgroundColor(), newColorFromAwt(YELLOW));
-		assertEquals(uiProperties.getBorder(), nullBorder());
+		assertEquals(uiProperties.getBorder(), noBorder());
 	}
 
 

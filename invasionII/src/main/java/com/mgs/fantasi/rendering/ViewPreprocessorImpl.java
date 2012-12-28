@@ -2,7 +2,6 @@ package com.mgs.fantasi.rendering;
 
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.rendering.structure.Structure;
 import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.views.View;
 
@@ -12,13 +11,11 @@ public class ViewPreprocessorImpl implements ViewPreprocessor {
 	public Renderable prepareForRendering(View view, UIProfile uiProfile) {
         UIProperties uiPropertiesWithStylesApplied = view.takeUiPropertiesSnapshot().withStyles(uiProfile.findStylesFor(view));
         Wireframe<Renderable> wireframeOfRenderables = view.buildContent().transform(toRenderables(uiProfile));
-        Structure<Renderable> structureOfRenderables = wireframeOfRenderables.build();
 
         return new Renderable
 		(
             wireframeOfRenderables,
-            structureOfRenderables,
-            uiPropertiesWithStylesApplied
+                uiPropertiesWithStylesApplied
 		);
 	}
 

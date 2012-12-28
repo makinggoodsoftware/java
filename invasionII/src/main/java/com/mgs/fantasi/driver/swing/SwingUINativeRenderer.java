@@ -22,7 +22,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
 	public JPanel render(Renderable renderable) {
 		JPanel uiNativeElement = createUINativeElementSkeleton(renderable.getUIProperties());
-		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.getContentAsWireframes());
+		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(renderable.getContent());
 		layoutConstructionStrategy.buildInto(uiNativeElement, this);
 		return uiNativeElement;
 	}

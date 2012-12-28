@@ -2,8 +2,6 @@ package com.mgs.fantasi.rendering.wireframe;
 
 import com.mgs.fantasi.Structurable;
 import com.mgs.fantasi.rendering.ViewPreprocessorImpl;
-import com.mgs.fantasi.rendering.structure.SimpleStructure;
-import com.mgs.fantasi.rendering.structure.Structure;
 import com.mgs.fantasi.rendering.structure.StructureType;
 
 public class RectangleWireframe<T extends Structurable> implements Wireframe<T> {
@@ -13,11 +11,6 @@ public class RectangleWireframe<T extends Structurable> implements Wireframe<T> 
 		if (content==null) throw new IllegalArgumentException("Content can't be null");
 		this.content = content;
 		return this;
-	}
-
-	@Override
-	public Structure<T> build() {
-		return new SimpleStructure<T>(content);
 	}
 
 	@Override

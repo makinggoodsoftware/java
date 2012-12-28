@@ -2,26 +2,19 @@ package com.mgs.fantasi.rendering;
 
 import com.mgs.fantasi.Structurable;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.rendering.structure.Structure;
 import com.mgs.fantasi.rendering.wireframe.Wireframe;
 
 public class Renderable implements Structurable {
-	private final Structure<Renderable> content;
-    private final Wireframe<Renderable> wireframeOfRenderables;
+    private final Wireframe<Renderable> content;
     private final UIProperties uiProperties;
 
-	public Renderable(Wireframe<Renderable> wireframeOfRenderables, Structure<Renderable> content, UIProperties uiProperties) {
-        this.wireframeOfRenderables = wireframeOfRenderables;
+	public Renderable(Wireframe<Renderable> content, UIProperties uiProperties) {
+        this.content = content;
         this.uiProperties = uiProperties;
-		this.content = content;
-	}
+    }
 
-    public Structure<Renderable> getContent() {
-		return content;
-	}
-
-    public Wireframe<Renderable> getContentAsWireframes() {
-        return wireframeOfRenderables;
+    public Wireframe<Renderable> getContent() {
+        return content;
     }
 
     @Override

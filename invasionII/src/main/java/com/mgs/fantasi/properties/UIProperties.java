@@ -9,6 +9,8 @@ import com.mgs.fantasi.views.BaseView;
 
 import java.util.Set;
 
+import static com.mgs.fantasi.properties.BorderFactory.nullBorder;
+import static com.mgs.fantasi.properties.ColorFactory.nullColor;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
@@ -18,8 +20,8 @@ public class UIProperties {
 	Padding padding = Padding.zero();
 	String name = EMPTY_NAME;
 	Measurement measurement = emptyMeasurement();
-	private PropertyDefinition<BorderDefinition.BorderUI> border = BorderDefinition.zero();
-	private PropertyDefinition<ColorFactory.Color> backgroundColor = ColorFactory.newTransparentColor();
+	private PropertyDefinition<BorderFactory.Border> border = nullBorder();
+	private PropertyDefinition<ColorFactory.Color> backgroundColor = nullColor();
 
 	public UIProperties() {
 	}
@@ -29,7 +31,7 @@ public class UIProperties {
 		backgroundColor = uiStyle.getBackgroundColorProperty().merge(backgroundColor);
 	}
 
-	public void setBorder(PropertyDefinition<BorderDefinition.BorderUI> border) {
+	public void setBorder(PropertyDefinition<BorderFactory.Border> border) {
 		this.border = border;
 	}
 
@@ -103,7 +105,7 @@ public class UIProperties {
 		return backgroundColor;
 	}
 
-	public PropertyDefinition<BorderDefinition.BorderUI> getBorder() {
+	public PropertyDefinition<BorderFactory.Border> getBorder() {
 		return border;
 	}
 }

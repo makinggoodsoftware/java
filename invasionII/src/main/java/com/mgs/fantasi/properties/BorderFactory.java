@@ -1,27 +1,37 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.profile.NotNullProperty;
+import com.mgs.fantasi.profile.NullProperty;
 import com.mgs.fantasi.profile.PropertyDefinition;
 import com.mgs.fantasi.profile.UIProperty;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import static com.mgs.fantasi.profile.NullProperty.nullProperty;
+import static com.mgs.fantasi.properties.ColorFactory.transparent;
 
-public abstract class BorderDefinition {
-    public static PropertyDefinition<BorderUI> zero(){
-        return new NotNullProperty<BorderUI>(new BorderUI(nullProperty(ColorFactory.Color.class), 0));
+public abstract class BorderFactory {
+	public static final NullProperty<Border> BORDER_NULL_PROPERTY = nullProperty(Border.class);
+	public static final PropertyDefinition<Border> BORDER_EMPTY_PROPERTY = newBorder(transparent(), 0);
+
+	public static PropertyDefinition<Border> nullBorder(){
+        return BORDER_NULL_PROPERTY;
 	}
 
-	public static PropertyDefinition<BorderUI> newBorder(PropertyDefinition<ColorFactory.Color> color, int width) {
-        return new NotNullProperty<BorderUI>(new BorderUI(color, width));
+	public static PropertyDefinition<Border> noBorder(){
+		return BORDER_EMPTY_PROPERTY;
 	}
 
-    public static class BorderUI implements UIProperty {
+	public static PropertyDefinition<Border> newBorder(PropertyDefinition<ColorFactory.Color> color, int width) {
+		if (! color.isDefined()) throw new RuntimeException("Can't define a border without color");
+        return new NotNullProperty<Border>(new Border(color, width));
+	}
+
+    public static class Border implements UIProperty {
         private final PropertyDefinition<ColorFactory.Color> color;
         private final int width;
 
-        public BorderUI(PropertyDefinition<ColorFactory.Color> color, int width) {
+        public Border(PropertyDefinition<ColorFactory.Color> color, int width) {
             if (!color.isDefined() && width!=0) throw new RuntimeException("Invalid combination!!");
             this.color = color;
             this.width = width;
@@ -52,12 +62,12 @@ public abstract class BorderDefinition {
 		@Override
 		public boolean equals(Object o) {
 			if (this == o) return true;
-			if (!(o instanceof BorderUI)) return false;
+			if (!(o instanceof Border)) return false;
 
-			BorderUI borderUI = (BorderUI) o;
+			Border border = (Border) o;
 
-			if (width != borderUI.width) return false;
-			if (color != null ? !color.equals(borderUI.color) : borderUI.color != null) return false;
+			if (width != border.width) return false;
+			if (color != null ? !color.equals(border.color) : border.color != null) return false;
 
 			return true;
 		}

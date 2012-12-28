@@ -4,7 +4,7 @@ import com.mgs.fantasi.driver.UINativeRenderer;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
 import com.mgs.fantasi.profile.PropertyDefinition;
-import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Fraction;
@@ -20,7 +20,6 @@ import com.mgs.fantasi.rendering.structure.grid.GridStructure;
 import com.mgs.fantasi.rendering.structure.layer.LayeredStructure;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
@@ -74,7 +73,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		int right = resolveMeasurement (padding.getRight());
 		int bottom = resolveMeasurement (padding.getBottom());
 		int left = resolveMeasurement (padding.getLeft());
-		marginContainer.setBorder(BorderFactory.createEmptyBorder(top, right, bottom, left));
+		marginContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(top, right, bottom, left));
 		marginContainer.add(nativeElement, coordinates(0, 0, Fractions.all(), Fractions.all()));
 		return marginContainer;
 	}
@@ -98,11 +97,11 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
         if (backgroundColor.isDefined()){
             jPanel.setBackground(backgroundColor.getData().getColorAsAwt());
         }
-		PropertyDefinition<BorderDefinition.BorderUI> border = uiProperties.getBorder();
+		PropertyDefinition<BorderFactory.Border> border = uiProperties.getBorder();
 		if (border.isDefined()){
             PropertyDefinition<ColorFactory.Color> colorDefinition = border.getData().getColor();
             if (colorDefinition.isDefined()){
-                Border lineBorder = BorderFactory.createLineBorder(colorDefinition.getData().getColorAsAwt(), border.getData().getWidth());
+                javax.swing.border.Border lineBorder = javax.swing.BorderFactory.createLineBorder(colorDefinition.getData().getColorAsAwt(), border.getData().getWidth());
 			    jPanel.setBorder(lineBorder);
             }else{
                 throw new RuntimeException("Can't paint the border without a color!!!");

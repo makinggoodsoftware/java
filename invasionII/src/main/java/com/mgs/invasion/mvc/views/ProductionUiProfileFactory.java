@@ -8,7 +8,7 @@ import com.mgs.fantasi.properties.selectors.UISelectorFactory;
 
 import java.awt.*;
 
-import static com.mgs.fantasi.properties.BorderDefinition.newBorder;
+import static com.mgs.fantasi.properties.BorderFactory.newBorder;
 import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;
 
 public class ProductionUiProfileFactory implements UIProfileFactory {

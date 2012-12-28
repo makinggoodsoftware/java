@@ -11,20 +11,24 @@ import static com.mgs.fantasi.profile.NullProperty.nullProperty;
 
 public abstract class ColorFactory {
 	private static final NullProperty<Color> COLOR_NULL_PROPERTY = nullProperty(Color.class);
+	private static final NotNullProperty<Color> COLOR_TRANSPARENT_PROPERTY = new NotNullProperty<Color>(new TransparentColor());
 
 	public static PropertyDefinition<Color> newColorFromAwt(java.awt.Color color) {
         return new NotNullProperty<Color>(new Color(color));
 	}
 
-    public static PropertyDefinition<Color> newTransparentColor() {
+    public static PropertyDefinition<Color> nullColor() {
 		return COLOR_NULL_PROPERTY;
+	}
+
+	public static PropertyDefinition<Color> transparent() {
+		return COLOR_TRANSPARENT_PROPERTY;
 	}
 	
     public static class Color implements UIProperty {
         private final java.awt.Color color;
 
-        public Color(java.awt.Color color) {
-            if (color == null) throw new RuntimeException("We don't take nulls!");
+        private Color(java.awt.Color color) {
             this.color = color;
         }
 
@@ -68,6 +72,31 @@ public abstract class ColorFactory {
 			return new ToStringBuilder(this).
 					append("color", color).
 					toString();
+		}
+
+		public boolean isTransparent(){
+			return false;
+		}
+	}
+	
+	public static class TransparentColor extends Color{
+		private TransparentColor() {
+			super(null);
+		}
+
+		@Override
+		public java.awt.Color getColorAsAwt() {
+			throw new RuntimeException("A transparent color doesn't have an underlying awt representation, use isTransparent to find out!");
+		}
+
+		@Override
+		public boolean isTransparent() {
+			return true;
+		}
+
+		@Override
+		public UIProperty copy() {
+			return this;
 		}
 	}
 }

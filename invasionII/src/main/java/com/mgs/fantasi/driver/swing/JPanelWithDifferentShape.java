@@ -1,9 +1,8 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.profile.PropertyDefinition;
-import com.mgs.fantasi.properties.BorderDefinition;
-import com.mgs.fantasi.properties.ColorFactory;
-import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.*;
+import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 
 import javax.swing.*;
@@ -25,7 +24,7 @@ public class JPanelWithDifferentShape extends JPanel {
 	public void paint(Graphics graphics) {
 		super.paint(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
-		PropertyDefinition<BorderDefinition.BorderUI> border = uiProperties.getBorder();
+		PropertyDefinition<BorderFactory.Border> border = uiProperties.getBorder();
 		float borderThickness = 0;
 		PropertyDefinition<ColorFactory.Color> foregroundColor = ColorFactory.newColorFromAwt(g2d.getColor());
 		if (border.isDefined()){

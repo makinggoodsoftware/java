@@ -1,6 +1,6 @@
 package com.mgs.fantasi.profile;
 
-import com.mgs.fantasi.properties.BorderDefinition;
+import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;
 
 import static com.mgs.fantasi.profile.NullProperty.nullProperty;
@@ -8,10 +8,10 @@ import static com.mgs.fantasi.profile.NullProperty.nullProperty;
 
 public class UIStyle {
 	private PropertyDefinition<ColorFactory.Color> backgroundColorProperty = nullProperty(ColorFactory.Color.class);
-    private PropertyDefinition<BorderDefinition.BorderUI> borderProperty = nullProperty(BorderDefinition.BorderUI.class);
+    private PropertyDefinition<BorderFactory.Border> borderProperty = nullProperty(BorderFactory.Border.class);
 
 
-	public UIStyle withBorder(PropertyDefinition<BorderDefinition.BorderUI> border) {
+	public UIStyle withBorder(PropertyDefinition<BorderFactory.Border> border) {
 		if (border == null) throw new IllegalArgumentException();
 		this.borderProperty = border;
 
@@ -29,7 +29,7 @@ public class UIStyle {
 		return backgroundColorProperty;
 	}
 
-	public PropertyDefinition<BorderDefinition.BorderUI> getBorderProperty() {
+	public PropertyDefinition<BorderFactory.Border> getBorderProperty() {
 		return borderProperty;
 	}
 

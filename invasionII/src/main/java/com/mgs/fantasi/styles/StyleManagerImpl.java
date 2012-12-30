@@ -4,7 +4,9 @@ import com.mgs.fantasi.properties.UIProperties;
 
 import java.util.Set;
 
+//TODO this should have tests... They are currently implemented inside UIPropertiesTest
 public class StyleManagerImpl implements StyleManager {
+	//TODO this should not be part of the interface
 	@Override
 	public void applyStyle(UIProperties uiProperties, UIStyle uiStyle){
         uiProperties.setBorder(uiStyle.getBorderUIProperty().merge(uiProperties.getBorder()));

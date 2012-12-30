@@ -1,7 +1,5 @@
 package com.mgs.fantasi.properties.polygon;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.List;
@@ -14,7 +12,7 @@ public class NativeRectanguarShape implements PolygonPointsIterator {
 
 	@Override
 	public List<Point2D.Double> getPointListFromBottomLeftCorner(Dimension size) {
-		throw new NotImplementedException();
+		throw new RuntimeException("Can't return list of points for native dimensions");
 	}
 
 	@Override

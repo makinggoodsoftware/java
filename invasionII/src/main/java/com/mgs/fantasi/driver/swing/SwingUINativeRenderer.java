@@ -3,8 +3,8 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.UINativeRenderer;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
+import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
-import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategyFactory;
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;
 import com.mgs.fantasi.properties.UIProperties;
@@ -19,22 +19,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
-	private final LayoutConstructionStrategyFactory layoutStrategyFactory = new LayoutConstructionStrategyFactory();
-	private final StyleManager styleManager;
+    private final StyleManager styleManager;
     private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
+    private final LayoutConstructionManager layoutConstructionManager;
 
-    public SwingUINativeRenderer(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
+    public SwingUINativeRenderer(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory, LayoutConstructionManager layoutConstructionManager) {
 		this.styleManager = styleManager;
         this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
+        this.layoutConstructionManager = layoutConstructionManager;
     }
 
 	@Override
 	public JPanel render(View view, UIProfile uiProfile) {
-		UIProperties uiPropertiesWitStyles = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
-        JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWitStyles);
-        LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutStrategyFactory.processStructure(view.buildContent());
+        JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view)));
+        LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(view.buildContent());
 
-        JPanel uiNativeElement = outsideCreationStrategy.create(uiPropertiesWitStyles);
+        JPanel uiNativeElement = outsideCreationStrategy.create(styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view)));
         insideConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
         return uiNativeElement;
 	}

@@ -1,6 +1,8 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
+import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
+import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategyFactory;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
@@ -18,7 +20,7 @@ public class SwingUINativeRendererTest {
 	@Before
 	public void setUp() throws Exception {
 		styleManagerMock = Mockito.mock(StyleManager.class);
-		swingUINativeRenderer = new SwingUINativeRenderer(styleManagerMock, new JPanelCreationStrategyFactory());
+		swingUINativeRenderer = new SwingUINativeRenderer(styleManagerMock, new JPanelCreationStrategyFactory(), new LayoutConstructionManager(new LayoutConstructionStrategyFactory()));
 	}
 
 	//TODO We need to complete this test... Can we unit test this?

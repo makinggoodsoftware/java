@@ -11,21 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LayoutConstructionStrategyFactory {
-    public LayoutConstructionStrategy<?, ? extends Wireframe> processStructure(Wireframe content) {
-		switch (content.getType()){
-			case GRID:
-				return grid().fillWith((GridWireframe) content);
-			case LAYERS:
-				return layers().fillWith((LayeredWireframe) content);
-			case SIMPLE:
-				return simple().fillWith((RectangleWireframe) content);
-			case DELEGATE:
-                return processStructure(((DelegateWireframe) content).getContent());
-			case EMPTY:
-				return new LayoutConstructionStrategyFactory().empty();
-			default:
-				throw new RuntimeException("Can't process the structure: " + content);
-		}
+
+
+    public SimpleBaseLayoutConstructionStrategyImpl simple() {
+		return new SimpleBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
+			@Override
+			public LayoutManager getLayoutManager(JPanel container) {
+				return new GridBagLayout();
+			}
+		});
+	}
+
+    public LayerBaseLayoutConstructionStrategyImpl layers() {
+		return new LayerBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
+			@Override
+			public LayoutManager getLayoutManager(JPanel container) {
+				return new OverlayLayout(container);
+			}
+		});
 	}
 
     public GridBaseLayoutConstructionStrategyImpl grid(){
@@ -37,26 +40,7 @@ public class LayoutConstructionStrategyFactory {
 		});
 	}
 
-	public LayerBaseLayoutConstructionStrategyImpl layers() {
-		return new LayerBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
-			@Override
-			public LayoutManager getLayoutManager(JPanel container) {
-				return new OverlayLayout(container);
-			}
-		});
-	}
-
-
-	public SimpleBaseLayoutConstructionStrategyImpl simple() {
-		return new SimpleBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
-			@Override
-			public LayoutManager getLayoutManager(JPanel container) {
-				return new GridBagLayout();
-			}
-		});
-	}
-
-	public LayoutConstructionStrategy<Void, ? extends Wireframe> empty() {
+    public LayoutConstructionStrategy<Void, ? extends Wireframe> empty() {
 		return new LayoutConstructionStrategy<Void, Wireframe>() {
 
             @Override

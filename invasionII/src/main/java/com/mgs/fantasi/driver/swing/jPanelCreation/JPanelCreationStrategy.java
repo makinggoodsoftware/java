@@ -1,9 +1,9 @@
-package com.mgs.fantasi.driver.swing;
+package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.properties.UIProperties;
 
 import javax.swing.*;
 
 public interface JPanelCreationStrategy {
-    JPanel run(UIProperties uiProperties);
+    JPanel create(UIProperties uiProperties);
 }

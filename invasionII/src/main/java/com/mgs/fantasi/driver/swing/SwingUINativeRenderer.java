@@ -1,6 +1,8 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.UINativeRenderer;
+import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
+import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
 import com.mgs.fantasi.properties.BorderFactory;
@@ -9,7 +11,6 @@ import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.rendering.wireframe.*;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
@@ -21,10 +22,12 @@ import java.awt.*;
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	private final OnGoingLayoutBuildingStrategyFactory layoutStrategyFactory = new OnGoingLayoutBuildingStrategyFactory();
 	private final StyleManager styleManager;
+    private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
 
-	public SwingUINativeRenderer(StyleManager styleManager) {
+    public SwingUINativeRenderer(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
 		this.styleManager = styleManager;
-	}
+        this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
+    }
 
 	@Override
 	public JPanel render(View view, UIProfile uiProfile) {
@@ -36,19 +39,18 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
     public JPanel createUINativeElementSkeleton(UIProperties uiProperties) {
-		JPanel content = uiProperties.getShape().isRectangular() ?
-				new StandardJPanelCreationStrategy().run(uiProperties):
-				new NonRectangularJPanelCreationStrategy(uiProperties.getShape()).run(uiProperties);
+        JPanelCreationStrategy jPanelCreationStrategy = jPanelCreationStrategyFactory.getJPanelCreationStrategy(uiProperties);
+        JPanel jPanel = jPanelCreationStrategy.create(uiProperties);
 
-		JPanel outmostPointer = content;
+        JPanel outmostPointer = jPanel;
 		Padding padding = uiProperties.getPadding();
 		if (! padding.isEmpty()){
-			outmostPointer = decorateWithPadding(content, padding);
+			outmostPointer = decorateWithPadding(jPanel, padding);
 		}
 		return outmostPointer;
 	}
 
-	public LayoutConstructionStrategy<?> processStructure(Wireframe content) {
+    public LayoutConstructionStrategy<?> processStructure(Wireframe content) {
 		switch (content.getType()){
 			case GRID:
 				return layoutStrategyFactory.grid().from((GridWireframe) content);
@@ -87,13 +89,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	}
 
 
-	private JPanel newRectangularNativeElementSkeletonWithStyles(UIProperties uiProperties) {
-		JPanel jPanel = newRectangularNativeElement();
-		applyUIProperties(jPanel, uiProperties);
-		return jPanel;
-	}
-
-	private void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
+    public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
         UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
         if (backgroundColor.isDefined() &&  ! backgroundColor.getData().isTransparent()){
             jPanel.setBackground(backgroundColor.getData().getColorAsAwt());
@@ -115,17 +111,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		}
 	}
 
-	protected final JPanel newRectangularNativeElement(){
-		JPanel jPanel = new JPanel();
-		jPanel.setOpaque(false);
-		return jPanel;
-	}
-
-	protected final JPanel newNonRectangularNativeElementSkeletonWithStyles(UIProperties uiProperties){
-		return new JPanelWithDifferentShape(uiProperties.getShape(), uiProperties);
-	}
-
-	public static GridBagConstraints coordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
+    public static GridBagConstraints coordinates(int x, int y, Fraction widthSizeRatio, Fraction heightSizeRatio) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
@@ -135,24 +121,4 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return gbc;
 	}
 
-    private class StandardJPanelCreationStrategy implements JPanelCreationStrategy{
-
-        @Override
-        public JPanel run(UIProperties uiProperties) {
-            return newRectangularNativeElementSkeletonWithStyles(uiProperties);
-        }
-    }
-
-    private class NonRectangularJPanelCreationStrategy implements JPanelCreationStrategy{
-        private final PolygonPointsIterator shape;
-
-        public NonRectangularJPanelCreationStrategy(PolygonPointsIterator shape) {
-            this.shape = shape;
-        }
-
-        @Override
-        public JPanel run(UIProperties uiProperties) {
-            return newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package com.mgs.fantasi.driver.swing;
+package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;

@@ -1,15 +1,16 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.UINativeRenderer;
+import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
-import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
+import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategyFactory;
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.UIPropertyProvider;
 import com.mgs.fantasi.properties.measurements.Fraction;
-import com.mgs.fantasi.rendering.wireframe.*;
+import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
@@ -18,7 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
-	private final OnGoingLayoutBuildingStrategyFactory layoutStrategyFactory = new OnGoingLayoutBuildingStrategyFactory();
+	private final LayoutConstructionStrategyFactory layoutStrategyFactory = new LayoutConstructionStrategyFactory();
 	private final StyleManager styleManager;
     private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
 
@@ -30,28 +31,12 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
 	public JPanel render(View view, UIProfile uiProfile) {
 		UIProperties uiPropertiesWitStyles = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
-        JPanel uiNativeElement = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWitStyles).create(uiPropertiesWitStyles);
-        LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(view.buildContent());
-        layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
-        return uiNativeElement;
-	}
+        JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWitStyles);
+        LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutStrategyFactory.processStructure(view.buildContent());
 
-    public LayoutConstructionStrategy<?> processStructure(Wireframe content) {
-		switch (content.getType()){
-			case GRID:
-				return layoutStrategyFactory.grid().from((GridWireframe) content);
-			case LAYERS:
-				return layoutStrategyFactory.layers().from((LayeredWireframe) content);
-			case SIMPLE:
-				return layoutStrategyFactory.simple().from((RectangleWireframe) content);
-			case DELEGATE:
-				Wireframe delegate = ((DelegateWireframe) content).getContent();
-				return processStructure(delegate);
-			case EMPTY:
-				return new OnGoingLayoutBuildingStrategyFactory().empty();
-			default:
-				throw new RuntimeException("Can't process the structure: " + content);
-		}
+        JPanel uiNativeElement = outsideCreationStrategy.create(uiPropertiesWitStyles);
+        insideConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
+        return uiNativeElement;
 	}
 
 

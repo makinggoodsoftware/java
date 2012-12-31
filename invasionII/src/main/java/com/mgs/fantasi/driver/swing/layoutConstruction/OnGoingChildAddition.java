@@ -1,13 +1,14 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
+import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.views.View;
 
-public class OnGoingChildAddition<T>{
-	private final BaseLayoutConstructionStrategyStrategy<T> baseLayoutConstruction;
+public class OnGoingChildAddition<T, Z extends Wireframe>{
+	private final BaseLayoutConstructionStrategyStrategy<T, Z> baseLayoutConstruction;
 	private final View content;
 	private T specifics;
 
-	public OnGoingChildAddition(BaseLayoutConstructionStrategyStrategy<T> baseLayoutConstruction, View content) {
+	public OnGoingChildAddition(BaseLayoutConstructionStrategyStrategy<T, Z> baseLayoutConstruction, View content) {
 		this.baseLayoutConstruction = baseLayoutConstruction;
 		this.content = content;
 	}

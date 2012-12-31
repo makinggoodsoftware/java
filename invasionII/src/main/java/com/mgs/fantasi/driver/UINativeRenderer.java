@@ -5,5 +5,4 @@ import com.mgs.fantasi.views.View;
 
 public interface UINativeRenderer<T> {
 	T render(View renderable, UIProfile uiProfile);
-
 }

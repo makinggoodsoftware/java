@@ -25,7 +25,7 @@ public abstract class BaseLayoutConstructionStrategyStrategy<T> implements Layou
 	public void buildInto(JPanel container, SwingUINativeRenderer renderer, UIProfile uiProfile){
 		container.setLayout(layoutProvider.getLayoutManager(container));
 		for (OnGoingChildAddition onGoingChildAddition : toBeAdded) {
-			View content = onGoingChildAddition.getCellContent();
+			View content = onGoingChildAddition.getContent();
 			JPanel uiNativeElement = renderer.render(content, uiProfile);
 			container.add(uiNativeElement, onGoingChildAddition.getSpecifics());
 		}

@@ -9,6 +9,7 @@ import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
+import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.rendering.wireframe.*;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
@@ -29,20 +30,20 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	public JPanel render(View view, UIProfile uiProfile) {
 		UIProperties uiPropertiesWitStyles = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		JPanel uiNativeElement = createUINativeElementSkeleton(uiPropertiesWitStyles);
-		LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(view.buildContent());
-		layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
-		return uiNativeElement;
+        LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(view.buildContent());
+        layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
+        return uiNativeElement;
 	}
 
-	public JPanel createUINativeElementSkeleton(UIProperties uiProperties) {
+    public JPanel createUINativeElementSkeleton(UIProperties uiProperties) {
 		JPanel content = uiProperties.getShape().isRectangular() ?
-				newRectangularNativeElementSkeletonWithStyles(uiProperties) :
-				newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
+				new StandardJPanelCreationStrategy().run(uiProperties):
+				new NonRectangularJPanelCreationStrategy(uiProperties.getShape()).run(uiProperties);
 
 		JPanel outmostPointer = content;
 		Padding padding = uiProperties.getPadding();
 		if (! padding.isEmpty()){
-			outmostPointer = decorateWithMargin (content, padding);
+			outmostPointer = decorateWithPadding(content, padding);
 		}
 		return outmostPointer;
 	}
@@ -65,17 +66,17 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		}
 	}
 
-	protected final JPanel decorateWithMargin(JPanel nativeElement, Padding padding){
-		JPanel marginContainer = new JPanel();
-		marginContainer.setOpaque(false);
-		marginContainer.setLayout(new GridBagLayout());
+	protected final JPanel decorateWithPadding(JPanel nativeElement, Padding padding){
+		JPanel paddingContainer = new JPanel();
+		paddingContainer.setOpaque(false);
+		paddingContainer.setLayout(new GridBagLayout());
 		int top = resolveMeasurement (padding.getTop());
 		int right = resolveMeasurement (padding.getRight());
 		int bottom = resolveMeasurement (padding.getBottom());
 		int left = resolveMeasurement (padding.getLeft());
-		marginContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(top, right, bottom, left));
-		marginContainer.add(nativeElement, coordinates(0, 0, Fractions.all(), Fractions.all()));
-		return marginContainer;
+		paddingContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(top, right, bottom, left));
+		paddingContainer.add(nativeElement, coordinates(0, 0, Fractions.all(), Fractions.all()));
+		return paddingContainer;
 	}
 
 	private int resolveMeasurement(Measurement measurement) {
@@ -134,4 +135,24 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return gbc;
 	}
 
+    private class StandardJPanelCreationStrategy implements JPanelCreationStrategy{
+
+        @Override
+        public JPanel run(UIProperties uiProperties) {
+            return newRectangularNativeElementSkeletonWithStyles(uiProperties);
+        }
+    }
+
+    private class NonRectangularJPanelCreationStrategy implements JPanelCreationStrategy{
+        private final PolygonPointsIterator shape;
+
+        public NonRectangularJPanelCreationStrategy(PolygonPointsIterator shape) {
+            this.shape = shape;
+        }
+
+        @Override
+        public JPanel run(UIProperties uiProperties) {
+            return newNonRectangularNativeElementSkeletonWithStyles(uiProperties);
+        }
+    }
 }

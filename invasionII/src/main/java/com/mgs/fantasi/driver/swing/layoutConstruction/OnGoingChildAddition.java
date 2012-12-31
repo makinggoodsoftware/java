@@ -4,12 +4,12 @@ import com.mgs.fantasi.views.View;
 
 public class OnGoingChildAddition<T>{
 	private final BaseLayoutConstructionStrategyStrategy<T> baseLayoutConstruction;
-	private final View cellContent;
+	private final View content;
 	private T specifics;
 
-	public OnGoingChildAddition(BaseLayoutConstructionStrategyStrategy<T> baseLayoutConstruction, View cellContent) {
+	public OnGoingChildAddition(BaseLayoutConstructionStrategyStrategy<T> baseLayoutConstruction, View content) {
 		this.baseLayoutConstruction = baseLayoutConstruction;
-		this.cellContent = cellContent;
+		this.content = content;
 	}
 
 	public void into(T specifics) {
@@ -17,8 +17,8 @@ public class OnGoingChildAddition<T>{
 		baseLayoutConstruction.doAdd(this);
 	}
 
-	public View getCellContent() {
-		return cellContent;
+	public View getContent() {
+		return content;
 	}
 
 	public T getSpecifics() {

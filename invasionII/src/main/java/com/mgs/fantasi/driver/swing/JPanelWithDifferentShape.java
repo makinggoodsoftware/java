@@ -53,7 +53,6 @@ public class JPanelWithDifferentShape extends JPanel {
 		path.closePath();
         if (foregroundColor.isDefined() && !foregroundColor.getData().isTransparent()) {
             g2d.setColor(foregroundColor.getData().getColorAsAwt());
-
         }
 		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g2d.draw(path);

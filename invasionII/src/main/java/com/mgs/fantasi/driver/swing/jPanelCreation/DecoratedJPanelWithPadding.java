@@ -1,7 +1,6 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.properties.Padding;
-import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
@@ -13,16 +12,17 @@ import static com.mgs.fantasi.driver.swing.SwingUINativeRenderer.coordinates;
 
 public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
     private final JPanelCreationStrategy decoratedPanel;
+    private final Padding padding;
 
-    public DecoratedJPanelWithPadding(JPanelCreationStrategy decoratedPanel) {
+    public DecoratedJPanelWithPadding(JPanelCreationStrategy decoratedPanel, Padding padding) {
         this.decoratedPanel = decoratedPanel;
+        this.padding = padding;
     }
 
     @Override
-    public JPanel create(UIProperties uiProperties) {
-        JPanel jPanel = decoratedPanel.create(uiProperties);
+    public JPanel create() {
+        JPanel jPanel = decoratedPanel.create();
         JPanel outmostPointer = jPanel;
-        Padding padding = uiProperties.getPadding();
         if (! padding.isEmpty()){
             outmostPointer = decorateWithPadding(jPanel, padding);
         }

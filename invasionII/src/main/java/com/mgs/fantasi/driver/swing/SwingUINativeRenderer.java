@@ -31,13 +31,21 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 
 	@Override
 	public JPanel render(View view, UIProfile uiProfile) {
-        JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view)));
-        LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(view.buildContent());
-
-        JPanel uiNativeElement = outsideCreationStrategy.create(styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view)));
-        insideConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
-        return uiNativeElement;
+        return createJPanel(uiProfile, createJPanelConstructionInstructions(view, uiProfile));
 	}
+
+    public JPanelCreationInstructions createJPanelConstructionInstructions(View view, UIProfile uiProfile) {
+        UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
+        JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
+        LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(view.buildContent());
+        return new JPanelCreationInstructions(outsideCreationStrategy, insideConstructionStrategy);
+    }
+
+    private JPanel createJPanel(UIProfile uiProfile, JPanelCreationInstructions jPanelCreationInstructions) {
+        JPanel uiNativeElement = jPanelCreationInstructions.getOutsideCreationStrategy().create();
+        jPanelCreationInstructions.getInsideConstructionStrategy().buildInto(uiNativeElement, this, uiProfile);
+        return uiNativeElement;
+    }
 
 
     public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
@@ -72,4 +80,21 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return gbc;
 	}
 
+    private static class JPanelCreationInstructions {
+        private final JPanelCreationStrategy outsideCreationStrategy;
+        private final LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy;
+
+        public JPanelCreationInstructions(JPanelCreationStrategy outsideCreationStrategy, LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy) {
+            this.outsideCreationStrategy = outsideCreationStrategy;
+            this.insideConstructionStrategy = insideConstructionStrategy;
+        }
+
+        public JPanelCreationStrategy getOutsideCreationStrategy() {
+            return outsideCreationStrategy;
+        }
+
+        public LayoutConstructionStrategy<?, ? extends Wireframe> getInsideConstructionStrategy() {
+            return insideConstructionStrategy;
+        }
+    }
 }

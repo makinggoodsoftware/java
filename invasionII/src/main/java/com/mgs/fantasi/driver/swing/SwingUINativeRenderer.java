@@ -112,7 +112,6 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		}else{
 			jPanel.setBorder(null);
 		}
-
 	}
 
 	protected final JPanel newRectangularNativeElement(){

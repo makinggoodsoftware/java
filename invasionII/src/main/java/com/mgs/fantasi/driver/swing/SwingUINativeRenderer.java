@@ -1,16 +1,14 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.UINativeRenderer;
-import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingLayoutBuildingStrategyFactory;
 import com.mgs.fantasi.properties.BorderFactory;
-import com.mgs.fantasi.properties.*;
+import com.mgs.fantasi.properties.ColorFactory;
+import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIPropertyProvider;
 import com.mgs.fantasi.properties.measurements.Fraction;
-import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.properties.measurements.Measurement;
-import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.rendering.wireframe.*;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
@@ -32,22 +30,10 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 	@Override
 	public JPanel render(View view, UIProfile uiProfile) {
 		UIProperties uiPropertiesWitStyles = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
-		JPanel uiNativeElement = createUINativeElementSkeleton(uiPropertiesWitStyles);
+        JPanel uiNativeElement = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWitStyles).create(uiPropertiesWitStyles);
         LayoutConstructionStrategy<?> layoutConstructionStrategy = processStructure(view.buildContent());
         layoutConstructionStrategy.buildInto(uiNativeElement, this, uiProfile);
         return uiNativeElement;
-	}
-
-    public JPanel createUINativeElementSkeleton(UIProperties uiProperties) {
-        JPanelCreationStrategy jPanelCreationStrategy = jPanelCreationStrategyFactory.getJPanelCreationStrategy(uiProperties);
-        JPanel jPanel = jPanelCreationStrategy.create(uiProperties);
-
-        JPanel outmostPointer = jPanel;
-		Padding padding = uiProperties.getPadding();
-		if (! padding.isEmpty()){
-			outmostPointer = decorateWithPadding(jPanel, padding);
-		}
-		return outmostPointer;
 	}
 
     public LayoutConstructionStrategy<?> processStructure(Wireframe content) {
@@ -66,26 +52,6 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 			default:
 				throw new RuntimeException("Can't process the structure: " + content);
 		}
-	}
-
-	protected final JPanel decorateWithPadding(JPanel nativeElement, Padding padding){
-		JPanel paddingContainer = new JPanel();
-		paddingContainer.setOpaque(false);
-		paddingContainer.setLayout(new GridBagLayout());
-		int top = resolveMeasurement (padding.getTop());
-		int right = resolveMeasurement (padding.getRight());
-		int bottom = resolveMeasurement (padding.getBottom());
-		int left = resolveMeasurement (padding.getLeft());
-		paddingContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(top, right, bottom, left));
-		paddingContainer.add(nativeElement, coordinates(0, 0, Fractions.all(), Fractions.all()));
-		return paddingContainer;
-	}
-
-	private int resolveMeasurement(Measurement measurement) {
-		if (measurement instanceof Measurements.SimpleMeasurement){
-			return ((Measurements.SimpleMeasurement) measurement).getIntValue();
-		}
-		return 0;
 	}
 
 

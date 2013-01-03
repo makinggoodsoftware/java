@@ -1,5 +1,6 @@
 package com.mgs.fantasi.driver;
 
+import com.mgs.fantasi.driver.swing.RenderingContextFactory;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
@@ -13,8 +14,6 @@ import com.mgs.fantasi.views.View;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.driver.swing.SwingUINativeRenderer.RenderingProcessFactory;
-
 public class UIDriver<T> {
     private final UINativeRenderer<T> uiNativeRenderer;
 	private final UIDisplayManager<T> uiDisplayManager;
@@ -24,8 +23,8 @@ public class UIDriver<T> {
 		StyleManager styleManager = new StyleManagerImpl();
 		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory();
 		LayoutConstructionManager layoutConstructionManager = new LayoutConstructionManager(new LayoutConstructionStrategyFactory());
-		RenderingProcessFactory renderingProcessFactory = new RenderingProcessFactory(layoutConstructionManager, styleManager, jPanelCreationStrategyFactory);
-		SwingUINativeRenderer swingUINativeRenderer = new SwingUINativeRenderer(renderingProcessFactory);
+		RenderingContextFactory renderingContextFactory = new RenderingContextFactory(layoutConstructionManager, styleManager, jPanelCreationStrategyFactory);
+		SwingUINativeRenderer swingUINativeRenderer = new SwingUINativeRenderer(renderingContextFactory);
 		return new UIDriver<JPanel>(swingUINativeRenderer, new SwingUIDisplayManager());
 	}
 

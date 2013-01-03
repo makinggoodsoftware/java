@@ -1,6 +1,6 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
+import com.mgs.fantasi.driver.swing.SwingUtils;
 import com.mgs.fantasi.properties.UIProperties;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ public class StandardJPanelCreationStrategy implements JPanelCreationStrategy{
     public JPanel create() {
         JPanel jPanel = new JPanel();
         jPanel.setOpaque(false);
-        SwingUINativeRenderer.applyUIProperties(jPanel, uiProperties);
+        SwingUtils.applyUIProperties(jPanel, uiProperties);
         return jPanel;
     }
 }

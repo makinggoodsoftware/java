@@ -1,6 +1,6 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
-import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
+import com.mgs.fantasi.driver.swing.SwingUtils;
 import com.mgs.fantasi.rendering.wireframe.GridWireframe;
 import com.mgs.fantasi.rendering.wireframe.grid.CellContent;
 import com.mgs.fantasi.rendering.wireframe.grid.CellIterator;
@@ -19,7 +19,7 @@ public class GridBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructi
         content.itereateCellsWith(new CellIterator() {
             @Override
             public void on(int x, int y, CellContent cell) {
-                queueForAddition(cell.getContent()).into(SwingUINativeRenderer.coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+                queueForAddition(cell.getContent()).into(SwingUtils.coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
             }
         });
         return this;

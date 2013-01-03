@@ -6,7 +6,7 @@ import com.mgs.fantasi.views.View;
 
 import java.awt.*;
 
-import static com.mgs.fantasi.driver.swing.SwingUINativeRenderer.coordinates;
+import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 
 public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategyStrategy<GridBagConstraints, RectangleWireframe> {
 	public SimpleBaseLayoutConstructionStrategyImpl(LayoutProvider layoutProvider) {

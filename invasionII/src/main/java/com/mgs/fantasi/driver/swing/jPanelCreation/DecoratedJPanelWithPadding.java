@@ -8,7 +8,7 @@ import com.mgs.fantasi.properties.measurements.Measurements;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.driver.swing.SwingUINativeRenderer.coordinates;
+import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 
 public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
     private final JPanelCreationStrategy decoratedPanel;
@@ -49,7 +49,4 @@ public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
         return 0;
     }
 
-    public JPanelCreationStrategy getDecoratedPanel() {
-        return decoratedPanel;
-    }
 }

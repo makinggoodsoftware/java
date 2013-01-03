@@ -1,4 +1,4 @@
-package com.mgs.fantasi.driver.swing;
+package com.mgs.fantasi.driver;
 
 import com.mgs.fantasi.styles.UIProfile;
 

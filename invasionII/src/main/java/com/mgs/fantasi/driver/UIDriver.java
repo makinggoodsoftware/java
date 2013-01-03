@@ -1,8 +1,6 @@
 package com.mgs.fantasi.driver;
 
 import com.mgs.fantasi.driver.swing.JPanelRenderingContextFactory;
-import com.mgs.fantasi.driver.swing.RenderingContext;
-import com.mgs.fantasi.driver.swing.RenderingContextFactory;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;

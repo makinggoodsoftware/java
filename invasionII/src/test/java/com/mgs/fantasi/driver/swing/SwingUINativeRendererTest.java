@@ -6,16 +6,17 @@ import org.junit.Test;
 
 public class SwingUINativeRendererTest {
 //	private SwingUINativeRenderer swingUINativeRenderer;
-//	private RenderingContextFactory renderingContextFactoryMock;
+//	private JPanelRenderingContextFactory renderingContextFactoryMock;
 
 	@Before
 	public void setUp() throws Exception {
-//		renderingContextFactoryMock = Mockito.mock(RenderingContextFactory.class);
+//		renderingContextFactoryMock = Mockito.mock(JPanelRenderingContextFactory.class);
 //		swingUINativeRenderer = new SwingUINativeRenderer(renderingContextFactoryMock);
 	}
 
 	//TODO We need to complete this test... Can we unit test this?
-	@Test @Ignore
+	@Test
+	@Ignore
 	public void testRender() throws Exception {
 //		View viewMock = Mockito.mock(View.class);
 //		UIProfile uiProfileMock = Mockito.mock(UIProfile.class);

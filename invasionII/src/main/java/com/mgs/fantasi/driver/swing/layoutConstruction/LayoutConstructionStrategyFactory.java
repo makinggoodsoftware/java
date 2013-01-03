@@ -1,8 +1,6 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
-import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.rendering.wireframe.*;
-import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
 
 import javax.swing.*;
@@ -49,11 +47,6 @@ public class LayoutConstructionStrategyFactory {
 			}
 
 			@Override
-			public void buildInto(JPanel container, SwingUINativeRenderer renderer, UIProfile uiProfile) {
-				//do nothing
-			}
-
-            @Override
             public LayoutConstructionStrategy<Void, Wireframe> fillWith(Wireframe content) {
                 throw new RuntimeException("Can't fill an empty structure!");
             }
@@ -62,6 +55,16 @@ public class LayoutConstructionStrategyFactory {
             public List<OnGoingChildAddition<Void, Wireframe>> getToBeAdded() {
                 return new ArrayList<OnGoingChildAddition<Void, Wireframe>>();
             }
-        };
+
+			@Override
+			public LayoutManager getLayoutManager(JPanel container) {
+				throw new RuntimeException("An empty structure doesn't have a layout!");
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return true;
+			}
+		};
 	}
 }

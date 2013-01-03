@@ -5,6 +5,7 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
+import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingChildAddition;
 import com.mgs.fantasi.properties.BorderFactory;
 import com.mgs.fantasi.properties.ColorFactory;
 import com.mgs.fantasi.properties.UIProperties;
@@ -19,36 +20,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
-    private final StyleManager styleManager;
-    private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
-    private final LayoutConstructionManager layoutConstructionManager;
+	private final RenderingProcessFactory renderingProcessFactory;
 
-    public SwingUINativeRenderer(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory, LayoutConstructionManager layoutConstructionManager) {
-		this.styleManager = styleManager;
-        this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
-        this.layoutConstructionManager = layoutConstructionManager;
-    }
+	public SwingUINativeRenderer(RenderingProcessFactory renderingProcessFactory) {
+		this.renderingProcessFactory = renderingProcessFactory;
+	}
 
 	@Override
 	public JPanel render(View view, UIProfile uiProfile) {
-        return createJPanel(uiProfile, createJPanelConstructionInstructions(view, uiProfile));
+		RenderingProcess renderingProcess = renderingProcessFactory.newRenderingProcess(uiProfile);
+		JPanelCreationInstructions jPanelConstructionInstructions = renderingProcess.createJPanelConstructionInstructions(view);
+		return renderingProcess.createJPanel(jPanelConstructionInstructions);
 	}
 
-    public JPanelCreationInstructions createJPanelConstructionInstructions(View view, UIProfile uiProfile) {
-        UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
-        JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
-        LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(view.buildContent());
-        return new JPanelCreationInstructions(outsideCreationStrategy, insideConstructionStrategy);
-    }
 
-    private JPanel createJPanel(UIProfile uiProfile, JPanelCreationInstructions jPanelCreationInstructions) {
-        JPanel uiNativeElement = jPanelCreationInstructions.getOutsideCreationStrategy().create();
-        jPanelCreationInstructions.getInsideConstructionStrategy().buildInto(uiNativeElement, this, uiProfile);
-        return uiNativeElement;
-    }
-
-
-    public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
+	public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
         UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
         if (backgroundColor.isDefined() &&  ! backgroundColor.getData().isTransparent()){
             jPanel.setBackground(backgroundColor.getData().getColorAsAwt());
@@ -80,7 +66,7 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
 		return gbc;
 	}
 
-    private static class JPanelCreationInstructions {
+    public static class JPanelCreationInstructions {
         private final JPanelCreationStrategy outsideCreationStrategy;
         private final LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy;
 
@@ -97,4 +83,55 @@ public final class SwingUINativeRenderer implements UINativeRenderer<JPanel> {
             return insideConstructionStrategy;
         }
     }
+
+	public static class RenderingProcess {
+		private final UIProfile uiProfile;
+		private final LayoutConstructionManager layoutConstructionManager;
+		private final StyleManager styleManager;
+		private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
+
+		public RenderingProcess(UIProfile uiProfile, LayoutConstructionManager layoutConstructionManager, StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
+			this.uiProfile = uiProfile;
+			this.layoutConstructionManager = layoutConstructionManager;
+			this.styleManager = styleManager;
+			this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
+		}
+
+		public JPanelCreationInstructions createJPanelConstructionInstructions(View view) {
+			UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
+			JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
+			LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(view.buildContent());
+			return new JPanelCreationInstructions(outsideCreationStrategy, insideConstructionStrategy);
+		}
+
+		public JPanel createJPanel(JPanelCreationInstructions jPanelCreationInstructions) {
+			JPanel container = jPanelCreationInstructions.getOutsideCreationStrategy().create();
+			LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = jPanelCreationInstructions.getInsideConstructionStrategy();
+			if (insideConstructionStrategy.isEmpty()) return container;
+
+			container.setLayout(insideConstructionStrategy.getLayoutManager(container));
+			for (OnGoingChildAddition onGoingChildAddition : insideConstructionStrategy.getToBeAdded()) {
+				View content = onGoingChildAddition.getContent();
+				JPanel childUiNativeElement = createJPanel(createJPanelConstructionInstructions(content));
+				container.add(childUiNativeElement, onGoingChildAddition.getSpecifics());
+			}
+			return container;
+		}
+	}
+
+	public static class RenderingProcessFactory {
+		private final LayoutConstructionManager layoutConstructionManager;
+		private final StyleManager styleManager;
+		private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
+
+		public RenderingProcessFactory(LayoutConstructionManager layoutConstructionManager, StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
+			this.layoutConstructionManager = layoutConstructionManager;
+			this.styleManager = styleManager;
+			this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
+		}
+
+		public RenderingProcess newRenderingProcess(UIProfile uiProfile) {
+			return new RenderingProcess(uiProfile, layoutConstructionManager, styleManager, jPanelCreationStrategyFactory);
+		}
+	}
 }

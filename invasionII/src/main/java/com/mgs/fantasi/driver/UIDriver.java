@@ -1,8 +1,9 @@
 package com.mgs.fantasi.driver;
 
+import com.mgs.fantasi.driver.swing.JPanelRenderingContextFactory;
+import com.mgs.fantasi.driver.swing.RenderingContext;
 import com.mgs.fantasi.driver.swing.RenderingContextFactory;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
-import com.mgs.fantasi.driver.swing.SwingUINativeRenderer;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategyFactory;
@@ -15,26 +16,26 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UIDriver<T> {
-    private final UINativeRenderer<T> uiNativeRenderer;
 	private final UIDisplayManager<T> uiDisplayManager;
+	private final RenderingContextFactory<T> renderingContextFactory;
 
 
-    public static UIDriver<JPanel> forSwing(){
+	public static UIDriver<JPanel> forSwing() {
 		StyleManager styleManager = new StyleManagerImpl();
 		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory();
 		LayoutConstructionManager layoutConstructionManager = new LayoutConstructionManager(new LayoutConstructionStrategyFactory());
-		RenderingContextFactory renderingContextFactory = new RenderingContextFactory(layoutConstructionManager, styleManager, jPanelCreationStrategyFactory);
-		SwingUINativeRenderer swingUINativeRenderer = new SwingUINativeRenderer(renderingContextFactory);
-		return new UIDriver<JPanel>(swingUINativeRenderer, new SwingUIDisplayManager());
+		JPanelRenderingContextFactory JPanelRenderingContextFactory = new JPanelRenderingContextFactory(layoutConstructionManager, styleManager, jPanelCreationStrategyFactory);
+		return new UIDriver<JPanel>(new SwingUIDisplayManager(), JPanelRenderingContextFactory);
 	}
 
-	private UIDriver(UINativeRenderer<T> uiStrategy, UIDisplayManager<T> uiDisplayManager) {
-        this.uiNativeRenderer = uiStrategy;
+	private UIDriver(UIDisplayManager<T> uiDisplayManager, RenderingContextFactory<T> renderingContextFactory) {
 		this.uiDisplayManager = uiDisplayManager;
-    }
+		this.renderingContextFactory = renderingContextFactory;
+	}
 
 	public void show(View view, Dimension dimension, UIProfileFactory uiProfileFactory) {
-        T uiNativeComponent = uiNativeRenderer.render(view, uiProfileFactory.getUIProfile());
+		RenderingContext<T> renderingContext = renderingContextFactory.getContextFor(uiProfileFactory.getUIProfile());
+		T uiNativeComponent = renderingContext.render(view);
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}
 }

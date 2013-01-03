@@ -1,4 +1,4 @@
-package com.mgs.fantasi.rendering.wireframe.grid;
+package com.mgs.fantasi.wireframe.grid;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
@@ -16,7 +16,7 @@ public class CellContent {
 	}
 
 	public static CellContent evenlyDivided(View content) {
-		return new CellContent (content, Fractions.all(), Fractions.all());
+		return new CellContent(content, Fractions.all(), Fractions.all());
 	}
 
 	public static CellContent withPartialHeight(View content, Fraction heightRatio) {

@@ -1,8 +1,8 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.rendering.wireframe.EmptyWireframe;
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.EmptyWireframe;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 public class PolygonView extends BaseView<PolygonView> {
 	private PolygonView(PolygonPointsIterator polygonPointsIterator) {

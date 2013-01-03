@@ -1,7 +1,7 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.rendering.wireframe.LayeredWireframe;
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.LayeredWireframe;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class LayeredElementsView extends BaseView {
 		return new LayeredElementsView();
 	}
 
-	public LayeredElementsView withLayer (View layer){
+	public LayeredElementsView withLayer(View layer) {
 		layers.add(layer);
 		return this;
 	}
@@ -21,6 +21,6 @@ public class LayeredElementsView extends BaseView {
 	@Override
 	public Wireframe buildContent() {
 		return new LayeredWireframe().
-			withLayers(layers);
+				withLayers(layers);
 	}
 }

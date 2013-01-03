@@ -1,7 +1,7 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.rendering.wireframe.WireframeType;
-import com.mgs.fantasi.rendering.wireframe.RectangleWireframe;
+import com.mgs.fantasi.wireframe.RectangleWireframe;
+import com.mgs.fantasi.wireframe.WireframeType;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -12,7 +12,7 @@ public class RectangleViewTest {
 	private View contentMock = Mockito.mock(View.class);
 
 	@Test
-	public void childViews_forEmptyRectangleView_shouldReturnAnEmptyRectangleWireframe(){
+	public void childViews_forEmptyRectangleView_shouldReturnAnEmptyRectangleWireframe() {
 		RectangleView rectangle = rectangle();
 		RectangleWireframe wireframe = (RectangleWireframe) rectangle.buildContent();
 
@@ -21,7 +21,7 @@ public class RectangleViewTest {
 	}
 
 	@Test
-	public void childViews_forRectangleViewWithContent_shouldReturnRectangleWireframeWithContent(){
+	public void childViews_forRectangleViewWithContent_shouldReturnRectangleWireframeWithContent() {
 		RectangleView rectangle = rectangle().withContent(contentMock);
 		RectangleWireframe wireframe = (RectangleWireframe) rectangle.buildContent();
 

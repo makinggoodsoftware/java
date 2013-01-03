@@ -1,9 +1,9 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.rendering.wireframe.grid.CellContent;
-import com.mgs.fantasi.rendering.wireframe.grid.CellContentGenerator;
-import com.mgs.fantasi.rendering.wireframe.GridWireframe;
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.GridWireframe;
+import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.grid.CellContent;
+import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
 public class VerticalSlicesView extends BaseView {
 
@@ -30,7 +30,7 @@ public class VerticalSlicesView extends BaseView {
 		});
 	}
 
-	public VerticalSlicesView withVerticalDivisions (int numberOVerticalDivisions){
+	public VerticalSlicesView withVerticalDivisions(int numberOVerticalDivisions) {
 		this.numberOfDivisions = numberOVerticalDivisions;
 		return this;
 	}

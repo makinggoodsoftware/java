@@ -7,10 +7,10 @@ import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingChildAddition;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 import javax.swing.*;
 

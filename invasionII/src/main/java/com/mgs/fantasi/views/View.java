@@ -1,12 +1,12 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.Wireframe;
 
-public interface View{
+public interface View {
 	Wireframe buildContent();
 
-	UIProperties getUiProperties ();
+	UIProperties getUiProperties();
 
-    String getName();
+	String getName();
 }

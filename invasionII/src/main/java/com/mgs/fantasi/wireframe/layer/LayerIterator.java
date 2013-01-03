@@ -1,4 +1,4 @@
-package com.mgs.fantasi.rendering.wireframe.layer;
+package com.mgs.fantasi.wireframe.layer;
 
 import com.mgs.fantasi.views.View;
 

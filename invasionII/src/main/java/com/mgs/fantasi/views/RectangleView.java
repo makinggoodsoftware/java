@@ -1,12 +1,12 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.rendering.wireframe.RectangleWireframe;
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.RectangleWireframe;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 public class RectangleView extends BaseView<RectangleView> {
 	private View content;
 
-    private RectangleView() {
+	private RectangleView() {
 	}
 
 	public static RectangleView rectangle() {
@@ -21,7 +21,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	@Override
 	public Wireframe buildContent() {
 		RectangleWireframe emptyRectangle = new RectangleWireframe();
-		if (content==null) return emptyRectangle;
+		if (content == null) return emptyRectangle;
 		return emptyRectangle.withContent(content);
 	}
 }

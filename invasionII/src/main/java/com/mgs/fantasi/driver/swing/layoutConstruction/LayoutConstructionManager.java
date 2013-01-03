@@ -1,16 +1,16 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
-import com.mgs.fantasi.rendering.wireframe.*;
+import com.mgs.fantasi.wireframe.*;
 
 public class LayoutConstructionManager {
-    private final LayoutConstructionStrategyFactory layoutConstructionStrategyFactory;
+	private final LayoutConstructionStrategyFactory layoutConstructionStrategyFactory;
 
-    public LayoutConstructionManager(LayoutConstructionStrategyFactory layoutConstructionStrategyFactory) {
-        this.layoutConstructionStrategyFactory = layoutConstructionStrategyFactory;
-    }
+	public LayoutConstructionManager(LayoutConstructionStrategyFactory layoutConstructionStrategyFactory) {
+		this.layoutConstructionStrategyFactory = layoutConstructionStrategyFactory;
+	}
 
-    public LayoutConstructionStrategy<?, ? extends Wireframe> createAndFillLayout(Wireframe from) {
-		switch (from.getType()){
+	public LayoutConstructionStrategy<?, ? extends Wireframe> createAndFillLayout(Wireframe from) {
+		switch (from.getType()) {
 			case GRID:
 				return layoutConstructionStrategyFactory.grid().fillWith((GridWireframe) from);
 			case LAYERS:
@@ -18,7 +18,7 @@ public class LayoutConstructionManager {
 			case SIMPLE:
 				return layoutConstructionStrategyFactory.simple().fillWith((RectangleWireframe) from);
 			case DELEGATE:
-                return createAndFillLayout(((DelegateWireframe) from).getContent());
+				return createAndFillLayout(((DelegateWireframe) from).getContent());
 			case EMPTY:
 				return layoutConstructionStrategyFactory.empty();
 			default:

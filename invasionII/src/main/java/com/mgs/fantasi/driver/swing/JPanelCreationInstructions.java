@@ -2,7 +2,7 @@ package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 public class JPanelCreationInstructions {
 	private final JPanelCreationStrategy outsideCreationStrategy;

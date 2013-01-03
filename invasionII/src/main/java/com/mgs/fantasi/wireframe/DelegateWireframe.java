@@ -1,4 +1,4 @@
-package com.mgs.fantasi.rendering.wireframe;
+package com.mgs.fantasi.wireframe;
 
 public class DelegateWireframe implements Wireframe {
 	private Wireframe content;
@@ -13,7 +13,7 @@ public class DelegateWireframe implements Wireframe {
 		return this;
 	}
 
-    public Wireframe getContent() {
-        return content;
-    }
+	public Wireframe getContent() {
+		return content;
+	}
 }

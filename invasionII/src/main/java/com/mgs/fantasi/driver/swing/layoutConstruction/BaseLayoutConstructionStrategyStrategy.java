@@ -1,7 +1,7 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,9 +31,9 @@ public abstract class BaseLayoutConstructionStrategyStrategy<T, Z extends Wirefr
 	}
 
 	@Override
-    public List<OnGoingChildAddition<T, Z>> getToBeAdded() {
-        return toBeAdded;
-    }
+	public List<OnGoingChildAddition<T, Z>> getToBeAdded() {
+		return toBeAdded;
+	}
 
 	@Override
 	public boolean isEmpty() {

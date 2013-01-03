@@ -1,4 +1,4 @@
-package com.mgs.fantasi.rendering.wireframe.grid;
+package com.mgs.fantasi.wireframe.grid;
 
 public interface CellIterator {
 

@@ -1,4 +1,4 @@
-package com.mgs.fantasi.rendering.wireframe;
+package com.mgs.fantasi.wireframe;
 
 public enum WireframeType {
 	GRID, EMPTY, LAYERS, SIMPLE, DELEGATE

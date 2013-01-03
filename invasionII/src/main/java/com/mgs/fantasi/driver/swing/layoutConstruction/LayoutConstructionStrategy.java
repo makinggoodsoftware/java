@@ -1,7 +1,7 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
-import com.mgs.fantasi.rendering.wireframe.Wireframe;
 import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public interface LayoutConstructionStrategy<T, Z extends Wireframe> {
 
 	LayoutConstructionStrategy<T, Z> fillWith(Z content);
 
-    List<OnGoingChildAddition<T, Z>> getToBeAdded();
+	List<OnGoingChildAddition<T, Z>> getToBeAdded();
 
 	LayoutManager getLayoutManager(JPanel container);
 

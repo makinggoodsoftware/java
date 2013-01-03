@@ -17,7 +17,7 @@ public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstruc
 	public SimpleBaseLayoutConstructionStrategyImpl fillWith(RectangleWireframe content) {
 		View renderable = content.getContent();
 		if (renderable != null) {
-			queueForAddition(renderable).into(coordinates(0, 0, Fractions.all(), Fractions.all()));
+			queueForAddition(renderable, coordinates(0, 0, Fractions.all(), Fractions.all()));
 		}
 		return this;
 	}

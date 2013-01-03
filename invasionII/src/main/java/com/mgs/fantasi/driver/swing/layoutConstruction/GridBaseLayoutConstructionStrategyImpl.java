@@ -19,7 +19,7 @@ public class GridBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructi
 		content.itereateCellsWith(new CellIterator() {
 			@Override
 			public void on(int x, int y, CellContent cell) {
-				queueForAddition(cell.getContent()).into(SwingUtils.coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
+				queueForAddition(cell.getContent(), SwingUtils.coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()));
 			}
 		});
 		return this;

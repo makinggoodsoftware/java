@@ -14,7 +14,7 @@ public class LayerBaseLayoutConstructionStrategyImpl extends BaseLayoutConstruct
 		content.iterateInCrescendo(new LayerIterator() {
 			@Override
 			public void on(int zIndex, View layer) {
-				queueForAddition(layer).into(zIndex);
+				queueForAddition(layer, zIndex);
 			}
 		});
 		return this;

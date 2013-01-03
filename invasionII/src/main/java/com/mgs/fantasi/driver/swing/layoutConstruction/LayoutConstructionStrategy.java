@@ -8,11 +8,11 @@ import java.awt.*;
 import java.util.List;
 
 public interface LayoutConstructionStrategy<T, Z extends Wireframe> {
-	OnGoingChildAddition<T, Z> queueForAddition(View child);
+	void queueForAddition(View child, T specifics);
 
 	LayoutConstructionStrategy<T, Z> fillWith(Z content);
 
-	List<OnGoingChildAddition<T, Z>> getToBeAdded();
+	List<OnGoingChildAddition<T>> getToBeAdded();
 
 	LayoutManager getLayoutManager(JPanel container);
 

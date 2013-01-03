@@ -1,21 +1,13 @@
 package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.views.View;
-import com.mgs.fantasi.wireframe.Wireframe;
 
-public class OnGoingChildAddition<T, Z extends Wireframe> {
-	private final BaseLayoutConstructionStrategyStrategy<T, Z> baseLayoutConstruction;
+public class OnGoingChildAddition<T> {
 	private final View content;
 	private T specifics;
 
-	public OnGoingChildAddition(BaseLayoutConstructionStrategyStrategy<T, Z> baseLayoutConstruction, View content) {
-		this.baseLayoutConstruction = baseLayoutConstruction;
+	public OnGoingChildAddition(View content) {
 		this.content = content;
-	}
-
-	public void into(T specifics) {
-		this.specifics = specifics;
-		baseLayoutConstruction.doAdd(this);
 	}
 
 	public View getContent() {
@@ -24,5 +16,9 @@ public class OnGoingChildAddition<T, Z extends Wireframe> {
 
 	public T getSpecifics() {
 		return specifics;
+	}
+
+	public void setSpecifics(T specifics) {
+		this.specifics = specifics;
 	}
 }

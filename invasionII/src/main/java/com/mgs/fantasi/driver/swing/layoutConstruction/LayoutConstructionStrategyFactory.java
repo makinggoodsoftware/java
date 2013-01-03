@@ -42,7 +42,7 @@ public class LayoutConstructionStrategyFactory {
 		return new LayoutConstructionStrategy<Void, Wireframe>() {
 
 			@Override
-			public OnGoingChildAddition<Void, Wireframe> queueForAddition(View child) {
+			public void queueForAddition(View child, Void specifics) {
 				throw new RuntimeException("This ongoing construction is empty, nothing can be added to it");
 			}
 
@@ -52,8 +52,8 @@ public class LayoutConstructionStrategyFactory {
 			}
 
 			@Override
-			public List<OnGoingChildAddition<Void, Wireframe>> getToBeAdded() {
-				return new ArrayList<OnGoingChildAddition<Void, Wireframe>>();
+			public List<OnGoingChildAddition<Void>> getToBeAdded() {
+				return new ArrayList<OnGoingChildAddition<Void>>();
 			}
 
 			@Override

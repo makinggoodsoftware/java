@@ -31,9 +31,8 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 	public JPanel render(View view) {
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
-		JPanelCreationInstructions jPanelConstructionInstructions = new JPanelCreationInstructions(outsideCreationStrategy, view.buildContent());
-		JPanel container = jPanelConstructionInstructions.getContainerCreationStrategy().create();
-		Wireframe<View> content = jPanelConstructionInstructions.getContent();
+		JPanel container = outsideCreationStrategy.create();
+		Wireframe<View> content = view.buildContent();
 		if (content.isEmpty()) return container;
 
 		return processContent(container, content);

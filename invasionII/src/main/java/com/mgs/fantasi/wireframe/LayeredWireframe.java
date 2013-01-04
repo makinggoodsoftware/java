@@ -13,6 +13,11 @@ public class LayeredWireframe implements Wireframe {
 		return WireframeType.LAYERS;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
 	public Wireframe withLayers(List<View> layers) {
 		this.layers = layers;
 		return this;

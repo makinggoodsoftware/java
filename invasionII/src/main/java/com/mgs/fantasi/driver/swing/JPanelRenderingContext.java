@@ -5,7 +5,7 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
-import com.mgs.fantasi.driver.swing.layoutConstruction.OnGoingChildAddition;
+import com.mgs.fantasi.driver.swing.layoutConstruction.ToBeAddedWithSpecifics;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
@@ -30,18 +30,18 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 	JPanelCreationInstructions createJPanelConstructionInstructions(View view) {
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
-		LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(view.buildContent());
-		return new JPanelCreationInstructions(outsideCreationStrategy, insideConstructionStrategy);
+		return new JPanelCreationInstructions(outsideCreationStrategy, view.buildContent());
 	}
 
 	JPanel createJPanel(JPanelCreationInstructions jPanelCreationInstructions) {
-		JPanel container = jPanelCreationInstructions.getOutsideCreationStrategy().create();
-		LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = jPanelCreationInstructions.getInsideConstructionStrategy();
-		if (insideConstructionStrategy.isEmpty()) return container;
+		JPanel container = jPanelCreationInstructions.getContainerCreationStrategy().create();
+		Wireframe content = jPanelCreationInstructions.getContent();
+		if (content.isEmpty()) return container;
 
+		LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(content);
 		container.setLayout(insideConstructionStrategy.getLayoutManager(container));
-		for (OnGoingChildAddition onGoingChildAddition : insideConstructionStrategy.getToBeAdded()) {
-			container.add(render(onGoingChildAddition.getContent()), onGoingChildAddition.getSpecifics());
+		for (ToBeAddedWithSpecifics toBeAddedWithSpecifics : insideConstructionStrategy.getToBeAddedWithSpecifics()) {
+			container.add(render(toBeAddedWithSpecifics.getContent()), toBeAddedWithSpecifics.getSpecifics());
 		}
 		return container;
 	}

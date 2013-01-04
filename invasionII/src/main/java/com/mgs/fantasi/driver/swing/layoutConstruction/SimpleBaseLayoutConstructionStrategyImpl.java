@@ -8,7 +8,7 @@ import java.awt.*;
 
 import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 
-public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategyStrategy<GridBagConstraints, RectangleWireframe> {
+public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategy<GridBagConstraints, RectangleWireframe> {
 	public SimpleBaseLayoutConstructionStrategyImpl(LayoutProvider layoutProvider) {
 		super(layoutProvider);
 	}

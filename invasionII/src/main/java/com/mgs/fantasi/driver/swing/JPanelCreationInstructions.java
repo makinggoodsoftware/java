@@ -1,23 +1,22 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
-import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 public class JPanelCreationInstructions {
-	private final JPanelCreationStrategy outsideCreationStrategy;
-	private final LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy;
+	private final JPanelCreationStrategy containerCreationStrategy;
+	private final Wireframe content;
 
-	public JPanelCreationInstructions(JPanelCreationStrategy outsideCreationStrategy, LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy) {
-		this.outsideCreationStrategy = outsideCreationStrategy;
-		this.insideConstructionStrategy = insideConstructionStrategy;
+	public JPanelCreationInstructions(JPanelCreationStrategy containerCreationStrategy, Wireframe content) {
+		this.containerCreationStrategy = containerCreationStrategy;
+		this.content = content;
 	}
 
-	public JPanelCreationStrategy getOutsideCreationStrategy() {
-		return outsideCreationStrategy;
+	public JPanelCreationStrategy getContainerCreationStrategy() {
+		return containerCreationStrategy;
 	}
 
-	public LayoutConstructionStrategy<?, ? extends Wireframe> getInsideConstructionStrategy() {
-		return insideConstructionStrategy;
+	public Wireframe getContent() {
+		return content;
 	}
 }

@@ -24,6 +24,11 @@ public class GridWireframe implements Wireframe {
 		return WireframeType.GRID;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
 	public void itereateCellsWith(CellIterator cellIterator) {
 		for (int x = 0; x < dimension.width; x++) {
 			for (int y = 0; y < dimension.height; y++) {

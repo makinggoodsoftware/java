@@ -4,7 +4,7 @@ import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.LayeredWireframe;
 import com.mgs.fantasi.wireframe.layer.LayerIterator;
 
-public class LayerBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategyStrategy<Integer, LayeredWireframe> {
+public class LayerBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategy<Integer, LayeredWireframe> {
 	public LayerBaseLayoutConstructionStrategyImpl(LayoutProvider layoutProvider) {
 		super(layoutProvider);
 	}

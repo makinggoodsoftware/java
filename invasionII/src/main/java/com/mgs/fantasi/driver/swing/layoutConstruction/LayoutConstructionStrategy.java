@@ -12,7 +12,7 @@ public interface LayoutConstructionStrategy<T, Z extends Wireframe> {
 
 	LayoutConstructionStrategy<T, Z> fillWith(Z content);
 
-	List<OnGoingChildAddition<T>> getToBeAdded();
+	List<ToBeAddedWithSpecifics<T>> getToBeAddedWithSpecifics();
 
 	LayoutManager getLayoutManager(JPanel container);
 

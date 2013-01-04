@@ -8,6 +8,11 @@ public class DelegateWireframe implements Wireframe {
 		return WireframeType.DELEGATE;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
 	public DelegateWireframe withContent(Wireframe content) {
 		this.content = content;
 		return this;

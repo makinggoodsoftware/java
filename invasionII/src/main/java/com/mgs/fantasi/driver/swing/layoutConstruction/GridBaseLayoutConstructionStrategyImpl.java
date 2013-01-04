@@ -7,7 +7,7 @@ import com.mgs.fantasi.wireframe.grid.CellIterator;
 
 import java.awt.*;
 
-public class GridBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategyStrategy<GridBagConstraints, GridWireframe> {
+public class GridBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategy<GridBagConstraints, GridWireframe> {
 
 	public GridBaseLayoutConstructionStrategyImpl(LayoutProvider layoutProvider) {
 		super(layoutProvider);

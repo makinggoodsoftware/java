@@ -2,12 +2,13 @@ package com.mgs.fantasi.driver.swing.layoutConstruction;
 
 import com.mgs.fantasi.views.View;
 
-public class OnGoingChildAddition<T> {
+public class ToBeAddedWithSpecifics<T> {
 	private final View content;
-	private T specifics;
+	private final T specifics;
 
-	public OnGoingChildAddition(View content) {
+	public ToBeAddedWithSpecifics(View content, T specifics) {
 		this.content = content;
+		this.specifics = specifics;
 	}
 
 	public View getContent() {
@@ -16,9 +17,5 @@ public class OnGoingChildAddition<T> {
 
 	public T getSpecifics() {
 		return specifics;
-	}
-
-	public void setSpecifics(T specifics) {
-		this.specifics = specifics;
 	}
 }

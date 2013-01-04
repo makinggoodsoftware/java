@@ -52,8 +52,8 @@ public class LayoutConstructionStrategyFactory {
 			}
 
 			@Override
-			public List<OnGoingChildAddition<Void>> getToBeAdded() {
-				return new ArrayList<OnGoingChildAddition<Void>>();
+			public List<ToBeAddedWithSpecifics<Void>> getToBeAddedWithSpecifics() {
+				return new ArrayList<ToBeAddedWithSpecifics<Void>>();
 			}
 
 			@Override

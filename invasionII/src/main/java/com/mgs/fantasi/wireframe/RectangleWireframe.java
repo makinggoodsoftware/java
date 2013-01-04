@@ -16,6 +16,11 @@ public class RectangleWireframe implements Wireframe {
 		return WireframeType.SIMPLE;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
 	public View getContent() {
 		return content;
 	}

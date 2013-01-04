@@ -5,4 +5,9 @@ public class EmptyWireframe implements Wireframe {
 	public WireframeType getType() {
 		return WireframeType.EMPTY;
 	}
+
+	@Override
+	public boolean isEmpty() {
+		return true;
+	}
 }

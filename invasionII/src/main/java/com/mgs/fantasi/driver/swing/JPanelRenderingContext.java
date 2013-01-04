@@ -27,28 +27,24 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 		this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
 	}
 
-	JPanelCreationInstructions createJPanelConstructionInstructions(View view) {
+	@Override
+	public JPanel render(View view) {
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
-		return new JPanelCreationInstructions(outsideCreationStrategy, view.buildContent());
-	}
-
-	JPanel createJPanel(JPanelCreationInstructions jPanelCreationInstructions) {
-		JPanel container = jPanelCreationInstructions.getContainerCreationStrategy().create();
-		Wireframe content = jPanelCreationInstructions.getContent();
+		JPanelCreationInstructions jPanelConstructionInstructions = new JPanelCreationInstructions(outsideCreationStrategy, view.buildContent());
+		JPanel container = jPanelConstructionInstructions.getContainerCreationStrategy().create();
+		Wireframe<View> content = jPanelConstructionInstructions.getContent();
 		if (content.isEmpty()) return container;
 
+		return processContent(container, content);
+	}
+
+	private JPanel processContent(JPanel container, Wireframe<View> content) {
 		LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(content);
 		container.setLayout(insideConstructionStrategy.getLayoutManager(container));
 		for (ToBeAddedWithSpecifics toBeAddedWithSpecifics : insideConstructionStrategy.getToBeAddedWithSpecifics()) {
 			container.add(render(toBeAddedWithSpecifics.getContent()), toBeAddedWithSpecifics.getSpecifics());
 		}
 		return container;
-	}
-
-	@Override
-	public JPanel render(View view) {
-		JPanelCreationInstructions jPanelConstructionInstructions = createJPanelConstructionInstructions(view);
-		return createJPanel(jPanelConstructionInstructions);
 	}
 }

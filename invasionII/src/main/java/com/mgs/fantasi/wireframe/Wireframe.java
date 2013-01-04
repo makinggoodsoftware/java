@@ -1,6 +1,7 @@
 package com.mgs.fantasi.wireframe;
 
-public interface Wireframe {
+@SuppressWarnings("unused")
+public interface Wireframe<T> {
 	WireframeType getType();
 
 	boolean isEmpty();

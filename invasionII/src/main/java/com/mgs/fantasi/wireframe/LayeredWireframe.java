@@ -1,12 +1,11 @@
 package com.mgs.fantasi.wireframe;
 
-import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.layer.LayerIterator;
 
 import java.util.List;
 
-public class LayeredWireframe implements Wireframe {
-	private List<View> layers;
+public class LayeredWireframe<T> implements Wireframe<T> {
+	private List<T> layers;
 
 	@Override
 	public WireframeType getType() {
@@ -18,12 +17,12 @@ public class LayeredWireframe implements Wireframe {
 		return false;
 	}
 
-	public Wireframe withLayers(List<View> layers) {
+	public Wireframe<T> withLayers(List<T> layers) {
 		this.layers = layers;
 		return this;
 	}
 
-	public void iterateInCrescendo(LayerIterator layerIterator) {
+	public void iterateInCrescendo(LayerIterator<T> layerIterator) {
 		int zIndex = 0;
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			layerIterator.on(zIndex, layers.get(i));

@@ -6,11 +6,9 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.grid.CellContent;
 import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
-public class PijamaRowsView extends BaseView {
+public class PijamaRowsView extends BaseView<PijamaRowsView> {
 	private static final int UNDEFINED = -1;
-
 	private final TwoLinesView generationBuilder;
-
 	private int numberOfGenerations = UNDEFINED;
 
 	private PijamaRowsView(View firstRowBuilder, View secondRowBuilder) {
@@ -21,24 +19,24 @@ public class PijamaRowsView extends BaseView {
 		return new PijamaRowsView(firstRowBuilder, secondRowBuilder);
 	}
 
-	public PijamaRowsView withFirstRowSize(Fraction sizeContraints) {
-		generationBuilder.withFirstRowSize(sizeContraints);
+	public PijamaRowsView withFirstRowSize(Fraction sizeConstraints) {
+		generationBuilder.withFirstRowSize(sizeConstraints);
 		return this;
 	}
 
-	public PijamaRowsView withNumberOfGerations(int numberOfGerations) {
-		numberOfGenerations = numberOfGerations;
+	public PijamaRowsView withNumberOfGenerations(int numberOfGenerations) {
+		this.numberOfGenerations = numberOfGenerations;
 		return this;
 	}
 
 	@Override
-	public Wireframe buildContent() {
-		return new GridWireframe().
+	public Wireframe<View> buildContent() {
+		return new GridWireframe<View>().
 				withDimension(1, numberOfGenerations).
-				withContent(new CellContentGenerator() {
+				withContent(new CellContentGenerator<View>() {
 					@Override
-					public CellContent generateContentFor(int x, int y) {
-						return CellContent.evenlyDivided(generationBuilder);
+					public CellContent<View> generateContentFor(int x, int y) {
+						return CellContent.evenlyDivided((View) generationBuilder);
 					}
 				});
 	}

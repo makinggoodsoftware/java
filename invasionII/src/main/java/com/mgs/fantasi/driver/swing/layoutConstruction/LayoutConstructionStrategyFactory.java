@@ -38,8 +38,8 @@ public class LayoutConstructionStrategyFactory {
 		});
 	}
 
-	public LayoutConstructionStrategy<Void, ? extends Wireframe> empty() {
-		return new LayoutConstructionStrategy<Void, Wireframe>() {
+	public LayoutConstructionStrategy<Void, ? extends Wireframe<View>> empty() {
+		return new LayoutConstructionStrategy<Void, Wireframe<View>>() {
 
 			@Override
 			public void queueForAddition(View child, Void specifics) {
@@ -47,7 +47,7 @@ public class LayoutConstructionStrategyFactory {
 			}
 
 			@Override
-			public LayoutConstructionStrategy<Void, Wireframe> fillWith(Wireframe content) {
+			public LayoutConstructionStrategy<Void, Wireframe<View>> fillWith(Wireframe<View> content) {
 				throw new RuntimeException("Can't fill an empty structure!");
 			}
 

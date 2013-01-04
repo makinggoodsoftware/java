@@ -19,8 +19,8 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public Wireframe buildContent() {
-		return new LayeredWireframe().
+	public Wireframe<View> buildContent() {
+		return new LayeredWireframe<View>().
 				withLayers(layers);
 	}
 }

@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseLayoutConstructionStrategy<T, Z extends Wireframe> implements LayoutConstructionStrategy<T, Z> {
+public abstract class BaseLayoutConstructionStrategy<T, Z extends Wireframe<View>> implements LayoutConstructionStrategy<T, Z> {
 	protected final LayoutProvider layoutProvider;
 	private List<ToBeAddedWithSpecifics<T>> toBeAddedWithSpecifics = new ArrayList<ToBeAddedWithSpecifics<T>>();
 

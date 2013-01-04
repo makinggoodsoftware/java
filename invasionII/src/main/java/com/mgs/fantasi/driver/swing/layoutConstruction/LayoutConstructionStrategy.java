@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public interface LayoutConstructionStrategy<T, Z extends Wireframe> {
+public interface LayoutConstructionStrategy<T, Z extends Wireframe<View>> {
 	void queueForAddition(View child, T specifics);
 
 	LayoutConstructionStrategy<T, Z> fillWith(Z content);

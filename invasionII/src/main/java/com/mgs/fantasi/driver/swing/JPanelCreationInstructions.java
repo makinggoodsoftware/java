@@ -1,13 +1,14 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
+import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 public class JPanelCreationInstructions {
 	private final JPanelCreationStrategy containerCreationStrategy;
-	private final Wireframe content;
+	private final Wireframe<View> content;
 
-	public JPanelCreationInstructions(JPanelCreationStrategy containerCreationStrategy, Wireframe content) {
+	public JPanelCreationInstructions(JPanelCreationStrategy containerCreationStrategy, Wireframe<View> content) {
 		this.containerCreationStrategy = containerCreationStrategy;
 		this.content = content;
 	}
@@ -16,7 +17,7 @@ public class JPanelCreationInstructions {
 		return containerCreationStrategy;
 	}
 
-	public Wireframe getContent() {
+	public Wireframe<View> getContent() {
 		return content;
 	}
 }

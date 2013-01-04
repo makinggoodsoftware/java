@@ -1,11 +1,9 @@
 package com.mgs.fantasi.wireframe;
 
-import com.mgs.fantasi.views.View;
+public class RectangleWireframe<T> implements Wireframe<T> {
+	private T content;
 
-public class RectangleWireframe implements Wireframe {
-	private View content;
-
-	public RectangleWireframe withContent(View content) {
+	public RectangleWireframe<T> withContent(T content) {
 		if (content == null) throw new IllegalArgumentException("Content can't be null");
 		this.content = content;
 		return this;
@@ -21,7 +19,7 @@ public class RectangleWireframe implements Wireframe {
 		return false;
 	}
 
-	public View getContent() {
+	public T getContent() {
 		return content;
 	}
 }

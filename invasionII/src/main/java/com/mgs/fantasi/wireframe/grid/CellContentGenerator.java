@@ -1,5 +1,5 @@
 package com.mgs.fantasi.wireframe.grid;
 
-public interface CellContentGenerator {
-	CellContent generateContentFor(int x, int y);
+public interface CellContentGenerator<T> {
+	CellContent<T> generateContentFor(int x, int y);
 }

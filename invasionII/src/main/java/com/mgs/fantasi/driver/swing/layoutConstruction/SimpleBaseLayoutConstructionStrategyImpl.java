@@ -8,13 +8,13 @@ import java.awt.*;
 
 import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 
-public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategy<GridBagConstraints, RectangleWireframe> {
+public class SimpleBaseLayoutConstructionStrategyImpl extends BaseLayoutConstructionStrategy<GridBagConstraints, RectangleWireframe<View>> {
 	public SimpleBaseLayoutConstructionStrategyImpl(LayoutProvider layoutProvider) {
 		super(layoutProvider);
 	}
 
 	@Override
-	public SimpleBaseLayoutConstructionStrategyImpl fillWith(RectangleWireframe content) {
+	public SimpleBaseLayoutConstructionStrategyImpl fillWith(RectangleWireframe<View> content) {
 		View renderable = content.getContent();
 		if (renderable != null) {
 			queueForAddition(renderable, coordinates(0, 0, Fractions.all(), Fractions.all()));

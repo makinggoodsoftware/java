@@ -28,7 +28,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 				rectangle()
 		).
 				withFirstRowSize(Fractions.thwoThirds()).
-				withNumberOfGerations(numberOfGerations);
+				withNumberOfGenerations(numberOfGerations);
 	}
 
 	public static HexagonRowsView hexagonRows(int numberOVerticalDivisions, int numberOfGerations) {
@@ -36,8 +36,8 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	public Wireframe buildContent() {
-		return new DelegateWireframe().
+	public Wireframe<View> buildContent() {
+		return new DelegateWireframe<View>().
 				withContent(pijamaRows.buildContent());
 	}
 

@@ -13,6 +13,8 @@ import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import javax.swing.*;
+import java.util.Iterator;
+import java.util.List;
 
 public class JPanelRenderingContext implements RenderingContext<JPanel> {
 	private final UIProfile uiProfile;
@@ -27,23 +29,75 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 		this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
 	}
 
-	@Override
-	public JPanel render(View view) {
-		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
-		JPanelCreationStrategy outsideCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
-		JPanel container = outsideCreationStrategy.create();
-		Wireframe<View> content = view.buildContent();
-		if (content.isEmpty()) return container;
-
-		return processContent(container, content);
+	public JPanelCreationStrategyFactory getJPanelCreationStrategyFactory() {
+		return jPanelCreationStrategyFactory;
 	}
 
-	private JPanel processContent(JPanel container, Wireframe<View> content) {
-		LayoutConstructionStrategy<?, ? extends Wireframe> insideConstructionStrategy = layoutConstructionManager.createAndFillLayout(content);
-		container.setLayout(insideConstructionStrategy.getLayoutManager(container));
-		for (ToBeAddedWithSpecifics toBeAddedWithSpecifics : insideConstructionStrategy.getToBeAddedWithSpecifics()) {
-			container.add(render(toBeAddedWithSpecifics.getContent()), toBeAddedWithSpecifics.getSpecifics());
+	public LayoutConstructionManager getLayoutConstructionManager() {
+		return layoutConstructionManager;
+	}
+
+	public StyleManager getStyleManager() {
+		return styleManager;
+	}
+
+	public UIProfile getUiProfile() {
+		return uiProfile;
+	}
+
+	@Override
+	public JPanel render(View view) {
+		return new JPanelRenderingProcess(this).prepare(view).render();
+	}
+
+	public static class JPanelRenderingProcess {
+		private final JPanelRenderingContext jPanelRenderingContext;
+		private JPanelCreationStrategy outsideCreationStrategy;
+		private List<? extends ToBeAddedWithSpecifics> toBeAddedWithSpecifics;
+		private LayoutConstructionStrategy<?, ? extends Wireframe> layoutConstructionStrategy;
+
+		public JPanelRenderingProcess(JPanelRenderingContext jPanelRenderingContext) {
+			this.jPanelRenderingContext = jPanelRenderingContext;
 		}
-		return container;
+
+		public JPanelRenderingProcess prepare(View view) {
+			UIProperties uiPropertiesWithStylesApplied = getStyleManager().applyStyles(view.getUiProperties(), getUIProfile().findStylesFor(view));
+			Wireframe<View> content = view.buildContent();
+			outsideCreationStrategy = getJPanelCreationStrategyFactory().forUIProperties(uiPropertiesWithStylesApplied);
+			layoutConstructionStrategy = getLayoutConstructionManager().createAndFillLayout(content);
+			toBeAddedWithSpecifics = layoutConstructionStrategy.getToBeAddedWithSpecifics();
+
+			return this;
+		}
+
+		public JPanel render() {
+			JPanel container = outsideCreationStrategy.create();
+			if (layoutConstructionStrategy.isEmpty()) return container;
+
+			container.setLayout(layoutConstructionStrategy.getLayoutManager(container));
+			Iterator<? extends ToBeAddedWithSpecifics> iterator = toBeAddedWithSpecifics.iterator();
+			while (iterator.hasNext()) {
+				ToBeAddedWithSpecifics toBeAddedWithSpecifics = iterator.next();
+				JPanel child = new JPanelRenderingProcess(jPanelRenderingContext).prepare(toBeAddedWithSpecifics.getContent()).render();
+				container.add(child, toBeAddedWithSpecifics.getSpecifics());
+			}
+			return container;
+		}
+
+		private UIProfile getUIProfile() {
+			return jPanelRenderingContext.getUiProfile();
+		}
+
+		private JPanelCreationStrategyFactory getJPanelCreationStrategyFactory() {
+			return jPanelRenderingContext.getJPanelCreationStrategyFactory();
+		}
+
+		private StyleManager getStyleManager() {
+			return jPanelRenderingContext.getStyleManager();
+		}
+
+		private LayoutConstructionManager getLayoutConstructionManager() {
+			return jPanelRenderingContext.getLayoutConstructionManager();
+		}
 	}
 }

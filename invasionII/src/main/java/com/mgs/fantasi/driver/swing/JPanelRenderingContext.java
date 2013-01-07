@@ -13,8 +13,9 @@ import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
 public class JPanelRenderingContext implements RenderingContext<JPanel> {
 	private final UIProfile uiProfile;
@@ -53,8 +54,8 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 	public static class JPanelRenderingProcess {
 		private final JPanelRenderingContext jPanelRenderingContext;
 		private JPanelCreationStrategy outsideCreationStrategy;
-		private List<? extends ToBeAddedWithSpecifics> toBeAddedWithSpecifics;
 		private LayoutConstructionStrategy<?, ? extends Wireframe> layoutConstructionStrategy;
+		private final Map<Object, JPanelRenderingProcess> childrenProcesses = new HashMap<Object, JPanelRenderingProcess>();
 
 		public JPanelRenderingProcess(JPanelRenderingContext jPanelRenderingContext) {
 			this.jPanelRenderingContext = jPanelRenderingContext;
@@ -65,8 +66,13 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 			Wireframe<View> content = view.buildContent();
 			outsideCreationStrategy = getJPanelCreationStrategyFactory().forUIProperties(uiPropertiesWithStylesApplied);
 			layoutConstructionStrategy = getLayoutConstructionManager().createAndFillLayout(content);
-			toBeAddedWithSpecifics = layoutConstructionStrategy.getToBeAddedWithSpecifics();
 
+			Iterator<? extends ToBeAddedWithSpecifics> iterator = layoutConstructionStrategy.getToBeAddedWithSpecifics().iterator();
+			while (iterator.hasNext()) {
+				ToBeAddedWithSpecifics toBeAddedWithSpecifics = iterator.next();
+				JPanelRenderingProcess childProcess = new JPanelRenderingProcess(jPanelRenderingContext).prepare(toBeAddedWithSpecifics.getContent());
+				childrenProcesses.put(toBeAddedWithSpecifics.getSpecifics(), childProcess);
+			}
 			return this;
 		}
 
@@ -75,11 +81,10 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 			if (layoutConstructionStrategy.isEmpty()) return container;
 
 			container.setLayout(layoutConstructionStrategy.getLayoutManager(container));
-			Iterator<? extends ToBeAddedWithSpecifics> iterator = toBeAddedWithSpecifics.iterator();
-			while (iterator.hasNext()) {
-				ToBeAddedWithSpecifics toBeAddedWithSpecifics = iterator.next();
-				JPanel child = new JPanelRenderingProcess(jPanelRenderingContext).prepare(toBeAddedWithSpecifics.getContent()).render();
-				container.add(child, toBeAddedWithSpecifics.getSpecifics());
+
+			for (Object specifics : childrenProcesses.keySet()) {
+				JPanelRenderingProcess childRenderingProcess = childrenProcesses.get(specifics);
+				container.add(childRenderingProcess.render(), specifics);
 			}
 			return container;
 		}

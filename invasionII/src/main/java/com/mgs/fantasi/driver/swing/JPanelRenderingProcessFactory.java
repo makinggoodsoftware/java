@@ -4,8 +4,6 @@ import com.mgs.fantasi.driver.RenderingProcess;
 import com.mgs.fantasi.driver.RenderingProcessFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
-import com.mgs.fantasi.driver.swing.layoutProvider.LayoutProvider;
-import com.mgs.fantasi.driver.swing.layoutProvider.LayoutProviderFactory;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
@@ -25,13 +23,11 @@ import static com.mgs.fantasi.properties.measurements.Fractions.all;
 public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JPanel> {
 	private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
 	private final StyleManager styleManager;
-	private final LayoutProviderFactory layoutProviderFactory;
 
 
-	public JPanelRenderingProcessFactory(LayoutProviderFactory layoutProviderFactory, StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
+	public JPanelRenderingProcessFactory(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
 		this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
 		this.styleManager = styleManager;
-		this.layoutProviderFactory = layoutProviderFactory;
 	}
 
 	@Override
@@ -46,9 +42,7 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	private Content createContent(UIProfile uiProfile, Wireframe<View> from) {
-		final Map<Object, RenderingProcess<JPanel>> childrenProcesses = findChildObjects(uiProfile, from);
-		LayoutProvider layoutProvider = layoutProviderFactory.translateTypeIntoLayoutProvider(from);
-		return new Content(layoutProvider, childrenProcesses, from.getType());
+		return new Content(findChildObjects(uiProfile, from), from.getType());
 	}
 
 	private Map<Object, RenderingProcess<JPanel>> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
@@ -84,18 +78,12 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	public static class Content {
-		private final LayoutProvider layoutProvider;
 		private final Map<Object, RenderingProcess<JPanel>> childrenProcesses;
 		private final WireframeType wireframeType;
 
-		public Content(LayoutProvider layoutProvider, Map<Object, RenderingProcess<JPanel>> childrenProcesses, WireframeType wireframeType) {
-			this.layoutProvider = layoutProvider;
+		public Content(Map<Object, RenderingProcess<JPanel>> childrenProcesses, WireframeType wireframeType) {
 			this.childrenProcesses = childrenProcesses;
 			this.wireframeType = wireframeType;
-		}
-
-		public LayoutProvider getLayoutProvider() {
-			return layoutProvider;
 		}
 
 		public Map<Object, RenderingProcess<JPanel>> getChildrenProcesses() {

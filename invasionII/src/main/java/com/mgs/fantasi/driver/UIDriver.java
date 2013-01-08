@@ -3,7 +3,6 @@ package com.mgs.fantasi.driver;
 import com.mgs.fantasi.driver.swing.JPanelRenderingProcessFactory;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
-import com.mgs.fantasi.driver.swing.layoutProvider.LayoutProviderFactory;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIProfile;
@@ -21,9 +20,8 @@ public class UIDriver<T> {
 	public static UIDriver<JPanel> forSwing() {
 		StyleManager styleManager = new StyleManagerImpl();
 		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory();
-		LayoutProviderFactory layoutProviderFactory = new LayoutProviderFactory();
 
-		return new UIDriver<JPanel>(new SwingUIDisplayManager(), new JPanelRenderingProcessFactory(layoutProviderFactory, styleManager, jPanelCreationStrategyFactory));
+		return new UIDriver<JPanel>(new SwingUIDisplayManager(), new JPanelRenderingProcessFactory(styleManager, jPanelCreationStrategyFactory));
 	}
 
 	private UIDriver(UIDisplayManager<T> uiDisplayManager, RenderingProcessFactory<T> renderingProcessFactory) {

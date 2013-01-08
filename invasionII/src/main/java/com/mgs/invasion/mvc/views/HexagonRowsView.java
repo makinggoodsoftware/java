@@ -7,7 +7,6 @@ import com.mgs.fantasi.views.BaseView;
 import com.mgs.fantasi.views.PijamaRowsView;
 import com.mgs.fantasi.views.PolygonView;
 import com.mgs.fantasi.views.View;
-import com.mgs.fantasi.wireframe.DelegateWireframe;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.views.PijamaRowsView.pijamaRows;
@@ -37,8 +36,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 
 	@Override
 	public Wireframe<View> buildContent() {
-		return new DelegateWireframe<View>().
-				withContent(pijamaRows);
+		return pijamaRows.buildContent();
 	}
 
 	public View withHexagonMeasurement(Measurement hexagonMeasurement) {

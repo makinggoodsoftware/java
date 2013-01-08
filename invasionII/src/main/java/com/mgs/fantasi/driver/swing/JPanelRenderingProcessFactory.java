@@ -37,11 +37,6 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	@Override
 	public RenderingProcess<JPanel> newRenderingProcess(View view, final UIProfile uiProfile) {
 		Wireframe<View> from = view.buildContent();
-		if (from.getType().equals(WireframeType.DELEGATE)) {
-			DelegateWireframe<View> delegated = (DelegateWireframe<View>) from;
-			return newRenderingProcess(delegated.getContent(), uiProfile);
-		}
-
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
@@ -83,10 +78,6 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 						childrenProcesses.put(zIndex, newRenderingProcess(layer, uiProfile));
 					}
 				});
-				break;
-			case DELEGATE:
-				DelegateWireframe<View> delegate = (DelegateWireframe<View>) from;
-				childrenProcesses.put(coordinates(0, 0, all(), all()), newRenderingProcess(delegate.getContent(), uiProfile));
 				break;
 		}
 		return childrenProcesses;

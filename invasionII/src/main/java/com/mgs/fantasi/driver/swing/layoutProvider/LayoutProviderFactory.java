@@ -1,7 +1,6 @@
 package com.mgs.fantasi.driver.swing.layoutProvider;
 
 import com.mgs.fantasi.views.View;
-import com.mgs.fantasi.wireframe.DelegateWireframe;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import javax.swing.*;
@@ -36,8 +35,6 @@ public class LayoutProviderFactory {
 						return false;
 					}
 				};
-			case DELEGATE:
-				return translateTypeIntoLayoutProvider(((DelegateWireframe<View>) from).getContent().buildContent());
 			case EMPTY:
 				return new LayoutProvider() {
 					@Override

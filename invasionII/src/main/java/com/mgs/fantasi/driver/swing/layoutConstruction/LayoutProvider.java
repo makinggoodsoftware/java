@@ -5,4 +5,6 @@ import java.awt.*;
 
 public interface LayoutProvider {
 	LayoutManager getLayoutManager(JPanel container);
+
+	boolean isEmpty();
 }

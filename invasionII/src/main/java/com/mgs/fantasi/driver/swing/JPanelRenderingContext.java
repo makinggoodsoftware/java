@@ -5,6 +5,7 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
+import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutProvider;
 import com.mgs.fantasi.driver.swing.layoutConstruction.ToBeAddedWithSpecifics;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
@@ -70,10 +71,10 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 			Iterator<? extends ToBeAddedWithSpecifics> iterator = layoutStrategy.getToBeAddedWithSpecifics().iterator();
 			while (iterator.hasNext()) {
 				ToBeAddedWithSpecifics toBeAddedWithSpecifics = iterator.next();
-				JPanelRenderingProcess childProcessFactory = newRenderingProcess(toBeAddedWithSpecifics.getContent());
-				childrenProcesses.put(toBeAddedWithSpecifics.getSpecifics(), childProcessFactory);
+				JPanelRenderingProcess childProcess = newRenderingProcess(toBeAddedWithSpecifics.getContent());
+				childrenProcesses.put(toBeAddedWithSpecifics.getSpecifics(), childProcess);
 			}
-			return new JPanelRenderingProcess(baseCreationStrategy, childrenProcesses, layoutStrategy);
+			return new JPanelRenderingProcess(baseCreationStrategy, childrenProcesses, getLayoutConstructionManager().translateTypeIntoLayoutProvider(view.buildContent()));
 		}
 
 		private UIProfile getUIProfile() {
@@ -95,20 +96,20 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 
 	public static class JPanelRenderingProcess {
 		private final JPanelCreationStrategy baseCreationStrategy;
-		private final LayoutConstructionStrategy<?, ? extends Wireframe> layoutConstructionStrategy;
 		private final Map<Object, JPanelRenderingProcess> childrenProcesses;
+		private final LayoutProvider layoutProvider;
 
-		public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, Map<Object, JPanelRenderingProcess> childrenProcesses, LayoutConstructionStrategy<?, ? extends Wireframe> layoutConstructionStrategy) {
+		public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, Map<Object, JPanelRenderingProcess> childrenProcesses, LayoutProvider layoutProvider) {
 			this.baseCreationStrategy = baseCreationStrategy;
 			this.childrenProcesses = childrenProcesses;
-			this.layoutConstructionStrategy = layoutConstructionStrategy;
+			this.layoutProvider = layoutProvider;
 		}
 
 		public JPanel render() {
 			JPanel container = baseCreationStrategy.create();
-			if (layoutConstructionStrategy.isEmpty()) return container;
+			if (layoutProvider.isEmpty()) return container;
 
-			container.setLayout(layoutConstructionStrategy.getLayoutManager(container));
+			container.setLayout(layoutProvider.getLayoutManager(container));
 
 			for (Object specifics : childrenProcesses.keySet()) {
 				JPanelRenderingProcess childRenderingProcessFactory = childrenProcesses.get(specifics);

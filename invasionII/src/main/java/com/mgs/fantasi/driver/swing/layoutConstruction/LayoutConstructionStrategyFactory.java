@@ -12,30 +12,57 @@ public class LayoutConstructionStrategyFactory {
 
 
 	public SimpleBaseLayoutConstructionStrategyImpl simple() {
-		return new SimpleBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
-			@Override
-			public LayoutManager getLayoutManager(JPanel container) {
-				return new GridBagLayout();
-			}
-		});
+		return new SimpleBaseLayoutConstructionStrategyImpl(gridLayoutProvider());
 	}
 
 	public LayerBaseLayoutConstructionStrategyImpl layers() {
-		return new LayerBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
+		return new LayerBaseLayoutConstructionStrategyImpl(layerLayoutProvider());
+	}
+
+	public GridBaseLayoutConstructionStrategyImpl grid() {
+		return new GridBaseLayoutConstructionStrategyImpl(gridLayoutProvider());
+	}
+
+	public LayoutProvider layerLayoutProvider() {
+		return new LayoutProvider() {
 			@Override
 			public LayoutManager getLayoutManager(JPanel container) {
 				return new OverlayLayout(container);
 			}
-		});
+
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		};
 	}
 
-	public GridBaseLayoutConstructionStrategyImpl grid() {
-		return new GridBaseLayoutConstructionStrategyImpl(new LayoutProvider() {
+	public LayoutProvider emptyLayoutProvider() {
+		return new LayoutProvider() {
+			@Override
+			public LayoutManager getLayoutManager(JPanel container) {
+				throw new RuntimeException("This is empty!!");
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return true;
+			}
+		};
+	}
+
+	public LayoutProvider gridLayoutProvider() {
+		return new LayoutProvider() {
 			@Override
 			public LayoutManager getLayoutManager(JPanel container) {
 				return new GridBagLayout();
 			}
-		});
+
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		};
 	}
 
 	public LayoutConstructionStrategy<Void, ? extends Wireframe<View>> empty() {

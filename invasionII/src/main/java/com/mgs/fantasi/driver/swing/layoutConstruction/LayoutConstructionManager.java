@@ -26,4 +26,20 @@ public class LayoutConstructionManager {
 				throw new RuntimeException("Can't process the structure: " + from);
 		}
 	}
+
+	public LayoutProvider translateTypeIntoLayoutProvider(Wireframe<View> from) {
+		switch (from.getType()) {
+			case GRID:
+			case SIMPLE:
+				return layoutConstructionStrategyFactory.gridLayoutProvider();
+			case LAYERS:
+				return layoutConstructionStrategyFactory.layerLayoutProvider();
+			case DELEGATE:
+				return translateTypeIntoLayoutProvider(((DelegateWireframe<View>) from).getContent());
+			case EMPTY:
+				return layoutConstructionStrategyFactory.emptyLayoutProvider();
+			default:
+				throw new RuntimeException("Can't process the structure: " + from);
+		}
+	}
 }

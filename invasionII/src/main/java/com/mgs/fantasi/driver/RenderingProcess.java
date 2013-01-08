@@ -1,4 +1,4 @@
-package com.mgs.fantasi.driver.swing;
+package com.mgs.fantasi.driver;
 
 
 public interface RenderingProcess<T> {

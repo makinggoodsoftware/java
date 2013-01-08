@@ -1,5 +1,7 @@
 package com.mgs.fantasi.driver.swing;
 
+import com.mgs.fantasi.driver.RenderingProcess;
+import com.mgs.fantasi.driver.RenderingProcessFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutProvider.LayoutProvider;
@@ -34,10 +36,27 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 
 	@Override
 	public RenderingProcess<JPanel> newRenderingProcess(View view, final UIProfile uiProfile) {
-		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		Wireframe<View> from = view.buildContent();
+		if (from.getType().equals(WireframeType.DELEGATE)) {
+			DelegateWireframe<View> delegated = (DelegateWireframe<View>) from;
+			return newRenderingProcess(delegated.getContent(), uiProfile);
+		}
+
+		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied);
+		Content content = createContent(uiProfile, from);
+
+		return new JPanelRenderingProcess(baseCreationStrategy, content);
+	}
+
+	private Content createContent(UIProfile uiProfile, Wireframe<View> from) {
+		final Map<Object, RenderingProcess<JPanel>> childrenProcesses = findChildObjects(uiProfile, from);
+		LayoutProvider layoutProvider = layoutProviderFactory.translateTypeIntoLayoutProvider(from);
+		return new Content(layoutProvider, childrenProcesses, from.getType());
+	}
+
+	private Map<Object, RenderingProcess<JPanel>> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
 		final Map<Object, RenderingProcess<JPanel>> childrenProcesses = new HashMap<Object, RenderingProcess<JPanel>>();
 
 		switch (from.getType()) {
@@ -70,9 +89,34 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 				childrenProcesses.put(coordinates(0, 0, all(), all()), newRenderingProcess(delegate.getContent(), uiProfile));
 				break;
 		}
-
-		LayoutProvider layoutProvider = layoutProviderFactory.translateTypeIntoLayoutProvider(from);
-		return new JPanelRenderingProcess(baseCreationStrategy, childrenProcesses, layoutProvider);
+		return childrenProcesses;
 	}
 
+	public static class Content {
+		private final LayoutProvider layoutProvider;
+		private final Map<Object, RenderingProcess<JPanel>> childrenProcesses;
+		private final WireframeType wireframeType;
+
+		public Content(LayoutProvider layoutProvider, Map<Object, RenderingProcess<JPanel>> childrenProcesses, WireframeType wireframeType) {
+			this.layoutProvider = layoutProvider;
+			this.childrenProcesses = childrenProcesses;
+			this.wireframeType = wireframeType;
+		}
+
+		public LayoutProvider getLayoutProvider() {
+			return layoutProvider;
+		}
+
+		public Map<Object, RenderingProcess<JPanel>> getChildrenProcesses() {
+			return childrenProcesses;
+		}
+
+		public boolean isEmpty() {
+			return childrenProcesses.keySet().size() == 0;
+		}
+
+		public WireframeType getType() {
+			return wireframeType;
+		}
+	}
 }

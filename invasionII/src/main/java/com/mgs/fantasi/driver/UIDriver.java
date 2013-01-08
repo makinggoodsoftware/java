@@ -3,8 +3,7 @@ package com.mgs.fantasi.driver;
 import com.mgs.fantasi.driver.swing.JPanelRenderingContextFactory;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
-import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
-import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategyFactory;
+import com.mgs.fantasi.driver.swing.layoutProvider.LayoutProviderFactory;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIProfileFactory;
@@ -21,8 +20,8 @@ public class UIDriver<T> {
 	public static UIDriver<JPanel> forSwing() {
 		StyleManager styleManager = new StyleManagerImpl();
 		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory();
-		LayoutConstructionManager layoutConstructionManager = new LayoutConstructionManager(new LayoutConstructionStrategyFactory());
-		JPanelRenderingContextFactory JPanelRenderingContextFactory = new JPanelRenderingContextFactory(layoutConstructionManager, styleManager, jPanelCreationStrategyFactory);
+		LayoutProviderFactory layoutProviderFactory = new LayoutProviderFactory();
+		JPanelRenderingContextFactory JPanelRenderingContextFactory = new JPanelRenderingContextFactory(layoutProviderFactory, styleManager, jPanelCreationStrategyFactory);
 		return new UIDriver<JPanel>(new SwingUIDisplayManager(), JPanelRenderingContextFactory);
 	}
 

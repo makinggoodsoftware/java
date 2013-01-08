@@ -3,8 +3,8 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.RenderingContext;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
-import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
-import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutProvider;
+import com.mgs.fantasi.driver.swing.layoutProvider.LayoutProvider;
+import com.mgs.fantasi.driver.swing.layoutProvider.LayoutProviderFactory;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
@@ -23,13 +23,13 @@ import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class JPanelRenderingContext implements RenderingContext<JPanel> {
 	private final UIProfile uiProfile;
-	private final LayoutConstructionManager layoutConstructionManager;
+	private final LayoutProviderFactory layoutProviderFactory;
 	private final StyleManager styleManager;
 	private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
 
-	public JPanelRenderingContext(UIProfile uiProfile, LayoutConstructionManager layoutConstructionManager, StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
+	public JPanelRenderingContext(UIProfile uiProfile, LayoutProviderFactory layoutProviderFactory, StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
 		this.uiProfile = uiProfile;
-		this.layoutConstructionManager = layoutConstructionManager;
+		this.layoutProviderFactory = layoutProviderFactory;
 		this.styleManager = styleManager;
 		this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
 	}
@@ -38,8 +38,8 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 		return jPanelCreationStrategyFactory;
 	}
 
-	public LayoutConstructionManager getLayoutConstructionManager() {
-		return layoutConstructionManager;
+	public LayoutProviderFactory getLayoutProviderFactory() {
+		return layoutProviderFactory;
 	}
 
 	public StyleManager getStyleManager() {
@@ -117,8 +117,8 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 			return jPanelRenderingContext.getStyleManager();
 		}
 
-		private LayoutConstructionManager getLayoutConstructionManager() {
-			return jPanelRenderingContext.getLayoutConstructionManager();
+		private LayoutProviderFactory getLayoutConstructionManager() {
+			return jPanelRenderingContext.getLayoutProviderFactory();
 		}
 	}
 

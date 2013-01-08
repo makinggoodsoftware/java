@@ -1,4 +1,4 @@
-package com.mgs.fantasi.driver.swing.layoutConstruction;
+package com.mgs.fantasi.driver.swing.layoutProvider;
 
 import javax.swing.*;
 import java.awt.*;

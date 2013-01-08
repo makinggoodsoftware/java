@@ -14,8 +14,9 @@ import com.mgs.fantasi.wireframe.grid.CellIterator;
 import com.mgs.fantasi.wireframe.layer.LayerIterator;
 
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 import static com.mgs.fantasi.properties.measurements.Fractions.all;
@@ -45,8 +46,8 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 		return new Content(findChildObjects(uiProfile, from), from.getType());
 	}
 
-	private Map<Object, RenderingProcess<JPanel>> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
-		final Map<Object, RenderingProcess<JPanel>> childrenProcesses = new HashMap<Object, RenderingProcess<JPanel>>();
+	private List<ToBeAdded> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
+		final List<ToBeAdded> toBeAddedList = new ArrayList<ToBeAdded>();
 
 		switch (from.getType()) {
 			case GRID:
@@ -54,14 +55,18 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 				grid.itereateCellsWith(new CellIterator<View>() {
 					@Override
 					public void on(int x, int y, CellContent<View> cell) {
-						childrenProcesses.put(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()), newRenderingProcess(cell.getContent(), uiProfile));
+						GridBagConstraints specifics = coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio());
+						RenderingProcess<JPanel> childRenderingProcess = newRenderingProcess(cell.getContent(), uiProfile);
+						toBeAddedList.add(new ToBeAdded<GridBagConstraints>(specifics, childRenderingProcess));
 					}
 				});
 				break;
 			case SIMPLE:
 				RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
 				if (rectangle.getContent() != null) {
-					childrenProcesses.put(coordinates(0, 0, all(), all()), newRenderingProcess(rectangle.getContent(), uiProfile));
+					GridBagConstraints specifics = coordinates(0, 0, all(), all());
+					RenderingProcess<JPanel> childRenderingProcess = newRenderingProcess(rectangle.getContent(), uiProfile);
+					toBeAddedList.add(new ToBeAdded<GridBagConstraints>(specifics, childRenderingProcess));
 				}
 				break;
 			case LAYERS:
@@ -69,29 +74,30 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 				layers.iterateInCrescendo(new LayerIterator<View>() {
 					@Override
 					public void on(int zIndex, View layer) {
-						childrenProcesses.put(zIndex, newRenderingProcess(layer, uiProfile));
+						RenderingProcess<JPanel> childRenderingProcess = newRenderingProcess(layer, uiProfile);
+						toBeAddedList.add(new ToBeAdded<Integer>(zIndex, childRenderingProcess));
 					}
 				});
 				break;
 		}
-		return childrenProcesses;
+		return toBeAddedList;
 	}
 
 	public static class Content {
-		private final Map<Object, RenderingProcess<JPanel>> childrenProcesses;
+		private final List<ToBeAdded> childrenProcesses;
 		private final WireframeType wireframeType;
 
-		public Content(Map<Object, RenderingProcess<JPanel>> childrenProcesses, WireframeType wireframeType) {
+		public Content(List<ToBeAdded> childrenProcesses, WireframeType wireframeType) {
 			this.childrenProcesses = childrenProcesses;
 			this.wireframeType = wireframeType;
 		}
 
-		public Map<Object, RenderingProcess<JPanel>> getChildrenProcesses() {
+		public List<ToBeAdded> getChildrenProcesses() {
 			return childrenProcesses;
 		}
 
 		public boolean isEmpty() {
-			return childrenProcesses.keySet().size() == 0;
+			return childrenProcesses.size() == 0;
 		}
 
 		public WireframeType getType() {

@@ -6,7 +6,6 @@ import com.mgs.fantasi.wireframe.WireframeType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
 
 import static com.mgs.fantasi.driver.swing.JPanelRenderingProcessFactory.Content;
 
@@ -24,13 +23,10 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		JPanel container = baseCreationStrategy.create();
 		if (content.isEmpty()) return container;
 
-		Map<Object, RenderingProcess<JPanel>> childrenProcesses = content.getChildrenProcesses();
 		container.setLayout(translateTypeIntoLayout(container, content.getType()));
-
-
-		for (Object specifics : childrenProcesses.keySet()) {
-			RenderingProcess<JPanel> childRenderingProcessFactory = childrenProcesses.get(specifics);
-			container.add(childRenderingProcessFactory.render(), specifics);
+		for (ToBeAdded<?> toBeAdded : content.getChildrenProcesses()) {
+			RenderingProcess<JPanel> childRenderingProcessFactory = toBeAdded.getRenderingProcess();
+			container.add(childRenderingProcessFactory.render(), toBeAdded.getSpecifics());
 		}
 		return container;
 	}

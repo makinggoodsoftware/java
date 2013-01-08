@@ -1,7 +1,7 @@
 package com.mgs.fantasi.wireframe;
 
 public class DelegateWireframe<T> implements Wireframe<T> {
-	private Wireframe<T> content;
+	private T content;
 
 	@Override
 	public WireframeType getType() {
@@ -13,12 +13,12 @@ public class DelegateWireframe<T> implements Wireframe<T> {
 		return false;
 	}
 
-	public DelegateWireframe<T> withContent(Wireframe<T> content) {
+	public DelegateWireframe<T> withContent(T content) {
 		this.content = content;
 		return this;
 	}
 
-	public Wireframe<T> getContent() {
+	public T getContent() {
 		return content;
 	}
 }

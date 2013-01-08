@@ -38,7 +38,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	@Override
 	public Wireframe<View> buildContent() {
 		return new DelegateWireframe<View>().
-				withContent(pijamaRows.buildContent());
+				withContent(pijamaRows);
 	}
 
 	public View withHexagonMeasurement(Measurement hexagonMeasurement) {

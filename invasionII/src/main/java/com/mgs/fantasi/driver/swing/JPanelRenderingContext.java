@@ -4,19 +4,22 @@ import com.mgs.fantasi.driver.RenderingContext;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionManager;
-import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutConstructionStrategy;
 import com.mgs.fantasi.driver.swing.layoutConstruction.LayoutProvider;
-import com.mgs.fantasi.driver.swing.layoutConstruction.ToBeAddedWithSpecifics;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
-import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.*;
+import com.mgs.fantasi.wireframe.grid.CellContent;
+import com.mgs.fantasi.wireframe.grid.CellIterator;
+import com.mgs.fantasi.wireframe.layer.LayerIterator;
 
 import javax.swing.*;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
+
+import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
+import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class JPanelRenderingContext implements RenderingContext<JPanel> {
 	private final UIProfile uiProfile;
@@ -62,19 +65,44 @@ public class JPanelRenderingContext implements RenderingContext<JPanel> {
 
 		public JPanelRenderingProcess newRenderingProcess(View view) {
 			UIProperties uiPropertiesWithStylesApplied = getStyleManager().applyStyles(view.getUiProperties(), getUIProfile().findStylesFor(view));
-			Wireframe<View> content = view.buildContent();
+			Wireframe<View> from = view.buildContent();
 
 			JPanelCreationStrategy baseCreationStrategy = getJPanelCreationStrategyFactory().forUIProperties(uiPropertiesWithStylesApplied);
-			LayoutConstructionStrategy<?, ? extends Wireframe> layoutStrategy = getLayoutConstructionManager().createAndFillLayout(content);
-			Map<Object, JPanelRenderingProcess> childrenProcesses = new HashMap<Object, JPanelRenderingProcess>();
+			final Map<Object, JPanelRenderingProcess> childrenProcesses = new HashMap<Object, JPanelRenderingProcess>();
 
-			Iterator<? extends ToBeAddedWithSpecifics> iterator = layoutStrategy.getToBeAddedWithSpecifics().iterator();
-			while (iterator.hasNext()) {
-				ToBeAddedWithSpecifics toBeAddedWithSpecifics = iterator.next();
-				JPanelRenderingProcess childProcess = newRenderingProcess(toBeAddedWithSpecifics.getContent());
-				childrenProcesses.put(toBeAddedWithSpecifics.getSpecifics(), childProcess);
+			switch (from.getType()) {
+				case GRID:
+					GridWireframe<View> grid = (GridWireframe<View>) from;
+					grid.itereateCellsWith(new CellIterator<View>() {
+						@Override
+						public void on(int x, int y, CellContent<View> cell) {
+							childrenProcesses.put(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()), newRenderingProcess(cell.getContent()));
+						}
+					});
+					break;
+				case SIMPLE:
+					RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
+					if (rectangle.getContent() != null) {
+						childrenProcesses.put(coordinates(0, 0, all(), all()), newRenderingProcess(rectangle.getContent()));
+					}
+					break;
+				case LAYERS:
+					LayeredWireframe<View> layers = (LayeredWireframe<View>) from;
+					layers.iterateInCrescendo(new LayerIterator<View>() {
+						@Override
+						public void on(int zIndex, View layer) {
+							childrenProcesses.put(zIndex, newRenderingProcess(layer));
+						}
+					});
+					break;
+				case DELEGATE:
+					DelegateWireframe<View> delegate = (DelegateWireframe<View>) from;
+					childrenProcesses.put(coordinates(0, 0, all(), all()), newRenderingProcess(delegate.getContent()));
+					break;
 			}
-			return new JPanelRenderingProcess(baseCreationStrategy, childrenProcesses, getLayoutConstructionManager().translateTypeIntoLayoutProvider(view.buildContent()));
+
+			LayoutProvider layoutProvider = getLayoutConstructionManager().translateTypeIntoLayoutProvider(from);
+			return new JPanelRenderingProcess(baseCreationStrategy, childrenProcesses, layoutProvider);
 		}
 
 		private UIProfile getUIProfile() {

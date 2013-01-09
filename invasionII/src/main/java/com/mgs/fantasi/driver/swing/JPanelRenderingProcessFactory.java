@@ -47,40 +47,48 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	private List<ToBeAdded> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
-		final List<ToBeAdded> toBeAddedList = new ArrayList<ToBeAdded>();
-
 		switch (from.getType()) {
 			case GRID:
+				final List<ToBeAdded> toBeAddedList = new ArrayList<ToBeAdded>();
 				GridWireframe<View> grid = (GridWireframe<View>) from;
 				grid.itereateCellsWith(new CellIterator<View>() {
 					@Override
 					public void on(int x, int y, CellContent<View> cell) {
-						GridBagConstraints specifics = coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio());
-						RenderingProcess<JPanel> childRenderingProcess = newRenderingProcess(cell.getContent(), uiProfile);
-						toBeAddedList.add(new ToBeAdded<GridBagConstraints>(specifics, childRenderingProcess));
+						ToBeAdded<GridBagConstraints> toBeAdded = createToBeAdded(uiProfile, coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()), cell.getContent());
+						toBeAddedList.add(toBeAdded);
 					}
 				});
-				break;
+				return toBeAddedList;
 			case SIMPLE:
+				final List<ToBeAdded> toBeAddedList1 = new ArrayList<ToBeAdded>();
 				RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
 				if (rectangle.getContent() != null) {
-					GridBagConstraints specifics = coordinates(0, 0, all(), all());
-					RenderingProcess<JPanel> childRenderingProcess = newRenderingProcess(rectangle.getContent(), uiProfile);
-					toBeAddedList.add(new ToBeAdded<GridBagConstraints>(specifics, childRenderingProcess));
+					ToBeAdded<GridBagConstraints> toBeAdded = createToBeAdded(uiProfile, coordinates(0, 0, all(), all()), rectangle.getContent());
+					toBeAddedList1.add(toBeAdded);
 				}
-				break;
+				return toBeAddedList1;
 			case LAYERS:
+				final List<ToBeAdded> toBeAddedList2 = new ArrayList<ToBeAdded>();
 				LayeredWireframe<View> layers = (LayeredWireframe<View>) from;
 				layers.iterateInCrescendo(new LayerIterator<View>() {
 					@Override
 					public void on(int zIndex, View layer) {
-						RenderingProcess<JPanel> childRenderingProcess = newRenderingProcess(layer, uiProfile);
-						toBeAddedList.add(new ToBeAdded<Integer>(zIndex, childRenderingProcess));
+						ToBeAdded<Integer> toBeAdded = createToBeAdded(uiProfile, zIndex, layer);
+						toBeAddedList2.add(toBeAdded);
 					}
 				});
-				break;
+				return toBeAddedList2;
+			default:
+				return new ArrayList<ToBeAdded>();
 		}
-		return toBeAddedList;
+	}
+
+	private ToBeAdded<GridBagConstraints> createToBeAdded(UIProfile uiProfile, GridBagConstraints coordinates, View content) {
+		return new ToBeAdded<GridBagConstraints>(coordinates, newRenderingProcess(content, uiProfile));
+	}
+
+	private ToBeAdded<Integer> createToBeAdded(UIProfile uiProfile, Integer zIndex, View content) {
+		return new ToBeAdded<Integer>(zIndex, newRenderingProcess(content, uiProfile));
 	}
 
 	public static class Content {

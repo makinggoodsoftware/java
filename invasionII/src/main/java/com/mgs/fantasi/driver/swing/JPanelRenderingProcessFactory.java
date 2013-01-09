@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
+import static com.mgs.fantasi.driver.swing.ToBeAddedBuilder.ToBeAdded;
 import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JPanel> {
@@ -43,56 +44,65 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	private Content createContent(UIProfile uiProfile, Wireframe<View> from) {
-		return new Content(findChildObjects(uiProfile, from), from.getType());
+		List<ToBeAddedBuilder> childObjectsBuiler = findChildObjects(uiProfile, from);
+		List<ToBeAdded> childObjects = new ArrayList<ToBeAdded>();
+		for (ToBeAddedBuilder<?, JPanel> toBeAddedBuilder : childObjectsBuiler) {
+			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(toBeAddedBuilder.getView(), uiProfile);
+			childObjects.add(toBeAddedBuilder.build(jPanelRenderingProcess));
+		}
+		return new Content(childObjects, from.getType());
 	}
 
-	private List<ToBeAdded> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
+	private List<ToBeAddedBuilder> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
 		switch (from.getType()) {
 			case GRID:
-				final List<ToBeAdded> toBeAddedList = new ArrayList<ToBeAdded>();
-				GridWireframe<View> grid = (GridWireframe<View>) from;
-				grid.itereateCellsWith(new CellIterator<View>() {
-					@Override
-					public void on(int x, int y, CellContent<View> cell) {
-						ToBeAdded<GridBagConstraints> toBeAdded = createToBeAdded(uiProfile, coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()), cell.getContent());
-						toBeAddedList.add(toBeAdded);
-					}
-				});
-				return toBeAddedList;
+				return processGrid(uiProfile, (GridWireframe<View>) from);
 			case SIMPLE:
-				final List<ToBeAdded> toBeAddedList1 = new ArrayList<ToBeAdded>();
-				RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
-				if (rectangle.getContent() != null) {
-					ToBeAdded<GridBagConstraints> toBeAdded = createToBeAdded(uiProfile, coordinates(0, 0, all(), all()), rectangle.getContent());
-					toBeAddedList1.add(toBeAdded);
-				}
-				return toBeAddedList1;
+				return processSimpleWireframe(uiProfile, (RectangleWireframe<View>) from);
 			case LAYERS:
-				final List<ToBeAdded> toBeAddedList2 = new ArrayList<ToBeAdded>();
-				LayeredWireframe<View> layers = (LayeredWireframe<View>) from;
-				layers.iterateInCrescendo(new LayerIterator<View>() {
-					@Override
-					public void on(int zIndex, View layer) {
-						ToBeAdded<Integer> toBeAdded = createToBeAdded(uiProfile, zIndex, layer);
-						toBeAddedList2.add(toBeAdded);
-					}
-				});
-				return toBeAddedList2;
+				return processLayers(uiProfile, (LayeredWireframe<View>) from);
 			default:
-				return new ArrayList<ToBeAdded>();
+				return new ArrayList<ToBeAddedBuilder>();
 		}
 	}
 
-	private ToBeAdded<GridBagConstraints> createToBeAdded(UIProfile uiProfile, GridBagConstraints coordinates, View content) {
-		return new ToBeAdded<GridBagConstraints>(coordinates, newRenderingProcess(content, uiProfile));
+	private List<ToBeAddedBuilder> processLayers(final UIProfile uiProfile, LayeredWireframe<View> from) {
+		final List<ToBeAddedBuilder> toBeAddedBuilderList2 = new ArrayList<ToBeAddedBuilder>();
+		LayeredWireframe<View> layers = (LayeredWireframe<View>) from;
+		layers.iterateInCrescendo(new LayerIterator<View>() {
+			@Override
+			public void on(int zIndex, View layer) {
+				ToBeAddedBuilder<Integer, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<Integer, JPanel>(zIndex, layer);
+				toBeAddedBuilderList2.add(toBeAddedBuilder);
+			}
+		});
+		return toBeAddedBuilderList2;
 	}
 
-	private ToBeAdded<Integer> createToBeAdded(UIProfile uiProfile, Integer zIndex, View content) {
-		return new ToBeAdded<Integer>(zIndex, newRenderingProcess(content, uiProfile));
+	private List<ToBeAddedBuilder> processSimpleWireframe(UIProfile uiProfile, RectangleWireframe<View> from) {
+		final List<ToBeAddedBuilder> toBeAddedBuilderList1 = new ArrayList<ToBeAddedBuilder>();
+		RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
+		if (rectangle.getContent() != null) {
+			ToBeAddedBuilder<GridBagConstraints, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<GridBagConstraints, JPanel>(coordinates(0, 0, all(), all()), rectangle.getContent());
+			toBeAddedBuilderList1.add(toBeAddedBuilder);
+		}
+		return toBeAddedBuilderList1;
+	}
+
+	private List<ToBeAddedBuilder> processGrid(final UIProfile uiProfile, GridWireframe<View> grid) {
+		final List<ToBeAddedBuilder> toBeAddedBuilderList = new ArrayList<ToBeAddedBuilder>();
+		grid.itereateCellsWith(new CellIterator<View>() {
+			@Override
+			public void on(int x, int y, CellContent<View> cell) {
+				ToBeAddedBuilder<GridBagConstraints, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<GridBagConstraints, JPanel>(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()), cell.getContent());
+				toBeAddedBuilderList.add(toBeAddedBuilder);
+			}
+		});
+		return toBeAddedBuilderList;
 	}
 
 	public static class Content {
-		private final List<ToBeAdded> childrenProcesses;
+		private final List<ToBeAddedBuilder.ToBeAdded> childrenProcesses;
 		private final WireframeType wireframeType;
 
 		public Content(List<ToBeAdded> childrenProcesses, WireframeType wireframeType) {

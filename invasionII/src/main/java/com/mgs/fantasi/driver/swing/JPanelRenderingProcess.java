@@ -24,9 +24,9 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		if (content.isEmpty()) return container;
 
 		container.setLayout(translateTypeIntoLayout(container, content.getType()));
-		for (ToBeAdded<?> toBeAdded : content.getChildrenProcesses()) {
-			RenderingProcess<JPanel> childRenderingProcessFactory = toBeAdded.getRenderingProcess();
-			container.add(childRenderingProcessFactory.render(), toBeAdded.getSpecifics());
+		for (ToBeAddedBuilder.ToBeAdded<?, JPanel> toBeAdded : content.getChildrenProcesses()) {
+			RenderingProcess<JPanel> childRenderingProcess = toBeAdded.getRenderingProcess();
+			container.add(childRenderingProcess.render(), toBeAdded.getSpecifics());
 		}
 		return container;
 	}

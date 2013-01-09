@@ -7,24 +7,22 @@ import com.mgs.fantasi.wireframe.WireframeType;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.driver.swing.JPanelRenderingProcessFactory.Content;
-
 public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 	private final JPanelCreationStrategy baseCreationStrategy;
-	private final Content content;
+	private final RenderingContent renderingContent;
 
-	public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, Content content) {
+	public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, RenderingContent renderingContent) {
 		this.baseCreationStrategy = baseCreationStrategy;
-		this.content = content;
+		this.renderingContent = renderingContent;
 	}
 
 	@Override
 	public JPanel render() {
 		JPanel container = baseCreationStrategy.create();
-		if (content.isEmpty()) return container;
+		if (renderingContent.isEmpty()) return container;
 
-		container.setLayout(translateTypeIntoLayout(container, content.getType()));
-		for (ToBeAddedBuilder.ToBeAdded<?, JPanel> toBeAdded : content.getChildrenProcesses()) {
+		container.setLayout(translateTypeIntoLayout(container, baseCreationStrategy.getType()));
+		for (ToBeAdded<?, JPanel> toBeAdded : renderingContent.getChildrenProcesses()) {
 			RenderingProcess<JPanel> childRenderingProcess = toBeAdded.getRenderingProcess();
 			container.add(childRenderingProcess.render(), toBeAdded.getSpecifics());
 		}

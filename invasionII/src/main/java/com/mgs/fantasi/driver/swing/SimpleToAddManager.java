@@ -14,8 +14,8 @@ import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class SimpleToAddManager implements ToBeAddedManager {
 	@Override
-	public List<ToBeAddedBuilder> process(Wireframe<View> from) {
-		final List<ToBeAddedBuilder> toBeAddedBuilderList1 = new ArrayList<ToBeAddedBuilder>();
+	public List<ToBeAddedBuilder<?, JPanel>> process(Wireframe<View> from) {
+		final List<ToBeAddedBuilder<?, JPanel>> toBeAddedBuilderList1 = new ArrayList<ToBeAddedBuilder<?, JPanel>>();
 		RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
 		if (rectangle.getContent() != null) {
 			ToBeAddedBuilder<GridBagConstraints, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<GridBagConstraints, JPanel>(coordinates(0, 0, all(), all()), rectangle.getContent());

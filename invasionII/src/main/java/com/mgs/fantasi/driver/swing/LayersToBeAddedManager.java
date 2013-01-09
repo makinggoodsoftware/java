@@ -11,8 +11,8 @@ import java.util.List;
 
 public class LayersToBeAddedManager implements ToBeAddedManager {
 	@Override
-	public List<ToBeAddedBuilder> process(Wireframe<View> from) {
-		final List<ToBeAddedBuilder> toBeAddedBuilderList2 = new ArrayList<ToBeAddedBuilder>();
+	public List<ToBeAddedBuilder<?, JPanel>> process(Wireframe<View> from) {
+		final List<ToBeAddedBuilder<?, JPanel>> toBeAddedBuilderList2 = new ArrayList<ToBeAddedBuilder<?, JPanel>>();
 		LayeredWireframe<View> layers = (LayeredWireframe<View>) from;
 		layers.iterateInCrescendo(new LayerIterator<View>() {
 			@Override

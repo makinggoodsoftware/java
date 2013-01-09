@@ -16,8 +16,8 @@ import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 public class GridToBeAddedManager implements ToBeAddedManager {
 
 	@Override
-	public List<ToBeAddedBuilder> process(Wireframe<View> grid) {
-		final List<ToBeAddedBuilder> toBeAddedBuilderList = new ArrayList<ToBeAddedBuilder>();
+	public List<ToBeAddedBuilder<?, JPanel>> process(Wireframe<View> grid) {
+		final List<ToBeAddedBuilder<?, JPanel>> toBeAddedBuilderList = new ArrayList<ToBeAddedBuilder<?, JPanel>>();
 		((GridWireframe<View>) grid).itereateCellsWith(new CellIterator<View>() {
 			@Override
 			public void on(int x, int y, CellContent<View> cell) {

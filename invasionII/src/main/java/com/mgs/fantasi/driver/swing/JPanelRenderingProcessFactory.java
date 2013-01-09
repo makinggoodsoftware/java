@@ -4,6 +4,7 @@ import com.mgs.fantasi.driver.RenderingProcess;
 import com.mgs.fantasi.driver.RenderingProcessFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
+import com.mgs.fantasi.driver.swing.jPanelCreation.ToBeAddedManagerFactory;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
@@ -20,11 +21,13 @@ import static com.mgs.fantasi.driver.swing.ToBeAddedBuilder.ToBeAdded;
 public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JPanel> {
 	private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
 	private final StyleManager styleManager;
+	private final ToBeAddedManagerFactory toBeAddedManagerFactory;
 
 
-	public JPanelRenderingProcessFactory(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
+	public JPanelRenderingProcessFactory(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory, ToBeAddedManagerFactory toBeAddedManagerFactory) {
 		this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
 		this.styleManager = styleManager;
+		this.toBeAddedManagerFactory = toBeAddedManagerFactory;
 	}
 
 	@Override
@@ -39,47 +42,25 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	private Content createContent(UIProfile uiProfile, Wireframe<View> from) {
-		List<ToBeAddedBuilder> childObjectsBuiler = findChildObjects(from);
-		List<ToBeAdded> childObjects = new ArrayList<ToBeAdded>();
-		for (ToBeAddedBuilder<?, JPanel> toBeAddedBuilder : childObjectsBuiler) {
+		List<ToBeAddedBuilder<?, JPanel>> childObjectsBuilder = toBeAddedManagerFactory.forType(from.getType()).process(from);
+		List<ToBeAdded<?, JPanel>> childObjects = new ArrayList<ToBeAdded<?, JPanel>>();
+		for (ToBeAddedBuilder<?, JPanel> toBeAddedBuilder : childObjectsBuilder) {
 			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(toBeAddedBuilder.getView(), uiProfile);
 			childObjects.add(toBeAddedBuilder.build(jPanelRenderingProcess));
 		}
 		return new Content(childObjects, from.getType());
 	}
 
-	private List<ToBeAddedBuilder> findChildObjects(Wireframe<View> from) {
-		return getToBeAddedManager(from.getType()).process(from);
-	}
-
-	private ToBeAddedManager getToBeAddedManager(WireframeType type) {
-		switch (type) {
-			case GRID:
-				return new GridToBeAddedManager();
-			case SIMPLE:
-				return new SimpleToAddManager();
-			case LAYERS:
-				return new LayersToBeAddedManager();
-			default:
-				return new ToBeAddedManager() {
-					@Override
-					public List<ToBeAddedBuilder> process(Wireframe<View> grid) {
-						return new ArrayList<ToBeAddedBuilder>();
-					}
-				};
-		}
-	}
-
 	public static class Content {
-		private final List<ToBeAddedBuilder.ToBeAdded> childrenProcesses;
+		private final List<ToBeAddedBuilder.ToBeAdded<?, JPanel>> childrenProcesses;
 		private final WireframeType wireframeType;
 
-		public Content(List<ToBeAdded> childrenProcesses, WireframeType wireframeType) {
+		public Content(List<ToBeAdded<?, JPanel>> childrenProcesses, WireframeType wireframeType) {
 			this.childrenProcesses = childrenProcesses;
 			this.wireframeType = wireframeType;
 		}
 
-		public List<ToBeAdded> getChildrenProcesses() {
+		public List<ToBeAdded<?, JPanel>> getChildrenProcesses() {
 			return childrenProcesses;
 		}
 

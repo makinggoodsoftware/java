@@ -8,19 +8,14 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.views.View;
-import com.mgs.fantasi.wireframe.*;
-import com.mgs.fantasi.wireframe.grid.CellContent;
-import com.mgs.fantasi.wireframe.grid.CellIterator;
-import com.mgs.fantasi.wireframe.layer.LayerIterator;
+import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeType;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 import static com.mgs.fantasi.driver.swing.ToBeAddedBuilder.ToBeAdded;
-import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JPanel> {
 	private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
@@ -44,7 +39,7 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	private Content createContent(UIProfile uiProfile, Wireframe<View> from) {
-		List<ToBeAddedBuilder> childObjectsBuiler = findChildObjects(uiProfile, from);
+		List<ToBeAddedBuilder> childObjectsBuiler = findChildObjects(from);
 		List<ToBeAdded> childObjects = new ArrayList<ToBeAdded>();
 		for (ToBeAddedBuilder<?, JPanel> toBeAddedBuilder : childObjectsBuiler) {
 			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(toBeAddedBuilder.getView(), uiProfile);
@@ -53,52 +48,26 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 		return new Content(childObjects, from.getType());
 	}
 
-	private List<ToBeAddedBuilder> findChildObjects(final UIProfile uiProfile, Wireframe<View> from) {
-		switch (from.getType()) {
+	private List<ToBeAddedBuilder> findChildObjects(Wireframe<View> from) {
+		return getToBeAddedManager(from.getType()).process(from);
+	}
+
+	private ToBeAddedManager getToBeAddedManager(WireframeType type) {
+		switch (type) {
 			case GRID:
-				return processGrid(uiProfile, (GridWireframe<View>) from);
+				return new GridToBeAddedManager();
 			case SIMPLE:
-				return processSimpleWireframe(uiProfile, (RectangleWireframe<View>) from);
+				return new SimpleToAddManager();
 			case LAYERS:
-				return processLayers(uiProfile, (LayeredWireframe<View>) from);
+				return new LayersToBeAddedManager();
 			default:
-				return new ArrayList<ToBeAddedBuilder>();
+				return new ToBeAddedManager() {
+					@Override
+					public List<ToBeAddedBuilder> process(Wireframe<View> grid) {
+						return new ArrayList<ToBeAddedBuilder>();
+					}
+				};
 		}
-	}
-
-	private List<ToBeAddedBuilder> processLayers(final UIProfile uiProfile, LayeredWireframe<View> from) {
-		final List<ToBeAddedBuilder> toBeAddedBuilderList2 = new ArrayList<ToBeAddedBuilder>();
-		LayeredWireframe<View> layers = (LayeredWireframe<View>) from;
-		layers.iterateInCrescendo(new LayerIterator<View>() {
-			@Override
-			public void on(int zIndex, View layer) {
-				ToBeAddedBuilder<Integer, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<Integer, JPanel>(zIndex, layer);
-				toBeAddedBuilderList2.add(toBeAddedBuilder);
-			}
-		});
-		return toBeAddedBuilderList2;
-	}
-
-	private List<ToBeAddedBuilder> processSimpleWireframe(UIProfile uiProfile, RectangleWireframe<View> from) {
-		final List<ToBeAddedBuilder> toBeAddedBuilderList1 = new ArrayList<ToBeAddedBuilder>();
-		RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
-		if (rectangle.getContent() != null) {
-			ToBeAddedBuilder<GridBagConstraints, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<GridBagConstraints, JPanel>(coordinates(0, 0, all(), all()), rectangle.getContent());
-			toBeAddedBuilderList1.add(toBeAddedBuilder);
-		}
-		return toBeAddedBuilderList1;
-	}
-
-	private List<ToBeAddedBuilder> processGrid(final UIProfile uiProfile, GridWireframe<View> grid) {
-		final List<ToBeAddedBuilder> toBeAddedBuilderList = new ArrayList<ToBeAddedBuilder>();
-		grid.itereateCellsWith(new CellIterator<View>() {
-			@Override
-			public void on(int x, int y, CellContent<View> cell) {
-				ToBeAddedBuilder<GridBagConstraints, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<GridBagConstraints, JPanel>(coordinates(x, y, cell.getWidthSizeRatio(), cell.getHeightSizeRatio()), cell.getContent());
-				toBeAddedBuilderList.add(toBeAddedBuilder);
-			}
-		});
-		return toBeAddedBuilderList;
 	}
 
 	public static class Content {

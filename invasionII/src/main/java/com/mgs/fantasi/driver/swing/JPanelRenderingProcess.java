@@ -6,12 +6,13 @@ import com.mgs.fantasi.wireframe.WireframeType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 	private final JPanelCreationStrategy baseCreationStrategy;
-	private final RenderingContent renderingContent;
+	private final List<ToBeAdded<?, JPanel>> renderingContent;
 
-	public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, RenderingContent renderingContent) {
+	public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, List<ToBeAdded<?, JPanel>> renderingContent) {
 		this.baseCreationStrategy = baseCreationStrategy;
 		this.renderingContent = renderingContent;
 	}
@@ -22,7 +23,7 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		if (renderingContent.isEmpty()) return container;
 
 		container.setLayout(translateTypeIntoLayout(container, baseCreationStrategy.getType()));
-		for (ToBeAdded<?, JPanel> toBeAdded : renderingContent.getChildrenProcesses()) {
+		for (ToBeAdded<?, JPanel> toBeAdded : renderingContent) {
 			RenderingProcess<JPanel> childRenderingProcess = toBeAdded.getRenderingProcess();
 			container.add(childRenderingProcess.render(), toBeAdded.getSpecifics());
 		}

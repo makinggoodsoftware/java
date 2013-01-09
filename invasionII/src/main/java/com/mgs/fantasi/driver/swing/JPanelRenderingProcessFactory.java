@@ -33,19 +33,17 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, from.getType());
 
-		RenderingProcess.RenderingContent renderingContent = createContent(uiProfile, from);
-
-		return new JPanelRenderingProcess(baseCreationStrategy, renderingContent);
+		return new JPanelRenderingProcess(baseCreationStrategy, createContent(uiProfile, from));
 	}
 
-	private RenderingProcess.RenderingContent createContent(UIProfile uiProfile, Wireframe<View> from) {
+	private List<ToBeAdded<?, JPanel>> createContent(UIProfile uiProfile, Wireframe<View> from) {
 		List<ToBeAddedBuilder<?, JPanel>> childObjectsBuilder = toBeAddedManagerFactory.forType(from.getType()).process(from);
 		List<ToBeAdded<?, JPanel>> childObjects = new ArrayList<ToBeAdded<?, JPanel>>();
 		for (ToBeAddedBuilder<?, JPanel> toBeAddedBuilder : childObjectsBuilder) {
 			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(toBeAddedBuilder.getView(), uiProfile);
 			childObjects.add(toBeAddedBuilder.build(jPanelRenderingProcess));
 		}
-		return new RenderingProcess.RenderingContent(childObjects);
+		return childObjects;
 	}
 
 }

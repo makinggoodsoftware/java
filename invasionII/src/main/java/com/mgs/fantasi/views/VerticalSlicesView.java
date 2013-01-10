@@ -6,6 +6,8 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.grid.CellContent;
 import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
+import java.awt.*;
+
 public class VerticalSlicesView extends BaseView {
 
 	private static final int UNDEFINED = -1;
@@ -28,7 +30,7 @@ public class VerticalSlicesView extends BaseView {
 				return CellContent.evenlyDivided(contentBuilder);
 			}
 		};
-		GridWireframe<View> grid = new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator));
+		GridWireframe<View> grid = new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(numberOfDivisions, 1)));
 		return grid.withDimension(numberOfDivisions, 1).withContent(cellContentGenerator);
 	}
 

@@ -8,6 +8,8 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.grid.CellContent;
 import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
+import java.awt.*;
+
 import static com.mgs.fantasi.wireframe.grid.CellContent.withPartialHeight;
 
 public class TwoLinesView extends BaseView {
@@ -41,7 +43,7 @@ public class TwoLinesView extends BaseView {
 			}
 		};
 		return
-				new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator)).
+				new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(1, 2))).
 						withDimension(1, 2).
 						withContent(cellContentGenerator);
 

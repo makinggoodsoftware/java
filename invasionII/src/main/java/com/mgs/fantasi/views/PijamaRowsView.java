@@ -7,6 +7,8 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.grid.CellContent;
 import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
+import java.awt.*;
+
 public class PijamaRowsView extends BaseView<PijamaRowsView> {
 	private static final int UNDEFINED = -1;
 	private final TwoLinesView generationBuilder;
@@ -38,7 +40,7 @@ public class PijamaRowsView extends BaseView<PijamaRowsView> {
 				return CellContent.evenlyDivided((View) generationBuilder);
 			}
 		};
-		return new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator)).
+		return new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(1, numberOfGenerations))).
 				withDimension(1, numberOfGenerations).
 				withContent(cellContentGenerator);
 	}

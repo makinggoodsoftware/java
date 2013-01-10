@@ -18,7 +18,7 @@ public class SimpleToAddManager implements ToBeAddedManager {
 		final List<ToBeAddedBuilder<?, JPanel>> toBeAddedBuilderList1 = new ArrayList<ToBeAddedBuilder<?, JPanel>>();
 		RectangleWireframe<View> rectangle = (RectangleWireframe<View>) from;
 		if (rectangle.getContent() != null) {
-			ToBeAddedBuilder<GridBagConstraints, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<GridBagConstraints, JPanel>(coordinates(0, 0, all(), all()), rectangle.getContent());
+			ToBeAddedBuilder<GridBagConstraints, JPanel> toBeAddedBuilder = new ToBeAddedBuilder<GridBagConstraints, JPanel>(coordinates(0, 0, all(), all()), rectangle.getContent().get(0).getContent());
 			toBeAddedBuilderList1.add(toBeAddedBuilder);
 		}
 		return toBeAddedBuilderList1;

@@ -7,6 +7,7 @@ import com.mgs.fantasi.views.BaseView;
 import com.mgs.fantasi.views.PijamaRowsView;
 import com.mgs.fantasi.views.PolygonView;
 import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.views.PijamaRowsView.pijamaRows;
@@ -18,7 +19,7 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	private PijamaRowsView pijamaRows;
 	private final PolygonView hexagon;
 
-	public HexagonRowsView(int numberOfGerations, int numberOVerticalDivisions) {
+	public HexagonRowsView(int numberOfGenerations, int numberOVerticalDivisions) {
 		hexagon = polygon(new HexagonShape());
 		this.pijamaRows = pijamaRows(
 				verticalSlices(hexagon).
@@ -27,16 +28,16 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 				rectangle()
 		).
 				withFirstRowSize(Fractions.thwoThirds()).
-				withNumberOfGenerations(numberOfGerations);
+				withNumberOfGenerations(numberOfGenerations);
 	}
 
-	public static HexagonRowsView hexagonRows(int numberOVerticalDivisions, int numberOfGerations) {
-		return new HexagonRowsView(numberOfGerations, numberOVerticalDivisions);
+	public static HexagonRowsView hexagonRows(int numberOVerticalDivisions, int numberOfGenerations) {
+		return new HexagonRowsView(numberOfGenerations, numberOVerticalDivisions);
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
-		return pijamaRows.buildContent();
+	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
+		return pijamaRows.buildContent(placeholderFactory);
 	}
 
 	public View withHexagonMeasurement(Measurement hexagonMeasurement) {

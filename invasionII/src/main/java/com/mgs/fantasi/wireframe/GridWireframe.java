@@ -4,10 +4,17 @@ import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 import com.mgs.fantasi.wireframe.grid.CellIterator;
 
 import java.awt.*;
+import java.util.List;
+
 
 public class GridWireframe<T> implements Wireframe<T> {
 	private Dimension dimension;
 	private CellContentGenerator<T> cellContentGenerator;
+	private final List<Placeholder<T>> gridPlaceholders;
+
+	public GridWireframe(List<Placeholder<T>> gridPlaceholders) {
+		this.gridPlaceholders = gridPlaceholders;
+	}
 
 	public GridWireframe<T> withDimension(int x, int y) {
 		this.dimension = new Dimension(x, y);
@@ -27,6 +34,11 @@ public class GridWireframe<T> implements Wireframe<T> {
 	@Override
 	public boolean isEmpty() {
 		return false;
+	}
+
+	@Override
+	public List<Placeholder<T>> getContent() {
+		return gridPlaceholders;
 	}
 
 	public void itereateCellsWith(CellIterator<T> cellIterator) {

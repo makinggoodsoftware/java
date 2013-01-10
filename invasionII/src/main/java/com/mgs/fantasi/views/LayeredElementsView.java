@@ -1,6 +1,7 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.wireframe.LayeredWireframe;
+import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
-		return new LayeredWireframe<View>().
+	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
+		return new LayeredWireframe<View>(placeholderFactory.layerPlaceholders(layers)).
 				withLayers(layers);
 	}
 }

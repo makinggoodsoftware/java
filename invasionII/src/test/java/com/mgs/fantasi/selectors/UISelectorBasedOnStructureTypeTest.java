@@ -2,6 +2,7 @@ package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.views.BaseView;
 import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class UISelectorBasedOnStructureTypeTest {
 
 	private class MatchingStructureTypeParent extends BaseView {
 		@Override
-		public Wireframe<View> buildContent() {
+		public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
 			return null;
 		}
 	}
@@ -32,7 +33,7 @@ public class UISelectorBasedOnStructureTypeTest {
 
 	private class OtherStructureType extends BaseView {
 		@Override
-		public Wireframe<View> buildContent() {
+		public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
 			return null;
 		}
 	}

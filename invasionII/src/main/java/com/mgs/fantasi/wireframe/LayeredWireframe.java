@@ -6,6 +6,11 @@ import java.util.List;
 
 public class LayeredWireframe<T> implements Wireframe<T> {
 	private List<T> layers;
+	private final List<Placeholder<T>> layerPlaceholders;
+
+	public LayeredWireframe(List<Placeholder<T>> layerPlaceholders) {
+		this.layerPlaceholders = layerPlaceholders;
+	}
 
 	@Override
 	public WireframeType getType() {
@@ -15,6 +20,11 @@ public class LayeredWireframe<T> implements Wireframe<T> {
 	@Override
 	public boolean isEmpty() {
 		return false;
+	}
+
+	@Override
+	public List<Placeholder<T>> getContent() {
+		return layerPlaceholders;
 	}
 
 	public Wireframe<T> withLayers(List<T> layers) {

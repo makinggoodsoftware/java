@@ -2,6 +2,7 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.EmptyWireframe;
+import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 public class PolygonView extends BaseView<PolygonView> {
@@ -14,7 +15,7 @@ public class PolygonView extends BaseView<PolygonView> {
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
+	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
 		return new EmptyWireframe<View>();
 	}
 }

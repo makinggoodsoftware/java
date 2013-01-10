@@ -2,6 +2,7 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.wireframe.GridWireframe;
+import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.grid.CellContent;
 import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
@@ -30,14 +31,15 @@ public class PijamaRowsView extends BaseView<PijamaRowsView> {
 	}
 
 	@Override
-	public Wireframe<View> buildContent() {
-		return new GridWireframe<View>().
+	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
+		CellContentGenerator<View> cellContentGenerator = new CellContentGenerator<View>() {
+			@Override
+			public CellContent<View> generateContentFor(int x, int y) {
+				return CellContent.evenlyDivided((View) generationBuilder);
+			}
+		};
+		return new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator)).
 				withDimension(1, numberOfGenerations).
-				withContent(new CellContentGenerator<View>() {
-					@Override
-					public CellContent<View> generateContentFor(int x, int y) {
-						return CellContent.evenlyDivided((View) generationBuilder);
-					}
-				});
+				withContent(cellContentGenerator);
 	}
 }

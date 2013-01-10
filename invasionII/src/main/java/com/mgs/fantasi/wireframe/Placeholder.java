@@ -7,12 +7,16 @@ public class Placeholder<T> {
 	private final Fraction proportionOfParentHeight;
 	private final Fraction proportionOfParentWeight;
 	private final int zIndex;
+	private final int coodinateX;
+	private final int coodinateY;
 
-	public Placeholder(T content, int zIndex, Fraction proportionOfParentWeight, Fraction proportionOfParentHeight) {
+	public Placeholder(T content, int zIndex, Fraction proportionOfParentWeight, Fraction proportionOfParentHeight, int coordinateX, int coordinateY) {
 		this.content = content;
 		this.zIndex = zIndex;
 		this.proportionOfParentWeight = proportionOfParentWeight;
 		this.proportionOfParentHeight = proportionOfParentHeight;
+		this.coodinateX = coordinateX;
+		this.coodinateY = coordinateY;
 	}
 
 	public T getContent() {
@@ -29,5 +33,13 @@ public class Placeholder<T> {
 
 	public int getzIndex() {
 		return zIndex;
+	}
+
+	public int getCoodinateX() {
+		return coodinateX;
+	}
+
+	public int getCoodinateY() {
+		return coodinateY;
 	}
 }

@@ -35,10 +35,10 @@ public class TwoLinesView extends BaseView {
 			@Override
 			public CellContent<View> generateContentFor(int x, int y) {
 				if (y == 0) {
-					return withPartialHeight(firstLineBuilder, firstLineHeightSizeRatio);
+					return withPartialHeight(firstLineBuilder, firstLineHeightSizeRatio, x, y);
 				} else {
 					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return withPartialHeight(secondLineBuilder, remainder);
+					return withPartialHeight(secondLineBuilder, remainder, x, y);
 				}
 			}
 		};

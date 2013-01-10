@@ -37,7 +37,7 @@ public class PijamaRowsView extends BaseView<PijamaRowsView> {
 		CellContentGenerator<View> cellContentGenerator = new CellContentGenerator<View>() {
 			@Override
 			public CellContent<View> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided((View) generationBuilder);
+				return CellContent.evenlyDivided((View) generationBuilder, x, y);
 			}
 		};
 		return new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(1, numberOfGenerations))).

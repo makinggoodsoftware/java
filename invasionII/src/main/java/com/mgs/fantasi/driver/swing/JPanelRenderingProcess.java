@@ -2,17 +2,21 @@ package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.RenderingProcess;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
+import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.WireframeType;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
+
 public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 	private final JPanelCreationStrategy baseCreationStrategy;
-	private final List<ToBeAdded<?, JPanel>> renderingContent;
+	private final List<ToBeAdded<JPanel>> renderingContent;
 
-	public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, List<ToBeAdded<?, JPanel>> renderingContent) {
+	public JPanelRenderingProcess(JPanelCreationStrategy baseCreationStrategy, List<ToBeAdded<JPanel>> renderingContent) {
 		this.baseCreationStrategy = baseCreationStrategy;
 		this.renderingContent = renderingContent;
 	}
@@ -22,15 +26,27 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		JPanel container = baseCreationStrategy.create();
 		if (renderingContent.isEmpty()) return container;
 
-		container.setLayout(translateTypeIntoLayout(container, baseCreationStrategy.getType()));
-		for (ToBeAdded<?, JPanel> toBeAdded : renderingContent) {
+		LayoutManager layoutManager = translateTypeIntoLayout(container, baseCreationStrategy.getType());
+		container.setLayout(layoutManager);
+		for (ToBeAdded<JPanel> toBeAdded : renderingContent) {
 			RenderingProcess<JPanel> childRenderingProcess = toBeAdded.getRenderingProcess();
-			Object specifics = toBeAdded.getSpecifics();
+			Placeholder<View> specifics = toBeAdded.getSpecifics();
 
 			JPanel child = childRenderingProcess.render();
-			container.add(child, specifics);
+			container.add(child, translate(specifics, layoutManager));
 		}
 		return container;
+	}
+
+	private Object translate(Placeholder<View> specifics, LayoutManager type) {
+		if (type instanceof GridBagLayout) {
+			GridBagConstraints coordinates = SwingUtils.coordinates(specifics.getCoodinateX(), specifics.getCoodinateY(), specifics.getProportionOfParentWeight(), specifics.getProportionOfParentHeight());
+			System.out.println("Coordinates = " + reflectionToString(coordinates));
+			return coordinates;
+		} else if (type instanceof OverlayLayout) {
+			return specifics.getzIndex();
+		}
+		throw new RuntimeException("Not expected to hit this code point");
 	}
 
 	private LayoutManager translateTypeIntoLayout(JPanel container, WireframeType type) {

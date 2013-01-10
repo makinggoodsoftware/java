@@ -12,8 +12,8 @@ import java.util.List;
 public class PlaceholderFactory {
 	public List<Placeholder<View>> gridPlaceholders(CellContentGenerator<View> cellContentGenerator, Dimension dimension) {
 		List<Placeholder<View>> placeholders = new ArrayList<Placeholder<View>>();
-		for (int x = 0; x <= dimension.width; x++) {
-			for (int y = 0; y <= dimension.height; y++) {
+		for (int x = 0; x < dimension.width; x++) {
+			for (int y = 0; y < dimension.height; y++) {
 				CellContent<View> viewCellContent = cellContentGenerator.generateContentFor(x, y);
 				placeholders.add(fromCellContent(viewCellContent));
 			}
@@ -38,10 +38,10 @@ public class PlaceholderFactory {
 	}
 
 	private Placeholder<View> fromCellContent(CellContent<View> viewCellContent) {
-		return new Placeholder<View>(viewCellContent.getContent(), 0, viewCellContent.getWidthSizeRatio(), viewCellContent.getHeightSizeRatio());
+		return new Placeholder<View>(viewCellContent.getContent(), 0, viewCellContent.getWidthSizeRatio(), viewCellContent.getHeightSizeRatio(), viewCellContent.getX(), viewCellContent.getY());
 	}
 
 	private Placeholder<View> singleContent(View content, int zIndex) {
-		return new Placeholder<View>(content, zIndex, Fractions.all(), Fractions.all());
+		return new Placeholder<View>(content, zIndex, Fractions.all(), Fractions.all(), 0, 0);
 	}
 }

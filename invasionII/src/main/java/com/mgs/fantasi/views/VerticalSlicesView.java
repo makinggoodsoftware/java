@@ -27,7 +27,7 @@ public class VerticalSlicesView extends BaseView {
 		CellContentGenerator<View> cellContentGenerator = new CellContentGenerator<View>() {
 			@Override
 			public CellContent<View> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided(contentBuilder);
+				return CellContent.evenlyDivided(contentBuilder, x, y);
 			}
 		};
 		GridWireframe<View> grid = new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(numberOfDivisions, 1)));

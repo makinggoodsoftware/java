@@ -30,21 +30,21 @@ public class Main {
 
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
 		View view =
-			layered().
-				withLayer(
-					hexagonRows(numberOVerticalDivisions, numberOfGenerations).
-						withName("OddHexagonRows").
-						withHexagonMeasurement(hexagonMeasurement)
-				).
-				withLayer(
-					rectangle().
-						withPadding(hexagonMeasurement.asPadding().withHalfOfItsSize()).
-						withName("EvenHexagonRows").
-						withContent(hexagonRows(numberOVerticalDivisions, numberOfGenerations).
+				layered().
+						withLayer(
+								hexagonRows(numberOVerticalDivisions, numberOfGenerations).
+										withName("OddHexagonRows").
+										withHexagonMeasurement(hexagonMeasurement)
+						).
+						withLayer(
+								rectangle().
+										withPadding(hexagonMeasurement.asPadding().withHalfOfItsSize()).
+										withName("EvenHexagonRows").
+										withContent(hexagonRows(numberOVerticalDivisions, numberOfGenerations).
 //							withOneLessColumn().
-							withHexagonMeasurement(hexagonMeasurement)
-				)
-			);
+		withHexagonMeasurement(hexagonMeasurement)
+										)
+						);
 
 		uiDriver.show(view, new Dimension(400, 400), uiProfileFactory);
 	}

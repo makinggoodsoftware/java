@@ -23,7 +23,7 @@ public class WireframeFactory<T> {
 			T layer = layers.get(i);
 			placeholders.add(new Placeholder<T>(layer, i, all(), all(), 0, 0));
 		}
-		return new BaseWireframe<T>(placeholders);
+		return new Wireframe<T>(placeholders, WireframeType.LAYERS);
 	}
 
 	public static <T> Wireframe<T> createRectangleWireframe(T content) {
@@ -31,14 +31,14 @@ public class WireframeFactory<T> {
 
 		List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
 		placeholders.add(new Placeholder<T>(content, 0, all(), all(), 0, 0));
-		return new BaseWireframe<T>(placeholders);
+		return new Wireframe<T>(placeholders, WireframeType.SIMPLE);
 	}
 
 	public static <T> Wireframe<T> createEmptyWireframe() {
-		return new BaseWireframe<T>(new ArrayList<Placeholder<T>>());
+		return new Wireframe<T>(new ArrayList<Placeholder<T>>(), WireframeType.EMPTY);
 	}
 
 	public Wireframe<T> grid(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {
-		return new BaseWireframe<T>(placeholderFactory.gridPlaceholders(gridPlaceholderGenerator, dimension));
+		return new Wireframe<T>(placeholderFactory.gridPlaceholders(gridPlaceholderGenerator, dimension), WireframeType.GRID);
 	}
 }

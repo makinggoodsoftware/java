@@ -1,13 +1,25 @@
 package com.mgs.fantasi.wireframe;
 
-
 import java.util.List;
 
-@SuppressWarnings("unused")
-public interface Wireframe<T> {
-	WireframeType getType();
+public class Wireframe<T> {
+	private final List<Placeholder<T>> placeholders;
+	private final WireframeType type;
 
-	boolean isEmpty();
+	public Wireframe(List<Placeholder<T>> placeholders, WireframeType type) {
+		this.placeholders = placeholders;
+		this.type = type;
+	}
 
-	List<Placeholder<T>> getContent();
+	public WireframeType getType() {
+		return type;
+	}
+
+	public boolean isEmpty() {
+		return placeholders.size() == 0;
+	}
+
+	public List<Placeholder<T>> getContent() {
+		return placeholders;
+	}
 }

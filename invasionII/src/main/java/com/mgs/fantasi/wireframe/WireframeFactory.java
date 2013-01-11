@@ -13,11 +13,19 @@ public class WireframeFactory<T> {
 		this.placeholderFactory = placeholderFactory;
 	}
 
-	public static <T> Wireframe<T> createGridWireframe(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {
-		return new WireframeFactory<T>(new PlaceholderFactory<T>()).grid(gridPlaceholderGenerator, dimension);
+	public <T> Wireframe<T> createEmptyWireframe() {
+		return new Wireframe<T>(new ArrayList<Placeholder<T>>(), WireframeType.EMPTY);
 	}
 
-	public static <T> Wireframe<T> createLayeredWireframe(java.util.List<T> layers) {
+	public <T> Wireframe<T> createRectangleWireframe(T content) {
+		if (content == null) return createEmptyWireframe();
+
+		List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
+		placeholders.add(new Placeholder<T>(content, 0, all(), all(), 0, 0));
+		return new Wireframe<T>(placeholders, WireframeType.SIMPLE);
+	}
+
+	public <T> Wireframe<T> createLayeredWireframe(List<T> layers) {
 		List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			T layer = layers.get(i);
@@ -26,16 +34,8 @@ public class WireframeFactory<T> {
 		return new Wireframe<T>(placeholders, WireframeType.LAYERS);
 	}
 
-	public static <T> Wireframe<T> createRectangleWireframe(T content) {
-		if (content == null) return createEmptyWireframe();
-
-		List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
-		placeholders.add(new Placeholder<T>(content, 0, all(), all(), 0, 0));
-		return new Wireframe<T>(placeholders, WireframeType.SIMPLE);
-	}
-
-	public static <T> Wireframe<T> createEmptyWireframe() {
-		return new Wireframe<T>(new ArrayList<Placeholder<T>>(), WireframeType.EMPTY);
+	public <T> Wireframe<T> createGridWireframe(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {
+		return new WireframeFactory<T>(new PlaceholderFactory<T>()).grid(gridPlaceholderGenerator, dimension);
 	}
 
 	public Wireframe<T> grid(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {

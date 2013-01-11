@@ -27,7 +27,7 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
+	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
 		PlaceholderFactory.GridPlaceholderGenerator<View> cellContentGenerator = new PlaceholderFactory.GridPlaceholderGenerator<View>() {
 			@Override
 			public Placeholder<View> generateContentFor(int x, int y) {
@@ -39,6 +39,6 @@ public class TwoLinesView extends BaseView {
 				}
 			}
 		};
-		return WireframeFactory.createGridWireframe(cellContentGenerator, new Dimension(1, 2));
+		return wireframeFactory.createGridWireframe(cellContentGenerator, new Dimension(1, 2));
 	}
 }

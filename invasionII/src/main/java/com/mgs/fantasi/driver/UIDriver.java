@@ -6,7 +6,6 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIProfile;
-import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
@@ -39,9 +38,9 @@ public class UIDriver<T> {
 		this.renderingProcessFactory = renderingProcessFactory;
 	}
 
-	public void show(View view, Dimension dimension, UIProfileFactory uiProfileFactory) {
-		UIProfile uiProfile = uiProfileFactory.getUIProfile();
-		T uiNativeComponent = renderingProcessFactory.newRenderingProcess(view, uiProfile).render();
+	public void show(View view, Dimension dimension, UIProfile uiProfile) {
+		RenderingProcess<T> renderingProcess = renderingProcessFactory.newRenderingProcess(view, uiProfile);
+		T uiNativeComponent = renderingProcess.render();
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}
 }

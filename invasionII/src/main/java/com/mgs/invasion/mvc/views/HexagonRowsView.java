@@ -36,8 +36,8 @@ public class HexagonRowsView extends BaseView<HexagonRowsView> {
 	}
 
 	@Override
-	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
-		return pijamaRows.buildContent(wireframeFactory);
+	public Wireframe<View> buildLayout(WireframeFactory<View> wireframeFactory) {
+		return pijamaRows.buildLayout(wireframeFactory);
 	}
 
 	public View withHexagonMeasurement(Measurement hexagonMeasurement) {

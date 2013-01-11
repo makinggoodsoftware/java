@@ -27,7 +27,7 @@ public class TwoLinesView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
+	public Wireframe<View> buildLayout(WireframeFactory<View> wireframeFactory) {
 		TwoDimensionsIterator<Placeholder<View>> cellContentGenerator = new TwoDimensionsIterator<Placeholder<View>>() {
 			@Override
 			public Placeholder<View> on(int x, int y) {

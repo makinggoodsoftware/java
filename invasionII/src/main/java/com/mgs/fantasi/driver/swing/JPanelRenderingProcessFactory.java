@@ -30,8 +30,7 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 
 	@Override
 	public RenderingProcess<JPanel> newRenderingProcess(View view, final UIProfile uiProfile) {
-		Wireframe<View> from = view.buildContent(wireframeFactory);
-		if (from == null) throw new RuntimeException("The content of a build can't be null");
+		Wireframe<View> from = view.buildLayout(wireframeFactory);
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, from.getType());
 
@@ -41,14 +40,11 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 
 	private List<ToBeAdded<JPanel>> createContent(UIProfile uiProfile, Wireframe<View> from) {
 		List<ToBeAdded<JPanel>> childObjects = new ArrayList<ToBeAdded<JPanel>>();
-		List<Placeholder<View>> content1 = from.getContent();
 
-		for (Placeholder<View> viewPlaceholder : content1) {
+		for (Placeholder<View> viewPlaceholder : from.getContent()) {
 			View content = viewPlaceholder.getContent();
-			if (content == null) throw new RuntimeException("The view for a placeholder can't be null");
 			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(content, uiProfile);
 			childObjects.add(new ToBeAdded<JPanel>(jPanelRenderingProcess, viewPlaceholder));
-
 		}
 		return childObjects;
 	}

@@ -19,7 +19,7 @@ public class LayeredElementsView extends BaseView {
 	}
 
 	@Override
-	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
+	public Wireframe<View> buildLayout(WireframeFactory<View> wireframeFactory) {
 		return wireframeFactory.createLayeredWireframe(layers);
 	}
 }

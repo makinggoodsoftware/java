@@ -33,7 +33,7 @@ public class PijamaRowsView extends BaseView<PijamaRowsView> {
 	}
 
 	@Override
-	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
+	public Wireframe<View> buildLayout(WireframeFactory<View> wireframeFactory) {
 		return wireframeFactory.createGridWireframe(new TwoDimensionsIterator<Placeholder<View>>() {
 			@Override
 			public Placeholder<View> on(int x, int y) {

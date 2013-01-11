@@ -19,7 +19,7 @@ public class RectangleView extends BaseView<RectangleView> {
 	}
 
 	@Override
-	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
+	public Wireframe<View> buildLayout(WireframeFactory<View> wireframeFactory) {
 		return wireframeFactory.createRectangleWireframe(content);
 	}
 }

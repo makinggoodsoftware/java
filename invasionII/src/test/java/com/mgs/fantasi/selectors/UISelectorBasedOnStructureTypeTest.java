@@ -20,7 +20,7 @@ public class UISelectorBasedOnStructureTypeTest {
 
 	private class MatchingStructureTypeParent extends BaseView {
 		@Override
-		public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
+		public Wireframe<View> buildLayout(WireframeFactory<View> wireframeFactory) {
 			return null;
 		}
 	}
@@ -33,7 +33,7 @@ public class UISelectorBasedOnStructureTypeTest {
 
 	private class OtherStructureType extends BaseView {
 		@Override
-		public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
+		public Wireframe<View> buildLayout(WireframeFactory<View> wireframeFactory) {
 			return null;
 		}
 	}

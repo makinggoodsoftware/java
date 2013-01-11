@@ -16,8 +16,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
-
 public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JPanel> {
 	private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
 	private final StyleManager styleManager;
@@ -32,30 +30,21 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 
 	@Override
 	public RenderingProcess<JPanel> newRenderingProcess(View view, final UIProfile uiProfile) {
-		System.out.println("Rendering process for view: " + view + ": START");
 		Wireframe<View> from = view.buildContent(placeholderFactory);
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(view.getUiProperties(), uiProfile.findStylesFor(view));
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, from.getType());
-		System.out.println("Rendering process for view: " + view + ": Base creation strategy = " + baseCreationStrategy);
 
-		System.out.println("Rendering process for view: " + view + ": About to create its content");
 		List<ToBeAdded<JPanel>> content = createContent(uiProfile, from);
-		System.out.println("Rendering process for view: " + view + ": Content created");
-		JPanelRenderingProcess jPanelRenderingProcess = new JPanelRenderingProcess(baseCreationStrategy, content);
-		System.out.println("Rendering process for view: " + view + ": END");
-		return jPanelRenderingProcess;
+		return new JPanelRenderingProcess(baseCreationStrategy, content);
 	}
 
 	private List<ToBeAdded<JPanel>> createContent(UIProfile uiProfile, Wireframe<View> from) {
-		System.out.println("Creating content for " + from + " - START");
 		List<ToBeAdded<JPanel>> childObjects = new ArrayList<ToBeAdded<JPanel>>();
 		for (Placeholder<View> viewPlaceholder : from.getContent()) {
-			System.out.println("Creating content for " + from + " - Placeholder = " + reflectionToString(viewPlaceholder));
 			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(viewPlaceholder.getContent(), uiProfile);
 			childObjects.add(new ToBeAdded<JPanel>(jPanelRenderingProcess, viewPlaceholder));
 
 		}
-		System.out.println("Creating content for " + from + " - END");
 		return childObjects;
 	}
 

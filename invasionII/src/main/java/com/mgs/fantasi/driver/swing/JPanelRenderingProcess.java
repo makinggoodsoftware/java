@@ -10,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
-
 public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 	private final JPanelCreationStrategy baseCreationStrategy;
 	private final List<ToBeAdded<JPanel>> renderingContent;
@@ -40,9 +38,7 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 
 	private Object translate(Placeholder<View> specifics, LayoutManager type) {
 		if (type instanceof GridBagLayout) {
-			GridBagConstraints coordinates = SwingUtils.coordinates(specifics.getCoodinateX(), specifics.getCoodinateY(), specifics.getProportionOfParentWeight(), specifics.getProportionOfParentHeight());
-			System.out.println("Coordinates = " + reflectionToString(coordinates));
-			return coordinates;
+			return SwingUtils.coordinates(specifics.getCoodinateX(), specifics.getCoodinateY(), specifics.getProportionOfParentWeight(), specifics.getProportionOfParentHeight());
 		} else if (type instanceof OverlayLayout) {
 			return specifics.getzIndex();
 		}

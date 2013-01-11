@@ -2,6 +2,7 @@ package com.mgs.fantasi.wireframe;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
@@ -17,7 +18,7 @@ public class WireframeFactory<T> {
 	}
 
 	public static <T> Wireframe<T> createLayeredWireframe(java.util.List<T> layers) {
-		java.util.List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
+		List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			T layer = layers.get(i);
 			placeholders.add(new Placeholder<T>(layer, i, all(), all(), 0, 0));
@@ -26,9 +27,15 @@ public class WireframeFactory<T> {
 	}
 
 	public static <T> Wireframe<T> createRectangleWireframe(T content) {
-		java.util.List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
-		if (content != null) placeholders.add(new Placeholder<T>(content, 0, all(), all(), 0, 0));
+		if (content == null) return createEmptyWireframe();
+
+		List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
+		placeholders.add(new Placeholder<T>(content, 0, all(), all(), 0, 0));
 		return new BaseWireframe<T>(placeholders);
+	}
+
+	public static <T> Wireframe<T> createEmptyWireframe() {
+		return new BaseWireframe<T>(new ArrayList<Placeholder<T>>());
 	}
 
 	public Wireframe<T> grid(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {

@@ -3,7 +3,7 @@ package com.mgs.fantasi.views;
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.wireframe.Placeholder;
-import com.mgs.fantasi.wireframe.PlaceholderFactory;
+import com.mgs.fantasi.wireframe.TwoDimensionsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
@@ -34,9 +34,9 @@ public class PijamaRowsView extends BaseView<PijamaRowsView> {
 
 	@Override
 	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
-		return wireframeFactory.createGridWireframe(new PlaceholderFactory.GridPlaceholderGenerator<View>() {
+		return wireframeFactory.createGridWireframe(new TwoDimensionsIterator<Placeholder<View>>() {
 			@Override
-			public Placeholder<View> generateContentFor(int x, int y) {
+			public Placeholder<View> on(int x, int y) {
 				return new Placeholder<View>(generationBuilder, 0, Fractions.all(), Fractions.all(), x, y);
 			}
 		}, new Dimension(1, numberOfGenerations));

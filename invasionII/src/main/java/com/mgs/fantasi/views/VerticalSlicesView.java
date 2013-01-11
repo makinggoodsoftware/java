@@ -1,7 +1,7 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.wireframe.Placeholder;
-import com.mgs.fantasi.wireframe.PlaceholderFactory;
+import com.mgs.fantasi.wireframe.TwoDimensionsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
@@ -25,9 +25,9 @@ public class VerticalSlicesView extends BaseView {
 
 	@Override
 	public Wireframe<View> buildContent(WireframeFactory<View> wireframeFactory) {
-		PlaceholderFactory.GridPlaceholderGenerator<View> cellContentGenerator = new PlaceholderFactory.GridPlaceholderGenerator<View>() {
+		TwoDimensionsIterator<Placeholder<View>> cellContentGenerator = new TwoDimensionsIterator<Placeholder<View>>() {
 			@Override
-			public Placeholder<View> generateContentFor(int x, int y) {
+			public Placeholder<View> on(int x, int y) {
 				return new Placeholder<View>(contentBuilder, 0, all(), all(), x, y);
 			}
 		};

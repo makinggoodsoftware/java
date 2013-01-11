@@ -7,12 +7,6 @@ import java.util.List;
 import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class WireframeFactory<T> {
-	private final PlaceholderFactory<T> placeholderFactory;
-
-	public WireframeFactory(PlaceholderFactory<T> placeholderFactory) {
-		this.placeholderFactory = placeholderFactory;
-	}
-
 	public <T> Wireframe<T> createEmptyWireframe() {
 		return new Wireframe<T>(new ArrayList<Placeholder<T>>(), WireframeType.EMPTY);
 	}
@@ -34,11 +28,17 @@ public class WireframeFactory<T> {
 		return new Wireframe<T>(placeholders, WireframeType.LAYERS);
 	}
 
-	public <T> Wireframe<T> createGridWireframe(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {
-		return new WireframeFactory<T>(new PlaceholderFactory<T>()).grid(gridPlaceholderGenerator, dimension);
+	public <T> Wireframe<T> createGridWireframe(TwoDimensionsIterator<Placeholder<T>> twoDimensionsIterator, Dimension dimension) {
+		return new WireframeFactory<T>().grid(twoDimensionsIterator, dimension);
 	}
 
-	public Wireframe<T> grid(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {
-		return new Wireframe<T>(placeholderFactory.gridPlaceholders(gridPlaceholderGenerator, dimension), WireframeType.GRID);
+	public Wireframe<T> grid(TwoDimensionsIterator<Placeholder<T>> twoDimensionsIterator, Dimension dimension) {
+		List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
+		for (int x = 0; x < dimension.width; x++) {
+			for (int y = 0; y < dimension.height; y++) {
+				placeholders.add(twoDimensionsIterator.on(x, y));
+			}
+		}
+		return new Wireframe<T>(placeholders, WireframeType.GRID);
 	}
 }

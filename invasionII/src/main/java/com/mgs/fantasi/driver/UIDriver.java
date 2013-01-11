@@ -8,7 +8,6 @@ import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.views.View;
-import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
 import javax.swing.*;
@@ -22,7 +21,7 @@ public class UIDriver<T> {
 	public static UIDriver<JPanel> forSwing() {
 		StyleManager styleManager = new StyleManagerImpl();
 		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory();
-		WireframeFactory<View> wireframeFactory = new WireframeFactory<View>(new PlaceholderFactory<View>());
+		WireframeFactory<View> wireframeFactory = new WireframeFactory<View>();
 
 		return new UIDriver<JPanel>
 				(

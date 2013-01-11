@@ -45,7 +45,6 @@ public class Main {
 		withHexagonMeasurement(hexagonMeasurement)
 										)
 						);
-
 		uiDriver.show(view, new Dimension(400, 400), uiProfileFactory);
 	}
 

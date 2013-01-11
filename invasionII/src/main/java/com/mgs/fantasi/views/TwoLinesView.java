@@ -3,14 +3,11 @@ package com.mgs.fantasi.views;
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.wireframe.GridWireframe;
+import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.grid.CellContent;
-import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
 import java.awt.*;
-
-import static com.mgs.fantasi.wireframe.grid.CellContent.withPartialHeight;
 
 public class TwoLinesView extends BaseView {
 
@@ -31,21 +28,20 @@ public class TwoLinesView extends BaseView {
 
 	@Override
 	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
-		CellContentGenerator<View> cellContentGenerator = new CellContentGenerator<View>() {
+		PlaceholderFactory.GridPlaceholderGenerator<View> cellContentGenerator = new PlaceholderFactory.GridPlaceholderGenerator<View>() {
 			@Override
-			public CellContent<View> generateContentFor(int x, int y) {
+			public Placeholder<View> generateContentFor(int x, int y) {
 				if (y == 0) {
-					return withPartialHeight(firstLineBuilder, firstLineHeightSizeRatio, x, y);
+					return new Placeholder<View>(firstLineBuilder, 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
 				} else {
 					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return withPartialHeight(secondLineBuilder, remainder, x, y);
+					return new Placeholder<View>(secondLineBuilder, 0, Fractions.all(), remainder, 0, y);
 				}
 			}
 		};
 		return
 				new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(1, 2))).
-						withDimension(1, 2).
-						withContent(cellContentGenerator);
+						withDimension(1, 2);
 
 	}
 }

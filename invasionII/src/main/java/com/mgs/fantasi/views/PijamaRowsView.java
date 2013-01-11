@@ -1,11 +1,11 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
+import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.wireframe.GridWireframe;
+import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.grid.CellContent;
-import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
 import java.awt.*;
 
@@ -34,14 +34,14 @@ public class PijamaRowsView extends BaseView<PijamaRowsView> {
 
 	@Override
 	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
-		CellContentGenerator<View> cellContentGenerator = new CellContentGenerator<View>() {
+		PlaceholderFactory.GridPlaceholderGenerator<View> cellContentGenerator = new PlaceholderFactory.GridPlaceholderGenerator<View>() {
 			@Override
-			public CellContent<View> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided((View) generationBuilder, x, y);
+			public Placeholder<View> generateContentFor(int x, int y) {
+				return new Placeholder<View>(generationBuilder, 0, Fractions.all(), Fractions.all(), x, y);
 			}
 		};
+
 		return new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(1, numberOfGenerations))).
-				withDimension(1, numberOfGenerations).
-				withContent(cellContentGenerator);
+				withDimension(1, numberOfGenerations);
 	}
 }

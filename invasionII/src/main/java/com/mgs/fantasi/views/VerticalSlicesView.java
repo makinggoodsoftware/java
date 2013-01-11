@@ -1,12 +1,13 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.wireframe.GridWireframe;
+import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.grid.CellContent;
-import com.mgs.fantasi.wireframe.grid.CellContentGenerator;
 
 import java.awt.*;
+
+import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class VerticalSlicesView extends BaseView {
 
@@ -24,14 +25,14 @@ public class VerticalSlicesView extends BaseView {
 
 	@Override
 	public Wireframe<View> buildContent(PlaceholderFactory placeholderFactory) {
-		CellContentGenerator<View> cellContentGenerator = new CellContentGenerator<View>() {
+		PlaceholderFactory.GridPlaceholderGenerator<View> cellContentGenerator = new PlaceholderFactory.GridPlaceholderGenerator<View>() {
 			@Override
-			public CellContent<View> generateContentFor(int x, int y) {
-				return CellContent.evenlyDivided(contentBuilder, x, y);
+			public Placeholder<View> generateContentFor(int x, int y) {
+				return new Placeholder<View>(contentBuilder, 0, all(), all(), x, y);
 			}
 		};
 		GridWireframe<View> grid = new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(numberOfDivisions, 1)));
-		return grid.withDimension(numberOfDivisions, 1).withContent(cellContentGenerator);
+		return grid.withDimension(numberOfDivisions, 1);
 	}
 
 	public VerticalSlicesView withVerticalDivisions(int numberOVerticalDivisions) {

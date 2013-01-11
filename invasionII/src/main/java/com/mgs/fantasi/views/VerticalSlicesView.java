@@ -1,9 +1,9 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.wireframe.GridWireframe;
 import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeFactory;
 
 import java.awt.*;
 
@@ -31,8 +31,7 @@ public class VerticalSlicesView extends BaseView {
 				return new Placeholder<View>(contentBuilder, 0, all(), all(), x, y);
 			}
 		};
-		GridWireframe<View> grid = new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(numberOfDivisions, 1)));
-		return grid.withDimension(numberOfDivisions, 1);
+		return WireframeFactory.createGridWireframe(cellContentGenerator, new Dimension(numberOfDivisions, 1));
 	}
 
 	public VerticalSlicesView withVerticalDivisions(int numberOVerticalDivisions) {

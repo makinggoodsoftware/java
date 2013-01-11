@@ -2,10 +2,10 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.wireframe.GridWireframe;
 import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.PlaceholderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeFactory;
 
 import java.awt.*;
 
@@ -39,9 +39,6 @@ public class TwoLinesView extends BaseView {
 				}
 			}
 		};
-		return
-				new GridWireframe<View>(placeholderFactory.gridPlaceholders(cellContentGenerator, new Dimension(1, 2))).
-						withDimension(1, 2);
-
+		return WireframeFactory.createGridWireframe(cellContentGenerator, new Dimension(1, 2));
 	}
 }

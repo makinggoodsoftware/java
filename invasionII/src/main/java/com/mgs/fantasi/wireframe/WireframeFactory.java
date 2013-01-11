@@ -25,6 +25,12 @@ public class WireframeFactory<T> {
 		return new BaseWireframe<T>(placeholders);
 	}
 
+	public static <T> Wireframe<T> createRectangleWireframe(T content) {
+		java.util.List<Placeholder<T>> placeholders = new ArrayList<Placeholder<T>>();
+		if (content != null) placeholders.add(new Placeholder<T>(content, 0, all(), all(), 0, 0));
+		return new BaseWireframe<T>(placeholders);
+	}
+
 	public Wireframe<T> grid(PlaceholderFactory.GridPlaceholderGenerator<T> gridPlaceholderGenerator, Dimension dimension) {
 		return new BaseWireframe<T>(placeholderFactory.gridPlaceholders(gridPlaceholderGenerator, dimension));
 	}

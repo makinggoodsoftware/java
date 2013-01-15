@@ -2,9 +2,9 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.TwoDimensionsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeChildElement;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
 import java.awt.*;
@@ -27,14 +27,14 @@ public class TwoLinesWireframeBuilder extends BaseWireframeBuilder {
 
 	@Override
 	public Wireframe build(final WireframeFactory wireframeFactory) {
-		TwoDimensionsIterator<Placeholder> cellContentGenerator = new TwoDimensionsIterator<Placeholder>() {
+		TwoDimensionsIterator<WireframeChildElement> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement>() {
 			@Override
-			public Placeholder on(int x, int y) {
+			public WireframeChildElement on(int x, int y) {
 				if (y == 0) {
-					return new Placeholder(firstLineBuilder.build(wireframeFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
+					return new WireframeChildElement(firstLineBuilder.build(wireframeFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
 				} else {
 					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return new Placeholder(secondLineBuilder.build(wireframeFactory), 0, Fractions.all(), remainder, 0, y);
+					return new WireframeChildElement(secondLineBuilder.build(wireframeFactory), 0, Fractions.all(), remainder, 0, y);
 				}
 			}
 		};

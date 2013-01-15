@@ -2,9 +2,9 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.TwoDimensionsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeChildElement;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
 import java.awt.*;
@@ -34,10 +34,10 @@ public class PijamaRowsWireframeBuilder extends BaseWireframeBuilder<PijamaRowsW
 
 	@Override
 	public Wireframe build(final WireframeFactory wireframeFactory) {
-		return wireframeFactory.createGridWireframe(new TwoDimensionsIterator<Placeholder>() {
+		return wireframeFactory.createGridWireframe(new TwoDimensionsIterator<WireframeChildElement>() {
 			@Override
-			public Placeholder on(int x, int y) {
-				return new Placeholder(generationBuilder.build(wireframeFactory), 0, Fractions.all(), Fractions.all(), x, y);
+			public WireframeChildElement on(int x, int y) {
+				return new WireframeChildElement(generationBuilder.build(wireframeFactory), 0, Fractions.all(), Fractions.all(), x, y);
 			}
 		}, new Dimension(1, numberOfGenerations), getUiProperties(), getName(), this.getClass());
 	}

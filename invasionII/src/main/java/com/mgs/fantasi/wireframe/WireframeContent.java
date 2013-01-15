@@ -3,9 +3,9 @@ package com.mgs.fantasi.wireframe;
 import java.util.List;
 
 public class WireframeContent {
-	final List<Placeholder> content;
+	final List<WireframeChildElement> content;
 
-	public WireframeContent(List<Placeholder> content) {
+	public WireframeContent(List<WireframeChildElement> content) {
 		this.content = content;
 	}
 
@@ -13,7 +13,7 @@ public class WireframeContent {
 		return content.size() == 0;
 	}
 
-	public List<Placeholder> getContent() {
+	public List<WireframeChildElement> getParts() {
 		return content;
 	}
 }

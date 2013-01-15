@@ -1,8 +1,8 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.wireframe.Placeholder;
 import com.mgs.fantasi.wireframe.TwoDimensionsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeChildElement;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
 import java.awt.*;
@@ -25,10 +25,10 @@ public class VerticalSlicesWireframeBuilder extends BaseWireframeBuilder {
 
 	@Override
 	public Wireframe build(final WireframeFactory wireframeFactory) {
-		TwoDimensionsIterator<Placeholder> cellContentGenerator = new TwoDimensionsIterator<Placeholder>() {
+		TwoDimensionsIterator<WireframeChildElement> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement>() {
 			@Override
-			public Placeholder on(int x, int y) {
-				return new Placeholder(contentBuilder.build(wireframeFactory), 0, all(), all(), x, y);
+			public WireframeChildElement on(int x, int y) {
+				return new WireframeChildElement(contentBuilder.build(wireframeFactory), 0, all(), all(), x, y);
 			}
 		};
 		return wireframeFactory.createGridWireframe(cellContentGenerator, new Dimension(numberOfDivisions, 1), getUiProperties(), getName(), this.getClass());

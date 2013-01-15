@@ -12,7 +12,7 @@ public class Wireframe {
 	private final Class<? extends WireframeBuilder> builderClass;
 	private final WireframeContent wireframeContent;
 
-	public Wireframe(List<Placeholder> content, WireframeType type, UIProperties uiProperties, String name, Class<? extends WireframeBuilder> builderClass) {
+	public Wireframe(List<WireframeChildElement> content, WireframeType type, UIProperties uiProperties, String name, Class<? extends WireframeBuilder> builderClass) {
 		this.wireframeContent = new WireframeContent(content);
 		this.type = type;
 		this.uiProperties = uiProperties;
@@ -24,12 +24,8 @@ public class Wireframe {
 		return type;
 	}
 
-	public boolean isEmpty() {
-		return wireframeContent.isEmpty();
-	}
-
-	public List<Placeholder> getContent() {
-		return wireframeContent.getContent();
+	public WireframeContent getContent() {
+		return wireframeContent;
 	}
 
 	public String getName() {
@@ -42,5 +38,9 @@ public class Wireframe {
 
 	public Class<? extends WireframeBuilder> getBuilderClass() {
 		return builderClass;
+	}
+
+	public List<WireframeChildElement> getContentElements() {
+		return getContent().getParts();
 	}
 }

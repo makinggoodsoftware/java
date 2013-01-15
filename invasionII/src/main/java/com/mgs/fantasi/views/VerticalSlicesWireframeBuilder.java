@@ -25,10 +25,10 @@ public class VerticalSlicesWireframeBuilder extends BaseWireframeBuilder {
 
 	@Override
 	public Wireframe build(final WireframeFactory wireframeFactory) {
-		TwoDimensionsIterator<Placeholder<Wireframe>> cellContentGenerator = new TwoDimensionsIterator<Placeholder<Wireframe>>() {
+		TwoDimensionsIterator<Placeholder> cellContentGenerator = new TwoDimensionsIterator<Placeholder>() {
 			@Override
-			public Placeholder<Wireframe> on(int x, int y) {
-				return new Placeholder<Wireframe>(contentBuilder.build(wireframeFactory), 0, all(), all(), x, y);
+			public Placeholder on(int x, int y) {
+				return new Placeholder(contentBuilder.build(wireframeFactory), 0, all(), all(), x, y);
 			}
 		};
 		return wireframeFactory.createGridWireframe(cellContentGenerator, new Dimension(numberOfDivisions, 1), getUiProperties(), getName(), this.getClass());

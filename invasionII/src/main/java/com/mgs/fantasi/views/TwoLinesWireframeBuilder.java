@@ -27,14 +27,14 @@ public class TwoLinesWireframeBuilder extends BaseWireframeBuilder {
 
 	@Override
 	public Wireframe build(final WireframeFactory wireframeFactory) {
-		TwoDimensionsIterator<Placeholder<Wireframe>> cellContentGenerator = new TwoDimensionsIterator<Placeholder<Wireframe>>() {
+		TwoDimensionsIterator<Placeholder> cellContentGenerator = new TwoDimensionsIterator<Placeholder>() {
 			@Override
-			public Placeholder<Wireframe> on(int x, int y) {
+			public Placeholder on(int x, int y) {
 				if (y == 0) {
-					return new Placeholder<Wireframe>(firstLineBuilder.build(wireframeFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
+					return new Placeholder(firstLineBuilder.build(wireframeFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
 				} else {
 					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return new Placeholder<Wireframe>(secondLineBuilder.build(wireframeFactory), 0, Fractions.all(), remainder, 0, y);
+					return new Placeholder(secondLineBuilder.build(wireframeFactory), 0, Fractions.all(), remainder, 0, y);
 				}
 			}
 		};

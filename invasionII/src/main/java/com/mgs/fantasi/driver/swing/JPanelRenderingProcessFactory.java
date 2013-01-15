@@ -36,7 +36,7 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	private List<ToBeAdded<JPanel>> createContent(UIProfile uiProfile, Wireframe from) {
 		List<ToBeAdded<JPanel>> childObjects = new ArrayList<ToBeAdded<JPanel>>();
 
-		for (Placeholder<Wireframe> viewPlaceholder : from.getContent()) {
+		for (Placeholder viewPlaceholder : from.getContent()) {
 			Wireframe content = viewPlaceholder.getContent();
 			UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(content.getUiProperties(), uiProfile.findStylesFor(content));
 			JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, content.getType());

@@ -2,16 +2,16 @@ package com.mgs.fantasi.wireframe;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 
-public class Placeholder<T> {
-	private final T content;
+public class Placeholder {
+	private final Wireframe content;
 	private final CollocationInfo collocationInfo;
 
-	public Placeholder(T content, int zIndex, Fraction proportionOfParentWeight, Fraction proportionOfParentHeight, int coordinateX, int coordinateY) {
+	public Placeholder(Wireframe content, int zIndex, Fraction proportionOfParentWeight, Fraction proportionOfParentHeight, int coordinateX, int coordinateY) {
 		this.content = content;
 		this.collocationInfo = new CollocationInfo(zIndex, proportionOfParentWeight, proportionOfParentHeight, coordinateX, coordinateY);
 	}
 
-	public T getContent() {
+	public Wireframe getContent() {
 		return content;
 	}
 

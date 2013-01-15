@@ -34,10 +34,10 @@ public class PijamaRowsWireframeBuilder extends BaseWireframeBuilder<PijamaRowsW
 
 	@Override
 	public Wireframe build(final WireframeFactory wireframeFactory) {
-		return wireframeFactory.createGridWireframe(new TwoDimensionsIterator<Placeholder<Wireframe>>() {
+		return wireframeFactory.createGridWireframe(new TwoDimensionsIterator<Placeholder>() {
 			@Override
-			public Placeholder<Wireframe> on(int x, int y) {
-				return new Placeholder<Wireframe>(generationBuilder.build(wireframeFactory), 0, Fractions.all(), Fractions.all(), x, y);
+			public Placeholder on(int x, int y) {
+				return new Placeholder(generationBuilder.build(wireframeFactory), 0, Fractions.all(), Fractions.all(), x, y);
 			}
 		}, new Dimension(1, numberOfGenerations), getUiProperties(), getName(), this.getClass());
 	}

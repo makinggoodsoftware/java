@@ -6,7 +6,7 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIProfile;
-import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
 import javax.swing.*;
@@ -20,15 +20,14 @@ public class UIDriver<T> {
 	public static UIDriver<JPanel> forSwing() {
 		StyleManager styleManager = new StyleManagerImpl();
 		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory();
-		WireframeFactory<View> wireframeFactory = new WireframeFactory<View>();
+		WireframeFactory<Wireframe> wireframeFactory = new WireframeFactory<Wireframe>();
 
 		return new UIDriver<JPanel>
 				(
 						new SwingUIDisplayManager(),
 						new JPanelRenderingProcessFactory(
 								styleManager,
-								jPanelCreationStrategyFactory,
-								wireframeFactory
+								jPanelCreationStrategyFactory
 						)
 				);
 	}
@@ -38,8 +37,8 @@ public class UIDriver<T> {
 		this.renderingProcessFactory = renderingProcessFactory;
 	}
 
-	public void show(View view, Dimension dimension, UIProfile uiProfile) {
-		RenderingProcess<T> renderingProcess = renderingProcessFactory.newRenderingProcess(view, uiProfile);
+	public void show(Wireframe<Wireframe> wireframe, Dimension dimension, UIProfile uiProfile) {
+		RenderingProcess<T> renderingProcess = renderingProcessFactory.newRenderingProcess(wireframe, uiProfile);
 		T uiNativeComponent = renderingProcess.render();
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}

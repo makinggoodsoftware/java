@@ -9,7 +9,6 @@ public class JPanelCreationStrategyFactory {
 				new StandardJPanelCreationStrategy(uiProperties, type) :
 				new NonRectangularJPanelCreationStrategy(uiProperties, type);
 
-
 		return uiProperties.getPadding().isEmpty() ?
 				jPanelCreationStrategy :
 				new DecoratedJPanelWithPadding(jPanelCreationStrategy, uiProperties.getPadding());

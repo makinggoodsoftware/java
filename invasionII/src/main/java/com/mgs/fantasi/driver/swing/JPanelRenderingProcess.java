@@ -2,8 +2,8 @@ package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.RenderingProcess;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
-import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.Placeholder;
+import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeType;
 
 import javax.swing.*;
@@ -28,7 +28,7 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		container.setLayout(layoutManager);
 		for (ToBeAdded<JPanel> toBeAdded : renderingContent) {
 			RenderingProcess<JPanel> childRenderingProcess = toBeAdded.getRenderingProcess();
-			Placeholder<View> specifics = toBeAdded.getSpecifics();
+			Placeholder<Wireframe> specifics = toBeAdded.getSpecifics();
 
 			JPanel child = childRenderingProcess.render();
 			container.add(child, translate(specifics, layoutManager));
@@ -36,7 +36,7 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		return container;
 	}
 
-	private Object translate(Placeholder<View> specifics, LayoutManager type) {
+	private Object translate(Placeholder<Wireframe> specifics, LayoutManager type) {
 		if (type instanceof GridBagLayout) {
 			return SwingUtils.coordinates(specifics.getCoodinateX(), specifics.getCoodinateY(), specifics.getProportionOfParentWeight(), specifics.getProportionOfParentHeight());
 		} else if (type instanceof OverlayLayout) {

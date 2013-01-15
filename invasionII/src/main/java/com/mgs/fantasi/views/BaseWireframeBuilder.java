@@ -4,23 +4,23 @@ import com.mgs.fantasi.properties.Padding;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Measurement;
 
-public abstract class BaseView<T extends BaseView> implements View {
+public abstract class BaseWireframeBuilder<T extends BaseWireframeBuilder> implements WireframeBuilder {
 	private final UIProperties uiProperties = new UIProperties();
-    private String name = "";
+	private String name = "";
 
-    @SuppressWarnings(value = "unchecked")
-    public T withPadding(Padding padding) {
+	@SuppressWarnings(value = "unchecked")
+	public T withPadding(Padding padding) {
 		getUiProperties().setPadding(padding);
 		return (T) this;
 	}
 
-    @SuppressWarnings(value = "unchecked")
+	@SuppressWarnings(value = "unchecked")
 	public T withName(String name) {
 		this.name = name;
 		return (T) this;
 	}
 
-    @SuppressWarnings(value = "unchecked")
+	@SuppressWarnings(value = "unchecked")
 	public T withMeasurement(Measurement measurement) {
 		getUiProperties().setMeasurement(measurement);
 		return (T) this;
@@ -32,7 +32,7 @@ public abstract class BaseView<T extends BaseView> implements View {
 	}
 
 	@Override
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 }

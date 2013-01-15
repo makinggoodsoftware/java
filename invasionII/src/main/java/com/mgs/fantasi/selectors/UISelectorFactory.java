@@ -1,11 +1,11 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.views.WireframeBuilder;
 
 public class UISelectorFactory {
 
-	public static UISelector forType(Class<? extends View> type) {
+	public static UISelector forType(Class<? extends WireframeBuilder> type) {
 		return new UISelectorBasedOnStructureType(type);
 	}
 

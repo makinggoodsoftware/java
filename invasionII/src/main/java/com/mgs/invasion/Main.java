@@ -4,15 +4,17 @@ import com.mgs.fantasi.driver.UIDriver;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.styles.UIProfileFactory;
-import com.mgs.fantasi.views.View;
+import com.mgs.fantasi.views.WireframeBuilder;
+import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeFactory;
 import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.views.LayeredElementsView.layered;
-import static com.mgs.fantasi.views.RectangleView.rectangle;
-import static com.mgs.invasion.mvc.views.HexagonRowsView.hexagonRows;
+import static com.mgs.fantasi.views.LayeredElementsWireframeBuilder.layered;
+import static com.mgs.fantasi.views.RectangleWireframeBuilder.rectangle;
+import static com.mgs.invasion.mvc.views.HexagonRowsWireframeBuilder.hexagonRows;
 
 public class Main {
 	public static void main(String... args) {
@@ -29,7 +31,7 @@ public class Main {
 
 
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
-		View view =
+		WireframeBuilder wireframeBuilder =
 				layered().
 						withLayer(
 								hexagonRows(numberOVerticalDivisions, numberOfGenerations).
@@ -45,7 +47,7 @@ public class Main {
 		withHexagonMeasurement(hexagonMeasurement)
 										)
 						);
-		uiDriver.show(view, new Dimension(400, 400), uiProfileFactory.getUIProfile());
+		uiDriver.show(wireframeBuilder.build(new WireframeFactory<Wireframe>()), new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}
 
 }

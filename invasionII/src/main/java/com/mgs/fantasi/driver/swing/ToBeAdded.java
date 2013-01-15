@@ -1,14 +1,14 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.RenderingProcess;
-import com.mgs.fantasi.views.View;
 import com.mgs.fantasi.wireframe.Placeholder;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 public class ToBeAdded<J> {
-	private final Placeholder<View> specifics;
+	private final Placeholder<Wireframe> specifics;
 	private final RenderingProcess<J> renderingProcess;
 
-	ToBeAdded(RenderingProcess<J> renderingProcess, Placeholder<View> specifics) {
+	ToBeAdded(RenderingProcess<J> renderingProcess, Placeholder<Wireframe> specifics) {
 		this.renderingProcess = renderingProcess;
 		this.specifics = specifics;
 	}
@@ -17,7 +17,7 @@ public class ToBeAdded<J> {
 		return renderingProcess;
 	}
 
-	public Placeholder<View> getSpecifics() {
+	public Placeholder<Wireframe> getSpecifics() {
 		return specifics;
 	}
 }

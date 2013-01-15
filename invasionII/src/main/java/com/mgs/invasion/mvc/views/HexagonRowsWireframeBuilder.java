@@ -36,7 +36,7 @@ public class HexagonRowsWireframeBuilder extends BaseWireframeBuilder<HexagonRow
 	}
 
 	@Override
-	public Wireframe<Wireframe> build(WireframeFactory<Wireframe> wireframeFactory) {
+	public Wireframe build(WireframeFactory wireframeFactory) {
 		return pijamaRows.build(wireframeFactory);
 	}
 

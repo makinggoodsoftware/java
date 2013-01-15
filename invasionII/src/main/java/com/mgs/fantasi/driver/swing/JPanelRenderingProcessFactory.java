@@ -25,7 +25,7 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	@Override
-	public RenderingProcess<JPanel> newRenderingProcess(Wireframe<Wireframe> wireframe, final UIProfile uiProfile) {
+	public RenderingProcess<JPanel> newRenderingProcess(Wireframe wireframe, final UIProfile uiProfile) {
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(wireframe.getUiProperties(), uiProfile.findStylesFor(wireframe));
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, wireframe.getType());
 
@@ -33,11 +33,11 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 		return new JPanelRenderingProcess(baseCreationStrategy, content);
 	}
 
-	private List<ToBeAdded<JPanel>> createContent(UIProfile uiProfile, Wireframe<Wireframe> from) {
+	private List<ToBeAdded<JPanel>> createContent(UIProfile uiProfile, Wireframe from) {
 		List<ToBeAdded<JPanel>> childObjects = new ArrayList<ToBeAdded<JPanel>>();
 
 		for (Placeholder<Wireframe> viewPlaceholder : from.getContent()) {
-			Wireframe<Wireframe> content = viewPlaceholder.getContent();
+			Wireframe content = viewPlaceholder.getContent();
 			UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(content.getUiProperties(), uiProfile.findStylesFor(content));
 			JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, content.getType());
 

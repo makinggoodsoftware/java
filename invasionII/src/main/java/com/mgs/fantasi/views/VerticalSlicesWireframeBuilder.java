@@ -24,7 +24,7 @@ public class VerticalSlicesWireframeBuilder extends BaseWireframeBuilder {
 	}
 
 	@Override
-	public Wireframe<Wireframe> build(final WireframeFactory<Wireframe> wireframeFactory) {
+	public Wireframe build(final WireframeFactory wireframeFactory) {
 		TwoDimensionsIterator<Placeholder<Wireframe>> cellContentGenerator = new TwoDimensionsIterator<Placeholder<Wireframe>>() {
 			@Override
 			public Placeholder<Wireframe> on(int x, int y) {

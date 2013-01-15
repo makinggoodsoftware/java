@@ -5,14 +5,14 @@ import com.mgs.fantasi.views.WireframeBuilder;
 
 import java.util.List;
 
-public class Wireframe<T> {
-	private final List<Placeholder<T>> placeholders;
+public class Wireframe {
+	private final List<Placeholder<Wireframe>> placeholders;
 	private final WireframeType type;
 	private final UIProperties uiProperties;
 	private final String name;
 	private final Class<? extends WireframeBuilder> builderClass;
 
-	public Wireframe(List<Placeholder<T>> placeholders, WireframeType type, UIProperties uiProperties, String name, Class<? extends WireframeBuilder> builderClass) {
+	public Wireframe(List<Placeholder<Wireframe>> placeholders, WireframeType type, UIProperties uiProperties, String name, Class<? extends WireframeBuilder> builderClass) {
 		if (uiProperties == null) throw new RuntimeException("WTF!");
 		this.placeholders = placeholders;
 		this.type = type;
@@ -29,7 +29,7 @@ public class Wireframe<T> {
 		return placeholders.size() == 0;
 	}
 
-	public List<Placeholder<T>> getContent() {
+	public List<Placeholder<Wireframe>> getContent() {
 		return placeholders;
 	}
 

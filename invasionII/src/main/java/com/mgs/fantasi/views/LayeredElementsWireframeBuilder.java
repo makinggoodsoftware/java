@@ -19,7 +19,7 @@ public class LayeredElementsWireframeBuilder extends BaseWireframeBuilder {
 	}
 
 	@Override
-	public Wireframe<Wireframe> build(WireframeFactory<Wireframe> wireframeFactory) {
+	public Wireframe build(WireframeFactory wireframeFactory) {
 		List<Wireframe> layersBuilt = new ArrayList<Wireframe>();
 		for (WireframeBuilder layer : layers) {
 			layersBuilt.add(layer.build(wireframeFactory));

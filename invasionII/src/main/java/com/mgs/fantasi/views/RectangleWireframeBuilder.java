@@ -19,7 +19,7 @@ public class RectangleWireframeBuilder extends BaseWireframeBuilder<RectangleWir
 	}
 
 	@Override
-	public Wireframe<Wireframe> build(WireframeFactory<Wireframe> wireframeFactory) {
+	public Wireframe build(WireframeFactory wireframeFactory) {
 		if (content == null) return wireframeFactory.createEmptyWireframe(getUiProperties(), getName(), getClass());
 		return wireframeFactory.createRectangleWireframe(content.build(wireframeFactory), getUiProperties(), getName(), this.getClass());
 	}

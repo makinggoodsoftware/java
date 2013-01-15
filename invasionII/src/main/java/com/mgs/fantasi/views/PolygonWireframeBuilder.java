@@ -14,7 +14,7 @@ public class PolygonWireframeBuilder extends BaseWireframeBuilder<PolygonWirefra
 	}
 
 	@Override
-	public Wireframe<Wireframe> build(WireframeFactory<Wireframe> wireframeFactory) {
+	public Wireframe build(WireframeFactory wireframeFactory) {
 		return wireframeFactory.createEmptyWireframe(getUiProperties(), getName(), this.getClass());
 	}
 }

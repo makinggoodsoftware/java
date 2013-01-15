@@ -33,7 +33,7 @@ public class PijamaRowsWireframeBuilder extends BaseWireframeBuilder<PijamaRowsW
 	}
 
 	@Override
-	public Wireframe<Wireframe> build(final WireframeFactory<Wireframe> wireframeFactory) {
+	public Wireframe build(final WireframeFactory wireframeFactory) {
 		return wireframeFactory.createGridWireframe(new TwoDimensionsIterator<Placeholder<Wireframe>>() {
 			@Override
 			public Placeholder<Wireframe> on(int x, int y) {

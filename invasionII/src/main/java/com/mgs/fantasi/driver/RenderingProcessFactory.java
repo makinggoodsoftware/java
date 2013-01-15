@@ -4,5 +4,5 @@ import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 public interface RenderingProcessFactory<T> {
-	RenderingProcess<T> newRenderingProcess(Wireframe<Wireframe> wireframe, UIProfile uiProfile);
+	RenderingProcess<T> newRenderingProcess(Wireframe wireframe, UIProfile uiProfile);
 }

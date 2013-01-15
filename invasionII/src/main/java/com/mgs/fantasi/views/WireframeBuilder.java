@@ -5,7 +5,7 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeFactory;
 
 public interface WireframeBuilder {
-	Wireframe<Wireframe> build(WireframeFactory<Wireframe> wireframeFactory);
+	Wireframe build(WireframeFactory wireframeFactory);
 
 	UIProperties getUiProperties();
 

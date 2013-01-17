@@ -1,7 +1,7 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeFactory;
+import com.mgs.fantasi.wireframe.WireframeContentFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,11 @@ public class LayeredElementsWireframeBuilder extends BaseWireframeBuilder {
 	}
 
 	@Override
-	public Wireframe build(WireframeFactory wireframeFactory) {
+	public Wireframe build(WireframeContentFactory wireframeContentFactory) {
 		List<Wireframe> layersBuilt = new ArrayList<Wireframe>();
 		for (WireframeBuilder layer : layers) {
-			layersBuilt.add(layer.build(wireframeFactory));
+			layersBuilt.add(layer.build(wireframeContentFactory));
 		}
-		return wireframeFactory.createLayeredWireframe(layersBuilt, getUiProperties(), getName(), this.getClass());
+		return new Wireframe(wireframeContentFactory.layered(layersBuilt), getUiProperties(), getName(), this.getClass());
 	}
 }

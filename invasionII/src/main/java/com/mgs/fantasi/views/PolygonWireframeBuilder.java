@@ -2,7 +2,7 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeFactory;
+import com.mgs.fantasi.wireframe.WireframeContentFactory;
 
 public class PolygonWireframeBuilder extends BaseWireframeBuilder<PolygonWireframeBuilder> {
 	private PolygonWireframeBuilder(PolygonPointsIterator polygonPointsIterator) {
@@ -14,7 +14,7 @@ public class PolygonWireframeBuilder extends BaseWireframeBuilder<PolygonWirefra
 	}
 
 	@Override
-	public Wireframe build(WireframeFactory wireframeFactory) {
-		return wireframeFactory.createEmptyWireframe(getUiProperties(), getName(), this.getClass());
+	public Wireframe build(WireframeContentFactory wireframeContentFactory) {
+		return new Wireframe(wireframeContentFactory.empty(), getUiProperties(), getName(), this.getClass());
 	}
 }

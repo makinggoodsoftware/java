@@ -8,7 +8,7 @@ import com.mgs.fantasi.views.PijamaRowsWireframeBuilder;
 import com.mgs.fantasi.views.PolygonWireframeBuilder;
 import com.mgs.fantasi.views.WireframeBuilder;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeFactory;
+import com.mgs.fantasi.wireframe.WireframeContentFactory;
 
 import static com.mgs.fantasi.views.PijamaRowsWireframeBuilder.pijamaRows;
 import static com.mgs.fantasi.views.PolygonWireframeBuilder.polygon;
@@ -36,8 +36,8 @@ public class HexagonRowsWireframeBuilder extends BaseWireframeBuilder<HexagonRow
 	}
 
 	@Override
-	public Wireframe build(WireframeFactory wireframeFactory) {
-		return pijamaRows.build(wireframeFactory);
+	public Wireframe build(WireframeContentFactory wireframeContentFactory) {
+		return pijamaRows.build(wireframeContentFactory);
 	}
 
 	public WireframeBuilder withHexagonMeasurement(Measurement hexagonMeasurement) {

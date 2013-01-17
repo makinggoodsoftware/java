@@ -5,7 +5,7 @@ import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.wireframe.TwoDimensionsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeChildElement;
-import com.mgs.fantasi.wireframe.WireframeFactory;
+import com.mgs.fantasi.wireframe.WireframeContentFactory;
 
 import java.awt.*;
 
@@ -26,18 +26,18 @@ public class TwoLinesWireframeBuilder extends BaseWireframeBuilder {
 	}
 
 	@Override
-	public Wireframe build(final WireframeFactory wireframeFactory) {
+	public Wireframe build(final WireframeContentFactory wireframeContentFactory) {
 		TwoDimensionsIterator<WireframeChildElement> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement>() {
 			@Override
 			public WireframeChildElement on(int x, int y) {
 				if (y == 0) {
-					return new WireframeChildElement(firstLineBuilder.build(wireframeFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
+					return new WireframeChildElement(firstLineBuilder.build(wireframeContentFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
 				} else {
 					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return new WireframeChildElement(secondLineBuilder.build(wireframeFactory), 0, Fractions.all(), remainder, 0, y);
+					return new WireframeChildElement(secondLineBuilder.build(wireframeContentFactory), 0, Fractions.all(), remainder, 0, y);
 				}
 			}
 		};
-		return wireframeFactory.createGridWireframe(cellContentGenerator, new Dimension(1, 2), getUiProperties(), getName(), this.getClass());
+		return new Wireframe(wireframeContentFactory.grid(cellContentGenerator, new Dimension(1, 2)), getUiProperties(), getName(), this.getClass());
 	}
 }

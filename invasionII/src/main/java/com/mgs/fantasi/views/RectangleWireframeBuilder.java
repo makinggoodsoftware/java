@@ -1,7 +1,7 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeFactory;
+import com.mgs.fantasi.wireframe.WireframeContentFactory;
 
 public class RectangleWireframeBuilder extends BaseWireframeBuilder<RectangleWireframeBuilder> {
 	private WireframeBuilder content;
@@ -19,8 +19,9 @@ public class RectangleWireframeBuilder extends BaseWireframeBuilder<RectangleWir
 	}
 
 	@Override
-	public Wireframe build(WireframeFactory wireframeFactory) {
-		if (content == null) return wireframeFactory.createEmptyWireframe(getUiProperties(), getName(), getClass());
-		return wireframeFactory.createRectangleWireframe(content.build(wireframeFactory), getUiProperties(), getName(), this.getClass());
+	public Wireframe build(WireframeContentFactory wireframeContentFactory) {
+		if (content == null)
+			return new Wireframe(wireframeContentFactory.empty(), getUiProperties(), getName(), getClass());
+		return new Wireframe(wireframeContentFactory.rectangle(content.build(wireframeContentFactory)), getUiProperties(), getName(), this.getClass());
 	}
 }

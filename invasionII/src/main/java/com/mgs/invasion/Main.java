@@ -7,7 +7,6 @@ import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.views.WireframeBuilder;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
-import com.mgs.fantasi.wireframe.WireframeFactory;
 import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
 
 import javax.swing.*;
@@ -18,8 +17,7 @@ import static com.mgs.fantasi.views.RectangleWireframeBuilder.rectangle;
 import static com.mgs.invasion.mvc.views.HexagonRowsWireframeBuilder.hexagonRows;
 
 public class Main {
-
-	private final WireframeFactory wireframeFactory = new WireframeFactory(new WireframeContentFactory());
+	private final WireframeContentFactory wireframeContentFactory = new WireframeContentFactory();
 
 	public static void main(String... args) {
 		new Main().go(new DebugUIProfileFactory());
@@ -51,7 +49,7 @@ public class Main {
 		withHexagonMeasurement(hexagonMeasurement)
 										)
 						);
-		Wireframe wireframe = wireframeBuilder.build(wireframeFactory);
+		Wireframe wireframe = wireframeBuilder.build(wireframeContentFactory);
 		uiDriver.show(wireframe, new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}
 

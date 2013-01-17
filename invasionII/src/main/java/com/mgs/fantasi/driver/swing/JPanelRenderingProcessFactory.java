@@ -7,7 +7,6 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
-import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeChildElement;
 
@@ -39,10 +38,9 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 
 		for (WireframeChildElement wireframeChildPart : from.getContentElements()) {
 			Wireframe child = wireframeChildPart.getChild();
-			CollocationInfo collocationInfo = wireframeChildPart.getCollocationInfo();
 
 			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(child, uiProfile);
-			childObjects.add(new ToBeAdded<JPanel>(jPanelRenderingProcess, collocationInfo));
+			childObjects.add(new ToBeAdded<JPanel>(jPanelRenderingProcess, wireframeChildPart));
 		}
 		return childObjects;
 	}

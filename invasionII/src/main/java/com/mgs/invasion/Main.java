@@ -33,22 +33,21 @@ public class Main {
 
 
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
-		WireframeBuilder wireframeBuilder =
-				layered().
-						withLayer(
-								hexagonRows(numberOVerticalDivisions, numberOfGenerations).
-										withName("OddHexagonRows").
-										withHexagonMeasurement(hexagonMeasurement)
-						).
-						withLayer(
-								rectangle().
-										withPadding(hexagonMeasurement.asPadding().withHalfOfItsSize()).
-										withName("EvenHexagonRows").
-										withContent(hexagonRows(numberOVerticalDivisions, numberOfGenerations).
-//							withOneLessColumn().
-		withHexagonMeasurement(hexagonMeasurement)
-										)
-						);
+		WireframeBuilder wireframeBuilder = layered().
+				withLayer(
+						hexagonRows(numberOVerticalDivisions, numberOfGenerations).
+								withName("OddHexagonRows").
+								withHexagonMeasurement(hexagonMeasurement)
+				).
+				withLayer(
+						rectangle().
+								withPadding(hexagonMeasurement.asPadding().withHalfOfItsSize()).
+								withName("EvenHexagonRows").
+								withContent(
+										hexagonRows(numberOVerticalDivisions, numberOfGenerations).
+												withHexagonMeasurement(hexagonMeasurement)
+								)
+				);
 		Wireframe wireframe = wireframeBuilder.build(wireframeContentFactory);
 		uiDriver.show(wireframe, new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}

@@ -2,14 +2,15 @@ package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.RenderingProcess;
 import com.mgs.fantasi.wireframe.CollocationInfo;
+import com.mgs.fantasi.wireframe.WireframeChildElement;
 
 public class ToBeAdded<J> {
-	private final CollocationInfo specifics;
+	private final WireframeChildElement wireframeChildPart;
 	private final RenderingProcess<J> renderingProcess;
 
-	ToBeAdded(RenderingProcess<J> renderingProcess, CollocationInfo specifics) {
+	ToBeAdded(RenderingProcess<J> renderingProcess, WireframeChildElement wireframeChildPart) {
 		this.renderingProcess = renderingProcess;
-		this.specifics = specifics;
+		this.wireframeChildPart = wireframeChildPart;
 	}
 
 	public RenderingProcess<J> getRenderingProcess() {
@@ -17,6 +18,6 @@ public class ToBeAdded<J> {
 	}
 
 	public CollocationInfo getSpecifics() {
-		return specifics;
+		return wireframeChildPart.getCollocationInfo();
 	}
 }

@@ -10,10 +10,7 @@ import com.mgs.fantasi.views.WireframeBuilder;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
 
-import static com.mgs.fantasi.views.PijamaRowsWireframeBuilder.pijamaRows;
-import static com.mgs.fantasi.views.PolygonWireframeBuilder.polygon;
-import static com.mgs.fantasi.views.RectangleWireframeBuilder.rectangle;
-import static com.mgs.fantasi.views.VerticalSlicesWireframeBuilder.verticalSlices;
+import static com.mgs.fantasi.wireframe.Wireframes.*;
 
 public class HexagonRowsWireframeBuilder extends BaseWireframeBuilder<HexagonRowsWireframeBuilder> {
 	private PijamaRowsWireframeBuilder pijamaRows;

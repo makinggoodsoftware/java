@@ -14,12 +14,8 @@ public class PijamaRowsWireframeBuilder extends BaseWireframeBuilder<PijamaRowsW
 	private final TwoLinesWireframeBuilder generationBuilder;
 	private int numberOfGenerations = UNDEFINED;
 
-	private PijamaRowsWireframeBuilder(WireframeBuilder firstRowBuilder, WireframeBuilder secondRowBuilder) {
+	public PijamaRowsWireframeBuilder(WireframeBuilder firstRowBuilder, WireframeBuilder secondRowBuilder) {
 		generationBuilder = new TwoLinesWireframeBuilder(firstRowBuilder, secondRowBuilder);
-	}
-
-	public static PijamaRowsWireframeBuilder pijamaRows(WireframeBuilder firstRowBuilder, WireframeBuilder secondRowBuilder) {
-		return new PijamaRowsWireframeBuilder(firstRowBuilder, secondRowBuilder);
 	}
 
 	public PijamaRowsWireframeBuilder withFirstRowSize(Fraction sizeConstraints) {

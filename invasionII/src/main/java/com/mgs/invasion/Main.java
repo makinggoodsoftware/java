@@ -12,8 +12,8 @@ import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.views.LayeredElementsWireframeBuilder.layered;
-import static com.mgs.fantasi.views.RectangleWireframeBuilder.rectangle;
+import static com.mgs.fantasi.wireframe.Wireframes.layered;
+import static com.mgs.fantasi.wireframe.Wireframes.rectangle;
 import static com.mgs.invasion.mvc.views.HexagonRowsWireframeBuilder.hexagonRows;
 
 public class Main {

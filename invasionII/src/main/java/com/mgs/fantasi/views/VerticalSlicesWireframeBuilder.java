@@ -15,12 +15,8 @@ public class VerticalSlicesWireframeBuilder extends BaseWireframeBuilder {
 	private final WireframeBuilder contentBuilder;
 	private int numberOfDivisions = UNDEFINED;
 
-	private VerticalSlicesWireframeBuilder(WireframeBuilder contentBuilder) {
+	public VerticalSlicesWireframeBuilder(WireframeBuilder contentBuilder) {
 		this.contentBuilder = contentBuilder;
-	}
-
-	public static VerticalSlicesWireframeBuilder verticalSlices(WireframeBuilder contentBuilder) {
-		return new VerticalSlicesWireframeBuilder(contentBuilder);
 	}
 
 	@Override

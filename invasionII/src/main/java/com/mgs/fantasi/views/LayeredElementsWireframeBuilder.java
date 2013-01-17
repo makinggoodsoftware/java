@@ -9,10 +9,6 @@ import java.util.List;
 public class LayeredElementsWireframeBuilder extends BaseWireframeBuilder {
 	private List<WireframeBuilder> layers = new ArrayList<WireframeBuilder>();
 
-	public static LayeredElementsWireframeBuilder layered() {
-		return new LayeredElementsWireframeBuilder();
-	}
-
 	public LayeredElementsWireframeBuilder withLayer(WireframeBuilder layer) {
 		layers.add(layer);
 		return this;

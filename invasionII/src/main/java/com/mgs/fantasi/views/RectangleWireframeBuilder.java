@@ -6,11 +6,7 @@ import com.mgs.fantasi.wireframe.WireframeContentFactory;
 public class RectangleWireframeBuilder extends BaseWireframeBuilder<RectangleWireframeBuilder> {
 	private WireframeBuilder content;
 
-	private RectangleWireframeBuilder() {
-	}
-
-	public static RectangleWireframeBuilder rectangle() {
-		return new RectangleWireframeBuilder();
+	public RectangleWireframeBuilder() {
 	}
 
 	public RectangleWireframeBuilder withContent(WireframeBuilder content) {

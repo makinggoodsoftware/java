@@ -2,17 +2,17 @@ package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.driver.swing.SwingUtils;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.wireframe.WireframeType;
+import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
 
 public class StandardJPanelCreationStrategy implements JPanelCreationStrategy {
 	private final UIProperties uiProperties;
-	private final WireframeType type;
+	private final WireframeContentType contentType;
 
-	public StandardJPanelCreationStrategy(UIProperties uiProperties, WireframeType type) {
+	public StandardJPanelCreationStrategy(UIProperties uiProperties, WireframeContentType contentType) {
 		this.uiProperties = uiProperties;
-		this.type = type;
+		this.contentType = contentType;
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class StandardJPanelCreationStrategy implements JPanelCreationStrategy {
 	}
 
 	@Override
-	public WireframeType getType() {
-		return type;
+	public WireframeContentType getContentType() {
+		return contentType;
 	}
 }

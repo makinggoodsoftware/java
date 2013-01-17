@@ -3,7 +3,7 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.RenderingProcess;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.WireframeType;
+import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		JPanel container = baseCreationStrategy.create();
 		if (renderingContent.isEmpty()) return container;
 
-		LayoutManager layoutManager = translateTypeIntoLayout(container, baseCreationStrategy.getType());
+		LayoutManager layoutManager = translateTypeIntoLayout(container, baseCreationStrategy.getContentType());
 		container.setLayout(layoutManager);
 		for (ToBeAdded<JPanel> toBeAdded : renderingContent) {
 			RenderingProcess<JPanel> childRenderingProcess = toBeAdded.getRenderingProcess();
@@ -44,10 +44,10 @@ public class JPanelRenderingProcess implements RenderingProcess<JPanel> {
 		throw new RuntimeException("Not expected to hit this code point");
 	}
 
-	private LayoutManager translateTypeIntoLayout(JPanel container, WireframeType type) {
-		switch (type) {
+	private LayoutManager translateTypeIntoLayout(JPanel container, WireframeContentType contentType) {
+		switch (contentType) {
 			case GRID:
-			case SIMPLE:
+			case RECTANGLE:
 				return new GridBagLayout();
 			case LAYERS:
 				return new OverlayLayout(container);

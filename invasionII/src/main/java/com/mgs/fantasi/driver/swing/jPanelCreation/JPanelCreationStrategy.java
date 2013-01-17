@@ -1,11 +1,11 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.wireframe.WireframeType;
+import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
 
 public interface JPanelCreationStrategy {
 	JPanel create();
 
-	WireframeType getType();
+	WireframeContentType getContentType();
 }

@@ -4,7 +4,7 @@ import com.mgs.fantasi.properties.Padding;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
-import com.mgs.fantasi.wireframe.WireframeType;
+import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,8 +31,8 @@ public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
 	}
 
 	@Override
-	public WireframeType getType() {
-		return decoratedPanel.getType();
+	public WireframeContentType getContentType() {
+		return decoratedPanel.getContentType();
 	}
 
 	protected final JPanel decorateWithPadding(JPanel nativeElement, Padding padding) {

@@ -3,10 +3,12 @@ package com.mgs.fantasi.wireframe;
 import java.util.List;
 
 public class WireframeContent {
-	final List<WireframeChildElement> content;
+	private final List<WireframeChildElement> content;
+	private final WireframeContentType type;
 
-	public WireframeContent(List<WireframeChildElement> content) {
+	public WireframeContent(List<WireframeChildElement> content, WireframeContentType type) {
 		this.content = content;
+		this.type = type;
 	}
 
 	public boolean isEmpty() {
@@ -15,5 +17,9 @@ public class WireframeContent {
 
 	public List<WireframeChildElement> getParts() {
 		return content;
+	}
+
+	public WireframeContentType getType() {
+		return type;
 	}
 }

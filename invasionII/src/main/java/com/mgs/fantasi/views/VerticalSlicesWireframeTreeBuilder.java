@@ -6,14 +6,14 @@ import java.awt.*;
 
 import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
-public class VerticalSlicesWireframeBuilder extends BaseWireframeBuilder {
+public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 
 	private static final int UNDEFINED = -1;
-	private final WireframeBuilder contentBuilder;
+	private final WireframeTreeBuilder contentTreeBuilder;
 	private int numberOfDivisions = UNDEFINED;
 
-	public VerticalSlicesWireframeBuilder(WireframeBuilder contentBuilder) {
-		this.contentBuilder = contentBuilder;
+	public VerticalSlicesWireframeTreeBuilder(WireframeTreeBuilder contentTreeBuilder) {
+		this.contentTreeBuilder = contentTreeBuilder;
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class VerticalSlicesWireframeBuilder extends BaseWireframeBuilder {
 		TwoDimensionsIterator<WireframeChildElement> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement>() {
 			@Override
 			public WireframeChildElement on(int x, int y) {
-				return new WireframeChildElement(contentBuilder.build(wireframeContentFactory), 0, all(), all(), x, y);
+				return new WireframeChildElement(contentTreeBuilder.build(wireframeContentFactory), 0, all(), all(), x, y);
 			}
 		};
 		return new WireframeTree
@@ -31,7 +31,7 @@ public class VerticalSlicesWireframeBuilder extends BaseWireframeBuilder {
 				);
 	}
 
-	public VerticalSlicesWireframeBuilder withVerticalDivisions(int numberOVerticalDivisions) {
+	public VerticalSlicesWireframeTreeBuilder withVerticalDivisions(int numberOVerticalDivisions) {
 		this.numberOfDivisions = numberOVerticalDivisions;
 		return this;
 	}

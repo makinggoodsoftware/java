@@ -4,23 +4,23 @@ import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.views.*;
 
 public class Wireframes {
-	public static LayeredElementsWireframeBuilder layered() {
-		return new LayeredElementsWireframeBuilder();
+	public static LayeredElementsWireframeTreeBuilder layered() {
+		return new LayeredElementsWireframeTreeBuilder();
 	}
 
-	public static RectangleWireframeBuilder rectangle() {
-		return new RectangleWireframeBuilder();
+	public static RectangleWireframeTreeBuilder rectangle() {
+		return new RectangleWireframeTreeBuilder();
 	}
 
-	public static PolygonWireframeBuilder polygon(PolygonPointsIterator polygonPointsIterator) {
-		return new PolygonWireframeBuilder(polygonPointsIterator);
+	public static PolygonWireframeTreeBuilder polygon(PolygonPointsIterator polygonPointsIterator) {
+		return new PolygonWireframeTreeBuilder(polygonPointsIterator);
 	}
 
-	public static VerticalSlicesWireframeBuilder verticalSlices(WireframeBuilder contentBuilder) {
-		return new VerticalSlicesWireframeBuilder(contentBuilder);
+	public static VerticalSlicesWireframeTreeBuilder verticalSlices(WireframeTreeBuilder contentTreeBuilder) {
+		return new VerticalSlicesWireframeTreeBuilder(contentTreeBuilder);
 	}
 
-	public static PijamaRowsWireframeBuilder pijamaRows(WireframeBuilder firstRowBuilder, WireframeBuilder secondRowBuilder) {
-		return new PijamaRowsWireframeBuilder(firstRowBuilder, secondRowBuilder);
+	public static PijamaRowsWireframeTreeBuilder pijamaRows(WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder) {
+		return new PijamaRowsWireframeTreeBuilder(firstRowTreeBuilder, secondRowTreeBuilder);
 	}
 }

@@ -7,10 +7,10 @@ import com.mgs.fantasi.wireframe.WireframeTree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LayeredElementsWireframeBuilder extends BaseWireframeBuilder {
-	private List<WireframeBuilder> layers = new ArrayList<WireframeBuilder>();
+public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilder {
+	private List<WireframeTreeBuilder> layers = new ArrayList<WireframeTreeBuilder>();
 
-	public LayeredElementsWireframeBuilder withLayer(WireframeBuilder layer) {
+	public LayeredElementsWireframeTreeBuilder withLayer(WireframeTreeBuilder layer) {
 		layers.add(layer);
 		return this;
 	}
@@ -18,7 +18,7 @@ public class LayeredElementsWireframeBuilder extends BaseWireframeBuilder {
 	@Override
 	public WireframeTree build(WireframeContentFactory wireframeContentFactory) {
 		List<WireframeTree> layersBuilt = new ArrayList<WireframeTree>();
-		for (WireframeBuilder layer : layers) {
+		for (WireframeTreeBuilder layer : layers) {
 			layersBuilt.add(layer.build(wireframeContentFactory));
 		}
 		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());

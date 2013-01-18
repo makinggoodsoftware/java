@@ -5,7 +5,7 @@ import com.mgs.fantasi.selectors.UISelectorFactory;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.styles.UIStyle;
-import com.mgs.fantasi.views.RectangleWireframeBuilder;
+import com.mgs.fantasi.views.RectangleWireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.BorderFactory.newBorder;
 import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;
@@ -17,21 +17,21 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 		UIProfile debugProfile = new UIProfile();
 
 		debugProfile.addStyle(
-				UISelectorFactory.forType(RectangleWireframeBuilder.class),
+				UISelectorFactory.forType(RectangleWireframeTreeBuilder.class),
 				new UIStyle().
 						withBorder(newBorder(newColorFromAwt(BLUE), 5)).
 						withBackgroundColor(newColorFromAwt(GREEN))
 		);
 //
 //		debugProfile.addStyle(
-//				UISelectorFactory.forType(TwoLinesWireframeBuilder.class),
+//				UISelectorFactory.forType(TwoLinesWireframeTreeBuilder.class),
 //				new UIStyle().
 //						withBorder(new BorderFactory(Color.ORANGE, 5)).
 //						withBackgroundColor(Color.BLACK)
 //		);
 //
 //		debugProfile.addStyle(
-//				UISelectorFactory.forType(VerticalSlicesWireframeBuilder.class),
+//				UISelectorFactory.forType(VerticalSlicesWireframeTreeBuilder.class),
 //				new UIStyle().
 //						withBorder(new BorderFactory(Color.CYAN, 5)).
 //						withBackgroundColor(Color.MAGENTA)

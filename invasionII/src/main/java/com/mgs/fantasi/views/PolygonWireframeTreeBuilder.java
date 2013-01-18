@@ -5,8 +5,8 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
 import com.mgs.fantasi.wireframe.WireframeTree;
 
-public class PolygonWireframeBuilder extends BaseWireframeBuilder<PolygonWireframeBuilder> {
-	public PolygonWireframeBuilder(PolygonPointsIterator polygonPointsIterator) {
+public class PolygonWireframeTreeBuilder extends BaseWireframeTreeBuilder<PolygonWireframeTreeBuilder> {
+	public PolygonWireframeTreeBuilder(PolygonPointsIterator polygonPointsIterator) {
 		getUiProperties().setShape(polygonPointsIterator);
 	}
 

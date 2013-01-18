@@ -4,7 +4,7 @@ import com.mgs.fantasi.properties.Padding;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.measurements.Measurement;
 
-public abstract class BaseWireframeBuilder<T extends BaseWireframeBuilder> implements WireframeBuilder {
+public abstract class BaseWireframeTreeBuilder<T extends BaseWireframeTreeBuilder> implements WireframeTreeBuilder {
 	private final UIProperties uiProperties = new UIProperties();
 	private String name = "";
 

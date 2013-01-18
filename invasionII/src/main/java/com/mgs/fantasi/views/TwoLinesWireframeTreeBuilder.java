@@ -6,18 +6,18 @@ import com.mgs.fantasi.wireframe.*;
 
 import java.awt.*;
 
-public class TwoLinesWireframeBuilder extends BaseWireframeBuilder {
-	private final WireframeBuilder firstLineBuilder;
-	private final WireframeBuilder secondLineBuilder;
+public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
+	private final WireframeTreeBuilder firstLineTreeBuilder;
+	private final WireframeTreeBuilder secondLineTreeBuilder;
 
 	private Fraction firstLineHeightSizeRatio = null;
 
-	public TwoLinesWireframeBuilder(WireframeBuilder firstLineBuilder, WireframeBuilder secondLineBuilder) {
-		this.firstLineBuilder = firstLineBuilder;
-		this.secondLineBuilder = secondLineBuilder;
+	public TwoLinesWireframeTreeBuilder(WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder) {
+		this.firstLineTreeBuilder = firstLineTreeBuilder;
+		this.secondLineTreeBuilder = secondLineTreeBuilder;
 	}
 
-	public TwoLinesWireframeBuilder withFirstRowSize(Fraction firstLineHeightSizeRatio) {
+	public TwoLinesWireframeTreeBuilder withFirstRowSize(Fraction firstLineHeightSizeRatio) {
 		this.firstLineHeightSizeRatio = firstLineHeightSizeRatio;
 		return this;
 	}
@@ -28,10 +28,10 @@ public class TwoLinesWireframeBuilder extends BaseWireframeBuilder {
 			@Override
 			public WireframeChildElement on(int x, int y) {
 				if (y == 0) {
-					return new WireframeChildElement(firstLineBuilder.build(wireframeContentFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
+					return new WireframeChildElement(firstLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
 				} else {
 					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return new WireframeChildElement(secondLineBuilder.build(wireframeContentFactory), 0, Fractions.all(), remainder, 0, y);
+					return new WireframeChildElement(secondLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), remainder, 0, y);
 				}
 			}
 		};

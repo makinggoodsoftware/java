@@ -4,7 +4,7 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
 import com.mgs.fantasi.wireframe.WireframeTree;
 
-public interface WireframeBuilder {
+public interface WireframeTreeBuilder {
 	WireframeTree build(WireframeContentFactory wireframeContentFactory);
 
 	UIProperties getUiProperties();

@@ -1,13 +1,13 @@
 package com.mgs.fantasi.wireframe;
 
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.views.WireframeBuilder;
+import com.mgs.fantasi.views.WireframeTreeBuilder;
 
 import java.util.List;
 
 public class WireframeTree {
-	private final WireframeContent wireframeContent;
 	private final Wireframe wireframe;
+	private final WireframeContent wireframeContent;
 
 	public WireframeTree(Wireframe wireframe, WireframeContent content) {
 		this.wireframeContent = content;
@@ -30,7 +30,7 @@ public class WireframeTree {
 		return wireframe.getUiProperties();
 	}
 
-	public Class<? extends WireframeBuilder> getBuilderClass() {
+	public Class<? extends WireframeTreeBuilder> getBuilderClass() {
 		return wireframe.getBuilderClass();
 	}
 

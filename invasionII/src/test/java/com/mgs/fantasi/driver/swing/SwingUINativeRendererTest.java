@@ -18,7 +18,7 @@ public class SwingUINativeRendererTest {
 	@Test
 	@Ignore
 	public void testRender() throws Exception {
-//		WireframeBuilder viewMock = Mockito.mock(WireframeBuilder.class);
+//		WireframeTreeBuilder viewMock = Mockito.mock(WireframeTreeBuilder.class);
 //		UIProfile uiProfileMock = Mockito.mock(UIProfile.class);
 
 //		JPanel jPanel = swingUINativeRenderer.render(viewMock, uiProfileMock);

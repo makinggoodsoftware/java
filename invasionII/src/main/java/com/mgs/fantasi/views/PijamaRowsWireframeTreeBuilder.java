@@ -6,21 +6,21 @@ import com.mgs.fantasi.wireframe.*;
 
 import java.awt.*;
 
-public class PijamaRowsWireframeBuilder extends BaseWireframeBuilder<PijamaRowsWireframeBuilder> {
+public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<PijamaRowsWireframeTreeBuilder> {
 	private static final int UNDEFINED = -1;
-	private final TwoLinesWireframeBuilder generationBuilder;
+	private final TwoLinesWireframeTreeBuilder generationBuilder;
 	private int numberOfGenerations = UNDEFINED;
 
-	public PijamaRowsWireframeBuilder(WireframeBuilder firstRowBuilder, WireframeBuilder secondRowBuilder) {
-		generationBuilder = new TwoLinesWireframeBuilder(firstRowBuilder, secondRowBuilder);
+	public PijamaRowsWireframeTreeBuilder(WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder) {
+		generationBuilder = new TwoLinesWireframeTreeBuilder(firstRowTreeBuilder, secondRowTreeBuilder);
 	}
 
-	public PijamaRowsWireframeBuilder withFirstRowSize(Fraction sizeConstraints) {
+	public PijamaRowsWireframeTreeBuilder withFirstRowSize(Fraction sizeConstraints) {
 		generationBuilder.withFirstRowSize(sizeConstraints);
 		return this;
 	}
 
-	public PijamaRowsWireframeBuilder withNumberOfGenerations(int numberOfGenerations) {
+	public PijamaRowsWireframeTreeBuilder withNumberOfGenerations(int numberOfGenerations) {
 		this.numberOfGenerations = numberOfGenerations;
 		return this;
 	}

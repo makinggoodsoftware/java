@@ -4,13 +4,13 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
 import com.mgs.fantasi.wireframe.WireframeTree;
 
-public class RectangleWireframeBuilder extends BaseWireframeBuilder<RectangleWireframeBuilder> {
-	private WireframeBuilder content;
+public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<RectangleWireframeTreeBuilder> {
+	private WireframeTreeBuilder content;
 
-	public RectangleWireframeBuilder() {
+	public RectangleWireframeTreeBuilder() {
 	}
 
-	public RectangleWireframeBuilder withContent(WireframeBuilder content) {
+	public RectangleWireframeTreeBuilder withContent(WireframeTreeBuilder content) {
 		this.content = content;
 		return this;
 	}

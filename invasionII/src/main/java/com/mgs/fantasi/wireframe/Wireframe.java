@@ -1,14 +1,14 @@
 package com.mgs.fantasi.wireframe;
 
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.views.WireframeBuilder;
+import com.mgs.fantasi.views.WireframeTreeBuilder;
 
 public class Wireframe {
 	final UIProperties uiProperties;
 	final String name;
-	final Class<? extends WireframeBuilder> builderClass;
+	final Class<? extends WireframeTreeBuilder> builderClass;
 
-	public Wireframe(Class<? extends WireframeBuilder> builderClass, String name, UIProperties uiProperties) {
+	public Wireframe(Class<? extends WireframeTreeBuilder> builderClass, String name, UIProperties uiProperties) {
 		this.builderClass = builderClass;
 		this.name = name;
 		this.uiProperties = uiProperties;
@@ -22,7 +22,7 @@ public class Wireframe {
 		return uiProperties;
 	}
 
-	public Class<? extends WireframeBuilder> getBuilderClass() {
+	public Class<? extends WireframeTreeBuilder> getBuilderClass() {
 		return builderClass;
 	}
 }

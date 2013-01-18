@@ -4,7 +4,7 @@ import com.mgs.fantasi.driver.UIDriver;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.styles.UIProfileFactory;
-import com.mgs.fantasi.views.WireframeBuilder;
+import com.mgs.fantasi.views.WireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
 import com.mgs.fantasi.wireframe.WireframeTree;
 import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
@@ -14,7 +14,7 @@ import java.awt.*;
 
 import static com.mgs.fantasi.wireframe.Wireframes.layered;
 import static com.mgs.fantasi.wireframe.Wireframes.rectangle;
-import static com.mgs.invasion.mvc.views.HexagonRowsWireframeBuilder.hexagonRows;
+import static com.mgs.invasion.mvc.views.HexagonRowsWireframeTreeBuilder.hexagonRows;
 
 public class Main {
 	private final WireframeContentFactory wireframeContentFactory = new WireframeContentFactory();
@@ -33,7 +33,7 @@ public class Main {
 
 
 		Measurement hexagonMeasurement = Measurements.futureMeasurement();
-		WireframeBuilder wireframeBuilder = layered().
+		WireframeTreeBuilder wireframeTreeBuilder = layered().
 				withLayer(
 						hexagonRows(numberOVerticalDivisions, numberOfGenerations).
 								withName("OddHexagonRows").
@@ -48,7 +48,7 @@ public class Main {
 												withHexagonMeasurement(hexagonMeasurement)
 								)
 				);
-		WireframeTree wireframeTree = wireframeBuilder.build(wireframeContentFactory);
+		WireframeTree wireframeTree = wireframeTreeBuilder.build(wireframeContentFactory);
 		uiDriver.show(wireframeTree, new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}
 

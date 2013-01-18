@@ -3,27 +3,15 @@ package com.mgs.fantasi.wireframe;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.views.WireframeBuilder;
 
-import java.util.List;
-
 public class Wireframe {
-	private final UIProperties uiProperties;
-	private final String name;
-	private final Class<? extends WireframeBuilder> builderClass;
-	private final WireframeContent wireframeContent;
+	final UIProperties uiProperties;
+	final String name;
+	final Class<? extends WireframeBuilder> builderClass;
 
-	public Wireframe(WireframeContent content, UIProperties uiProperties, String name, Class<? extends WireframeBuilder> builderClass) {
-		this.wireframeContent = content;
-		this.uiProperties = uiProperties;
-		this.name = name;
+	public Wireframe(Class<? extends WireframeBuilder> builderClass, String name, UIProperties uiProperties) {
 		this.builderClass = builderClass;
-	}
-
-	public WireframeContentType getContentType() {
-		return wireframeContent.getType();
-	}
-
-	public WireframeContent getContent() {
-		return wireframeContent;
+		this.name = name;
+		this.uiProperties = uiProperties;
 	}
 
 	public String getName() {
@@ -36,13 +24,5 @@ public class Wireframe {
 
 	public Class<? extends WireframeBuilder> getBuilderClass() {
 		return builderClass;
-	}
-
-	public List<WireframeChildElement> getContentElements() {
-		return getContent().getParts();
-	}
-
-	public boolean isEmpty() {
-		return wireframeContent.isEmpty();
 	}
 }

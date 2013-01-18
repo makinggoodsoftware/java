@@ -4,9 +4,9 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.views.WireframeTreeBuilder;
 
 public class Wireframe {
-	final UIProperties uiProperties;
-	final String name;
-	final Class<? extends WireframeTreeBuilder> builderClass;
+	private final UIProperties uiProperties;
+	private final String name;
+	private final Class<? extends WireframeTreeBuilder> builderClass;
 
 	public Wireframe(Class<? extends WireframeTreeBuilder> builderClass, String name, UIProperties uiProperties) {
 		this.builderClass = builderClass;

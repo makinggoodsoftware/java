@@ -55,4 +55,7 @@ public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
 		return 0;
 	}
 
+	public LayoutManager translateTypeIntoLayout(JPanel container) {
+		return decoratedPanel.translateTypeIntoLayout(container);
+	}
 }

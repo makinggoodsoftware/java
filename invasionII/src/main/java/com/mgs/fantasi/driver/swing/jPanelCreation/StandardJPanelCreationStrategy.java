@@ -5,14 +5,17 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class StandardJPanelCreationStrategy implements JPanelCreationStrategy {
 	private final UIProperties uiProperties;
 	private final WireframeContentType contentType;
+	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 
-	public StandardJPanelCreationStrategy(UIProperties uiProperties, WireframeContentType contentType) {
+	public StandardJPanelCreationStrategy(UIProperties uiProperties, WireframeContentType contentType, JPanelLayoutTranslator jPanelLayoutTranslator) {
 		this.uiProperties = uiProperties;
 		this.contentType = contentType;
+		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 	}
 
 	@Override
@@ -26,5 +29,9 @@ public class StandardJPanelCreationStrategy implements JPanelCreationStrategy {
 	@Override
 	public WireframeContentType getContentType() {
 		return contentType;
+	}
+
+	public LayoutManager translateTypeIntoLayout(JPanel container) {
+		return jPanelLayoutTranslator.translate(getContentType(), container);
 	}
 }

@@ -3,6 +3,7 @@ package com.mgs.fantasi.driver;
 import com.mgs.fantasi.driver.swing.JPanelRenderingManager;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
+import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIProfile;
@@ -18,7 +19,8 @@ public class UIDriver<T> {
 
 	public static UIDriver<JPanel> forSwing() {
 		StyleManager styleManager = new StyleManagerImpl();
-		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory();
+		JPanelLayoutTranslator jPanelLayoutTranslator = new JPanelLayoutTranslator();
+		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory(jPanelLayoutTranslator);
 
 		return new UIDriver<JPanel>
 				(
@@ -36,8 +38,6 @@ public class UIDriver<T> {
 	}
 
 	public void show(WireframeTree wireframeTree, Dimension dimension, UIProfile uiProfile) {
-//		RenderingProcess<T> renderingProcess = renderingManager.newRenderingProcess(wireframeTree, uiProfile);
-//		T uiNativeComponent = renderingProcess.render();
 		T uiNativeComponent = renderingManager.render(wireframeTree, uiProfile);
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}

@@ -1,6 +1,6 @@
 package com.mgs.fantasi.driver.swing;
 
-import com.mgs.fantasi.driver.RenderingProcessFactory;
+import com.mgs.fantasi.driver.RenderingManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.properties.UIProperties;
@@ -14,12 +14,12 @@ import com.mgs.fantasi.wireframe.WireframeContentType;
 import javax.swing.*;
 import java.awt.*;
 
-public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JPanel> {
+public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
 	private final StyleManager styleManager;
 
 
-	public JPanelRenderingProcessFactory(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
+	public JPanelRenderingManager(StyleManager styleManager, JPanelCreationStrategyFactory jPanelCreationStrategyFactory) {
 		this.jPanelCreationStrategyFactory = jPanelCreationStrategyFactory;
 		this.styleManager = styleManager;
 	}

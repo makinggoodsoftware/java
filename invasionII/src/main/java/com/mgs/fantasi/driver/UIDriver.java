@@ -36,8 +36,9 @@ public class UIDriver<T> {
 	}
 
 	public void show(Wireframe wireframe, Dimension dimension, UIProfile uiProfile) {
-		RenderingProcess<T> renderingProcess = renderingProcessFactory.newRenderingProcess(wireframe, uiProfile);
-		T uiNativeComponent = renderingProcess.render();
+//		RenderingProcess<T> renderingProcess = renderingProcessFactory.newRenderingProcess(wireframe, uiProfile);
+//		T uiNativeComponent = renderingProcess.render();
+		T uiNativeComponent = renderingProcessFactory.render(wireframe, uiProfile);
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}
 }

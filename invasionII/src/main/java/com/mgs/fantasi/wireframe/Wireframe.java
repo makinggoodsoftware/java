@@ -41,4 +41,8 @@ public class Wireframe {
 	public List<WireframeChildElement> getContentElements() {
 		return getContent().getParts();
 	}
+
+	public boolean isEmpty() {
+		return wireframeContent.isEmpty();
+	}
 }

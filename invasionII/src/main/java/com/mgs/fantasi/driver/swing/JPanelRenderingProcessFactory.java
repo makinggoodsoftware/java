@@ -1,18 +1,18 @@
 package com.mgs.fantasi.driver.swing;
 
-import com.mgs.fantasi.driver.RenderingProcess;
 import com.mgs.fantasi.driver.RenderingProcessFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategy;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
+import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeChildElement;
+import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
 
 public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JPanel> {
 	private final JPanelCreationStrategyFactory jPanelCreationStrategyFactory;
@@ -25,24 +25,47 @@ public class JPanelRenderingProcessFactory implements RenderingProcessFactory<JP
 	}
 
 	@Override
-	public RenderingProcess<JPanel> newRenderingProcess(Wireframe wireframe, final UIProfile uiProfile) {
+	public JPanel render(Wireframe wireframe, UIProfile uiProfile) {
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(wireframe.getUiProperties(), uiProfile.findStylesFor(wireframe));
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, wireframe.getContentType());
+		JPanel container = baseCreationStrategy.create();
+		if (wireframe.isEmpty()) return container;
 
-		List<ToBeAdded<JPanel>> content = renderContent(uiProfile, wireframe);
-		return new JPanelRenderingProcess(baseCreationStrategy, content);
-	}
+		LayoutManager layoutManager = translateTypeIntoLayout(container, baseCreationStrategy.getContentType());
+		container.setLayout(layoutManager);
 
-	private List<ToBeAdded<JPanel>> renderContent(UIProfile uiProfile, Wireframe from) {
-		List<ToBeAdded<JPanel>> childObjects = new ArrayList<ToBeAdded<JPanel>>();
-
-		for (WireframeChildElement wireframeChildPart : from.getContentElements()) {
-			Wireframe child = wireframeChildPart.getChild();
-
-			RenderingProcess<JPanel> jPanelRenderingProcess = newRenderingProcess(child, uiProfile);
-			childObjects.add(new ToBeAdded<JPanel>(jPanelRenderingProcess, wireframeChildPart));
+		for (WireframeChildElement wireframeChildPart : wireframe.getContentElements()) {
+			Wireframe childWireframe = wireframeChildPart.getChild();
+			CollocationInfo specifics = wireframeChildPart.getCollocationInfo();
+			JPanel child = render(childWireframe, uiProfile);
+			container.add(child, translate(specifics, layoutManager));
 		}
-		return childObjects;
+		return container;
 	}
+
+	private Object translate(CollocationInfo specifics, LayoutManager type) {
+		if (type instanceof GridBagLayout) {
+			return SwingUtils.coordinates(specifics.getCoordinateX(), specifics.getCoordinateY(), specifics.getProportionOfParentWeight(), specifics.getProportionOfParentHeight());
+		} else if (type instanceof OverlayLayout) {
+			return specifics.getzIndex();
+		}
+		throw new RuntimeException("Not expected to hit this code point");
+	}
+
+
+	private LayoutManager translateTypeIntoLayout(JPanel container, WireframeContentType contentType) {
+		switch (contentType) {
+			case GRID:
+			case RECTANGLE:
+				return new GridBagLayout();
+			case LAYERS:
+				return new OverlayLayout(container);
+			case EMPTY:
+				throw new RuntimeException("There is no layout for empty wireframes!!!");
+			default:
+				throw new RuntimeException("Shouldn't have reached this point in the code!!!");
+		}
+	}
+
 
 }

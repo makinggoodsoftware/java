@@ -2,10 +2,7 @@ package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.wireframe.TwoDimensionsIterator;
-import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeChildElement;
-import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframe.*;
 
 import java.awt.*;
 
@@ -26,7 +23,7 @@ public class TwoLinesWireframeBuilder extends BaseWireframeBuilder {
 	}
 
 	@Override
-	public Wireframe build(final WireframeContentFactory wireframeContentFactory) {
+	public WireframeTree build(final WireframeContentFactory wireframeContentFactory) {
 		TwoDimensionsIterator<WireframeChildElement> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement>() {
 			@Override
 			public WireframeChildElement on(int x, int y) {
@@ -38,6 +35,7 @@ public class TwoLinesWireframeBuilder extends BaseWireframeBuilder {
 				}
 			}
 		};
-		return new Wireframe(wireframeContentFactory.grid(cellContentGenerator, new Dimension(1, 2)), getUiProperties(), getName(), this.getClass());
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		return new WireframeTree(wireframe, wireframeContentFactory.grid(cellContentGenerator, new Dimension(1, 2)));
 	}
 }

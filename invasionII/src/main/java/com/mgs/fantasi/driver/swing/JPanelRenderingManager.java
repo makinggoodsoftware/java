@@ -7,9 +7,9 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeChildElement;
 import com.mgs.fantasi.wireframe.WireframeContentType;
+import com.mgs.fantasi.wireframe.WireframeTree;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,19 +25,19 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	}
 
 	@Override
-	public JPanel render(Wireframe wireframe, UIProfile uiProfile) {
-		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(wireframe.getUiProperties(), uiProfile.findStylesFor(wireframe));
-		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, wireframe.getContentType());
+	public JPanel render(WireframeTree wireframeTree, UIProfile uiProfile) {
+		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(wireframeTree.getUiProperties(), uiProfile.findStylesFor(wireframeTree));
+		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, wireframeTree.getContentType());
 		JPanel container = baseCreationStrategy.create();
-		if (wireframe.isEmpty()) return container;
+		if (wireframeTree.isEmpty()) return container;
 
 		LayoutManager layoutManager = translateTypeIntoLayout(container, baseCreationStrategy.getContentType());
 		container.setLayout(layoutManager);
 
-		for (WireframeChildElement wireframeChildPart : wireframe.getContentElements()) {
-			Wireframe childWireframe = wireframeChildPart.getChild();
+		for (WireframeChildElement wireframeChildPart : wireframeTree.getContentElements()) {
+			WireframeTree childWireframeTree = wireframeChildPart.getChild();
 			CollocationInfo specifics = wireframeChildPart.getCollocationInfo();
-			JPanel child = render(childWireframe, uiProfile);
+			JPanel child = render(childWireframeTree, uiProfile);
 			container.add(child, translate(specifics, layoutManager));
 		}
 		return container;

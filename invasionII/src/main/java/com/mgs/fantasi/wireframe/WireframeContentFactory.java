@@ -11,16 +11,16 @@ public class WireframeContentFactory {
 		return new WireframeContent(new ArrayList<WireframeChildElement>(), WireframeContentType.EMPTY);
 	}
 
-	public WireframeContent rectangle(Wireframe content) {
+	public WireframeContent rectangle(WireframeTree content) {
 		List<WireframeChildElement> wireframeChildElements = new ArrayList<WireframeChildElement>();
 		wireframeChildElements.add(new WireframeChildElement(content, 0, all(), all(), 0, 0));
 		return new WireframeContent(wireframeChildElements, WireframeContentType.RECTANGLE);
 	}
 
-	public WireframeContent layered(List<Wireframe> layers) {
+	public WireframeContent layered(List<WireframeTree> layers) {
 		List<WireframeChildElement> wireframeChildElements = new ArrayList<WireframeChildElement>();
 		for (int i = layers.size() - 1; i >= 0; i--) {
-			Wireframe layer = layers.get(i);
+			WireframeTree layer = layers.get(i);
 			wireframeChildElements.add(new WireframeChildElement(layer, i, all(), all(), 0, 0));
 		}
 		return new WireframeContent(wireframeChildElements, WireframeContentType.LAYERS);

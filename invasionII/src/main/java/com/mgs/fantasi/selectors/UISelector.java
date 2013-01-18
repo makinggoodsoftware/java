@@ -1,7 +1,7 @@
 package com.mgs.fantasi.selectors;
 
-import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeTree;
 
 public interface UISelector {
-	public boolean appliesTo(Wireframe renderable);
+	public boolean appliesTo(WireframeTree renderable);
 }

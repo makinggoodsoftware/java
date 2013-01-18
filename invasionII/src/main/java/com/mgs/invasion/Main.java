@@ -5,8 +5,8 @@ import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.views.WireframeBuilder;
-import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframe.WireframeTree;
 import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
 
 import javax.swing.*;
@@ -48,8 +48,8 @@ public class Main {
 												withHexagonMeasurement(hexagonMeasurement)
 								)
 				);
-		Wireframe wireframe = wireframeBuilder.build(wireframeContentFactory);
-		uiDriver.show(wireframe, new Dimension(400, 400), uiProfileFactory.getUIProfile());
+		WireframeTree wireframeTree = wireframeBuilder.build(wireframeContentFactory);
+		uiDriver.show(wireframeTree, new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}
 
 }

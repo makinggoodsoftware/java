@@ -4,7 +4,6 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class NonRectangularJPanelCreationStrategy implements JPanelCreationStrategy {
 	private final UIProperties uiProperties;
@@ -19,7 +18,11 @@ public class NonRectangularJPanelCreationStrategy implements JPanelCreationStrat
 
 	@Override
 	public JPanel create() {
-		return new JPanelWithDifferentShape(uiProperties.getShape(), uiProperties);
+		JPanelWithDifferentShape container = new JPanelWithDifferentShape(uiProperties.getShape(), uiProperties);
+		if (getContentType() != WireframeContentType.EMPTY) {
+			container.setLayout(jPanelLayoutTranslator.translate(getContentType(), container));
+		}
+		return container;
 	}
 
 	@Override
@@ -27,7 +30,4 @@ public class NonRectangularJPanelCreationStrategy implements JPanelCreationStrat
 		return contentType;
 	}
 
-	public LayoutManager translateTypeIntoLayout(JPanel container) {
-		return jPanelLayoutTranslator.translate(getContentType(), container);
-	}
 }

@@ -5,7 +5,6 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class StandardJPanelCreationStrategy implements JPanelCreationStrategy {
 	private final UIProperties uiProperties;
@@ -23,6 +22,9 @@ public class StandardJPanelCreationStrategy implements JPanelCreationStrategy {
 		JPanel jPanel = new JPanel();
 		jPanel.setOpaque(false);
 		SwingUtils.applyUIProperties(jPanel, uiProperties);
+		if (getContentType() != WireframeContentType.EMPTY) {
+			jPanel.setLayout(jPanelLayoutTranslator.translate(getContentType(), jPanel));
+		}
 		return jPanel;
 	}
 
@@ -31,7 +33,4 @@ public class StandardJPanelCreationStrategy implements JPanelCreationStrategy {
 		return contentType;
 	}
 
-	public LayoutManager translateTypeIntoLayout(JPanel container) {
-		return jPanelLayoutTranslator.translate(getContentType(), container);
-	}
 }

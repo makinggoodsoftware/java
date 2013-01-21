@@ -28,20 +28,17 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(wireframeTree.getUiProperties(), uiProfile.findStylesFor(wireframeTree));
 		JPanelCreationStrategy baseCreationStrategy = jPanelCreationStrategyFactory.forUIProperties(uiPropertiesWithStylesApplied, wireframeTree.getContentType());
 		JPanel container = baseCreationStrategy.create();
-		if (wireframeTree.isEmpty()) return container;
-
-		container.setLayout(baseCreationStrategy.translateTypeIntoLayout(container));
 
 		for (WireframeChildElement wireframeChildPart : wireframeTree.getContentElements()) {
-			WireframeTree childWireframeTree = wireframeChildPart.getChild();
+			JPanel child = render(wireframeChildPart.getChild(), uiProfile);
+
 			CollocationInfo specifics = wireframeChildPart.getCollocationInfo();
-			JPanel child = render(childWireframeTree, uiProfile);
-			container.add(child, translate(specifics, baseCreationStrategy.translateTypeIntoLayout(container)));
+			container.add(child, translate(specifics, container.getLayout()));
 		}
 		return container;
 	}
 
-	private Object translate(CollocationInfo specifics, LayoutManager type) {
+	public static Object translate(CollocationInfo specifics, LayoutManager type) {
 		if (type instanceof GridBagLayout) {
 			return SwingUtils.coordinates(specifics.getCoordinateX(), specifics.getCoordinateY(), specifics.getProportionOfParentWeight(), specifics.getProportionOfParentHeight());
 		} else if (type instanceof OverlayLayout) {

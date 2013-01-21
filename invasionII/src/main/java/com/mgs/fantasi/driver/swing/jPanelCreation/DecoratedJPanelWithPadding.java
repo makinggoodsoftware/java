@@ -23,6 +23,7 @@ public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
 	@Override
 	public JPanel create() {
 		JPanel jPanel = decoratedPanel.create();
+
 		JPanel outmostPointer = jPanel;
 		if (!padding.isEmpty()) {
 			outmostPointer = decorateWithPadding(jPanel, padding);
@@ -55,7 +56,4 @@ public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
 		return 0;
 	}
 
-	public LayoutManager translateTypeIntoLayout(JPanel container) {
-		return decoratedPanel.translateTypeIntoLayout(container);
-	}
 }

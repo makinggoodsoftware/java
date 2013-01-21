@@ -49,6 +49,7 @@ public class Main {
 								)
 				);
 		WireframeTree wireframeTree = wireframeTreeBuilder.build(wireframeContentFactory);
+
 		uiDriver.show(wireframeTree, new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}
 

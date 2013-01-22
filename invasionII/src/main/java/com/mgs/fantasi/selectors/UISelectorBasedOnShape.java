@@ -1,7 +1,8 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.WireframeTree;
+import com.mgs.fantasi.wireframe.Tree;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 public class UISelectorBasedOnShape implements UISelector {
 	private final Class<? extends PolygonPointsIterator> type;
@@ -11,8 +12,8 @@ public class UISelectorBasedOnShape implements UISelector {
 	}
 
 	@Override
-	public boolean appliesTo(WireframeTree renderable) {
-		if (renderable == null || renderable.getUiProperties() == null) return false;
-		return renderable.getUiProperties().getShape().getClass().equals(type);
+	public boolean appliesTo(Tree<Wireframe> renderable) {
+		if ((renderable == null) || (renderable.getContent().getUiProperties() == null)) return false;
+		return renderable.getContent().getUiProperties().getShape().getClass().equals(type);
 	}
 }

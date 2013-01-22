@@ -26,14 +26,14 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 	}
 
 	@Override
-	public WireframeTree build(final WireframeContentFactory wireframeContentFactory) {
-		return new WireframeTree
+	public Tree<Wireframe> build(final WireframeContentFactory wireframeContentFactory) {
+		return new Tree<Wireframe>
 				(
 						new Wireframe(this.getClass(), getName(), getUiProperties()),
-						wireframeContentFactory.grid(new TwoDimensionsIterator<WireframeChildElement>() {
+						wireframeContentFactory.grid(new TwoDimensionsIterator<WireframeChildElement<Wireframe>>() {
 							@Override
-							public WireframeChildElement on(int x, int y) {
-								return new WireframeChildElement(generationBuilder.build(wireframeContentFactory), 0, Fractions.all(), Fractions.all(), x, y);
+							public WireframeChildElement<Wireframe> on(int x, int y) {
+								return new WireframeChildElement<Wireframe>(generationBuilder.build(wireframeContentFactory), 0, Fractions.all(), Fractions.all(), x, y);
 							}
 						}, new Dimension(1, numberOfGenerations)));
 	}

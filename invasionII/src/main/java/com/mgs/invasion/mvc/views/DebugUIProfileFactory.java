@@ -22,22 +22,6 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 						withBorder(newBorder(newColorFromAwt(BLUE), 5)).
 						withBackgroundColor(newColorFromAwt(GREEN))
 		);
-//
-//		debugProfile.addStyle(
-//				UISelectorFactory.forType(TwoLinesWireframeTreeBuilder.class),
-//				new UIStyle().
-//						withBorder(new BorderFactory(Color.ORANGE, 5)).
-//						withBackgroundColor(Color.BLACK)
-//		);
-//
-//		debugProfile.addStyle(
-//				UISelectorFactory.forType(VerticalSlicesWireframeTreeBuilder.class),
-//				new UIStyle().
-//						withBorder(new BorderFactory(Color.CYAN, 5)).
-//						withBackgroundColor(Color.MAGENTA)
-//		);
-
-
 		debugProfile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
 				new UIStyle().

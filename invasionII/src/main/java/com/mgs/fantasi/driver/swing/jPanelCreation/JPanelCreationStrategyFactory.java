@@ -10,14 +10,14 @@ public class JPanelCreationStrategyFactory {
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 	}
 
-	public JPanelCreationStrategy forUIProperties(UIProperties uiProperties, WireframeContentType contentType) {
-		JPanelCreationStrategy jPanelCreationStrategy = uiProperties.getShape().isRectangular() ?
-				new StandardJPanelCreationStrategy(uiProperties, contentType, jPanelLayoutTranslator) :
-				new NonRectangularJPanelCreationStrategy(uiProperties, contentType, jPanelLayoutTranslator);
+	public JPanelBuilder forUIProperties(UIProperties uiProperties, WireframeContentType contentType) {
+		JPanelBuilder jPanelBuilder = uiProperties.getShape().isRectangular() ?
+				new StandardJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator) :
+				new NonRectangularJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator);
 
 		return uiProperties.getPadding().isEmpty() ?
-				jPanelCreationStrategy :
-				new DecoratedJPanelWithPadding(jPanelCreationStrategy, uiProperties.getPadding());
+				jPanelBuilder :
+				new DecoratedJPanelWithPadding(jPanelBuilder, uiProperties.getPadding());
 	}
 
 }

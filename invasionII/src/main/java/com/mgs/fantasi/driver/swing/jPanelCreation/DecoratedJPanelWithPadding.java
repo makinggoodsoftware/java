@@ -4,6 +4,7 @@ import com.mgs.fantasi.properties.Padding;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
+import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.WireframeContentType;
 
 import javax.swing.*;
@@ -11,18 +12,18 @@ import java.awt.*;
 
 import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 
-public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
-	private final JPanelCreationStrategy decoratedPanel;
+public class DecoratedJPanelWithPadding implements JPanelBuilder {
+	private final JPanelBuilder decoratedPanel;
 	private final Padding padding;
 
-	public DecoratedJPanelWithPadding(JPanelCreationStrategy decoratedPanel, Padding padding) {
+	public DecoratedJPanelWithPadding(JPanelBuilder decoratedPanel, Padding padding) {
 		this.decoratedPanel = decoratedPanel;
 		this.padding = padding;
 	}
 
 	@Override
-	public JPanel create() {
-		JPanel jPanel = decoratedPanel.create();
+	public JPanel build() {
+		JPanel jPanel = decoratedPanel.build();
 
 		JPanel outmostPointer = jPanel;
 		if (!padding.isEmpty()) {
@@ -34,6 +35,12 @@ public class DecoratedJPanelWithPadding implements JPanelCreationStrategy {
 	@Override
 	public WireframeContentType getContentType() {
 		return decoratedPanel.getContentType();
+	}
+
+	@Override
+	public JPanelBuilder withChild(JPanel child, CollocationInfo collocationInfo) {
+		this.decoratedPanel.withChild(child, collocationInfo);
+		return this;
 	}
 
 	protected final JPanel decorateWithPadding(JPanel nativeElement, Padding padding) {

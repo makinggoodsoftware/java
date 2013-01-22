@@ -21,8 +21,6 @@ public class Main {
 
 	public static void main(String... args) {
 		new Main().go(new DebugUIProfileFactory());
-//		new Main().go(new ProductionUiProfileFactory());
-//		new Main().showEsther();
 	}
 
 	private void go(UIProfileFactory uiProfileFactory) {
@@ -49,7 +47,6 @@ public class Main {
 								)
 				);
 		WireframeTree wireframeTree = wireframeTreeBuilder.build(wireframeContentFactory);
-
 		uiDriver.show(wireframeTree, new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}
 

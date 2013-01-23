@@ -8,7 +8,7 @@ import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class WireframeContentFactory {
 	public Branch<Wireframe> empty() {
-		return new Branch<Wireframe>(rejectNewChildren(), new ArrayList<WireframeChildElement<Wireframe>>(), WireframeContentType.EMPTY);
+		return new Branch<Wireframe>(rejectNewChildren(), WireframeContentType.EMPTY);
 	}
 
 	private ConnectionManager<Wireframe> rejectNewChildren() {
@@ -23,7 +23,9 @@ public class WireframeContentFactory {
 	public Branch<Wireframe> rectangle(Tree<Wireframe> content) {
 		List<WireframeChildElement<Wireframe>> wireframeChildElements = new ArrayList<WireframeChildElement<Wireframe>>();
 		wireframeChildElements.add(new WireframeChildElement<Wireframe>(content, 0, all(), all(), 0, 0));
-		return new Branch<Wireframe>(acceptNewChildren(), wireframeChildElements, WireframeContentType.RECTANGLE);
+		Branch<Wireframe> wireframeBranch = new Branch<Wireframe>(acceptNewChildren(), WireframeContentType.RECTANGLE);
+		wireframeBranch.addChildren(wireframeChildElements);
+		return wireframeBranch;
 	}
 
 	private ConnectionManager<Wireframe> acceptNewChildren() {
@@ -41,7 +43,9 @@ public class WireframeContentFactory {
 			Tree<Wireframe> layer = layers.get(i);
 			wireframeChildElements.add(new WireframeChildElement<Wireframe>(layer, i, all(), all(), 0, 0));
 		}
-		return new Branch<Wireframe>(acceptNewChildren(), wireframeChildElements, WireframeContentType.LAYERS);
+		Branch<Wireframe> wireframeBranch = new Branch<Wireframe>(acceptNewChildren(), WireframeContentType.LAYERS);
+		wireframeBranch.addChildren(wireframeChildElements);
+		return wireframeBranch;
 	}
 
 	public Branch<Wireframe> grid(TwoDimensionsIterator<WireframeChildElement<Wireframe>> twoDimensionsIterator, Dimension dimension) {
@@ -51,6 +55,8 @@ public class WireframeContentFactory {
 				wireframeChildElements.add(twoDimensionsIterator.on(x, y));
 			}
 		}
-		return new Branch<Wireframe>(acceptNewChildren(), wireframeChildElements, WireframeContentType.GRID);
+		Branch<Wireframe> wireframeBranch = new Branch<Wireframe>(acceptNewChildren(), WireframeContentType.GRID);
+		wireframeBranch.addChildren(wireframeChildElements);
+		return wireframeBranch;
 	}
 }

@@ -8,10 +8,9 @@ public class Branch<T> {
 	private final WireframeContentType type;
 	private final ConnectionManager<T> connectionManager;
 
-	public Branch(ConnectionManager<T> connectionManager, List<WireframeChildElement<T>> content, WireframeContentType type) {
+	public Branch(ConnectionManager<T> connectionManager, WireframeContentType type) {
 		this.connectionManager = connectionManager;
 		this.type = type;
-		addChildren(content);
 	}
 
 	public void addChildren(List<WireframeChildElement<T>> content) {

@@ -8,22 +8,30 @@ import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class WireframeContentFactory {
 	public Branch<Wireframe> empty() {
-		return new Branch<Wireframe>(emptyConnectionManager(), new ArrayList<WireframeChildElement<Wireframe>>(), WireframeContentType.EMPTY);
+		return new Branch<Wireframe>(rejectNewChildren(), new ArrayList<WireframeChildElement<Wireframe>>(), WireframeContentType.EMPTY);
 	}
 
-	private ConnectionManager emptyConnectionManager() {
-		return new ConnectionManager() {
+	private ConnectionManager<Wireframe> rejectNewChildren() {
+		return new ConnectionManager<Wireframe>() {
+			@Override
+			public boolean accepts(WireframeChildElement<Wireframe> toBeAdded) {
+				throw new RuntimeException("Can't accept content for an empty connector!");
+			}
 		};
 	}
 
 	public Branch<Wireframe> rectangle(Tree<Wireframe> content) {
 		List<WireframeChildElement<Wireframe>> wireframeChildElements = new ArrayList<WireframeChildElement<Wireframe>>();
 		wireframeChildElements.add(new WireframeChildElement<Wireframe>(content, 0, all(), all(), 0, 0));
-		return new Branch<Wireframe>(rectangleConnectionManager(), wireframeChildElements, WireframeContentType.RECTANGLE);
+		return new Branch<Wireframe>(acceptNewChildren(), wireframeChildElements, WireframeContentType.RECTANGLE);
 	}
 
-	private ConnectionManager rectangleConnectionManager() {
-		return new ConnectionManager() {
+	private ConnectionManager<Wireframe> acceptNewChildren() {
+		return new ConnectionManager<Wireframe>() {
+			@Override
+			public boolean accepts(WireframeChildElement<Wireframe> toBeAdded) {
+				return true;
+			}
 		};
 	}
 
@@ -33,12 +41,7 @@ public class WireframeContentFactory {
 			Tree<Wireframe> layer = layers.get(i);
 			wireframeChildElements.add(new WireframeChildElement<Wireframe>(layer, i, all(), all(), 0, 0));
 		}
-		return new Branch<Wireframe>(layeredConnectionManager(), wireframeChildElements, WireframeContentType.LAYERS);
-	}
-
-	private ConnectionManager layeredConnectionManager() {
-		return new ConnectionManager() {
-		};
+		return new Branch<Wireframe>(acceptNewChildren(), wireframeChildElements, WireframeContentType.LAYERS);
 	}
 
 	public Branch<Wireframe> grid(TwoDimensionsIterator<WireframeChildElement<Wireframe>> twoDimensionsIterator, Dimension dimension) {
@@ -48,11 +51,6 @@ public class WireframeContentFactory {
 				wireframeChildElements.add(twoDimensionsIterator.on(x, y));
 			}
 		}
-		return new Branch<Wireframe>(gridConnectionManager(), wireframeChildElements, WireframeContentType.GRID);
-	}
-
-	private ConnectionManager gridConnectionManager() {
-		return new ConnectionManager() {
-		};
+		return new Branch<Wireframe>(acceptNewChildren(), wireframeChildElements, WireframeContentType.GRID);
 	}
 }

@@ -17,14 +17,14 @@ public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder
 	}
 
 	@Override
-	public Tree<Wireframe> build(final WireframeContentFactory wireframeContentFactory) {
-		TwoDimensionsIterator<WireframeChildElement<Wireframe>> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement<Wireframe>>() {
+	public Tree<Wireframe, CollocationInfo> build(final WireframeContentFactory wireframeContentFactory) {
+		TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>>() {
 			@Override
-			public WireframeChildElement<Wireframe> on(int x, int y) {
-				return new WireframeChildElement<Wireframe>(contentTreeBuilder.build(wireframeContentFactory), 0, all(), all(), x, y);
+			public WireframeChildElement<Wireframe, CollocationInfo> on(int x, int y) {
+				return new WireframeChildElement<Wireframe, CollocationInfo>(contentTreeBuilder.build(wireframeContentFactory), 0, all(), all(), x, y);
 			}
 		};
-		return new Tree<Wireframe>
+		return new Tree<Wireframe, CollocationInfo>
 				(
 						new Wireframe(this.getClass(), getName(), getUiProperties()),
 						wireframeContentFactory.grid(cellContentGenerator, new Dimension(numberOfDivisions, 1))

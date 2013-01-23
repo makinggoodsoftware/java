@@ -1,6 +1,7 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.views.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
 
@@ -12,7 +13,7 @@ public class UISelectorBasedOnStructureType implements UISelector {
 	}
 
 	@Override
-	public boolean appliesTo(Tree<Wireframe> tree) {
+	public boolean appliesTo(Tree<Wireframe, CollocationInfo> tree) {
 		return tree.getContent().getBuilderClass().equals(type);
 	}
 }

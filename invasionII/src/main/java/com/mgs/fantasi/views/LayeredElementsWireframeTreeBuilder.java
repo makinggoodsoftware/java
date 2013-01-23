@@ -1,5 +1,6 @@
 package com.mgs.fantasi.views;
 
+import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
@@ -16,12 +17,12 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 	}
 
 	@Override
-	public Tree<Wireframe> build(WireframeContentFactory wireframeContentFactory) {
-		List<Tree<Wireframe>> layersBuilt = new ArrayList<Tree<Wireframe>>();
+	public Tree<Wireframe, CollocationInfo> build(WireframeContentFactory wireframeContentFactory) {
+		List<Tree<Wireframe, CollocationInfo>> layersBuilt = new ArrayList<Tree<Wireframe, CollocationInfo>>();
 		for (WireframeTreeBuilder layer : layers) {
 			layersBuilt.add(layer.build(wireframeContentFactory));
 		}
 		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
-		return new Tree<Wireframe>(wireframe, wireframeContentFactory.layered(layersBuilt));
+		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeContentFactory.layered(layersBuilt));
 	}
 }

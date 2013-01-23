@@ -1,12 +1,13 @@
 package com.mgs.fantasi.wireframe;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class Tree<T> {
+public class Tree<T, Z> {
 	private final T content;
-	private final Branch<T> branch;
+	private final Branch<T, Z> branch;
 
-	public Tree(T content, Branch<T> branch) {
+	public Tree(T content, Branch<T, Z> branch) {
 		this.branch = branch;
 		this.content = content;
 	}
@@ -15,7 +16,7 @@ public class Tree<T> {
 		return branch.getType();
 	}
 
-	public Branch<T> getChildren() {
+	public Branch<T, Z> getChildren() {
 		return branch;
 	}
 
@@ -23,7 +24,7 @@ public class Tree<T> {
 		return content;
 	}
 
-	public List<WireframeChildElement<T>> getContentElements() {
+	public Set<Map.Entry<Z, Tree<T, Z>>> getContentElements() {
 		return getChildren().getParts();
 	}
 

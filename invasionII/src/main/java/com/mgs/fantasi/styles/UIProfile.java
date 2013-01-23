@@ -1,6 +1,7 @@
 package com.mgs.fantasi.styles;
 
 import com.mgs.fantasi.selectors.UISelector;
+import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
 
@@ -16,7 +17,7 @@ public class UIProfile {
 		styles.put(uiSelector, uiStyle);
 	}
 
-	public Set<UIStyle> findStylesFor(Tree<Wireframe> renderable) {
+	public Set<UIStyle> findStylesFor(Tree<Wireframe, CollocationInfo> renderable) {
 		Set<UIStyle> uiStyles = new HashSet<UIStyle>();
 		for (UISelector matchingStrategy : styles.keySet()) {
 			if (matchingStrategy.appliesTo(renderable)) {

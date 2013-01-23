@@ -1,5 +1,5 @@
 package com.mgs.fantasi.wireframe;
 
-public interface ConnectionManager<T> {
-	boolean accepts(WireframeChildElement<T> toBeAdded);
+public interface ConnectionManager<T, Z> {
+	boolean accepts(Z linkInfo, Tree<T, Z> child);
 }

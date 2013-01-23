@@ -7,6 +7,7 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.StyleManagerImpl;
 import com.mgs.fantasi.styles.UIProfile;
+import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
 
@@ -38,7 +39,7 @@ public class UIDriver<T> {
 		this.renderingManager = renderingManager;
 	}
 
-	public void show(Tree<Wireframe> tree, Dimension dimension, UIProfile uiProfile) {
+	public void show(Tree<Wireframe, CollocationInfo> tree, Dimension dimension, UIProfile uiProfile) {
 		T uiNativeComponent = renderingManager.render(tree, uiProfile);
 		uiDisplayManager.showPacked(uiNativeComponent, dimension);
 	}

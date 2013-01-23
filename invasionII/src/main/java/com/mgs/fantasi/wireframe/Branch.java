@@ -1,32 +1,27 @@
 package com.mgs.fantasi.wireframe;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-public class Branch<T> {
-	private final List<WireframeChildElement<T>> children = new ArrayList<WireframeChildElement<T>>();
+public class Branch<T, Z> {
+	private final Map<Z, Tree<T, Z>> children = new HashMap<Z, Tree<T, Z>>();
 	private final WireframeContentType type;
-	private final ConnectionManager<T> connectionManager;
+	private final ConnectionManager<T, Z> connectionManager;
 
-	public Branch(ConnectionManager<T> connectionManager, WireframeContentType type) {
+	public Branch(ConnectionManager<T, Z> connectionManager, WireframeContentType type) {
 		this.connectionManager = connectionManager;
 		this.type = type;
 	}
 
-	public void addChildren(List<WireframeChildElement<T>> content) {
-		for (WireframeChildElement<T> toBeAdded : content) {
-			addChild(toBeAdded);
+	public void addChild(Z linkInfo, Tree<T, Z> child) {
+		if (connectionManager.accepts(linkInfo, child)) {
+			children.put(linkInfo, child);
 		}
 	}
 
-	private void addChild(WireframeChildElement<T> toBeAdded) {
-		if (this.connectionManager.accepts(toBeAdded)) {
-			children.add(toBeAdded);
-		}
-	}
-
-	public List<WireframeChildElement<T>> getParts() {
-		return children;
+	public Set<Map.Entry<Z, Tree<T, Z>>> getParts() {
+		return children.entrySet();
 	}
 
 	public WireframeContentType getType() {

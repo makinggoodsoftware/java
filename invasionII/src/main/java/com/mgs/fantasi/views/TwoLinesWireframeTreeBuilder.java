@@ -23,19 +23,19 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 	}
 
 	@Override
-	public Tree<Wireframe> build(final WireframeContentFactory wireframeContentFactory) {
-		TwoDimensionsIterator<WireframeChildElement<Wireframe>> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement<Wireframe>>() {
+	public Tree<Wireframe, CollocationInfo> build(final WireframeContentFactory wireframeContentFactory) {
+		TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>>() {
 			@Override
-			public WireframeChildElement<Wireframe> on(int x, int y) {
+			public WireframeChildElement<Wireframe, CollocationInfo> on(int x, int y) {
 				if (y == 0) {
-					return new WireframeChildElement<Wireframe>(firstLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
+					return new WireframeChildElement<Wireframe, CollocationInfo>(firstLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
 				} else {
 					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return new WireframeChildElement<Wireframe>(secondLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), remainder, 0, y);
+					return new WireframeChildElement<Wireframe, CollocationInfo>(secondLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), remainder, 0, y);
 				}
 			}
 		};
 		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
-		return new Tree<Wireframe>(wireframe, wireframeContentFactory.grid(cellContentGenerator, new Dimension(1, 2)));
+		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeContentFactory.grid(cellContentGenerator, new Dimension(1, 2)));
 	}
 }

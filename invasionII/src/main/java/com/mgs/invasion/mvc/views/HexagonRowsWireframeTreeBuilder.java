@@ -7,6 +7,7 @@ import com.mgs.fantasi.views.BaseWireframeTreeBuilder;
 import com.mgs.fantasi.views.PijamaRowsWireframeTreeBuilder;
 import com.mgs.fantasi.views.PolygonWireframeTreeBuilder;
 import com.mgs.fantasi.views.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
@@ -34,7 +35,7 @@ public class HexagonRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<He
 	}
 
 	@Override
-	public Tree<Wireframe> build(WireframeContentFactory wireframeContentFactory) {
+	public Tree<Wireframe, CollocationInfo> build(WireframeContentFactory wireframeContentFactory) {
 		return pijamaRows.build(wireframeContentFactory);
 	}
 

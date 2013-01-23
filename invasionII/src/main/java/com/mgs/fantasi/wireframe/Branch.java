@@ -5,8 +5,10 @@ import java.util.List;
 public class Branch<T> {
 	private final List<WireframeChildElement<T>> content;
 	private final WireframeContentType type;
+	private final ConnectionManager connectionManager;
 
-	public Branch(List<WireframeChildElement<T>> content, WireframeContentType type) {
+	public Branch(ConnectionManager connectionManager, List<WireframeChildElement<T>> content, WireframeContentType type) {
+		this.connectionManager = connectionManager;
 		this.content = content;
 		this.type = type;
 	}

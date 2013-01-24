@@ -12,10 +12,6 @@ public class Tree<T, Z> {
 		this.content = content;
 	}
 
-	public WireframeContentType getContentType() {
-		return branch.getType();
-	}
-
 	public Branch<T, Z> getChildren() {
 		return branch;
 	}
@@ -28,4 +24,7 @@ public class Tree<T, Z> {
 		return getChildren().getParts();
 	}
 
+	public Branch<T, Z> getBranch() {
+		return branch;
+	}
 }

@@ -6,12 +6,10 @@ import java.util.Set;
 
 public class Branch<T, Z> {
 	private final Map<Z, Tree<T, Z>> children = new HashMap<Z, Tree<T, Z>>();
-	private final WireframeContentType type;
 	private final ConnectionManager<T, Z> connectionManager;
 
-	public Branch(ConnectionManager<T, Z> connectionManager, WireframeContentType type) {
+	public Branch(ConnectionManager<T, Z> connectionManager) {
 		this.connectionManager = connectionManager;
-		this.type = type;
 	}
 
 	public void addChild(Z linkInfo, Tree<T, Z> child) {
@@ -24,7 +22,7 @@ public class Branch<T, Z> {
 		return children.entrySet();
 	}
 
-	public WireframeContentType getType() {
-		return type;
+	public ConnectionManager<T, Z> getConnectionManager() {
+		return connectionManager;
 	}
 }

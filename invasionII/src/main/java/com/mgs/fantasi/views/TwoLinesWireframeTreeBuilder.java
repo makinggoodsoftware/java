@@ -24,18 +24,26 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 
 	@Override
 	public Tree<Wireframe, CollocationInfo> build(final WireframeContentFactory wireframeContentFactory) {
-		TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>>() {
-			@Override
-			public WireframeChildElement<Wireframe, CollocationInfo> on(int x, int y) {
+		Branch<Wireframe, CollocationInfo> branch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getGridConnectionManager());
+		Dimension dimension = new Dimension(1, 2);
+		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
+
+		for (int x = 0; x < dimension.width; x++) {
+			for (int y = 0; y < dimension.height; y++) {
+				CollocationInfo collocationInfo;
+				Tree<Wireframe, CollocationInfo> child;
 				if (y == 0) {
-					return new WireframeChildElement<Wireframe, CollocationInfo>(firstLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
+					collocationInfo = new CollocationInfo(0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
+					child = firstLineTreeBuilder.build(wireframeContentFactory);
 				} else {
-					Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-					return new WireframeChildElement<Wireframe, CollocationInfo>(secondLineTreeBuilder.build(wireframeContentFactory), 0, Fractions.all(), remainder, 0, y);
+					collocationInfo = new CollocationInfo(0, Fractions.all(), remainder, 0, y);
+					child = secondLineTreeBuilder.build(wireframeContentFactory);
 				}
+				branch.addChild(collocationInfo, child);
 			}
-		};
+		}
+
 		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
-		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeContentFactory.grid(cellContentGenerator, new Dimension(1, 2)));
+		return new Tree<Wireframe, CollocationInfo>(wireframe, branch);
 	}
 }

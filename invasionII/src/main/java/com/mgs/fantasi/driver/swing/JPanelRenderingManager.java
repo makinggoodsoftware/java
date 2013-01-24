@@ -9,6 +9,7 @@ import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeCollocationInfoConnectionManager;
 
 import javax.swing.*;
 import java.util.Map;
@@ -26,7 +27,8 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	@Override
 	public JPanel render(Tree<Wireframe, CollocationInfo> tree, UIProfile uiProfile) {
 		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(tree.getContent().getUiProperties(), uiProfile.findStylesFor(tree));
-		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(uiPropertiesWithStylesApplied, tree.getContentType());
+		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getBranch().getConnectionManager();
+		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(uiPropertiesWithStylesApplied, connectionManager.getType());
 
 		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> wireframeChildPart : tree.getContentElements()) {
 			JPanel child = render(wireframeChildPart.getValue(), uiProfile);

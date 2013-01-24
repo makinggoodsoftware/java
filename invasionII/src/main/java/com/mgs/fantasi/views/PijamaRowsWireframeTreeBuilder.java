@@ -27,14 +27,16 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 
 	@Override
 	public Tree<Wireframe, CollocationInfo> build(final WireframeContentFactory wireframeContentFactory) {
-		return new Tree<Wireframe, CollocationInfo>
-				(
-						new Wireframe(this.getClass(), getName(), getUiProperties()),
-						wireframeContentFactory.grid(new TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>>() {
-							@Override
-							public WireframeChildElement<Wireframe, CollocationInfo> on(int x, int y) {
-								return new WireframeChildElement<Wireframe, CollocationInfo>(generationBuilder.build(wireframeContentFactory), 0, Fractions.all(), Fractions.all(), x, y);
-							}
-						}, new Dimension(1, numberOfGenerations)));
+		Dimension dimension = new Dimension(1, numberOfGenerations);
+		Branch<Wireframe, CollocationInfo> wireframeBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getGridConnectionManager());
+		for (int x = 0; x < dimension.width; x++) {
+			for (int y = 0; y < dimension.height; y++) {
+				Tree<Wireframe, CollocationInfo> content = generationBuilder.build(wireframeContentFactory);
+				CollocationInfo collocationInfo = new CollocationInfo(0, Fractions.all(), Fractions.all(), x, y);
+				wireframeBranch.addChild(collocationInfo, content);
+			}
+		}
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
 	}
 }

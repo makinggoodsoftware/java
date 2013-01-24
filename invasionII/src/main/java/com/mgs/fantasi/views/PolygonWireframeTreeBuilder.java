@@ -1,10 +1,7 @@
 package com.mgs.fantasi.views;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Tree;
-import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframe.*;
 
 public class PolygonWireframeTreeBuilder extends BaseWireframeTreeBuilder<PolygonWireframeTreeBuilder> {
 	public PolygonWireframeTreeBuilder(PolygonPointsIterator polygonPointsIterator) {
@@ -13,6 +10,9 @@ public class PolygonWireframeTreeBuilder extends BaseWireframeTreeBuilder<Polygo
 
 	@Override
 	public Tree<Wireframe, CollocationInfo> build(WireframeContentFactory wireframeContentFactory) {
-		return new Tree<Wireframe, CollocationInfo>(new Wireframe(this.getClass(), getName(), getUiProperties()), wireframeContentFactory.empty());
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		Branch<Wireframe, CollocationInfo> wireframeCollocationInfoBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getEmptyConnectionManager());
+
+		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeCollocationInfoBranch);
 	}
 }

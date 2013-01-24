@@ -1,6 +1,6 @@
 package com.mgs.fantasi.wireframe;
 
-class WireframeCollocationInfoConnectionManager implements ConnectionManager<Wireframe, CollocationInfo> {
+public class WireframeCollocationInfoConnectionManager implements ConnectionManager<Wireframe, CollocationInfo> {
 	private final WireframeContentType type;
 
 	WireframeCollocationInfoConnectionManager(WireframeContentType type) {

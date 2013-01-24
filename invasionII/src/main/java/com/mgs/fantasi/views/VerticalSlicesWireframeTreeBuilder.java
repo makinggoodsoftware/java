@@ -18,17 +18,17 @@ public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder
 
 	@Override
 	public Tree<Wireframe, CollocationInfo> build(final WireframeContentFactory wireframeContentFactory) {
-		TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>> cellContentGenerator = new TwoDimensionsIterator<WireframeChildElement<Wireframe, CollocationInfo>>() {
-			@Override
-			public WireframeChildElement<Wireframe, CollocationInfo> on(int x, int y) {
-				return new WireframeChildElement<Wireframe, CollocationInfo>(contentTreeBuilder.build(wireframeContentFactory), 0, all(), all(), x, y);
+		Dimension dimension = new Dimension(numberOfDivisions, 1);
+		Branch<Wireframe, CollocationInfo> wireframeBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getGridConnectionManager());
+		for (int x = 0; x < dimension.width; x++) {
+			for (int y = 0; y < dimension.height; y++) {
+				CollocationInfo collocationInfo = new CollocationInfo(0, all(), all(), x, y);
+				Tree<Wireframe, CollocationInfo> child = contentTreeBuilder.build(wireframeContentFactory);
+				wireframeBranch.addChild(collocationInfo, child);
 			}
-		};
-		return new Tree<Wireframe, CollocationInfo>
-				(
-						new Wireframe(this.getClass(), getName(), getUiProperties()),
-						wireframeContentFactory.grid(cellContentGenerator, new Dimension(numberOfDivisions, 1))
-				);
+		}
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
 	}
 
 	public VerticalSlicesWireframeTreeBuilder withVerticalDivisions(int numberOVerticalDivisions) {

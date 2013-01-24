@@ -1,9 +1,8 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Tree;
-import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframe.*;
+
+import static com.mgs.fantasi.properties.measurements.Fractions.all;
 
 public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<RectangleWireframeTreeBuilder> {
 	private WireframeTreeBuilder content;
@@ -19,8 +18,12 @@ public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<Rect
 	@Override
 	public Tree<Wireframe, CollocationInfo> build(WireframeContentFactory wireframeContentFactory) {
 		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
-		if (content == null)
-			return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeContentFactory.empty());
-		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeContentFactory.rectangle(content.build(wireframeContentFactory)));
+		if (content == null) {
+			Branch<Wireframe, CollocationInfo> wireframeCollocationInfoBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getEmptyConnectionManager());
+			return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeCollocationInfoBranch);
+		}
+		Branch<Wireframe, CollocationInfo> wireframeBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getRectangleConnectionManager());
+		wireframeBranch.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.build(wireframeContentFactory));
+		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
 	}
 }

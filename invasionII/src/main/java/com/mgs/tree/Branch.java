@@ -1,4 +1,4 @@
-package com.mgs.fantasi.wireframe;
+package com.mgs.tree;
 
 import java.util.HashMap;
 import java.util.Map;

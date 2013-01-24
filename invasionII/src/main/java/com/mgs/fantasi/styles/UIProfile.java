@@ -2,8 +2,8 @@ package com.mgs.fantasi.styles;
 
 import com.mgs.fantasi.selectors.UISelector;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.tree.Tree;
 
 import java.util.HashMap;
 import java.util.HashSet;

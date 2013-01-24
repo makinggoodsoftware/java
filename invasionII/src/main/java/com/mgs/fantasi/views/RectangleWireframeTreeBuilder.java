@@ -1,6 +1,10 @@
 package com.mgs.fantasi.views;
 
-import com.mgs.fantasi.wireframe.*;
+import com.mgs.fantasi.wireframe.CollocationInfo;
+import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.tree.Branch;
+import com.mgs.tree.Tree;
 
 import static com.mgs.fantasi.properties.measurements.Fractions.all;
 

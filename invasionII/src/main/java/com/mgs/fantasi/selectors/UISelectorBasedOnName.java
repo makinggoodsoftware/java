@@ -1,8 +1,8 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.tree.Tree;
 
 public class UISelectorBasedOnName implements UISelector {
 	private final String name;

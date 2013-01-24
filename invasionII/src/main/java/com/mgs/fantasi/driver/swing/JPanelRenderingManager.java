@@ -7,9 +7,9 @@ import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.styles.StyleManager;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeCollocationInfoConnectionManager;
+import com.mgs.tree.Tree;
 
 import javax.swing.*;
 import java.util.Map;

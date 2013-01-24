@@ -8,9 +8,9 @@ import com.mgs.fantasi.views.PijamaRowsWireframeTreeBuilder;
 import com.mgs.fantasi.views.PolygonWireframeTreeBuilder;
 import com.mgs.fantasi.views.WireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Tree;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.tree.Tree;
 
 import static com.mgs.fantasi.wireframe.Wireframes.*;
 

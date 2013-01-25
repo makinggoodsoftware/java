@@ -3,10 +3,10 @@ package com.mgs.fantasi.properties.measurements;
 import com.mgs.fantasi.properties.Padding;
 import org.apache.commons.lang.builder.EqualsBuilder;
 
-public class EmptyMeasurement implements Measurement{
+public class EmptyMeasurement implements Measurement {
 	public static final EmptyMeasurement EMPTY_MEASUREMENT = new EmptyMeasurement();
 
-	public static EmptyMeasurement emptyMeasurement (){
+	public static EmptyMeasurement emptyMeasurement() {
 		return EMPTY_MEASUREMENT;
 	}
 
@@ -15,7 +15,7 @@ public class EmptyMeasurement implements Measurement{
 
 	@Override
 	public Padding asPadding() {
-		return Padding.zero();
+		return Padding.zeroPadding();
 	}
 
 	@Override
@@ -35,6 +35,6 @@ public class EmptyMeasurement implements Measurement{
 
 	@Override
 	public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
-    }
+		return EqualsBuilder.reflectionEquals(this, o);
+	}
 }

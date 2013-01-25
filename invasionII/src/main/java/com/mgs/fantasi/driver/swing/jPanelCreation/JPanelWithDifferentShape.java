@@ -28,14 +28,14 @@ public class JPanelWithDifferentShape extends JPanel {
 		UIPropertyProvider<BorderFactory.Border> border = uiProperties.getBorder();
 		float borderThickness = 0;
 		UIPropertyProvider<ColorFactory.Color> foregroundColor = ColorFactory.newColorFromAwt(g2d.getColor());
-		if (border.isDefined()){
-			borderThickness = border.getData().getWidth();
-            UIPropertyProvider<ColorFactory.Color> color = border.getData().getColor();
-            if (color.isDefined()){
-                foregroundColor = color;
-            }
+		if (border.isDefined()) {
+			borderThickness = border.getValue().getWidth();
+			UIPropertyProvider<ColorFactory.Color> color = border.getValue().getColor();
+			if (color.isDefined()) {
+				foregroundColor = color;
+			}
 		}
-        UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
+		UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);
 	}
@@ -43,22 +43,22 @@ public class JPanelWithDifferentShape extends JPanel {
 	private void drawHexagon(Graphics2D g2d, Dimension size, UIPropertyProvider<ColorFactory.Color> foregroundColor, UIPropertyProvider<ColorFactory.Color> backgroundColor, float thickness) {
 		int insetSpace = (int) thickness;
 		Dimension sizeWithoutBorders = new Dimension(size.width - insetSpace, size.height - insetSpace);
-		if (sizeWithoutBorders.getWidth()<0 || sizeWithoutBorders.getHeight()<0) return;
+		if (sizeWithoutBorders.getWidth() < 0 || sizeWithoutBorders.getHeight() < 0) return;
 		java.util.List<Point2D.Double> hexagonPoints = shape.getPointListFromBottomLeftCorner(sizeWithoutBorders);
 		Path2D.Double path = new Path2D.Double();
 		nextLine(path, hexagonPoints.get(0), thickness);
-		for (int i = 1; i < hexagonPoints.size() ; i++) {
+		for (int i = 1; i < hexagonPoints.size(); i++) {
 			nextLine(path, hexagonPoints.get(i), thickness);
 		}
 		path.closePath();
-        if (foregroundColor.isDefined() && !foregroundColor.getData().isTransparent()) {
-            g2d.setColor(foregroundColor.getData().getColorAsAwt());
-        }
+		if (foregroundColor.isDefined() && !foregroundColor.getValue().isTransparent()) {
+			g2d.setColor(foregroundColor.getValue().getColorAsAwt());
+		}
 		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g2d.draw(path);
-        if (backgroundColor.isDefined() && !backgroundColor.getData().isTransparent()){
-		    g2d.setColor(backgroundColor.getData().getColorAsAwt());
-        }
+		if (backgroundColor.isDefined() && !backgroundColor.getValue().isTransparent()) {
+			g2d.setColor(backgroundColor.getValue().getColorAsAwt());
+		}
 		g2d.fill(path);
 	}
 
@@ -66,12 +66,12 @@ public class JPanelWithDifferentShape extends JPanel {
 		double x = point.getX();
 		double y = point.getY();
 
-		x+=thickness/2;
-		y+=thickness/2;
+		x += thickness / 2;
+		y += thickness / 2;
 
-		if (path.getCurrentPoint() == null){
+		if (path.getCurrentPoint() == null) {
 			path.moveTo(x, y);
-		}else{
+		} else {
 			path.lineTo(x, y);
 		}
 	}

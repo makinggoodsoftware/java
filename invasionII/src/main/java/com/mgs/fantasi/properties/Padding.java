@@ -24,7 +24,7 @@ public class Padding {
 		this.left = left;
 	}
 
-	public static Padding zero() {
+	public static Padding zeroPadding() {
 		return new Padding(0, 0, 0, 0);
 	}
 
@@ -66,11 +66,11 @@ public class Padding {
 		return new Padding(top.copy(), right.copy(), bottom.copy(), left.copy());
 	}
 
-    @Override
-    public boolean equals(Object o) {
+	@Override
+	public boolean equals(Object o) {
 
-        return EqualsBuilder.reflectionEquals(this, o);
-    }
+		return EqualsBuilder.reflectionEquals(this, o);
+	}
 
 	@Override
 	public int hashCode() {

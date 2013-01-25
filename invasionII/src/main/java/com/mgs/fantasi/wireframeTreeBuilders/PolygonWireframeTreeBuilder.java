@@ -1,4 +1,4 @@
-package com.mgs.fantasi.views;
+package com.mgs.fantasi.wireframeTreeBuilders;
 
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.CollocationInfo;

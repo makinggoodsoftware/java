@@ -23,7 +23,7 @@ public class StyleManagerImplTest {
 	}
 
 	@Test
-	public void testApplyStyle_whenPropertiesAndStyleAreCompletelyEmpty(){
+	public void testApplyStyle_whenPropertiesAndStyleAreCompletelyEmpty() {
 		UIProperties uiProperties = new UIProperties();
 		styleManager.applyStyles(uiProperties, asSet(new UIStyle()));
 
@@ -32,7 +32,7 @@ public class StyleManagerImplTest {
 	}
 
 	@Test
-	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsFullyDefined(){
+	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsFullyDefined() {
 		UIProperties uiProperties = new UIProperties();
 		UIStyle uiStyle = new UIStyle().
 				withBackgroundColor(newColorFromAwt(YELLOW)).
@@ -40,12 +40,12 @@ public class StyleManagerImplTest {
 		UIProperties propertiesWithStyleApplied = styleManager.applyStyles(uiProperties, asSet(uiStyle));
 
 		assertEquals(propertiesWithStyleApplied.getBackgroundColor(), newColorFromAwt(YELLOW));
-		assertEquals(propertiesWithStyleApplied.getBorder().getData().getColor(), newColorFromAwt(RED));
-		assertEquals(propertiesWithStyleApplied.getBorder().getData().getWidth(), 3);
+		assertEquals(propertiesWithStyleApplied.getBorder().getValue().getColor(), newColorFromAwt(RED));
+		assertEquals(propertiesWithStyleApplied.getBorder().getValue().getWidth(), 3);
 	}
 
 	@Test
-	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsPartiallyDefined(){
+	public void testApplyStyle_whenPropertiesAreEmptyAndStyleIsPartiallyDefined() {
 		UIProperties uiProperties = new UIProperties();
 		UIStyle uiStyle = new UIStyle().
 				withBackgroundColor(newColorFromAwt(YELLOW));
@@ -56,7 +56,7 @@ public class StyleManagerImplTest {
 	}
 
 	@Test
-	public void testApplyStyle_whenPropertiesAreFullyPopulatedAndStyleIsPartiallyDefined (){
+	public void testApplyStyle_whenPropertiesAreFullyPopulatedAndStyleIsPartiallyDefined() {
 		UIProperties uiProperties = new UIProperties();
 		uiProperties.setBackgroundColor(newColorFromAwt(RED));
 		uiProperties.setBorder(newBorder(newColorFromAwt(YELLOW), 4));
@@ -66,13 +66,13 @@ public class StyleManagerImplTest {
 		UIProperties propertiesWithStyleApplied = styleManager.applyStyles(uiProperties, asSet(uiStyle));
 
 		assertEquals(propertiesWithStyleApplied.getBackgroundColor(), newColorFromAwt(BLACK));
-		assertEquals(propertiesWithStyleApplied.getBorder().getData().getColor(), newColorFromAwt(YELLOW));
-		assertEquals(propertiesWithStyleApplied.getBorder().getData().getWidth(), 4);
+		assertEquals(propertiesWithStyleApplied.getBorder().getValue().getColor(), newColorFromAwt(YELLOW));
+		assertEquals(propertiesWithStyleApplied.getBorder().getValue().getWidth(), 4);
 	}
 
 
 	@Test
-	public void testApplyStyle_whenPropertiesArePartiallyPopulatedAndStyleIsPartiallyDefined (){
+	public void testApplyStyle_whenPropertiesArePartiallyPopulatedAndStyleIsPartiallyDefined() {
 		UIProperties uiProperties = new UIProperties();
 		uiProperties.setBackgroundColor(newColorFromAwt(RED));
 
@@ -81,12 +81,12 @@ public class StyleManagerImplTest {
 		UIProperties propertiesWithStyleApplied = styleManager.applyStyles(uiProperties, asSet(uiStyle));
 
 		assertEquals(propertiesWithStyleApplied.getBackgroundColor(), newColorFromAwt(RED));
-		assertEquals(propertiesWithStyleApplied.getBorder().getData().getColor(), newColorFromAwt(BLACK));
-		assertEquals(propertiesWithStyleApplied.getBorder().getData().getWidth(), 2);
+		assertEquals(propertiesWithStyleApplied.getBorder().getValue().getColor(), newColorFromAwt(BLACK));
+		assertEquals(propertiesWithStyleApplied.getBorder().getValue().getWidth(), 2);
 	}
 
 	@Test
-	public void testApplyStyle_withManyStyles (){
+	public void testApplyStyle_withManyStyles() {
 		UIProperties uiProperties = new UIProperties();
 
 		UIStyle uiStyle1 = new UIStyle().
@@ -96,8 +96,8 @@ public class StyleManagerImplTest {
 		UIProperties propertiesWithStylesApplied = styleManager.applyStyles(uiProperties, asSet(uiStyle1, uiStyle2));
 
 		assertEquals(propertiesWithStylesApplied.getBackgroundColor(), newColorFromAwt(RED));
-		assertEquals(propertiesWithStylesApplied.getBorder().getData().getColor(), newColorFromAwt(BLACK));
-		assertEquals(propertiesWithStylesApplied.getBorder().getData().getWidth(), 2);
+		assertEquals(propertiesWithStylesApplied.getBorder().getValue().getColor(), newColorFromAwt(BLACK));
+		assertEquals(propertiesWithStylesApplied.getBorder().getValue().getWidth(), 2);
 	}
 
 	private Set<UIStyle> asSet(UIStyle... styles) {

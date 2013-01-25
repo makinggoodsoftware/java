@@ -11,16 +11,16 @@ import java.awt.*;
 public class SwingUtils {
 	public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
 		UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
-		if (backgroundColor.isDefined() && !backgroundColor.getData().isTransparent()) {
-			jPanel.setBackground(backgroundColor.getData().getColorAsAwt());
+		if (backgroundColor.isDefined() && !backgroundColor.getValue().isTransparent()) {
+			jPanel.setBackground(backgroundColor.getValue().getColorAsAwt());
 		}
 		UIPropertyProvider<com.mgs.fantasi.properties.BorderFactory.Border> border = uiProperties.getBorder();
-		if (border.isDefined() && border.getData().getWidth() > 0) {
-			UIPropertyProvider<ColorFactory.Color> colorProviderUI = border.getData().getColor();
+		if (border.isDefined() && border.getValue().getWidth() > 0) {
+			UIPropertyProvider<ColorFactory.Color> colorProviderUI = border.getValue().getColor();
 			if (colorProviderUI.isDefined()) {
-				ColorFactory.Color colorData = colorProviderUI.getData();
+				ColorFactory.Color colorData = colorProviderUI.getValue();
 				Color lineColor = colorData.isTransparent() ? Color.ORANGE : colorData.getColorAsAwt();
-				javax.swing.border.Border lineBorder = BorderFactory.createLineBorder(lineColor, border.getData().getWidth());
+				javax.swing.border.Border lineBorder = BorderFactory.createLineBorder(lineColor, border.getValue().getWidth());
 				jPanel.setBorder(lineBorder);
 			} else {
 				throw new RuntimeException("Can't paint the border without a color!!!");

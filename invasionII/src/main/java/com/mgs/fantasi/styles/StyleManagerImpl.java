@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class StyleManagerImpl implements StyleManager {
 	public void applyStyle(UIProperties uiProperties, UIStyle uiStyle) {
-		uiProperties.setBorder(uiStyle.getBorderUIProperty().merge(uiProperties.getBorder()));
-		uiProperties.setBackgroundColor(uiStyle.getBackgroundColorUIProperty().merge(uiProperties.getBackgroundColor()));
+		uiProperties.setBorder(uiStyle.getBorderUIProperty().filterStronger(uiProperties.getBorder()));
+		uiProperties.setBackgroundColor(uiStyle.getBackgroundColorUIProperty().filterStronger(uiProperties.getBackgroundColor()));
 	}
 
 	@Override

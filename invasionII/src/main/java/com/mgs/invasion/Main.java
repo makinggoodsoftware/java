@@ -4,10 +4,10 @@ import com.mgs.fantasi.driver.UIDriver;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.styles.UIProfileFactory;
-import com.mgs.fantasi.views.WireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframeTreeBuilders.WireframeTreeBuilder;
 import com.mgs.invasion.mvc.views.DebugUIProfileFactory;
 import com.mgs.tree.Tree;
 

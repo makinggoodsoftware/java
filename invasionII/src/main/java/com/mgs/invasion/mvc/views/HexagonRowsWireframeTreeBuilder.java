@@ -3,13 +3,13 @@ package com.mgs.invasion.mvc.views;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.HexagonShape;
-import com.mgs.fantasi.views.BaseWireframeTreeBuilder;
-import com.mgs.fantasi.views.PijamaRowsWireframeTreeBuilder;
-import com.mgs.fantasi.views.PolygonWireframeTreeBuilder;
-import com.mgs.fantasi.views.WireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframeTreeBuilders.BaseWireframeTreeBuilder;
+import com.mgs.fantasi.wireframeTreeBuilders.PijamaRowsWireframeTreeBuilder;
+import com.mgs.fantasi.wireframeTreeBuilders.PolygonWireframeTreeBuilder;
+import com.mgs.fantasi.wireframeTreeBuilders.WireframeTreeBuilder;
 import com.mgs.tree.Tree;
 
 import static com.mgs.fantasi.wireframe.Wireframes.*;

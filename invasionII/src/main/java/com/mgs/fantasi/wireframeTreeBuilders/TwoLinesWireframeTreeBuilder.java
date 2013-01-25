@@ -1,4 +1,4 @@
-package com.mgs.fantasi.views;
+package com.mgs.fantasi.wireframeTreeBuilders;
 
 import com.mgs.fantasi.properties.measurements.Fraction;
 import com.mgs.fantasi.properties.measurements.Fractions;

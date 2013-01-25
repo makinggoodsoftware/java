@@ -5,7 +5,7 @@ import com.mgs.fantasi.selectors.UISelectorFactory;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.styles.UIStyle;
-import com.mgs.fantasi.views.RectangleWireframeTreeBuilder;
+import com.mgs.fantasi.wireframeTreeBuilders.RectangleWireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.BorderFactory.newBorder;
 import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;

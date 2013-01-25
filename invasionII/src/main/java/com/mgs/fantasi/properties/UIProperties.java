@@ -10,8 +10,8 @@ import static com.mgs.fantasi.properties.ColorFactory.transparent;
 import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
 
 public class UIProperties {
-    PolygonPointsIterator shape = new NativeRectanguarShape();
-	Padding padding = Padding.zero();
+	PolygonPointsIterator shape = new NativeRectanguarShape();
+	Padding padding = Padding.zeroPadding();
 	Measurement measurement = emptyMeasurement();
 	private UIPropertyProvider<BorderFactory.Border> border = noBorder();
 	private UIPropertyProvider<ColorFactory.Color> backgroundColor = transparent();
@@ -48,12 +48,12 @@ public class UIProperties {
 	}
 
 	public UIProperties copy() {
-        try {
-            return (UIProperties) BeanUtils.cloneBean(this);
-        } catch (Exception e) {
-            throw new RuntimeException("Unexpected exception copying UIProperties", e);
-        }
-    }
+		try {
+			return (UIProperties) BeanUtils.cloneBean(this);
+		} catch (Exception e) {
+			throw new RuntimeException("Unexpected exception copying UIProperties", e);
+		}
+	}
 
 	public void setBackgroundColor(UIPropertyProvider<ColorFactory.Color> backgroundColor) {
 		this.backgroundColor = backgroundColor;

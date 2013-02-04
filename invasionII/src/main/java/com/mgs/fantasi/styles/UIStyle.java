@@ -1,37 +1,22 @@
 package com.mgs.fantasi.styles;
 
-import com.mgs.fantasi.properties.BorderFactory;
-import com.mgs.fantasi.properties.ColorFactory;
-import com.mgs.fantasi.properties.UIPropertyProvider;
-
-import static com.mgs.fantasi.properties.NullUIProperty.nullProperty;
+import com.mgs.fantasi.properties.*;
 
 
 public class UIStyle {
-	private UIPropertyProvider<ColorFactory.Color> backgroundColorUIProperty = nullProperty(ColorFactory.Color.class);
-    private UIPropertyProvider<BorderFactory.Border> borderUIProperty = nullProperty(BorderFactory.Border.class);
+	private final UIPropertiesBuilder underlyingBuilder = new AllUndefinedUIPropertiesBuilder();
 
-
-	public UIStyle withBorder(UIPropertyProvider<BorderFactory.Border> border) {
-		if (border == null) throw new IllegalArgumentException();
-		this.borderUIProperty = border;
-
+	public UIStyle withBorder(UIProperty<Border> border) {
+		underlyingBuilder.withBorder(border);
 		return this;
 	}
 
-	public UIStyle withBackgroundColor(UIPropertyProvider<ColorFactory.Color> color) {
-		if (color == null) throw new IllegalArgumentException();
-		this.backgroundColorUIProperty = color;
-
+	public UIStyle withBackgroundColor(UIProperty<Color> color) {
+		underlyingBuilder.withBackgroundColor(color);
 		return this;
 	}
 
-	public UIPropertyProvider<ColorFactory.Color> getBackgroundColorUIProperty() {
-		return backgroundColorUIProperty;
+	public UIPropertiesBuilder getUnderlyingBuilder() {
+		return underlyingBuilder;
 	}
-
-	public UIPropertyProvider<BorderFactory.Border> getBorderUIProperty() {
-		return borderUIProperty;
-	}
-
 }

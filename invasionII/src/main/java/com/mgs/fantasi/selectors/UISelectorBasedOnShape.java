@@ -15,6 +15,6 @@ public class UISelectorBasedOnShape implements UISelector {
 	@Override
 	public boolean appliesTo(Tree<Wireframe, CollocationInfo> renderable) {
 		if ((renderable == null) || (renderable.getContent().getUiProperties() == null)) return false;
-		return renderable.getContent().getUiProperties().getShape().getClass().equals(type);
+		return renderable.getContent().getUiProperties().getShape().getValue().getClass().equals(type);
 	}
 }

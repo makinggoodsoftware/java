@@ -1,69 +1,82 @@
 package com.mgs.fantasi.properties;
 
 import com.mgs.fantasi.properties.measurements.Measurement;
-import com.mgs.fantasi.properties.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
-import org.apache.commons.beanutils.BeanUtils;
 
-import static com.mgs.fantasi.properties.BorderFactory.noBorder;
-import static com.mgs.fantasi.properties.ColorFactory.transparent;
-import static com.mgs.fantasi.properties.measurements.EmptyMeasurement.emptyMeasurement;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class UIProperties {
-	PolygonPointsIterator shape = new NativeRectanguarShape();
-	Padding padding = Padding.zeroPadding();
-	Measurement measurement = emptyMeasurement();
-	private UIPropertyProvider<BorderFactory.Border> border = noBorder();
-	private UIPropertyProvider<ColorFactory.Color> backgroundColor = transparent();
+public class UIProperties implements Iterable<UIProperty<? extends UIPropertyData>> {
+	private final UIProperty<PolygonPointsIterator> shape;
+	private final UIProperty<Padding> padding;
+	private final UIProperty<Border> border;
+	private final UIProperty<Color> backgroundColor;
+	private final UIProperty<Color> foregroundColor;
+	private final UIProperty<Measurement> measurement;
 
-	public UIProperties() {
-	}
-
-	public void setBorder(UIPropertyProvider<BorderFactory.Border> border) {
+	public UIProperties(UIProperty<Border> border, UIProperty<Color> backgroundColor, UIProperty<Color> foregroundColor, UIProperty<Padding> padding, UIProperty<PolygonPointsIterator> shape, UIProperty<Measurement> measurement) {
 		this.border = border;
-	}
-
-	public void setShape(PolygonPointsIterator shape) {
-		this.shape = shape;
-	}
-
-	public void setPadding(Padding padding) {
+		this.backgroundColor = backgroundColor;
+		this.foregroundColor = foregroundColor;
 		this.padding = padding;
-	}
-
-	public void setMeasurement(Measurement measurement) {
+		this.shape = shape;
 		this.measurement = measurement;
 	}
 
-	public Padding getPadding() {
-		return padding;
-	}
-
-	public PolygonPointsIterator getShape() {
-		return shape;
-	}
-
-	public Measurement getMeasurement() {
-		return measurement;
-	}
-
-	public UIProperties copy() {
-		try {
-			return (UIProperties) BeanUtils.cloneBean(this);
-		} catch (Exception e) {
-			throw new RuntimeException("Unexpected exception copying UIProperties", e);
-		}
-	}
-
-	public void setBackgroundColor(UIPropertyProvider<ColorFactory.Color> backgroundColor) {
-		this.backgroundColor = backgroundColor;
-	}
-
-	public UIPropertyProvider<ColorFactory.Color> getBackgroundColor() {
+	public UIProperty<Color> getBackgroundColor() {
 		return backgroundColor;
 	}
 
-	public UIPropertyProvider<BorderFactory.Border> getBorder() {
+	public UIProperty<Border> getBorder() {
 		return border;
+	}
+
+	public UIProperty<Padding> getPadding() {
+		return padding;
+	}
+
+	public UIProperty<PolygonPointsIterator> getShape() {
+		return shape;
+	}
+
+	public UIProperty<Measurement> getMeasurement() {
+		return measurement;
+	}
+
+	@Override
+	public Iterator<UIProperty<? extends UIPropertyData>> iterator() {
+		return new UIPropertyIterator(this);
+	}
+
+	private static class UIPropertyIterator implements Iterator<UIProperty<? extends UIPropertyData>> {
+		private final List<UIProperty<? extends UIPropertyData>> underlyingList = new ArrayList<UIProperty<? extends UIPropertyData>>();
+		private final Iterator<UIProperty<? extends UIPropertyData>> underlyingIterator;
+
+		public UIPropertyIterator(UIProperties uiProperties) {
+			underlyingList.add(uiProperties.getBackgroundColor());
+			underlyingList.add(uiProperties.getBorder());
+			underlyingList.add(uiProperties.getPadding());
+			underlyingList.add(uiProperties.getShape());
+			underlyingList.add(uiProperties.getMeasurement());
+			underlyingIterator = underlyingList.iterator();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return underlyingIterator.hasNext();
+		}
+
+		@Override
+		public UIProperty<? extends UIPropertyData> next() {
+			UIProperty<? extends UIPropertyData> next = underlyingIterator.next();
+			if (next == null) throw new RuntimeException("Bullshit!");
+			return next;
+		}
+
+		@Override
+		public void remove() {
+			throw new RuntimeException("Can't remove UI properties, operation not supported");
+		}
 	}
 }

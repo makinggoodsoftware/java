@@ -1,5 +1,6 @@
 package com.mgs.invasion.mvc.views;
 
+import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.measurements.Fractions;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.HexagonShape;
@@ -39,7 +40,7 @@ public class HexagonRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<He
 		return pijamaRows.build(wireframeContentFactory);
 	}
 
-	public WireframeTreeBuilder withHexagonMeasurement(Measurement hexagonMeasurement) {
+	public WireframeTreeBuilder withHexagonMeasurement(UIProperty<Measurement> hexagonMeasurement) {
 		hexagon.withMeasurement(hexagonMeasurement);
 		return this;
 	}

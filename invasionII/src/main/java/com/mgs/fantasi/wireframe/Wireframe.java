@@ -11,6 +11,7 @@ public class Wireframe {
 	public Wireframe(Class<? extends WireframeTreeBuilder> builderClass, String name, UIProperties uiProperties) {
 		this.builderClass = builderClass;
 		this.name = name;
+		if (uiProperties == null) throw new RuntimeException("Bullshit!");
 		this.uiProperties = uiProperties;
 	}
 

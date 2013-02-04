@@ -1,7 +1,17 @@
 package com.mgs.fantasi.properties;
 
-public interface UIProperty {
-    UIProperty copy();
+public interface UIProperty<T extends UIPropertyData> {
+	UIProperty<T> copy();
 
-    boolean isFullyDefined();
+	boolean isEmpty();
+
+	PropertyType getType();
+
+	T getValue();
+
+	boolean isDefined();
+
+	boolean isFullyDefined();
+
+	boolean isNotDefined();
 }

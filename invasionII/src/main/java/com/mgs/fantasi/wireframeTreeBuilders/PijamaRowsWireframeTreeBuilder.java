@@ -40,7 +40,7 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 				wireframeBranch.addChild(collocationInfo, content);
 			}
 		}
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
 		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
 	}
 }

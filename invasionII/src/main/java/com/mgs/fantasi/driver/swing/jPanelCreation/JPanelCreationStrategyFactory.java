@@ -1,6 +1,8 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIProperty;
+import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.WireframeContentType;
 
 public class JPanelCreationStrategyFactory {
@@ -11,13 +13,16 @@ public class JPanelCreationStrategyFactory {
 	}
 
 	public JPanelBuilder forUIProperties(UIProperties uiProperties, WireframeContentType contentType) {
-		JPanelBuilder jPanelBuilder = uiProperties.getShape().isRectangular() ?
+		UIProperty<PolygonPointsIterator> shape = uiProperties.getShape();
+		PolygonPointsIterator value = shape.getValue();
+		boolean rectangular = value.isRectangular();
+		JPanelBuilder jPanelBuilder = rectangular ?
 				new StandardJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator) :
 				new NonRectangularJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator);
 
 		return uiProperties.getPadding().isEmpty() ?
 				jPanelBuilder :
-				new DecoratedJPanelWithPadding(jPanelBuilder, uiProperties.getPadding());
+				new DecoratedJPanelWithPadding(jPanelBuilder, uiProperties.getPadding().getValue());
 	}
 
 }

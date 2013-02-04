@@ -6,7 +6,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import static com.mgs.fantasi.properties.measurements.Measurements.simpleMeasurement;
 
 
-public class Padding {
+public class Padding implements UIPropertyData {
 
 	private final Measurement top;
 	private final Measurement right;

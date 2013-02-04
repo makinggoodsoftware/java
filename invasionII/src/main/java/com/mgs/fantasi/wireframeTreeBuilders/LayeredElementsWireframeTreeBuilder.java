@@ -28,7 +28,7 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 			wireframeBranch.addChild(new CollocationInfo(i, all(), all(), 0, 0), layer);
 		}
 
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
 		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
 	}
 }

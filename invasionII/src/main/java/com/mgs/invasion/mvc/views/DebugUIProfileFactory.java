@@ -7,11 +7,17 @@ import com.mgs.fantasi.styles.UIProfileFactory;
 import com.mgs.fantasi.styles.UIStyle;
 import com.mgs.fantasi.wireframeTreeBuilders.RectangleWireframeTreeBuilder;
 
-import static com.mgs.fantasi.properties.BorderFactory.newBorder;
-import static com.mgs.fantasi.properties.ColorFactory.newColorFromAwt;
-import static java.awt.Color.*;
+import java.awt.*;
+
+import static com.mgs.fantasi.properties.UIPropertyFactory.backgroundColorFromAwt;
+import static com.mgs.fantasi.properties.UIPropertyFactory.newBorder;
+import static java.awt.Color.GREEN;
+import static java.awt.Color.RED;
 
 public class DebugUIProfileFactory implements UIProfileFactory {
+	public DebugUIProfileFactory() {
+	}
+
 	@Override
 	public UIProfile getUIProfile() {
 		UIProfile debugProfile = new UIProfile();
@@ -19,14 +25,20 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 		debugProfile.addStyle(
 				UISelectorFactory.forType(RectangleWireframeTreeBuilder.class),
 				new UIStyle().
-						withBorder(newBorder(newColorFromAwt(BLUE), 5)).
-						withBackgroundColor(newColorFromAwt(GREEN))
+						withBorder(newBorder(
+								Color.BLUE,
+								5
+						)).
+						withBackgroundColor(backgroundColorFromAwt(GREEN))
 		);
 		debugProfile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
 				new UIStyle().
-						withBorder(newBorder(newColorFromAwt(YELLOW), 10)).
-						withBackgroundColor(newColorFromAwt(RED))
+						withBorder(newBorder(
+								Color.YELLOW,
+								10
+						)).
+						withBackgroundColor(backgroundColorFromAwt(RED))
 		);
 
 		return debugProfile;

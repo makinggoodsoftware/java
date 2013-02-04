@@ -1,6 +1,8 @@
 package com.mgs.invasion;
 
 import com.mgs.fantasi.driver.UIDriver;
+import com.mgs.fantasi.properties.PropertyType;
+import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.measurements.Measurements;
 import com.mgs.fantasi.styles.UIProfileFactory;
@@ -14,6 +16,7 @@ import com.mgs.tree.Tree;
 import javax.swing.*;
 import java.awt.*;
 
+import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
 import static com.mgs.fantasi.wireframe.Wireframes.layered;
 import static com.mgs.fantasi.wireframe.Wireframes.rectangle;
 import static com.mgs.invasion.mvc.views.HexagonRowsWireframeTreeBuilder.hexagonRows;
@@ -32,7 +35,7 @@ public class Main {
 		int numberOfGenerations = 5;
 
 
-		Measurement hexagonMeasurement = Measurements.futureMeasurement();
+		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), PropertyType.MEASUREMENT);
 		WireframeTreeBuilder wireframeTreeBuilder = layered().
 				withLayer(
 						hexagonRows(numberOVerticalDivisions, numberOfGenerations).
@@ -41,7 +44,7 @@ public class Main {
 				).
 				withLayer(
 						rectangle().
-								withPadding(hexagonMeasurement.asPadding().withHalfOfItsSize()).
+								withPadding(uiProperty(hexagonMeasurement.getValue().asPadding().withHalfOfItsSize(), PropertyType.MEASUREMENT)).
 								withName("EvenHexagonRows").
 								withContent(
 										hexagonRows(numberOVerticalDivisions, numberOfGenerations).
@@ -49,6 +52,8 @@ public class Main {
 								)
 				);
 		Tree<Wireframe, CollocationInfo> tree = wireframeTreeBuilder.build(wireframeContentFactory);
+
+
 		uiDriver.show(tree, new Dimension(400, 400), uiProfileFactory.getUIProfile());
 	}
 

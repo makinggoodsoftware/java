@@ -31,7 +31,7 @@ public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder
 				wireframeBranch.addChild(collocationInfo, child);
 			}
 		}
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
 		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
 	}
 

@@ -47,7 +47,7 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 			}
 		}
 
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
 		return new Tree<Wireframe, CollocationInfo>(wireframe, branch);
 	}
 }

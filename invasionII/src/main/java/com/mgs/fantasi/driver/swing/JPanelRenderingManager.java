@@ -26,7 +26,8 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 
 	@Override
 	public JPanel render(Tree<Wireframe, CollocationInfo> tree, UIProfile uiProfile) {
-		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(tree.getContent().getUiProperties(), uiProfile.findStylesFor(tree));
+		UIProperties uiProperties = tree.getContent().getUiProperties();
+		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(uiProperties, uiProfile.findStylesFor(tree));
 		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getBranch().getConnectionManager();
 		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(uiPropertiesWithStylesApplied, connectionManager.getType());
 

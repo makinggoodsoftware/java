@@ -1,9 +1,8 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.properties.BorderFactory;
-import com.mgs.fantasi.properties.ColorFactory;
+import com.mgs.fantasi.properties.Border;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.properties.UIPropertyProvider;
+import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 
 import javax.swing.*;
@@ -25,22 +24,21 @@ public class JPanelWithDifferentShape extends JPanel {
 	public void paint(Graphics graphics) {
 		super.paint(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
-		UIPropertyProvider<BorderFactory.Border> border = uiProperties.getBorder();
-		float borderThickness = 0;
-		UIPropertyProvider<ColorFactory.Color> foregroundColor = ColorFactory.newColorFromAwt(g2d.getColor());
-		if (border.isDefined()) {
+		float borderThickness;
+		Color borderColor = g2d.getColor();
+		UIProperty<Border> border = uiProperties.getBorder();
+		if (border.isEmpty()) {
+			borderThickness = 0;
+		} else {
 			borderThickness = border.getValue().getWidth();
-			UIPropertyProvider<ColorFactory.Color> color = border.getValue().getColor();
-			if (color.isDefined()) {
-				foregroundColor = color;
-			}
+			borderColor = border.getValue().getColor().getValue().getColorAsAwt();
 		}
-		UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
+		UIProperty<com.mgs.fantasi.properties.Color> backgroundColor = uiProperties.getBackgroundColor();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		drawHexagon(g2d, getSize(), foregroundColor, backgroundColor, borderThickness * 2);
+		drawHexagon(g2d, getSize(), borderColor, backgroundColor, borderThickness * 2);
 	}
 
-	private void drawHexagon(Graphics2D g2d, Dimension size, UIPropertyProvider<ColorFactory.Color> foregroundColor, UIPropertyProvider<ColorFactory.Color> backgroundColor, float thickness) {
+	private void drawHexagon(Graphics2D g2d, Dimension size, Color borderColor, UIProperty<com.mgs.fantasi.properties.Color> backgroundColor, float thickness) {
 		int insetSpace = (int) thickness;
 		Dimension sizeWithoutBorders = new Dimension(size.width - insetSpace, size.height - insetSpace);
 		if (sizeWithoutBorders.getWidth() < 0 || sizeWithoutBorders.getHeight() < 0) return;
@@ -51,12 +49,10 @@ public class JPanelWithDifferentShape extends JPanel {
 			nextLine(path, hexagonPoints.get(i), thickness);
 		}
 		path.closePath();
-		if (foregroundColor.isDefined() && !foregroundColor.getValue().isTransparent()) {
-			g2d.setColor(foregroundColor.getValue().getColorAsAwt());
-		}
+		g2d.setColor(borderColor);
 		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g2d.draw(path);
-		if (backgroundColor.isDefined() && !backgroundColor.getValue().isTransparent()) {
+		if (backgroundColor.isFullyDefined()) {
 			g2d.setColor(backgroundColor.getValue().getColorAsAwt());
 		}
 		g2d.fill(path);

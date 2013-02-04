@@ -19,7 +19,7 @@ public class NonRectangularJPanelBuilder implements JPanelBuilder {
 
 	@Override
 	public JPanel build() {
-		JPanelWithDifferentShape container = new JPanelWithDifferentShape(uiProperties.getShape(), uiProperties);
+		JPanelWithDifferentShape container = new JPanelWithDifferentShape(uiProperties.getShape().getValue(), uiProperties);
 		if (getContentType() != WireframeContentType.EMPTY) {
 			container.setLayout(jPanelLayoutTranslator.translate(getContentType(), container));
 		}

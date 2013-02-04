@@ -1,8 +1,8 @@
 package com.mgs.fantasi.driver.swing;
 
-import com.mgs.fantasi.properties.ColorFactory;
+import com.mgs.fantasi.properties.Border;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.properties.UIPropertyProvider;
+import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.measurements.Fraction;
 
 import javax.swing.*;
@@ -10,16 +10,16 @@ import java.awt.*;
 
 public class SwingUtils {
 	public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
-		UIPropertyProvider<ColorFactory.Color> backgroundColor = uiProperties.getBackgroundColor();
-		if (backgroundColor.isDefined() && !backgroundColor.getValue().isTransparent()) {
+		UIProperty<com.mgs.fantasi.properties.Color> backgroundColor = uiProperties.getBackgroundColor();
+		if (backgroundColor.isDefined() && !backgroundColor.isEmpty()) {
 			jPanel.setBackground(backgroundColor.getValue().getColorAsAwt());
 		}
-		UIPropertyProvider<com.mgs.fantasi.properties.BorderFactory.Border> border = uiProperties.getBorder();
-		if (border.isDefined() && border.getValue().getWidth() > 0) {
-			UIPropertyProvider<ColorFactory.Color> colorProviderUI = border.getValue().getColor();
+		UIProperty<Border> border = uiProperties.getBorder();
+		if (border.isFullyDefined() && border.getValue().getWidth() > 0) {
+			UIProperty<com.mgs.fantasi.properties.Color> colorProviderUI = border.getValue().getColor();
 			if (colorProviderUI.isDefined()) {
-				ColorFactory.Color colorData = colorProviderUI.getValue();
-				Color lineColor = colorData.isTransparent() ? Color.ORANGE : colorData.getColorAsAwt();
+				com.mgs.fantasi.properties.Color colorData = colorProviderUI.getValue();
+				Color lineColor = colorProviderUI.isEmpty() ? Color.ORANGE : colorData.getColorAsAwt();
 				javax.swing.border.Border lineBorder = BorderFactory.createLineBorder(lineColor, border.getValue().getWidth());
 				jPanel.setBorder(lineBorder);
 			} else {

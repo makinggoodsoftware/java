@@ -1,16 +1,17 @@
 package com.mgs.fantasi.wireframeTreeBuilders;
 
+import com.mgs.fantasi.properties.EmptyRectangularUIPropertiesBuilder;
 import com.mgs.fantasi.properties.Padding;
-import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.measurements.Measurement;
 
 public abstract class BaseWireframeTreeBuilder<T extends BaseWireframeTreeBuilder> implements WireframeTreeBuilder {
-	private final UIProperties uiProperties = new UIProperties();
+	private final EmptyRectangularUIPropertiesBuilder uiPropertiesBuilder = new EmptyRectangularUIPropertiesBuilder();
 	private String name = "";
 
 	@SuppressWarnings(value = "unchecked")
-	public T withPadding(Padding padding) {
-		getUiProperties().setPadding(padding);
+	public T withPadding(UIProperty<Padding> padding) {
+		getUiPropertiesBuilder().withPadding(padding);
 		return (T) this;
 	}
 
@@ -21,14 +22,14 @@ public abstract class BaseWireframeTreeBuilder<T extends BaseWireframeTreeBuilde
 	}
 
 	@SuppressWarnings(value = "unchecked")
-	public T withMeasurement(Measurement measurement) {
-		getUiProperties().setMeasurement(measurement);
+	public T withMeasurement(UIProperty<Measurement> measurement) {
+		getUiPropertiesBuilder().withMeasurement(measurement);
 		return (T) this;
 	}
 
 	@Override
-	public UIProperties getUiProperties() {
-		return uiProperties;
+	public EmptyRectangularUIPropertiesBuilder getUiPropertiesBuilder() {
+		return uiPropertiesBuilder;
 	}
 
 	@Override

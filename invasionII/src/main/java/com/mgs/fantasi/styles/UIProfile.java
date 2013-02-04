@@ -19,9 +19,9 @@ public class UIProfile {
 
 	public Set<UIStyle> findStylesFor(Tree<Wireframe, CollocationInfo> renderable) {
 		Set<UIStyle> uiStyles = new HashSet<UIStyle>();
-		for (UISelector matchingStrategy : styles.keySet()) {
-			if (matchingStrategy.appliesTo(renderable)) {
-				uiStyles.add(styles.get(matchingStrategy));
+		for (Map.Entry<UISelector, UIStyle> style : styles.entrySet()) {
+			if (style.getKey().appliesTo(renderable)) {
+				uiStyles.add(style.getValue());
 			}
 		}
 		return uiStyles;

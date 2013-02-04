@@ -21,7 +21,7 @@ public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<Rect
 
 	@Override
 	public Tree<Wireframe, CollocationInfo> build(WireframeContentFactory wireframeContentFactory) {
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiProperties());
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
 		if (content == null) {
 			Branch<Wireframe, CollocationInfo> wireframeCollocationInfoBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getEmptyConnectionManager());
 			return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeCollocationInfoBranch);

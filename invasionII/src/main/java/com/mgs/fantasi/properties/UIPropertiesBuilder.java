@@ -15,57 +15,35 @@ public class UIPropertiesBuilder {
 		properties = propertiesAsMap(initializationStrategy);
 	}
 
-	public UIPropertiesBuilder withUIProperty(UIProperty<? extends UIPropertyData> propertyToModify) {
+	public UIPropertiesBuilder withUIProperty(UIPropertyId uiPropertyId, UIProperty<? extends UIPropertyData> propertyToModify) {
 		if (propertyToModify.isNotDefined()) return this;
-
-		switch (propertyToModify.getType()) {
-			case SHAPE:
-				properties.put(SHAPE, (UIProperty<PolygonPointsIterator>) propertyToModify);
-				break;
-			case PADDING:
-				properties.put(PADDING, (UIProperty<Padding>) propertyToModify);
-				break;
-			case BORDER:
-				properties.put(BORDER, (UIProperty<Border>) propertyToModify);
-				break;
-			case BACKGROUND_COLOR:
-				properties.put(BACKGROUND_COLOR, (UIProperty<Color>) propertyToModify);
-				break;
-			case FOREGROUND_COLOR:
-				properties.put(FOREGROUND_COLOR, (UIProperty<Color>) propertyToModify);
-				break;
-			case MEASUREMENT:
-				properties.put(MEASUREMENT, (UIProperty<Measurement>) propertyToModify);
-				break;
-			default:
-				throw new RuntimeException("Unexpected line of code reached");
-		}
+		properties.put(uiPropertyId, propertyToModify);
 		return this;
 	}
 
 	public UIPropertiesBuilder withPadding(UIProperty<Padding> padding) {
-		return withUIProperty(padding);
+		return withUIProperty(PADDING, padding);
 	}
 
 	public UIPropertiesBuilder withShape(UIProperty<PolygonPointsIterator> polygonPointsIterator) {
-		return withUIProperty(polygonPointsIterator);
+		return withUIProperty(SHAPE, polygonPointsIterator);
 	}
 
 	public UIPropertiesBuilder withMeasurement(UIProperty<Measurement> measurement) {
-		return withUIProperty(measurement);
+		return withUIProperty(MEASUREMENT, measurement);
 	}
 
 	public UIPropertiesBuilder withBorder(UIProperty<Border> border) {
-		return withUIProperty(border);
+		return withUIProperty(BORDER, border);
 	}
 
 	public UIPropertiesBuilder withBackgroundColor(UIProperty<Color> color) {
-		return withUIProperty(color);
+		return withUIProperty(BACKGROUND_COLOR, color);
 	}
 
 	public UIPropertiesBuilder withUIProperties(UIProperties uiProperties) {
-		for (UIProperty<? extends UIPropertyData> uiProperty : uiProperties) {
-			withUIProperty(uiProperty);
+		for (Map.Entry<UIPropertyId, UIProperty<? extends UIPropertyData>> uiProperty : uiProperties) {
+			withUIProperty(uiProperty.getKey(), uiProperty.getValue());
 		}
 		return this;
 	}

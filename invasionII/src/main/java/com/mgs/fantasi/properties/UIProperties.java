@@ -6,7 +6,7 @@ import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 import java.util.Iterator;
 import java.util.Map;
 
-public class UIProperties implements Iterable<UIProperty<? extends UIPropertyData>>, UIPropertiesReader {
+public class UIProperties implements Iterable<Map.Entry<UIPropertyId, UIProperty<? extends UIPropertyData>>>, UIPropertiesReader {
 	private final Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties;
 
 	public UIProperties(Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties) {
@@ -39,8 +39,8 @@ public class UIProperties implements Iterable<UIProperty<? extends UIPropertyDat
 	}
 
 	@Override
-	public Iterator<UIProperty<? extends UIPropertyData>> iterator() {
-		return properties.values().iterator();
+	public Iterator<Map.Entry<UIPropertyId, UIProperty<? extends UIPropertyData>>> iterator() {
+		return properties.entrySet().iterator();
 	}
 
 }

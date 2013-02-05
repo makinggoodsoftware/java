@@ -3,21 +3,16 @@ package com.mgs.fantasi.properties;
 import com.mgs.fantasi.properties.measurements.Measurement;
 import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.mgs.fantasi.properties.UIPropertyId.*;
+
 public class UIPropertiesBuilder {
-	private UIProperty<Border> border;
-	private UIProperty<Color> backgroundColor;
-	private UIProperty<Color> foregroundColor;
-	private UIProperty<Padding> padding;
-	private UIProperty<PolygonPointsIterator> shape;
-	private UIProperty<Measurement> measurement;
+	private final Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties;
 
 	public UIPropertiesBuilder(UIPropertiesReader initializationStrategy) {
-		border = initializationStrategy.getBorder();
-		backgroundColor = initializationStrategy.getBackgroundColor();
-		foregroundColor = initializationStrategy.getForegroundColor();
-		padding = initializationStrategy.getPadding();
-		shape = initializationStrategy.getShape();
-		measurement = initializationStrategy.getMeasurement();
+		properties = propertiesAsMap(initializationStrategy);
 	}
 
 	public UIPropertiesBuilder withUIProperty(UIProperty<? extends UIPropertyData> propertyToModify) {
@@ -25,22 +20,22 @@ public class UIPropertiesBuilder {
 
 		switch (propertyToModify.getType()) {
 			case SHAPE:
-				this.shape = (UIProperty<PolygonPointsIterator>) propertyToModify;
+				properties.put(SHAPE, (UIProperty<PolygonPointsIterator>) propertyToModify);
 				break;
 			case PADDING:
-				this.padding = (UIProperty<Padding>) propertyToModify;
+				properties.put(PADDING, (UIProperty<Padding>) propertyToModify);
 				break;
 			case BORDER:
-				this.border = (UIProperty<Border>) propertyToModify;
+				properties.put(BORDER, (UIProperty<Border>) propertyToModify);
 				break;
 			case BACKGROUND_COLOR:
-				this.backgroundColor = (UIProperty<Color>) propertyToModify;
+				properties.put(BACKGROUND_COLOR, (UIProperty<Color>) propertyToModify);
 				break;
 			case FOREGROUND_COLOR:
-				this.foregroundColor = (UIProperty<Color>) propertyToModify;
+				properties.put(FOREGROUND_COLOR, (UIProperty<Color>) propertyToModify);
 				break;
 			case MEASUREMENT:
-				this.measurement = (UIProperty<Measurement>) propertyToModify;
+				properties.put(MEASUREMENT, (UIProperty<Measurement>) propertyToModify);
 				break;
 			default:
 				throw new RuntimeException("Unexpected line of code reached");
@@ -49,28 +44,23 @@ public class UIPropertiesBuilder {
 	}
 
 	public UIPropertiesBuilder withPadding(UIProperty<Padding> padding) {
-		this.padding = padding;
-		return this;
+		return withUIProperty(padding);
 	}
 
 	public UIPropertiesBuilder withShape(UIProperty<PolygonPointsIterator> polygonPointsIterator) {
-		this.shape = polygonPointsIterator;
-		return this;
+		return withUIProperty(polygonPointsIterator);
 	}
 
 	public UIPropertiesBuilder withMeasurement(UIProperty<Measurement> measurement) {
-		this.measurement = measurement;
-		return this;
+		return withUIProperty(measurement);
 	}
 
 	public UIPropertiesBuilder withBorder(UIProperty<Border> border) {
-		this.border = border;
-		return this;
+		return withUIProperty(border);
 	}
 
 	public UIPropertiesBuilder withBackgroundColor(UIProperty<Color> color) {
-		this.backgroundColor = color;
-		return this;
+		return withUIProperty(color);
 	}
 
 	public UIPropertiesBuilder withUIProperties(UIProperties uiProperties) {
@@ -81,12 +71,17 @@ public class UIPropertiesBuilder {
 	}
 
 	public UIProperties build() {
-		return new UIProperties(
-				border,
-				backgroundColor,
-				foregroundColor,
-				padding,
-				shape,
-				measurement);
+		return new UIProperties(properties);
+	}
+
+	private Map<UIPropertyId, UIProperty<? extends UIPropertyData>> propertiesAsMap(UIPropertiesReader initializationStrategy) {
+		Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties = new HashMap<UIPropertyId, UIProperty<? extends UIPropertyData>>();
+		properties.put(BORDER, initializationStrategy.getBorder());
+		properties.put(BACKGROUND_COLOR, initializationStrategy.getBackgroundColor());
+		properties.put(FOREGROUND_COLOR, initializationStrategy.getForegroundColor());
+		properties.put(PADDING, initializationStrategy.getPadding());
+		properties.put(SHAPE, initializationStrategy.getShape());
+		properties.put(MEASUREMENT, initializationStrategy.getMeasurement());
+		return properties;
 	}
 }

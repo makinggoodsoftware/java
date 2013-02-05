@@ -1,12 +1,14 @@
 package com.mgs.fantasi.wireframeTreeBuilders;
 
-import com.mgs.fantasi.properties.EmptyRectangularUIPropertiesBuilder;
 import com.mgs.fantasi.properties.Padding;
+import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.measurements.Measurement;
 
+import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
+
 public abstract class BaseWireframeTreeBuilder<T extends BaseWireframeTreeBuilder> implements WireframeTreeBuilder {
-	private final EmptyRectangularUIPropertiesBuilder uiPropertiesBuilder = new EmptyRectangularUIPropertiesBuilder();
+	private final UIPropertiesBuilder uiPropertiesBuilder = rectangularEmpty();
 	private String name = "";
 
 	@SuppressWarnings(value = "unchecked")
@@ -28,7 +30,7 @@ public abstract class BaseWireframeTreeBuilder<T extends BaseWireframeTreeBuilde
 	}
 
 	@Override
-	public EmptyRectangularUIPropertiesBuilder getUiPropertiesBuilder() {
+	public UIPropertiesBuilder getUiPropertiesBuilder() {
 		return uiPropertiesBuilder;
 	}
 

@@ -20,7 +20,7 @@ public class JPanelCreationStrategyFactory {
 				new StandardJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator) :
 				new NonRectangularJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator);
 
-		return uiProperties.getPadding().isEmpty() ?
+		return uiProperties.getPadding().isFullyDefined() ?
 				jPanelBuilder :
 				new DecoratedJPanelWithPadding(jPanelBuilder, uiProperties.getPadding().getValue());
 	}

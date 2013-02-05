@@ -20,7 +20,7 @@ public class UIPropertiesBuilder {
 	}
 
 	public UIPropertiesBuilder withUIProperty(UIPropertyId uiPropertyId, UIProperty<? extends UIPropertyData> propertyToModify) {
-		if (propertyToModify.isNotDefined()) return this;
+		if (propertyToModify.isFullyUndefined()) return this;
 		properties.put(uiPropertyId, propertyToModify);
 		return this;
 	}

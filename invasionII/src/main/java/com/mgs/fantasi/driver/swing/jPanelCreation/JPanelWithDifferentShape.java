@@ -27,7 +27,7 @@ public class JPanelWithDifferentShape extends JPanel {
 		float borderThickness;
 		Color borderColor = g2d.getColor();
 		UIProperty<Border> border = uiProperties.getBorder();
-		if (border.isEmpty()) {
+		if (!border.isFullyDefined()) {
 			borderThickness = 0;
 		} else {
 			borderThickness = border.getValue().getWidth();

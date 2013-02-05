@@ -25,13 +25,8 @@ public class FullyDefinedUIProperty<Z extends UIPropertyData> implements UIPrope
 	}
 
 	@Override
-	public boolean isNotDefined() {
+	public boolean isFullyUndefined() {
 		return false;
-	}
-
-	@Override
-	public UIProperty<Z> copy() {
-		return null;
 	}
 
 	@Override

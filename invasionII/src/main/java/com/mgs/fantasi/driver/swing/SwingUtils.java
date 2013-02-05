@@ -11,7 +11,7 @@ import java.awt.*;
 public class SwingUtils {
 	public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
 		UIProperty<com.mgs.fantasi.properties.data.Color> backgroundColor = uiProperties.getBackgroundColor();
-		if (backgroundColor.isDefined() && !backgroundColor.isEmpty()) {
+		if (backgroundColor.isFullyDefined()) {
 			jPanel.setBackground(backgroundColor.getValue().getColorAsAwt());
 		}
 		UIProperty<Border> border = uiProperties.getBorder();

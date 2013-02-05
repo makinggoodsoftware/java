@@ -1,9 +1,9 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.properties.Border;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.UIProperty;
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.properties.data.Border;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,12 +33,12 @@ public class JPanelWithDifferentShape extends JPanel {
 			borderThickness = border.getValue().getWidth();
 			borderColor = border.getValue().getColor().getValue().getColorAsAwt();
 		}
-		UIProperty<com.mgs.fantasi.properties.Color> backgroundColor = uiProperties.getBackgroundColor();
+		UIProperty<com.mgs.fantasi.properties.data.Color> backgroundColor = uiProperties.getBackgroundColor();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		drawHexagon(g2d, getSize(), borderColor, backgroundColor, borderThickness * 2);
 	}
 
-	private void drawHexagon(Graphics2D g2d, Dimension size, Color borderColor, UIProperty<com.mgs.fantasi.properties.Color> backgroundColor, float thickness) {
+	private void drawHexagon(Graphics2D g2d, Dimension size, Color borderColor, UIProperty<com.mgs.fantasi.properties.data.Color> backgroundColor, float thickness) {
 		int insetSpace = (int) thickness;
 		Dimension sizeWithoutBorders = new Dimension(size.width - insetSpace, size.height - insetSpace);
 		if (sizeWithoutBorders.getWidth() < 0 || sizeWithoutBorders.getHeight() < 0) return;

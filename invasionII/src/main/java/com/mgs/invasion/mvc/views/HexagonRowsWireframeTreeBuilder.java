@@ -1,9 +1,9 @@
 package com.mgs.invasion.mvc.views;
 
 import com.mgs.fantasi.properties.UIProperty;
-import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.properties.measurements.Measurement;
-import com.mgs.fantasi.properties.polygon.HexagonShape;
+import com.mgs.fantasi.properties.data.measurements.Fractions;
+import com.mgs.fantasi.properties.data.measurements.Measurement;
+import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;

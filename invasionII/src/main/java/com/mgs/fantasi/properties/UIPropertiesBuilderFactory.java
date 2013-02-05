@@ -1,8 +1,11 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.properties.measurements.Measurement;
-import com.mgs.fantasi.properties.polygon.NativeRectanguarShape;
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.properties.data.Border;
+import com.mgs.fantasi.properties.data.Color;
+import com.mgs.fantasi.properties.data.Padding;
+import com.mgs.fantasi.properties.data.measurements.Measurement;
+import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
 import static com.mgs.fantasi.properties.UIPropertyFactory.*;
 

@@ -1,9 +1,9 @@
-package com.mgs.fantasi.properties;
+package com.mgs.fantasi.properties.data;
 
-import com.mgs.fantasi.properties.measurements.Measurement;
+import com.mgs.fantasi.properties.data.measurements.Measurement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 
-import static com.mgs.fantasi.properties.measurements.Measurements.simpleMeasurement;
+import static com.mgs.fantasi.properties.data.measurements.Measurements.simpleMeasurement;
 
 
 public class Padding implements UIPropertyData {

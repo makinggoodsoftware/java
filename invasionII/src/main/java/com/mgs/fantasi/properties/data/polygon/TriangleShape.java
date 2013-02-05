@@ -1,4 +1,4 @@
-package com.mgs.fantasi.properties.polygon;
+package com.mgs.fantasi.properties.data.polygon;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -18,17 +18,17 @@ public class TriangleShape implements PolygonPointsIterator {
 		double halfWidth = size.getWidth() / 2;
 
 		double yBottom = 0;
-		double yFirstAnchor 	= quarterHeight;
-		double ySecondAnchor 	= yFirstAnchor * 3;
-		double yTop 			= size.getHeight();
+		double yFirstAnchor = quarterHeight;
+		double ySecondAnchor = yFirstAnchor * 3;
+		double yTop = size.getHeight();
 
-		double xOrigin   = 0;
-		double xCenter   = halfWidth;
+		double xOrigin = 0;
+		double xCenter = halfWidth;
 		double xEndPoint = size.getWidth();
 
-		hexPoints.add(new Point2D.Double(xOrigin, 		yBottom));
-		hexPoints.add(new Point2D.Double(xCenter, 		yTop));
-		hexPoints.add(new Point2D.Double(xEndPoint,			yBottom));
+		hexPoints.add(new Point2D.Double(xOrigin, yBottom));
+		hexPoints.add(new Point2D.Double(xCenter, yTop));
+		hexPoints.add(new Point2D.Double(xEndPoint, yBottom));
 
 //		hexPoints.add(new Point2D.Double(xEndPoint,		ySecondAnchor));
 //		hexPoints.add(new Point2D.Double(xEndPoint, 		yFirstAnchor));

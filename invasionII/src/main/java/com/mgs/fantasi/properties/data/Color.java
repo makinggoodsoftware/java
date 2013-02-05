@@ -1,4 +1,4 @@
-package com.mgs.fantasi.properties;
+package com.mgs.fantasi.properties.data;
 
 public class Color implements UIPropertyData {
 	private final java.awt.Color colorAsAwt;

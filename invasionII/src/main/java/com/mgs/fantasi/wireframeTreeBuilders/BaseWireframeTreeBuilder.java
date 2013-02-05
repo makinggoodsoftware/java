@@ -1,9 +1,9 @@
 package com.mgs.fantasi.wireframeTreeBuilders;
 
-import com.mgs.fantasi.properties.Padding;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.UIProperty;
-import com.mgs.fantasi.properties.measurements.Measurement;
+import com.mgs.fantasi.properties.data.Padding;
+import com.mgs.fantasi.properties.data.measurements.Measurement;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
 

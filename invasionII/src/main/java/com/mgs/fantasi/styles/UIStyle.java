@@ -1,9 +1,9 @@
 package com.mgs.fantasi.styles;
 
-import com.mgs.fantasi.properties.Border;
-import com.mgs.fantasi.properties.Color;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.UIProperty;
+import com.mgs.fantasi.properties.data.Border;
+import com.mgs.fantasi.properties.data.Color;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allUndefined;
 

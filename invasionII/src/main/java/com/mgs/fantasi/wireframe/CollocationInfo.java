@@ -1,6 +1,6 @@
 package com.mgs.fantasi.wireframe;
 
-import com.mgs.fantasi.properties.measurements.Fraction;
+import com.mgs.fantasi.properties.data.measurements.Fraction;
 
 public class CollocationInfo {
 	private final Fraction proportionOfParentHeight;

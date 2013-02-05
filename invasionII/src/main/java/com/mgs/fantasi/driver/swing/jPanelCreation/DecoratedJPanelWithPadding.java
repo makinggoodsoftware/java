@@ -1,9 +1,9 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.properties.Padding;
-import com.mgs.fantasi.properties.measurements.Fractions;
-import com.mgs.fantasi.properties.measurements.Measurement;
-import com.mgs.fantasi.properties.measurements.Measurements;
+import com.mgs.fantasi.properties.data.Padding;
+import com.mgs.fantasi.properties.data.measurements.Fractions;
+import com.mgs.fantasi.properties.data.measurements.Measurement;
+import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.WireframeContentType;
 

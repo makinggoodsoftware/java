@@ -1,6 +1,6 @@
 package com.mgs.invasion.mvc.views;
 
-import com.mgs.fantasi.properties.polygon.HexagonShape;
+import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.selectors.UISelectorFactory;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.styles.UIProfileFactory;

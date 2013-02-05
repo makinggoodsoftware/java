@@ -1,7 +1,11 @@
 package com.mgs.fantasi.properties;
 
-import com.mgs.fantasi.properties.measurements.Measurement;
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.properties.data.Border;
+import com.mgs.fantasi.properties.data.Color;
+import com.mgs.fantasi.properties.data.Padding;
+import com.mgs.fantasi.properties.data.UIPropertyData;
+import com.mgs.fantasi.properties.data.measurements.Measurement;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -9,7 +13,7 @@ import java.util.Map;
 public class UIProperties implements Iterable<Map.Entry<UIPropertyId, UIProperty<? extends UIPropertyData>>>, UIPropertiesReader {
 	private final Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties;
 
-	public UIProperties(Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties) {
+	UIProperties(Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties) {
 		this.properties = properties;
 	}
 

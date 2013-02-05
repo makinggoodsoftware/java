@@ -1,4 +1,4 @@
-package com.mgs.fantasi.properties.measurements;
+package com.mgs.fantasi.properties.data.measurements;
 
 public class Fraction {
 	private final int take;
@@ -10,7 +10,7 @@ public class Fraction {
 	}
 
 	public double toDouble() {
-		return (double)take / (double)from;
+		return (double) take / (double) from;
 	}
 
 	public Fraction minus(Fraction toSubstract) {
@@ -25,7 +25,7 @@ public class Fraction {
 
 	@Override
 	public String toString() {
-		return "Fraction{ "+
+		return "Fraction{ " +
 				from + "/" + take +
 				'}';
 	}

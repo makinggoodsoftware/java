@@ -1,6 +1,6 @@
-package com.mgs.fantasi.properties.measurements;
+package com.mgs.fantasi.properties.data.measurements;
 
-import com.mgs.fantasi.properties.Padding;
+import com.mgs.fantasi.properties.data.Padding;
 import org.apache.commons.lang.builder.EqualsBuilder;
 
 public class EmptyMeasurement implements Measurement {
@@ -20,7 +20,7 @@ public class EmptyMeasurement implements Measurement {
 
 	@Override
 	public Measurement half() {
-		return new com.mgs.fantasi.properties.measurements.EmptyMeasurement();
+		return new com.mgs.fantasi.properties.data.measurements.EmptyMeasurement();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class EmptyMeasurement implements Measurement {
 
 	@Override
 	public Measurement copy() {
-		return new com.mgs.fantasi.properties.measurements.EmptyMeasurement();
+		return new com.mgs.fantasi.properties.data.measurements.EmptyMeasurement();
 	}
 
 	@Override

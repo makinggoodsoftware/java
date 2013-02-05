@@ -1,11 +1,11 @@
-package com.mgs.fantasi.properties.measurements;
+package com.mgs.fantasi.properties.data.measurements;
 
-import com.mgs.fantasi.properties.Padding;
+import com.mgs.fantasi.properties.data.Padding;
 import org.apache.commons.lang.builder.EqualsBuilder;
 
 public class Measurements {
-	public static Measurement simpleMeasurement (int measurement){
-		return new SimpleMeasurement (measurement);
+	public static Measurement simpleMeasurement(int measurement) {
+		return new SimpleMeasurement(measurement);
 	}
 
 	public static Measurement futureMeasurement() {
@@ -45,8 +45,8 @@ public class Measurements {
 
 		@Override
 		public boolean equals(Object o) {
-            return EqualsBuilder.reflectionEquals(this, o);
-        }
+			return EqualsBuilder.reflectionEquals(this, o);
+		}
 
 		@Override
 		public int hashCode() {
@@ -62,7 +62,7 @@ public class Measurements {
 
 		@Override
 		public Measurement half() {
-			return new FractionOfAMeasurement (this, Fractions.half());
+			return new FractionOfAMeasurement(this, Fractions.half());
 		}
 
 		@Override
@@ -92,7 +92,7 @@ public class Measurements {
 
 		@Override
 		public Measurement half() {
-			return new FractionOfAMeasurement (this, Fractions.half());
+			return new FractionOfAMeasurement(this, Fractions.half());
 		}
 
 		@Override
@@ -107,8 +107,8 @@ public class Measurements {
 
 		@Override
 		public boolean equals(Object o) {
-            return EqualsBuilder.reflectionEquals(this, o);
-        }
+			return EqualsBuilder.reflectionEquals(this, o);
+		}
 
 		@Override
 		public int hashCode() {

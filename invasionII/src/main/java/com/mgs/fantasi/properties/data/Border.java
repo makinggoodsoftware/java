@@ -1,4 +1,6 @@
-package com.mgs.fantasi.properties;
+package com.mgs.fantasi.properties.data;
+
+import com.mgs.fantasi.properties.UIProperty;
 
 public class Border implements UIPropertyData {
 	private final UIProperty<Color> color;

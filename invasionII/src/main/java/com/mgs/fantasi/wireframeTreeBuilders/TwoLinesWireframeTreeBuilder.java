@@ -1,7 +1,7 @@
 package com.mgs.fantasi.wireframeTreeBuilders;
 
-import com.mgs.fantasi.properties.measurements.Fraction;
-import com.mgs.fantasi.properties.measurements.Fractions;
+import com.mgs.fantasi.properties.data.measurements.Fraction;
+import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;

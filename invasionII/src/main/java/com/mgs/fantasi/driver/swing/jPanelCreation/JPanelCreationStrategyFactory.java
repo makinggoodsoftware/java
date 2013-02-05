@@ -2,7 +2,7 @@ package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.properties.UIProperty;
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.WireframeContentType;
 
 public class JPanelCreationStrategyFactory {

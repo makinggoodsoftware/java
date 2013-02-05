@@ -8,7 +8,7 @@ import com.mgs.tree.Tree;
 
 import java.awt.*;
 
-import static com.mgs.fantasi.properties.measurements.Fractions.all;
+import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 
 public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 

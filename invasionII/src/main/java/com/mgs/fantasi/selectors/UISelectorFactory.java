@@ -1,6 +1,6 @@
 package com.mgs.fantasi.selectors;
 
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframeTreeBuilders.WireframeTreeBuilder;
 
 public class UISelectorFactory {

@@ -1,5 +1,9 @@
 package com.mgs.fantasi.properties;
 
+import com.mgs.fantasi.properties.data.Border;
+import com.mgs.fantasi.properties.data.Color;
+import com.mgs.fantasi.properties.data.UIPropertyData;
+
 public abstract class UIPropertyFactory {
 	public static UIProperty<Border> newBorder(java.awt.Color color, int width) {
 		return new FullyDefinedUIProperty<Border>(new Border(width, foregroundColorFromAwt(color)), PropertyType.BORDER);
@@ -53,11 +57,6 @@ public abstract class UIPropertyFactory {
 		@Override
 		public boolean isEmpty() {
 			return isEmpty;
-		}
-
-		@Override
-		public PropertyType getType() {
-			return type;
 		}
 
 		@Override

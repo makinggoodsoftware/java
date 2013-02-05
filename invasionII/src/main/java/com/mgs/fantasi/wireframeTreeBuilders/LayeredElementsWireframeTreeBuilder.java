@@ -9,7 +9,7 @@ import com.mgs.tree.Tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mgs.fantasi.properties.measurements.Fractions.all;
+import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 
 public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 	private List<WireframeTreeBuilder> layers = new ArrayList<WireframeTreeBuilder>();

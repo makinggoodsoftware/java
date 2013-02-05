@@ -1,5 +1,6 @@
 package com.mgs.fantasi.properties;
 
+import com.mgs.fantasi.properties.data.UIPropertyData;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -36,11 +37,6 @@ public class FullyDefinedUIProperty<Z extends UIPropertyData> implements UIPrope
 	@Override
 	public boolean isEmpty() {
 		return false;
-	}
-
-	@Override
-	public PropertyType getType() {
-		return type;
 	}
 
 	@Override

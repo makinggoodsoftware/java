@@ -1,4 +1,4 @@
-package com.mgs.fantasi.properties.measurements;
+package com.mgs.fantasi.properties.data.measurements;
 
 public class Fractions {
 	public static Fraction thwoThirds() {

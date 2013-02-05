@@ -1,6 +1,6 @@
-package com.mgs.fantasi.properties.polygon;
+package com.mgs.fantasi.properties.data.polygon;
 
-import com.mgs.fantasi.properties.UIPropertyData;
+import com.mgs.fantasi.properties.data.UIPropertyData;
 
 import java.awt.*;
 import java.awt.geom.Point2D;

@@ -1,6 +1,6 @@
 package com.mgs.fantasi.wireframe;
 
-import com.mgs.fantasi.properties.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframeTreeBuilders.*;
 
 public class Wireframes {

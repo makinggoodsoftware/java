@@ -13,6 +13,6 @@ public class UISelectorBasedOnName implements UISelector {
 
 	@Override
 	public boolean appliesTo(Tree<Wireframe, CollocationInfo> renderable) {
-		return renderable.getContent().getName().equals(name);
+		return renderable.getRoot().getName().equals(name);
 	}
 }

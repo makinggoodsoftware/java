@@ -25,17 +25,17 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 
 	@Override
 	public JPanel render(Tree<Wireframe, CollocationInfo> tree, UIProfile uiProfile) {
-		UIPropertiesBuilder withStylesApplied = from(tree.getContent().getUiProperties());
+		UIPropertiesBuilder withStylesApplied = from(tree.getRoot().getUiProperties());
 		withStylesApplied.applyStyles(uiProfile.findStylesFor(tree));
-		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getBranch().getConnectionManager();
-		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(withStylesApplied.build(), connectionManager.getType());
+		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getChildrenBranch().getConnectionManager();
+		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(withStylesApplied.build());
 
-		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> wireframeChildPart : tree.getContentElements()) {
+		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> wireframeChildPart : tree.getChildren()) {
 			JPanel child = render(wireframeChildPart.getValue(), uiProfile);
 			jPanelBuilder.withChild(child, wireframeChildPart.getKey());
 		}
 
-		return jPanelBuilder.build();
+		return jPanelBuilder.build(connectionManager.getType());
 	}
 
 

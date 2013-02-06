@@ -12,23 +12,21 @@ import java.util.List;
 
 public class StandardJPanelBuilder implements JPanelBuilder {
 	private final UIProperties uiProperties;
-	private final WireframeContentType contentType;
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 	private List<JPanelChild> children = new ArrayList<JPanelChild>();
 
-	public StandardJPanelBuilder(UIProperties uiProperties, WireframeContentType contentType, JPanelLayoutTranslator jPanelLayoutTranslator) {
+	public StandardJPanelBuilder(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator) {
 		this.uiProperties = uiProperties;
-		this.contentType = contentType;
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 	}
 
 	@Override
-	public JPanel build() {
+	public JPanel build(WireframeContentType contentType) {
 		JPanel jPanel = new JPanel();
 		jPanel.setOpaque(false);
 		SwingUtils.applyUIProperties(jPanel, uiProperties);
-		if (getContentType() != WireframeContentType.EMPTY) {
-			LayoutManager layout = jPanelLayoutTranslator.translate(getContentType(), jPanel);
+		if (contentType != WireframeContentType.EMPTY) {
+			LayoutManager layout = jPanelLayoutTranslator.translate(contentType, jPanel);
 			jPanel.setLayout(layout);
 			for (JPanelChild child : children) {
 				jPanel.add(child.getPanel(), translate(child.getCollocationInfo(), layout));
@@ -46,11 +44,6 @@ public class StandardJPanelBuilder implements JPanelBuilder {
 		throw new RuntimeException("Not expected to hit this code point");
 	}
 
-
-	@Override
-	public WireframeContentType getContentType() {
-		return contentType;
-	}
 
 	@Override
 	public JPanelBuilder withChild(JPanel child, CollocationInfo collocationInfo) {

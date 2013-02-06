@@ -18,7 +18,7 @@ public class Branch<T, Z> {
 		}
 	}
 
-	public Set<Map.Entry<Z, Tree<T, Z>>> getParts() {
+	public Set<Map.Entry<Z, Tree<T, Z>>> getLinks() {
 		return children.entrySet();
 	}
 

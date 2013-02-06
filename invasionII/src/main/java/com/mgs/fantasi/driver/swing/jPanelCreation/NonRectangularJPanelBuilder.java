@@ -8,27 +8,20 @@ import javax.swing.*;
 
 public class NonRectangularJPanelBuilder implements JPanelBuilder {
 	private final UIProperties uiProperties;
-	private final WireframeContentType contentType;
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 
-	public NonRectangularJPanelBuilder(UIProperties uiProperties, WireframeContentType contentType, JPanelLayoutTranslator jPanelLayoutTranslator) {
+	public NonRectangularJPanelBuilder(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator) {
 		this.uiProperties = uiProperties;
-		this.contentType = contentType;
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 	}
 
 	@Override
-	public JPanel build() {
+	public JPanel build(WireframeContentType contentType) {
 		JPanelWithDifferentShape container = new JPanelWithDifferentShape(uiProperties.getShape().getValue(), uiProperties);
-		if (getContentType() != WireframeContentType.EMPTY) {
-			container.setLayout(jPanelLayoutTranslator.translate(getContentType(), container));
+		if (contentType != WireframeContentType.EMPTY) {
+			container.setLayout(jPanelLayoutTranslator.translate(contentType, container));
 		}
 		return container;
-	}
-
-	@Override
-	public WireframeContentType getContentType() {
-		return contentType;
 	}
 
 	@Override

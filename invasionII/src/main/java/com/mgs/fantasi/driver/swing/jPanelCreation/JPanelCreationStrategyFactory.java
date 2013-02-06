@@ -1,9 +1,6 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.properties.UIProperty;
-import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.WireframeContentType;
 
 public class JPanelCreationStrategyFactory {
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
@@ -12,17 +9,14 @@ public class JPanelCreationStrategyFactory {
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 	}
 
-	public JPanelBuilder forUIProperties(UIProperties uiProperties, WireframeContentType contentType) {
-		UIProperty<PolygonPointsIterator> shape = uiProperties.getShape();
-		PolygonPointsIterator value = shape.getValue();
-		boolean rectangular = value.isRectangular();
-		JPanelBuilder jPanelBuilder = rectangular ?
-				new StandardJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator) :
-				new NonRectangularJPanelBuilder(uiProperties, contentType, jPanelLayoutTranslator);
+	public JPanelBuilder forUIProperties(UIProperties uiProperties) {
+		JPanelBuilder baseBuilder = uiProperties.getShape().getValue().isRectangular() ?
+				new StandardJPanelBuilder(uiProperties, jPanelLayoutTranslator) :
+				new NonRectangularJPanelBuilder(uiProperties, jPanelLayoutTranslator);
 
 		return uiProperties.getPadding().isFullyDefined() ?
-				new DecoratedJPanelWithPadding(jPanelBuilder, uiProperties.getPadding().getValue()) :
-				jPanelBuilder;
+				new DecoratedJPanelWithPadding(baseBuilder, uiProperties.getPadding().getValue()) :
+				baseBuilder;
 	}
 
 }

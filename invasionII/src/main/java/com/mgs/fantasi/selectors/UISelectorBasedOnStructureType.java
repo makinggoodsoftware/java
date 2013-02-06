@@ -14,6 +14,6 @@ public class UISelectorBasedOnStructureType implements UISelector {
 
 	@Override
 	public boolean appliesTo(Tree<Wireframe, CollocationInfo> tree) {
-		return tree.getContent().getBuilderClass().equals(type);
+		return tree.getRoot().getBuilderClass().equals(type);
 	}
 }

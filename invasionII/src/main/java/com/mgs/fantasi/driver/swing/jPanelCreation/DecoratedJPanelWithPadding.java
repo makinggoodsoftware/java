@@ -22,19 +22,14 @@ public class DecoratedJPanelWithPadding implements JPanelBuilder {
 	}
 
 	@Override
-	public JPanel build() {
-		JPanel jPanel = decoratedPanel.build();
+	public JPanel build(WireframeContentType contentType) {
+		JPanel jPanel = decoratedPanel.build(contentType);
 
 		JPanel outmostPointer = jPanel;
 		if (!padding.isEmpty()) {
 			outmostPointer = decorateWithPadding(jPanel, padding);
 		}
 		return outmostPointer;
-	}
-
-	@Override
-	public WireframeContentType getContentType() {
-		return decoratedPanel.getContentType();
 	}
 
 	@Override

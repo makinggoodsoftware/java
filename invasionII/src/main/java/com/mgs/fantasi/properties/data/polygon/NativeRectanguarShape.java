@@ -15,9 +15,4 @@ public class NativeRectanguarShape implements PolygonPointsIterator {
 		throw new RuntimeException("Can't return list of points for native dimensions");
 	}
 
-	@Override
-	public PolygonPointsIterator copy() {
-		return new NativeRectanguarShape();
-	}
-
 }

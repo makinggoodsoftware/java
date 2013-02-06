@@ -37,8 +37,4 @@ public class TriangleShape implements PolygonPointsIterator {
 
 	}
 
-	@Override
-	public PolygonPointsIterator copy() {
-		return new TriangleShape();
-	}
 }

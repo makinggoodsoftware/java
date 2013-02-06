@@ -11,5 +11,4 @@ public interface PolygonPointsIterator extends UIPropertyData {
 
 	List<Point2D.Double> getPointListFromBottomLeftCorner(Dimension size);
 
-	PolygonPointsIterator copy();
 }

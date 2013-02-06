@@ -1,6 +1,6 @@
 package com.mgs.fantasi.wireframeTreeBuilders;
 
-import com.mgs.fantasi.properties.PropertyType;
+import com.mgs.fantasi.properties.UIPropertyType;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
@@ -12,7 +12,7 @@ import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
 
 public class PolygonWireframeTreeBuilder extends BaseWireframeTreeBuilder<PolygonWireframeTreeBuilder> {
 	public PolygonWireframeTreeBuilder(PolygonPointsIterator polygonPointsIterator) {
-		getUiPropertiesBuilder().withShape(uiProperty(polygonPointsIterator, PropertyType.SHAPE));
+		getUiPropertiesBuilder().withShape(uiProperty(polygonPointsIterator, UIPropertyType.SHAPE));
 	}
 
 	@Override

@@ -6,9 +6,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class FullyDefinedUIProperty<Z extends UIPropertyData> implements UIProperty<Z> {
 	private final Z data;
-	private final PropertyType type;
+	private final UIPropertyType type;
 
-	public FullyDefinedUIProperty(Z data, PropertyType type) {
+	public FullyDefinedUIProperty(Z data, UIPropertyType type) {
 		this.data = data;
 		if (type == null) throw new RuntimeException("Bullshit!");
 		this.type = type;

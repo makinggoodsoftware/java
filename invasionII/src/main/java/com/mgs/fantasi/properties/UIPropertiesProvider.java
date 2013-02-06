@@ -6,7 +6,7 @@ import com.mgs.fantasi.properties.data.Padding;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
-public interface UIPropertiesReader {
+public interface UIPropertiesProvider {
 	UIProperty<Border> getBorder();
 
 	UIProperty<Color> getBackgroundColor();

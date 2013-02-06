@@ -3,89 +3,69 @@ package com.mgs.fantasi.properties;
 import com.mgs.fantasi.properties.data.Border;
 import com.mgs.fantasi.properties.data.Color;
 import com.mgs.fantasi.properties.data.Padding;
+import com.mgs.fantasi.properties.data.UIPropertyData;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.mgs.fantasi.properties.UIPropertyFactory.*;
+import static com.mgs.fantasi.properties.UIPropertyId.*;
 
 public class UIPropertiesBuilderFactory {
-	private final static UIPropertiesReader RECTANGULAR_EMPTY = rectangularEmptyInitializer();
-	private final static UIPropertiesReader ALL_UNDEFINED = allUndefinedInitializer();
-
 	public static UIPropertiesBuilder rectangularEmpty() {
-		return new UIPropertiesBuilder(RECTANGULAR_EMPTY);
+		UIProperty<Border> border = empty(UIPropertyType.BORDER);
+		UIProperty<Color> backgroundColor = empty(UIPropertyType.BACKGROUND_COLOR);
+		UIProperty<Color> foregroundColor = empty(UIPropertyType.FOREGROUND_COLOR);
+		UIProperty<Padding> padding = empty(UIPropertyType.PADDING);
+		UIProperty<PolygonPointsIterator> shape = uiProperty((PolygonPointsIterator) new NativeRectanguarShape(), UIPropertyType.SHAPE);
+		UIProperty<Measurement> measurement = empty(UIPropertyType.MEASUREMENT);
+
+		return new UIPropertiesBuilder(newUIPropertiesMap(
+				border,
+				backgroundColor,
+				foregroundColor,
+				padding,
+				shape,
+				measurement
+		));
 	}
 
 	public static UIPropertiesBuilder allUndefined() {
-		return new UIPropertiesBuilder(ALL_UNDEFINED);
+		UIProperty<Border> border = undefined(UIPropertyType.BORDER);
+		UIProperty<Color> backgroundColor = undefined(UIPropertyType.BACKGROUND_COLOR);
+		UIProperty<Color> foregroundColor = undefined(UIPropertyType.FOREGROUND_COLOR);
+		UIProperty<Padding> padding = undefined(UIPropertyType.PADDING);
+		UIProperty<PolygonPointsIterator> shape = undefined(UIPropertyType.SHAPE);
+		UIProperty<Measurement> measurement = undefined(UIPropertyType.MEASUREMENT);
+
+		return new UIPropertiesBuilder(newUIPropertiesMap(
+				border,
+				backgroundColor,
+				foregroundColor,
+				padding,
+				shape,
+				measurement
+		));
 	}
 
-	private static UIPropertiesReader rectangularEmptyInitializer() {
-		return new UIPropertiesReader() {
-			@Override
-			public UIProperty<Border> getBorder() {
-				return empty(PropertyType.BORDER);
-			}
-
-			@Override
-			public UIProperty<Color> getBackgroundColor() {
-				return empty(PropertyType.BACKGROUND_COLOR);
-			}
-
-			@Override
-			public UIProperty<Color> getForegroundColor() {
-				return empty(PropertyType.FOREGROUND_COLOR);
-			}
-
-			@Override
-			public UIProperty<Padding> getPadding() {
-				return empty(PropertyType.PADDING);
-			}
-
-			@Override
-			public UIProperty<PolygonPointsIterator> getShape() {
-				return uiProperty((PolygonPointsIterator) new NativeRectanguarShape(), PropertyType.SHAPE);
-			}
-
-			@Override
-			public UIProperty<Measurement> getMeasurement() {
-				return empty(PropertyType.MEASUREMENT);
-			}
-		};
-	}
-
-	private static UIPropertiesReader allUndefinedInitializer() {
-		return new UIPropertiesReader() {
-			@Override
-			public UIProperty<Border> getBorder() {
-				return undefined(PropertyType.BORDER);
-			}
-
-			@Override
-			public UIProperty<Color> getBackgroundColor() {
-				return undefined(PropertyType.BACKGROUND_COLOR);
-			}
-
-			@Override
-			public UIProperty<Color> getForegroundColor() {
-				return undefined(PropertyType.FOREGROUND_COLOR);
-			}
-
-			@Override
-			public UIProperty<Padding> getPadding() {
-				return undefined(PropertyType.PADDING);
-			}
-
-			@Override
-			public UIProperty<PolygonPointsIterator> getShape() {
-				return undefined(PropertyType.SHAPE);
-			}
-
-			@Override
-			public UIProperty<Measurement> getMeasurement() {
-				return undefined(PropertyType.MEASUREMENT);
-			}
-		};
+	private static Map<UIPropertyId, UIProperty<? extends UIPropertyData>> newUIPropertiesMap(
+			UIProperty<Border> border,
+			UIProperty<Color> backgroundColor,
+			UIProperty<Color> foregroundColor,
+			UIProperty<Padding> padding,
+			UIProperty<PolygonPointsIterator> shape,
+			UIProperty<Measurement> measurement
+	) {
+		Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties = new HashMap<UIPropertyId, UIProperty<? extends UIPropertyData>>();
+		properties.put(BORDER, border);
+		properties.put(BACKGROUND_COLOR, backgroundColor);
+		properties.put(FOREGROUND_COLOR, foregroundColor);
+		properties.put(PADDING, padding);
+		properties.put(SHAPE, shape);
+		properties.put(MEASUREMENT, measurement);
+		return properties;
 	}
 }

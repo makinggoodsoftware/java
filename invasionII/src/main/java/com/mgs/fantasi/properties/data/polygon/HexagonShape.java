@@ -36,8 +36,4 @@ public class HexagonShape implements PolygonPointsIterator {
 		return hexPoints;
 	}
 
-	@Override
-	public PolygonPointsIterator copy() {
-		return new HexagonShape();
-	}
 }

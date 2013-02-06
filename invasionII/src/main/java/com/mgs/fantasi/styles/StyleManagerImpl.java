@@ -14,7 +14,8 @@ public class StyleManagerImpl implements StyleManager {
 		UIPropertiesBuilder withStylesApplied = allUndefined();
 		withStylesApplied.withUIProperties(uiProperties);
 		for (UIStyle style : stylesToApply) {
-			withStylesApplied.withUIProperties(style.getUnderlyingBuilder().build());
+			UIProperties styleProperties = style.getUnderlyingBuilder().build();
+			withStylesApplied.withUIProperties(styleProperties);
 		}
 		return withStylesApplied.build();
 	}

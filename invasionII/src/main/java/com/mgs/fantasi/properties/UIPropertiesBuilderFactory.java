@@ -33,6 +33,25 @@ public class UIPropertiesBuilderFactory {
 		));
 	}
 
+	public static UIPropertiesBuilder from(UIPropertiesProvider uiPropertiesProvider) {
+		UIProperty<Border> border = uiPropertiesProvider.getBorder();
+		UIProperty<Color> backgroundColor = uiPropertiesProvider.getBackgroundColor();
+		UIProperty<Color> foregroundColor = uiPropertiesProvider.getForegroundColor();
+		UIProperty<Padding> padding = uiPropertiesProvider.getPadding();
+		UIProperty<PolygonPointsIterator> shape = uiPropertiesProvider.getShape();
+		UIProperty<Measurement> measurement = uiPropertiesProvider.getMeasurement();
+
+		return new UIPropertiesBuilder(newUIPropertiesMap(
+				border,
+				backgroundColor,
+				foregroundColor,
+				padding,
+				shape,
+				measurement
+		));
+	}
+
+
 	public static UIPropertiesBuilder allUndefined() {
 		UIProperty<Border> border = undefined(UIPropertyType.BORDER);
 		UIProperty<Color> backgroundColor = undefined(UIPropertyType.BACKGROUND_COLOR);

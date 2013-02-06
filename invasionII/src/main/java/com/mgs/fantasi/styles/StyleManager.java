@@ -5,5 +5,5 @@ import com.mgs.fantasi.properties.UIProperties;
 import java.util.Set;
 
 public interface StyleManager {
-	UIProperties applyStyles(UIProperties uiProperties, Set<UIStyle> stylesToApply);
+	UIProperties applyStyles(UIProperties uiProperties, Set<UIProperties> stylesToApply);
 }

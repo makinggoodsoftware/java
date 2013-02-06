@@ -4,11 +4,11 @@ import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.selectors.UISelectorFactory;
 import com.mgs.fantasi.styles.UIProfile;
 import com.mgs.fantasi.styles.UIProfileFactory;
-import com.mgs.fantasi.styles.UIStyle;
 import com.mgs.fantasi.wireframeTreeBuilders.RectangleWireframeTreeBuilder;
 
 import java.awt.*;
 
+import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allUndefined;
 import static com.mgs.fantasi.properties.UIPropertyFactory.backgroundColorFromAwt;
 import static com.mgs.fantasi.properties.UIPropertyFactory.newBorder;
 import static java.awt.Color.GREEN;
@@ -24,21 +24,23 @@ public class DebugUIProfileFactory implements UIProfileFactory {
 
 		debugProfile.addStyle(
 				UISelectorFactory.forType(RectangleWireframeTreeBuilder.class),
-				new UIStyle().
+				allUndefined().
 						withBorder(newBorder(
 								Color.BLUE,
 								5
 						)).
 						withBackgroundColor(backgroundColorFromAwt(GREEN))
+						.build()
 		);
 		debugProfile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
-				new UIStyle().
+				allUndefined().
 						withBorder(newBorder(
 								Color.YELLOW,
 								10
 						)).
 						withBackgroundColor(backgroundColorFromAwt(RED))
+						.build()
 		);
 
 		return debugProfile;

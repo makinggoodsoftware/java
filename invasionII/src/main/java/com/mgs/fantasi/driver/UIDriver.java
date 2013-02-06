@@ -4,9 +4,7 @@ import com.mgs.fantasi.driver.swing.JPanelRenderingManager;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
-import com.mgs.fantasi.styles.StyleManager;
-import com.mgs.fantasi.styles.StyleManagerImpl;
-import com.mgs.fantasi.styles.UIProfile;
+import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.tree.Tree;
@@ -20,7 +18,6 @@ public class UIDriver<T> {
 
 
 	public static UIDriver<JPanel> forSwing() {
-		StyleManager styleManager = new StyleManagerImpl();
 		JPanelLayoutTranslator jPanelLayoutTranslator = new JPanelLayoutTranslator();
 		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory(jPanelLayoutTranslator);
 
@@ -28,7 +25,6 @@ public class UIDriver<T> {
 				(
 						new SwingUIDisplayManager(),
 						new JPanelRenderingManager(
-								styleManager,
 								jPanelCreationStrategyFactory
 						)
 				);

@@ -1,4 +1,4 @@
-package com.mgs.fantasi.styles;
+package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.selectors.UISelector;

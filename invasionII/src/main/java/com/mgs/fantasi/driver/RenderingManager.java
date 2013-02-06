@@ -1,6 +1,6 @@
 package com.mgs.fantasi.driver;
 
-import com.mgs.fantasi.styles.UIProfile;
+import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.tree.Tree;

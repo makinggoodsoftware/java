@@ -8,6 +8,7 @@ import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
 import java.util.Map;
+import java.util.Set;
 
 import static com.mgs.fantasi.properties.UIPropertyId.*;
 
@@ -53,5 +54,12 @@ public class UIPropertiesBuilder {
 
 	public UIProperties build() {
 		return new UIProperties(properties);
+	}
+
+	public UIProperties applyStyles(Set<UIProperties> uiPropertiesToApply) {
+		for (UIProperties uiPropertyToApply : uiPropertiesToApply) {
+			withUIProperties(uiPropertyToApply);
+		}
+		return build();
 	}
 }

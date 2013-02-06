@@ -3,9 +3,8 @@ package com.mgs.fantasi.driver.swing;
 import com.mgs.fantasi.driver.RenderingManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelBuilder;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
-import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.styles.StyleManager;
-import com.mgs.fantasi.styles.UIProfile;
+import com.mgs.fantasi.profile.UIProfile;
+import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeCollocationInfoConnectionManager;
@@ -14,22 +13,22 @@ import com.mgs.tree.Tree;
 import javax.swing.*;
 import java.util.Map;
 
+import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.from;
+
 public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	private final JPanelCreationStrategyFactory jPanelBuilderFactory;
-	private final StyleManager styleManager;
 
 
-	public JPanelRenderingManager(StyleManager styleManager, JPanelCreationStrategyFactory jPanelBuilderFactory) {
+	public JPanelRenderingManager(JPanelCreationStrategyFactory jPanelBuilderFactory) {
 		this.jPanelBuilderFactory = jPanelBuilderFactory;
-		this.styleManager = styleManager;
 	}
 
 	@Override
 	public JPanel render(Tree<Wireframe, CollocationInfo> tree, UIProfile uiProfile) {
-		UIProperties uiProperties = tree.getContent().getUiProperties();
-		UIProperties uiPropertiesWithStylesApplied = styleManager.applyStyles(uiProperties, uiProfile.findStylesFor(tree));
+		UIPropertiesBuilder withStylesApplied = from(tree.getContent().getUiProperties());
+		withStylesApplied.applyStyles(uiProfile.findStylesFor(tree));
 		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getBranch().getConnectionManager();
-		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(uiPropertiesWithStylesApplied, connectionManager.getType());
+		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(withStylesApplied.build(), connectionManager.getType());
 
 		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> wireframeChildPart : tree.getContentElements()) {
 			JPanel child = render(wireframeChildPart.getValue(), uiProfile);

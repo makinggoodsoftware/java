@@ -2,9 +2,8 @@ package com.mgs.fantasi.wireframe.builder;
 
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeContainer;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
-import com.mgs.tree.Branch;
-import com.mgs.tree.Tree;
 
 import java.awt.*;
 
@@ -21,18 +20,18 @@ public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder
 	}
 
 	@Override
-	public Tree<Wireframe, CollocationInfo> build(final WireframeContentFactory wireframeContentFactory) {
+	public WireframeContainer build(final WireframeContentFactory wireframeContentFactory) {
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
+		WireframeContainer wireframeContainer = new WireframeContainer(wireframe, wireframeContentFactory.getGridConnectionManager());
 		Dimension dimension = new Dimension(numberOfDivisions, 1);
-		Branch<Wireframe, CollocationInfo> wireframeBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getGridConnectionManager());
 		for (int x = 0; x < dimension.width; x++) {
 			for (int y = 0; y < dimension.height; y++) {
 				CollocationInfo collocationInfo = new CollocationInfo(0, all(), all(), x, y);
-				Tree<Wireframe, CollocationInfo> child = contentTreeBuilder.build(wireframeContentFactory);
-				wireframeBranch.addChild(collocationInfo, child);
+				WireframeContainer child = contentTreeBuilder.build(wireframeContentFactory);
+				wireframeContainer.addContent(collocationInfo, child);
 			}
 		}
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
-		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
+		return wireframeContainer;
 	}
 
 	public VerticalSlicesWireframeTreeBuilder withVerticalDivisions(int numberOVerticalDivisions) {

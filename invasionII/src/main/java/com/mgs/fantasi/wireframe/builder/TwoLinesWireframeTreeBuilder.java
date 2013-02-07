@@ -4,9 +4,8 @@ import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeContainer;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
-import com.mgs.tree.Branch;
-import com.mgs.tree.Tree;
 
 import java.awt.*;
 
@@ -27,15 +26,17 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 	}
 
 	@Override
-	public Tree<Wireframe, CollocationInfo> build(final WireframeContentFactory wireframeContentFactory) {
-		Branch<Wireframe, CollocationInfo> branch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getGridConnectionManager());
+	public WireframeContainer build(final WireframeContentFactory wireframeContentFactory) {
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
+		WireframeContainer wireframeContainer = new WireframeContainer(wireframe, wireframeContentFactory.getGridConnectionManager());
+
 		Dimension dimension = new Dimension(1, 2);
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
 
 		for (int x = 0; x < dimension.width; x++) {
 			for (int y = 0; y < dimension.height; y++) {
 				CollocationInfo collocationInfo;
-				Tree<Wireframe, CollocationInfo> child;
+				WireframeContainer child;
 				if (y == 0) {
 					collocationInfo = new CollocationInfo(0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
 					child = firstLineTreeBuilder.build(wireframeContentFactory);
@@ -43,11 +44,10 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 					collocationInfo = new CollocationInfo(0, Fractions.all(), remainder, 0, y);
 					child = secondLineTreeBuilder.build(wireframeContentFactory);
 				}
-				branch.addChild(collocationInfo, child);
+				wireframeContainer.addContent(collocationInfo, child);
 			}
 		}
 
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
-		return new Tree<Wireframe, CollocationInfo>(wireframe, branch);
+		return wireframeContainer;
 	}
 }

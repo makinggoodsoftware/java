@@ -2,9 +2,8 @@ package com.mgs.fantasi.wireframe.builder;
 
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeContainer;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
-import com.mgs.tree.Branch;
-import com.mgs.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +19,15 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 	}
 
 	@Override
-	public Tree<Wireframe, CollocationInfo> build(WireframeContentFactory wireframeContentFactory) {
-		Branch<Wireframe, CollocationInfo> wireframeBranch = new Branch<Wireframe, CollocationInfo>(wireframeContentFactory.getLayeredConnectionManager());
+	public WireframeContainer build(WireframeContentFactory wireframeContentFactory) {
+		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
+		WireframeContainer wireframeContainer = new WireframeContainer(wireframe, wireframeContentFactory.getLayeredConnectionManager());
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			WireframeTreeBuilder layerBuilder = layers.get(i);
-			Tree<Wireframe, CollocationInfo> layer = layerBuilder.build(wireframeContentFactory);
-			wireframeBranch.addChild(new CollocationInfo(i, all(), all(), 0, 0), layer);
+			WireframeContainer layer = layerBuilder.build(wireframeContentFactory);
+			wireframeContainer.addContent(new CollocationInfo(i, all(), all(), 0, 0), layer);
 		}
 
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
-		return new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch);
+		return wireframeContainer;
 	}
 }

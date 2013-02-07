@@ -8,11 +8,10 @@ import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeCollocationInfoConnectionManager;
-import com.mgs.tree.Tree;
+import com.mgs.fantasi.wireframe.WireframeContainer;
 
 import javax.swing.*;
 import java.util.Map;
-import java.util.Set;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.from;
 
@@ -25,16 +24,16 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	}
 
 	@Override
-	public JPanel render(Tree<Wireframe, CollocationInfo> tree, UIProfile uiProfile) {
-		JPanelBuilder jPanelBuilder = renderWireframe(tree.getRoot(), uiProfile);
-		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, tree.getChildren(), uiProfile);
+	public JPanel render(WireframeContainer wireframeContainer, UIProfile uiProfile) {
+		JPanelBuilder jPanelBuilder = renderWireframe(wireframeContainer.getWireframe(), uiProfile);
+		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, wireframeContainer.getContent(), uiProfile);
 
-		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getConnectionManager();
+		WireframeCollocationInfoConnectionManager connectionManager = wireframeContainer.getLayoutManager();
 		return jPanelBuilderWithChildren.build(connectionManager.getType());
 	}
 
-	private JPanelBuilder renderChildrenIntoJPanelBuilder(JPanelBuilder jPanelBuilder, Set<Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>>> children, UIProfile uiProfile) {
-		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> wireframeChildPart : children) {
+	private JPanelBuilder renderChildrenIntoJPanelBuilder(JPanelBuilder jPanelBuilder, Map<CollocationInfo, WireframeContainer> children, UIProfile uiProfile) {
+		for (Map.Entry<CollocationInfo, WireframeContainer> wireframeChildPart : children.entrySet()) {
 			JPanel child = render(wireframeChildPart.getValue(), uiProfile);
 			jPanelBuilder.withChild(child, wireframeChildPart.getKey());
 		}

@@ -1,7 +1,7 @@
 package com.mgs.fantasi.wireframe;
 
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframeTreeBuilders.*;
+import com.mgs.fantasi.wireframe.builder.*;
 
 public class Wireframes {
 	public static LayeredElementsWireframeTreeBuilder layered() {
@@ -20,7 +20,11 @@ public class Wireframes {
 		return new VerticalSlicesWireframeTreeBuilder(contentTreeBuilder);
 	}
 
-	public static PijamaRowsWireframeTreeBuilder pijamaRows(WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder) {
-		return new PijamaRowsWireframeTreeBuilder(firstRowTreeBuilder, secondRowTreeBuilder);
+	public static PijamaRowsWireframeTreeBuilder pijamaRows(WireframeTreeBuilder oddLineTreeBuilder, WireframeTreeBuilder evenRowTreeBuilder) {
+		return new PijamaRowsWireframeTreeBuilder(oddLineTreeBuilder, evenRowTreeBuilder);
+	}
+
+	public static TwoLinesWireframeTreeBuilder twoLines(WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder) {
+		return new TwoLinesWireframeTreeBuilder(firstLineTreeBuilder, secondLineTreeBuilder);
 	}
 }

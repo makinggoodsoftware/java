@@ -1,8 +1,6 @@
 package com.mgs.fantasi.selectors;
 
-import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.tree.Tree;
 
 public class UISelectorBasedOnName implements UISelector {
 	private final String name;
@@ -12,7 +10,7 @@ public class UISelectorBasedOnName implements UISelector {
 	}
 
 	@Override
-	public boolean appliesTo(Tree<Wireframe, CollocationInfo> renderable) {
-		return renderable.getRoot().getName().equals(name);
+	public boolean appliesTo(Wireframe renderable) {
+		return renderable.getName().equals(name);
 	}
 }

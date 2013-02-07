@@ -9,7 +9,7 @@ import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
-import com.mgs.fantasi.wireframeTreeBuilders.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.builder.WireframeTreeBuilder;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 import com.mgs.tree.Tree;
 

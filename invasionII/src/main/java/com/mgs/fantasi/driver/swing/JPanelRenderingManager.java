@@ -12,6 +12,7 @@ import com.mgs.tree.Tree;
 
 import javax.swing.*;
 import java.util.Map;
+import java.util.Set;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.from;
 
@@ -25,17 +26,26 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 
 	@Override
 	public JPanel render(Tree<Wireframe, CollocationInfo> tree, UIProfile uiProfile) {
-		UIPropertiesBuilder withStylesApplied = from(tree.getRoot().getUiProperties());
-		withStylesApplied.applyStyles(uiProfile.findStylesFor(tree));
-		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getChildrenBranch().getConnectionManager();
-		JPanelBuilder jPanelBuilder = jPanelBuilderFactory.forUIProperties(withStylesApplied.build());
+		JPanelBuilder jPanelBuilder = renderWireframe(tree.getRoot(), uiProfile);
+		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, tree.getChildren(), uiProfile);
 
-		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> wireframeChildPart : tree.getChildren()) {
+		WireframeCollocationInfoConnectionManager connectionManager = (WireframeCollocationInfoConnectionManager) tree.getConnectionManager();
+		return jPanelBuilderWithChildren.build(connectionManager.getType());
+	}
+
+	private JPanelBuilder renderChildrenIntoJPanelBuilder(JPanelBuilder jPanelBuilder, Set<Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>>> children, UIProfile uiProfile) {
+		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> wireframeChildPart : children) {
 			JPanel child = render(wireframeChildPart.getValue(), uiProfile);
 			jPanelBuilder.withChild(child, wireframeChildPart.getKey());
 		}
 
-		return jPanelBuilder.build(connectionManager.getType());
+		return jPanelBuilder;
+	}
+
+	private JPanelBuilder renderWireframe(Wireframe wireframe, UIProfile uiProfile) {
+		UIPropertiesBuilder withStylesApplied = from(wireframe.getUiProperties());
+		withStylesApplied.applyStyles(uiProfile.findStylesFor(wireframe));
+		return jPanelBuilderFactory.forUIProperties(withStylesApplied.build());
 	}
 
 

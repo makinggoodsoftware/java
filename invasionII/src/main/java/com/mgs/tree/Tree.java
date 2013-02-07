@@ -24,4 +24,7 @@ public class Tree<T, Z> {
 		return getChildrenBranch().getLinks();
 	}
 
+	public ConnectionManager<T, Z> getConnectionManager() {
+		return branch.getConnectionManager();
+	}
 }

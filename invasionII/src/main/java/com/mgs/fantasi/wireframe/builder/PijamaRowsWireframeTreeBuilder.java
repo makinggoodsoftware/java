@@ -1,10 +1,11 @@
-package com.mgs.fantasi.wireframeTreeBuilders;
+package com.mgs.fantasi.wireframe.builder;
 
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframe.Wireframes;
 import com.mgs.tree.Branch;
 import com.mgs.tree.Tree;
 
@@ -16,7 +17,7 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 	private int numberOfGenerations = UNDEFINED;
 
 	public PijamaRowsWireframeTreeBuilder(WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder) {
-		generationBuilder = new TwoLinesWireframeTreeBuilder(firstRowTreeBuilder, secondRowTreeBuilder);
+		generationBuilder = Wireframes.twoLines(firstRowTreeBuilder, secondRowTreeBuilder);
 	}
 
 	public PijamaRowsWireframeTreeBuilder withFirstRowSize(Fraction sizeConstraints) {

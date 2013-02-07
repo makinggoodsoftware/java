@@ -1,7 +1,7 @@
 package com.mgs.fantasi.wireframe;
 
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.wireframeTreeBuilders.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.builder.WireframeTreeBuilder;
 
 public class Wireframe {
 	private final UIProperties uiProperties;

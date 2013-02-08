@@ -2,15 +2,15 @@ package com.mgs.tree;
 
 import java.util.Map;
 
-public class SingleBrachTreeWithConnectionInfo<T, Z> implements TreeWithConnectionInfo<T, Z> {
+public class SingleBranchTreeWithConnectionInfo<T, Z> implements TreeWithConnectionInfo<T, Z> {
 	private final T root;
 	private final Branch<T, Z> branch;
 
-	public SingleBrachTreeWithConnectionInfo(T root, ConnectionManager<T, Z> connectionManager) {
+	public SingleBranchTreeWithConnectionInfo(T root, ConnectionManager<T, Z> connectionManager) {
 		this(root, new Branch<T, Z>(connectionManager));
 	}
 
-	public SingleBrachTreeWithConnectionInfo(T root, Branch<T, Z> branch) {
+	public SingleBranchTreeWithConnectionInfo(T root, Branch<T, Z> branch) {
 		this.branch = branch;
 		this.root = root;
 	}

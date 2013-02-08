@@ -1,30 +1,32 @@
 package com.mgs.fantasi.wireframe;
 
 import com.mgs.tree.Branch;
-import com.mgs.tree.Tree;
+import com.mgs.tree.SingleBrachTreeWithConnectionInfo;
+import com.mgs.tree.TreeWithConnectionInfo;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class WireframeContainer {
-	private final Tree<Wireframe, CollocationInfo> tree;
+	private final SingleBrachTreeWithConnectionInfo<Wireframe, CollocationInfo> tree;
 
 	public WireframeContainer(Wireframe wireframe, WireframeCollocationInfoConnectionManager connectionManager) {
-		this(new Tree<Wireframe, CollocationInfo>(wireframe, connectionManager));
+		this(new SingleBrachTreeWithConnectionInfo<Wireframe, CollocationInfo>(wireframe, connectionManager));
 	}
 
 	public WireframeContainer(Wireframe wireframe, Branch<Wireframe, CollocationInfo> wireframeBranch) {
-		this(new Tree<Wireframe, CollocationInfo>(wireframe, wireframeBranch));
+		this(new SingleBrachTreeWithConnectionInfo<Wireframe, CollocationInfo>(wireframe, wireframeBranch));
 	}
 
-	public WireframeContainer(Tree<Wireframe, CollocationInfo> tree) {
+	public WireframeContainer(SingleBrachTreeWithConnectionInfo<Wireframe, CollocationInfo> tree) {
 		this.tree = tree;
 	}
 
 	public Map<CollocationInfo, WireframeContainer> getContent() {
 		Map<CollocationInfo, WireframeContainer> childrenWrapped = new HashMap<CollocationInfo, WireframeContainer>();
-		for (Map.Entry<CollocationInfo, Tree<Wireframe, CollocationInfo>> child : tree.getChildren()) {
-			childrenWrapped.put(child.getKey(), new WireframeContainer(child.getValue()));
+		for (Map.Entry<CollocationInfo, TreeWithConnectionInfo<Wireframe, CollocationInfo>> child : tree.getChildren().entrySet()) {
+			WireframeContainer wireframeContainer = new WireframeContainer((SingleBrachTreeWithConnectionInfo<Wireframe, CollocationInfo>) child.getValue());
+			childrenWrapped.put(child.getKey(), wireframeContainer);
 		}
 		return childrenWrapped;
 	}

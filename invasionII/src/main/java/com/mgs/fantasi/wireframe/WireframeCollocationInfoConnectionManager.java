@@ -1,7 +1,7 @@
 package com.mgs.fantasi.wireframe;
 
 import com.mgs.tree.ConnectionManager;
-import com.mgs.tree.Tree;
+import com.mgs.tree.TreeWithConnectionInfo;
 
 public class WireframeCollocationInfoConnectionManager implements ConnectionManager<Wireframe, CollocationInfo> {
 	private final WireframeContentType type;
@@ -11,7 +11,7 @@ public class WireframeCollocationInfoConnectionManager implements ConnectionMana
 	}
 
 	@Override
-	public boolean accepts(CollocationInfo linkInfo, Tree<Wireframe, CollocationInfo> child) {
+	public boolean accepts(CollocationInfo linkInfo, TreeWithConnectionInfo<Wireframe, CollocationInfo> child) {
 		if (type == WireframeContentType.EMPTY) {
 			throw new RuntimeException("Can't accept content for an empty connector!");
 		}

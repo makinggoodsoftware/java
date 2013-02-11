@@ -25,7 +25,7 @@ public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<Rect
 			return new WireframeContainer(wireframe, wireframeContentFactory.getEmptyConnectionManager());
 		}
 		WireframeContainer wireframeContainer = new WireframeContainer(wireframe, wireframeContentFactory.getRectangleConnectionManager());
-		wireframeContainer.addContent(new CollocationInfo(0, all(), all(), 0, 0), content.build(wireframeContentFactory));
+		wireframeContainer.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.build(wireframeContentFactory));
 		return wireframeContainer;
 	}
 }

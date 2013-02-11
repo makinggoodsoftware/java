@@ -5,7 +5,7 @@ import java.util.Map;
 public interface TreeWithConnectionInfo<T, Z> {
 	T getRoot();
 
-	Map<Z, TreeWithConnectionInfo<T, Z>> getChildren();
+	Map<Z, ? extends TreeWithConnectionInfo<T, Z>> getChildren();
 
 	void addChild(Z connection, TreeWithConnectionInfo<T, Z> child);
 

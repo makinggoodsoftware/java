@@ -34,7 +34,7 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 			for (int y = 0; y < dimension.height; y++) {
 				WireframeContainer content = generationBuilder.build(wireframeContentFactory);
 				CollocationInfo collocationInfo = new CollocationInfo(0, Fractions.all(), Fractions.all(), x, y);
-				wireframeContainer.addContent(collocationInfo, content);
+				wireframeContainer.addChild(collocationInfo, content);
 			}
 		}
 		return wireframeContainer;

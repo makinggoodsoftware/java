@@ -28,7 +28,7 @@ public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder
 			for (int y = 0; y < dimension.height; y++) {
 				CollocationInfo collocationInfo = new CollocationInfo(0, all(), all(), x, y);
 				WireframeContainer child = contentTreeBuilder.build(wireframeContentFactory);
-				wireframeContainer.addContent(collocationInfo, child);
+				wireframeContainer.addChild(collocationInfo, child);
 			}
 		}
 		return wireframeContainer;

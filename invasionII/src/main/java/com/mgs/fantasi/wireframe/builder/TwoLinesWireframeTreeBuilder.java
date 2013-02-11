@@ -44,7 +44,7 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 					collocationInfo = new CollocationInfo(0, Fractions.all(), remainder, 0, y);
 					child = secondLineTreeBuilder.build(wireframeContentFactory);
 				}
-				wireframeContainer.addContent(collocationInfo, child);
+				wireframeContainer.addChild(collocationInfo, child);
 			}
 		}
 

@@ -25,7 +25,7 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			WireframeTreeBuilder layerBuilder = layers.get(i);
 			WireframeContainer layer = layerBuilder.build(wireframeContentFactory);
-			wireframeContainer.addContent(new CollocationInfo(i, all(), all(), 0, 0), layer);
+			wireframeContainer.addChild(new CollocationInfo(i, all(), all(), 0, 0), layer);
 		}
 
 		return wireframeContainer;

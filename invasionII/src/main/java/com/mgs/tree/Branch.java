@@ -29,8 +29,8 @@ public class Branch<T, Z, Y extends TreeWithConnectionInfo<T, Z>> {
 		Map<Z, Y> childrenInHierarchy = getChildren();
 		Map<T, Z> plainChildren = new HashMap<T, Z>();
 		for (Map.Entry<Z, Y> childInHierarchy : childrenInHierarchy.entrySet()) {
-			TreeWithConnectionInfo<T, Z> value = childInHierarchy.getValue();
-			plainChildren.put(value.getRoot(), childInHierarchy.getKey());
+			Y value = childInHierarchy.getValue();
+			plainChildren.put(value.getRoot().getValue(), childInHierarchy.getKey());
 		}
 		return plainChildren;
 	}

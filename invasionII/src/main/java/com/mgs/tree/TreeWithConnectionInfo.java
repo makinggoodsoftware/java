@@ -3,7 +3,7 @@ package com.mgs.tree;
 import java.util.Map;
 
 public interface TreeWithConnectionInfo<T, Z> {
-	T getRoot();
+	Node<T> getRoot();
 
 	Map<Z, ? extends TreeWithConnectionInfo<T, Z>> getChildren();
 

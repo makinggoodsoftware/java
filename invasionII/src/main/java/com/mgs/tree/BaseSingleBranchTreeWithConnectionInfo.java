@@ -3,14 +3,14 @@ package com.mgs.tree;
 import java.util.Map;
 
 public abstract class BaseSingleBranchTreeWithConnectionInfo<T, Z, Y extends TreeWithConnectionInfo<T, Z>> implements TreeWithConnectionInfo<T, Z> {
-	private final T root;
+	private final Node<T> root;
 	private final Branch<T, Z, Y> branch;
 
-	public BaseSingleBranchTreeWithConnectionInfo(T root, ConnectionManager<T, Z> connectionManager) {
+	public BaseSingleBranchTreeWithConnectionInfo(Node<T> root, ConnectionManager<T, Z> connectionManager) {
 		this(root, new Branch<T, Z, Y>(connectionManager));
 	}
 
-	public BaseSingleBranchTreeWithConnectionInfo(T root, Branch<T, Z, Y> branch) {
+	public BaseSingleBranchTreeWithConnectionInfo(Node<T> root, Branch<T, Z, Y> branch) {
 		this.branch = branch;
 		this.root = root;
 	}
@@ -20,7 +20,7 @@ public abstract class BaseSingleBranchTreeWithConnectionInfo<T, Z, Y extends Tre
 	}
 
 	@Override
-	public final T getRoot() {
+	public final Node<T> getRoot() {
 		return root;
 	}
 

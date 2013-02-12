@@ -24,7 +24,7 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 
 	@Override
 	public JPanel render(WireframeContainer wireframeContainer, UIProfile uiProfile) {
-		JPanelBuilder jPanelBuilder = renderWireframe(wireframeContainer.getRoot(), uiProfile);
+		JPanelBuilder jPanelBuilder = renderWireframe(wireframeContainer.getValue(), uiProfile);
 		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, wireframeContainer.getChildren(), uiProfile);
 		return jPanelBuilderWithChildren.build(wireframeContainer.getType());
 	}

@@ -5,7 +5,7 @@ import com.mgs.tree.ConnectionManager;
 
 public class WireframeContainer extends BaseSingleBranchTreeWithConnectionInfo<Wireframe, CollocationInfo, WireframeContainer> {
 
-	public WireframeContainer(Wireframe root, ConnectionManager<Wireframe, CollocationInfo> connectionManager) {
+	WireframeContainer(Wireframe root, ConnectionManager<Wireframe, CollocationInfo> connectionManager) {
 		super(root, connectionManager);
 	}
 
@@ -13,4 +13,7 @@ public class WireframeContainer extends BaseSingleBranchTreeWithConnectionInfo<W
 		return (WireframeCollocationInfoConnectionManager) getConnectionManager();
 	}
 
+	public WireframeContentType getType() {
+		return getLayoutManager().getType();
+	}
 }

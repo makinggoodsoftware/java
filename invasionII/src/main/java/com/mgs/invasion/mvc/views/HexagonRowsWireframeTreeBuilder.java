@@ -5,7 +5,6 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.wireframe.WireframeContainer;
-import com.mgs.fantasi.wireframe.WireframeContentFactory;
 import com.mgs.fantasi.wireframe.builder.BaseWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.builder.PijamaRowsWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.builder.PolygonWireframeTreeBuilder;
@@ -34,8 +33,8 @@ public class HexagonRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<He
 	}
 
 	@Override
-	public WireframeContainer build(WireframeContentFactory wireframeContentFactory) {
-		return pijamaRows.build(wireframeContentFactory);
+	public WireframeContainer build() {
+		return pijamaRows.build();
 	}
 
 	public WireframeTreeBuilder withHexagonMeasurement(UIProperty<Measurement> hexagonMeasurement) {

@@ -7,7 +7,6 @@ import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeCollocationInfoConnectionManager;
 import com.mgs.fantasi.wireframe.WireframeContainer;
 
 import javax.swing.*;
@@ -27,9 +26,7 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	public JPanel render(WireframeContainer wireframeContainer, UIProfile uiProfile) {
 		JPanelBuilder jPanelBuilder = renderWireframe(wireframeContainer.getRoot(), uiProfile);
 		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, wireframeContainer.getChildren(), uiProfile);
-
-		WireframeCollocationInfoConnectionManager connectionManager = wireframeContainer.getLayoutManager();
-		return jPanelBuilderWithChildren.build(connectionManager.getType());
+		return jPanelBuilderWithChildren.build(wireframeContainer.getType());
 	}
 
 	private JPanelBuilder renderChildrenIntoJPanelBuilder(JPanelBuilder jPanelBuilder, Map<CollocationInfo, WireframeContainer> children, UIProfile uiProfile) {

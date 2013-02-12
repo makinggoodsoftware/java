@@ -5,9 +5,10 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContainer;
-import com.mgs.fantasi.wireframe.WireframeContentFactory;
 
 import java.awt.*;
+
+import static com.mgs.fantasi.wireframe.WireframeContainerFactory.grid;
 
 public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 	private final WireframeTreeBuilder firstLineTreeBuilder;
@@ -26,9 +27,9 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 	}
 
 	@Override
-	public WireframeContainer build(final WireframeContentFactory wireframeContentFactory) {
+	public WireframeContainer build() {
 		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
-		WireframeContainer wireframeContainer = new WireframeContainer(wireframe, wireframeContentFactory.getGridConnectionManager());
+		WireframeContainer wireframeContainer = grid(wireframe);
 
 		Dimension dimension = new Dimension(1, 2);
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
@@ -39,10 +40,10 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 				WireframeContainer child;
 				if (y == 0) {
 					collocationInfo = new CollocationInfo(0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
-					child = firstLineTreeBuilder.build(wireframeContentFactory);
+					child = firstLineTreeBuilder.build();
 				} else {
 					collocationInfo = new CollocationInfo(0, Fractions.all(), remainder, 0, y);
-					child = secondLineTreeBuilder.build(wireframeContentFactory);
+					child = secondLineTreeBuilder.build();
 				}
 				wireframeContainer.addChild(collocationInfo, child);
 			}

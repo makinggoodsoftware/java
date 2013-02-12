@@ -3,7 +3,7 @@ package com.mgs.fantasi.wireframe.builder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContainer;
-import com.mgs.fantasi.wireframe.WireframeContentFactory;
+import com.mgs.fantasi.wireframe.WireframeContainerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,12 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 	}
 
 	@Override
-	public WireframeContainer build(WireframeContentFactory wireframeContentFactory) {
+	public WireframeContainer build() {
 		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
-		WireframeContainer wireframeContainer = new WireframeContainer(wireframe, wireframeContentFactory.getLayeredConnectionManager());
+		WireframeContainer wireframeContainer = WireframeContainerFactory.layered(wireframe);
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			WireframeTreeBuilder layerBuilder = layers.get(i);
-			WireframeContainer layer = layerBuilder.build(wireframeContentFactory);
+			WireframeContainer layer = layerBuilder.build();
 			wireframeContainer.addChild(new CollocationInfo(i, all(), all(), 0, 0), layer);
 		}
 

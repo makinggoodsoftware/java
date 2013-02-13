@@ -3,7 +3,7 @@ package com.mgs.fantasi.driver.swing.jPanelCreation;
 import com.mgs.fantasi.driver.swing.SwingUtils;
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.tree.WireframeChildrenLayout;
+import com.mgs.fantasi.wireframe.tree.WireframeLayoutType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,12 +21,12 @@ public class StandardJPanelBuilder implements JPanelBuilder {
 	}
 
 	@Override
-	public JPanel build(WireframeChildrenLayout childrenLayout) {
+	public JPanel build(WireframeLayoutType layoutType) {
 		JPanel jPanel = new JPanel();
 		jPanel.setOpaque(false);
 		SwingUtils.applyUIProperties(jPanel, uiProperties);
-		if (childrenLayout != WireframeChildrenLayout.EMPTY) {
-			LayoutManager layout = jPanelLayoutTranslator.translate(childrenLayout, jPanel);
+		if (layoutType != WireframeLayoutType.EMPTY) {
+			LayoutManager layout = jPanelLayoutTranslator.translate(layoutType, jPanel);
 			jPanel.setLayout(layout);
 			for (JPanelChild child : children) {
 				jPanel.add(child.getPanel(), translate(child.getCollocationInfo(), layout));

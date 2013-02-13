@@ -1,5 +1,5 @@
 package com.mgs.fantasi.wireframe.tree;
 
-public enum WireframeChildrenLayout {
+public enum WireframeLayoutType {
 	GRID, EMPTY, LAYERS, SIMPLE
 }

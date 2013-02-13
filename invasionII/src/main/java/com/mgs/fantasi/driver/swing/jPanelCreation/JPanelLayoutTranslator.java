@@ -1,13 +1,13 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.wireframe.tree.WireframeChildrenLayout;
+import com.mgs.fantasi.wireframe.tree.WireframeLayoutType;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class JPanelLayoutTranslator {
-	public LayoutManager translate(WireframeChildrenLayout childrenLayout, JPanel container) {
-		switch (childrenLayout) {
+	public LayoutManager translate(WireframeLayoutType layoutType, JPanel container) {
+		switch (layoutType) {
 			case GRID:
 			case SIMPLE:
 				return new GridBagLayout();

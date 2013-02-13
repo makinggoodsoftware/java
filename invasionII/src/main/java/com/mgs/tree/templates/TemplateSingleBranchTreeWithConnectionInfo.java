@@ -9,8 +9,8 @@ public abstract class TemplateSingleBranchTreeWithConnectionInfo<T, Z, Y extends
 	private final W root;
 	private final Branch<T, Z, Y> branch;
 
-	public TemplateSingleBranchTreeWithConnectionInfo(W root, ConnectionManager<T, Z> connectionManager) {
-		this(root, new Branch<T, Z, Y>(connectionManager));
+	public TemplateSingleBranchTreeWithConnectionInfo(W root) {
+		this(root, new Branch<T, Z, Y>());
 	}
 
 	public TemplateSingleBranchTreeWithConnectionInfo(W root, Branch<T, Z, Y> branch) {
@@ -32,9 +32,6 @@ public abstract class TemplateSingleBranchTreeWithConnectionInfo<T, Z, Y extends
 		return getChildrenBranch().getChildren();
 	}
 
-	public ConnectionManager<T, Z> getConnectionManager() {
-		return branch.getConnectionManager();
-	}
 
 	@Override
 	public final void addChild(Z connection, TreeWithConnectionInfo<T, Z> child) {

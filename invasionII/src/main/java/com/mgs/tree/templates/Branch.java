@@ -7,20 +7,9 @@ import java.util.Map;
 
 public class Branch<T, Z, Y extends TreeWithConnectionInfo<T, Z>> {
 	private final Map<Z, Y> children = new HashMap<Z, Y>();
-	private final ConnectionManager<T, Z> connectionManager;
-
-	public Branch(ConnectionManager<T, Z> connectionManager) {
-		this.connectionManager = connectionManager;
-	}
 
 	public void addChild(Z linkInfo, Y child) {
-		if (connectionManager.accepts(linkInfo, child)) {
-			children.put(linkInfo, child);
-		}
-	}
-
-	public ConnectionManager<T, Z> getConnectionManager() {
-		return connectionManager;
+		children.put(linkInfo, child);
 	}
 
 	public Map<Z, Y> getChildren() {

@@ -2,7 +2,7 @@ package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.tree.WireframeChildrenLayout;
+import com.mgs.fantasi.wireframe.tree.WireframeLayoutType;
 
 import javax.swing.*;
 
@@ -16,10 +16,10 @@ public class NonRectangularJPanelBuilder implements JPanelBuilder {
 	}
 
 	@Override
-	public JPanel build(WireframeChildrenLayout childrenLayout) {
+	public JPanel build(WireframeLayoutType layoutType) {
 		JPanelWithDifferentShape container = new JPanelWithDifferentShape(uiProperties.getShape().getValue(), uiProperties);
-		if (childrenLayout != WireframeChildrenLayout.EMPTY) {
-			container.setLayout(jPanelLayoutTranslator.translate(childrenLayout, container));
+		if (layoutType != WireframeLayoutType.EMPTY) {
+			container.setLayout(jPanelLayoutTranslator.translate(layoutType, container));
 		}
 		return container;
 	}

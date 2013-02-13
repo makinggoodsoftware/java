@@ -1,6 +1,7 @@
-package com.mgs.fantasi.wireframe;
+package com.mgs.fantasi.wireframe.tree;
 
-import com.mgs.fantasi.wireframe.builder.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 import com.mgs.tree.TemplateNode;
 
 public class WireframeNode extends TemplateNode<Wireframe> {

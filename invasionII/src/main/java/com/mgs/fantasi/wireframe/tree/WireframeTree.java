@@ -1,14 +1,16 @@
-package com.mgs.fantasi.wireframe;
+package com.mgs.fantasi.wireframe.tree;
 
+import com.mgs.fantasi.wireframe.CollocationInfo;
+import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.tree.ConnectionManager;
 import com.mgs.tree.TemplateSingleBranchTreeWithConnectionInfo;
 
-public class WireframeContainer extends
+public class WireframeTree extends
 		TemplateSingleBranchTreeWithConnectionInfo<
 				Wireframe, CollocationInfo,
-				WireframeContainer, WireframeNode
+				WireframeTree, WireframeNode
 				> {
-	WireframeContainer(WireframeNode root, ConnectionManager<Wireframe, CollocationInfo> connectionManager) {
+	WireframeTree(WireframeNode root, ConnectionManager<Wireframe, CollocationInfo> connectionManager) {
 		super(root, connectionManager);
 	}
 
@@ -16,7 +18,7 @@ public class WireframeContainer extends
 		return (WireframeCollocationInfoConnectionManager) getConnectionManager();
 	}
 
-	public WireframeContentType getType() {
+	public WireframeChildrenLayout getType() {
 		return getLayoutManager().getType();
 	}
 

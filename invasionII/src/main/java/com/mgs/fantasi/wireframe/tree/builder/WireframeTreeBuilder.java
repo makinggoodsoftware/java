@@ -1,10 +1,10 @@
-package com.mgs.fantasi.wireframe.builder;
+package com.mgs.fantasi.wireframe.tree.builder;
 
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
-import com.mgs.fantasi.wireframe.WireframeContainer;
+import com.mgs.fantasi.wireframe.tree.WireframeTree;
 
 public interface WireframeTreeBuilder {
-	WireframeContainer build();
+	WireframeTree build();
 
 	UIPropertiesBuilder getUiPropertiesBuilder();
 

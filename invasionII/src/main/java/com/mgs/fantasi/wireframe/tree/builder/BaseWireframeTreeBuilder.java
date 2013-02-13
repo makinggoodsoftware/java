@@ -1,4 +1,4 @@
-package com.mgs.fantasi.wireframe.builder;
+package com.mgs.fantasi.wireframe.tree.builder;
 
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.UIProperty;

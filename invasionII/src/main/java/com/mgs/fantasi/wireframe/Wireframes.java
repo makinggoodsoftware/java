@@ -1,7 +1,7 @@
 package com.mgs.fantasi.wireframe;
 
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.builder.*;
+import com.mgs.fantasi.wireframe.tree.builder.*;
 
 public class Wireframes {
 	public static LayeredElementsWireframeTreeBuilder layered() {

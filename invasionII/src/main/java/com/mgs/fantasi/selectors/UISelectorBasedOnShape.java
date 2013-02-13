@@ -1,7 +1,7 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.WireframeNode;
+import com.mgs.fantasi.wireframe.tree.WireframeNode;
 
 public class UISelectorBasedOnShape implements UISelector {
 	private final Class<? extends PolygonPointsIterator> type;

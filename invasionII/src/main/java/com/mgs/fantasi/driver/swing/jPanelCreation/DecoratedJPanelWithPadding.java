@@ -5,7 +5,7 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.WireframeContentType;
+import com.mgs.fantasi.wireframe.tree.WireframeChildrenLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,8 +22,8 @@ public class DecoratedJPanelWithPadding implements JPanelBuilder {
 	}
 
 	@Override
-	public JPanel build(WireframeContentType contentType) {
-		JPanel jPanel = decoratedPanel.build(contentType);
+	public JPanel build(WireframeChildrenLayout childrenLayout) {
+		JPanel jPanel = decoratedPanel.build(childrenLayout);
 
 		JPanel outmostPointer = jPanel;
 		if (!padding.isEmpty()) {

@@ -4,11 +4,11 @@ import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
-import com.mgs.fantasi.wireframe.WireframeContainer;
-import com.mgs.fantasi.wireframe.builder.BaseWireframeTreeBuilder;
-import com.mgs.fantasi.wireframe.builder.PijamaRowsWireframeTreeBuilder;
-import com.mgs.fantasi.wireframe.builder.PolygonWireframeTreeBuilder;
-import com.mgs.fantasi.wireframe.builder.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.WireframeTree;
+import com.mgs.fantasi.wireframe.tree.builder.BaseWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.PijamaRowsWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.PolygonWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.wireframe.Wireframes.*;
 
@@ -33,7 +33,7 @@ public class HexagonRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<He
 	}
 
 	@Override
-	public WireframeContainer build() {
+	public WireframeTree build() {
 		return pijamaRows.build();
 	}
 

@@ -1,12 +1,12 @@
-package com.mgs.fantasi.wireframe.builder;
+package com.mgs.fantasi.wireframe.tree.builder;
 
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.WireframeContainer;
+import com.mgs.fantasi.wireframe.tree.WireframeTree;
 
 import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
-import static com.mgs.fantasi.wireframe.WireframeContainerFactory.empty;
-import static com.mgs.fantasi.wireframe.WireframeContainerFactory.rectangle;
+import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.empty;
+import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.rectangle;
 
 public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<RectangleWireframeTreeBuilder> {
 	private WireframeTreeBuilder content;
@@ -20,13 +20,13 @@ public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<Rect
 	}
 
 	@Override
-	public WireframeContainer build() {
+	public WireframeTree build() {
 		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
 		if (content == null) {
 			return empty(wireframe, getName(), this.getClass());
 		}
-		WireframeContainer wireframeContainer = rectangle(wireframe, getName(), this.getClass());
-		wireframeContainer.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.build());
-		return wireframeContainer;
+		WireframeTree wireframeTree = rectangle(wireframe, getName(), this.getClass());
+		wireframeTree.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.build());
+		return wireframeTree;
 	}
 }

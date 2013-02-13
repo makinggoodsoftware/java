@@ -3,23 +3,38 @@ package com.mgs.tree.templates;
 import com.mgs.tree.Node;
 import com.mgs.tree.TreeWithConnectionInfo;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public abstract class TemplateSingleBranchTreeWithConnectionInfo<T, Z, Y extends TreeWithConnectionInfo<T, Z>, W extends Node<T>> implements TreeWithConnectionInfo<T, Z> {
+public abstract class TemplateSingleBranchTreeWithConnectionInfo<T, Z, Y extends TreeWithConnectionInfo<T, Z, Y>, W extends Node<T>> implements TreeWithConnectionInfo<T, Z, Y> {
 	private final W root;
-	private final Branch<T, Z, Y> branch;
+	private final Map<Z, Y> children;
+
+	public void addChild(Z linkInfo, Y child) {
+		children.put(linkInfo, child);
+	}
+
+	public Map<Z, Y> getChildren() {
+		return children;
+	}
+
+	public Map<T, Z> getPlainChildren() {
+		Map<Z, Y> childrenInHierarchy = getChildren();
+		Map<T, Z> plainChildren = new HashMap<T, Z>();
+		for (Map.Entry<Z, Y> childInHierarchy : childrenInHierarchy.entrySet()) {
+			Y value = childInHierarchy.getValue();
+			plainChildren.put(value.getRoot().getValue(), childInHierarchy.getKey());
+		}
+		return plainChildren;
+	}
 
 	public TemplateSingleBranchTreeWithConnectionInfo(W root) {
-		this(root, new Branch<T, Z, Y>());
+		this(root, new HashMap<Z, Y>());
 	}
 
-	public TemplateSingleBranchTreeWithConnectionInfo(W root, Branch<T, Z, Y> branch) {
-		this.branch = branch;
+	public TemplateSingleBranchTreeWithConnectionInfo(W root, Map<Z, Y> children) {
+		this.children = children;
 		this.root = root;
-	}
-
-	public Branch<T, Z, Y> getChildrenBranch() {
-		return branch;
 	}
 
 	@Override
@@ -27,19 +42,4 @@ public abstract class TemplateSingleBranchTreeWithConnectionInfo<T, Z, Y extends
 		return root;
 	}
 
-	@Override
-	public final Map<Z, Y> getChildren() {
-		return getChildrenBranch().getChildren();
-	}
-
-
-	@Override
-	public final void addChild(Z connection, TreeWithConnectionInfo<T, Z> child) {
-		branch.addChild(connection, (Y) child);
-	}
-
-	@Override
-	public final Map<T, Z> getPlainChildren() {
-		return branch.getPlainChildren();
-	}
 }

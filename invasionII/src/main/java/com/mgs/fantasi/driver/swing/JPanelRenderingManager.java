@@ -6,8 +6,8 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.WireframeContainer;
+import com.mgs.fantasi.wireframe.WireframeNode;
 
 import javax.swing.*;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 
 	@Override
 	public JPanel render(WireframeContainer wireframeContainer, UIProfile uiProfile) {
-		JPanelBuilder jPanelBuilder = renderWireframe(wireframeContainer.getValue(), uiProfile);
+		JPanelBuilder jPanelBuilder = renderWireframe(wireframeContainer.getRoot(), uiProfile);
 		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, wireframeContainer.getChildren(), uiProfile);
 		return jPanelBuilderWithChildren.build(wireframeContainer.getType());
 	}
@@ -38,8 +38,8 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 		return jPanelBuilder;
 	}
 
-	private JPanelBuilder renderWireframe(Wireframe wireframe, UIProfile uiProfile) {
-		UIPropertiesBuilder withStylesApplied = from(wireframe.getUiProperties());
+	private JPanelBuilder renderWireframe(WireframeNode wireframe, UIProfile uiProfile) {
+		UIPropertiesBuilder withStylesApplied = from(wireframe.getValue().getUiProperties());
 		withStylesApplied.applyStyles(uiProfile.findStylesFor(wireframe));
 		return jPanelBuilderFactory.forUIProperties(withStylesApplied.build());
 	}

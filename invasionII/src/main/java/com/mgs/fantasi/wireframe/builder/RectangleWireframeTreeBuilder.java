@@ -21,11 +21,11 @@ public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<Rect
 
 	@Override
 	public WireframeContainer build() {
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
+		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
 		if (content == null) {
-			return empty(wireframe);
+			return empty(wireframe, getName(), this.getClass());
 		}
-		WireframeContainer wireframeContainer = rectangle(wireframe);
+		WireframeContainer wireframeContainer = rectangle(wireframe, getName(), this.getClass());
 		wireframeContainer.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.build());
 		return wireframeContainer;
 	}

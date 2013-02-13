@@ -15,6 +15,7 @@ public class PolygonWireframeTreeBuilder extends BaseWireframeTreeBuilder<Polygo
 
 	@Override
 	public WireframeContainer build() {
-		return empty(new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build()));
+		final Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
+		return empty(wireframe, getName(), this.getClass());
 	}
 }

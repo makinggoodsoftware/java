@@ -28,8 +28,8 @@ public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 
 	@Override
 	public WireframeContainer build() {
-		Wireframe wireframe = new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build());
-		WireframeContainer wireframeContainer = grid(wireframe);
+		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
+		WireframeContainer wireframeContainer = grid(wireframe, getName(), this.getClass());
 
 		Dimension dimension = new Dimension(1, 2);
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);

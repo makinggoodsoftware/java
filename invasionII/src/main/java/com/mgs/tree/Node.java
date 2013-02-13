@@ -1,13 +1,9 @@
 package com.mgs.tree;
 
-public class Node<T> {
-	private final T value;
+public interface Node<T> {
+	T getValue();
 
-	public Node(T value) {
-		this.value = value;
-	}
+	Object getTag(String name);
 
-	public T getValue() {
-		return value;
-	}
+	void setTag(String name, Object value);
 }

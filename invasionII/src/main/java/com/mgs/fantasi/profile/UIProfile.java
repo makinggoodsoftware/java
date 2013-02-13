@@ -2,7 +2,7 @@ package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.selectors.UISelector;
-import com.mgs.fantasi.wireframe.Wireframe;
+import com.mgs.fantasi.wireframe.WireframeNode;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +16,7 @@ public class UIProfile {
 		styles.put(uiSelector, uiProperties);
 	}
 
-	public Set<UIProperties> findStylesFor(Wireframe renderable) {
+	public Set<UIProperties> findStylesFor(WireframeNode renderable) {
 		Set<UIProperties> uiStyles = new HashSet<UIProperties>();
 		for (Map.Entry<UISelector, UIProperties> style : styles.entrySet()) {
 			if (style.getKey().appliesTo(renderable)) {

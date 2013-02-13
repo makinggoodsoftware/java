@@ -32,7 +32,8 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 
 	@Override
 	public WireframeContainer build() {
-		WireframeContainer wireframeContainer = grid(new Wireframe(this.getClass(), getName(), getUiPropertiesBuilder().build()));
+		final Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
+		WireframeContainer wireframeContainer = grid(wireframe, getName(), this.getClass());
 		Dimension dimension = new Dimension(1, numberOfGenerations);
 		for (int x = 0; x < dimension.width; x++) {
 			for (int y = 0; y < dimension.height; y++) {

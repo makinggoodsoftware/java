@@ -1,4 +1,7 @@
-package com.mgs.tree;
+package com.mgs.tree.templates;
+
+import com.mgs.tree.Node;
+import com.mgs.tree.TreeWithConnectionInfo;
 
 import java.util.Map;
 

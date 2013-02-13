@@ -2,8 +2,8 @@ package com.mgs.fantasi.wireframe.tree;
 
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.tree.ConnectionManager;
 import com.mgs.tree.TreeWithConnectionInfo;
+import com.mgs.tree.templates.ConnectionManager;
 
 public class WireframeCollocationInfoConnectionManager implements ConnectionManager<Wireframe, CollocationInfo> {
 	private final WireframeChildrenLayout type;

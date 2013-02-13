@@ -1,4 +1,6 @@
-package com.mgs.tree;
+package com.mgs.tree.templates;
+
+import com.mgs.tree.Node;
 
 import java.util.HashMap;
 import java.util.Map;

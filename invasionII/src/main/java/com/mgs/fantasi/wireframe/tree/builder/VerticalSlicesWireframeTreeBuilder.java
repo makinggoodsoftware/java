@@ -10,7 +10,6 @@ import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
 public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
-
 	private static final int UNDEFINED = -1;
 	private final WireframeTreeBuilder contentTreeBuilder;
 	private int numberOfDivisions = UNDEFINED;

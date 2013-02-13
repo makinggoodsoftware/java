@@ -28,7 +28,7 @@ public class HexagonRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<He
 				withNumberOfGenerations(numberOfGenerations);
 	}
 
-	public static HexagonRowsWireframeTreeBuilder hexagonRows(int numberOVerticalDivisions, int numberOfGenerations) {
+	public static HexagonRowsWireframeTreeBuilder pijamaHexagonRows(int numberOVerticalDivisions, int numberOfGenerations) {
 		return new HexagonRowsWireframeTreeBuilder(numberOfGenerations, numberOVerticalDivisions);
 	}
 

@@ -11,9 +11,9 @@ import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.layered;
 
 public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilder {
-	private List<WireframeTreeBuilder> layers = new ArrayList<WireframeTreeBuilder>();
+	private List<WireframeTreeBuilderOld> layers = new ArrayList<WireframeTreeBuilderOld>();
 
-	public LayeredElementsWireframeTreeBuilder withLayer(WireframeTreeBuilder layer) {
+	public LayeredElementsWireframeTreeBuilder withLayer(WireframeTreeBuilderOld layer) {
 		layers.add(layer);
 		return this;
 	}
@@ -23,7 +23,7 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
 		WireframeTree wireframeTree = layered(wireframe, getName(), this.getClass());
 		for (int i = layers.size() - 1; i >= 0; i--) {
-			WireframeTreeBuilder layerBuilder = layers.get(i);
+			WireframeTreeBuilderOld layerBuilder = layers.get(i);
 			WireframeTree layer = layerBuilder.build();
 			wireframeTree.addChild(new CollocationInfo(i, all(), all(), 0, 0), layer);
 		}

@@ -16,7 +16,7 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 	private final TwoLinesWireframeTreeBuilder generationBuilder;
 	private int numberOfGenerations = UNDEFINED;
 
-	public PijamaRowsWireframeTreeBuilder(WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder) {
+	public PijamaRowsWireframeTreeBuilder(WireframeTreeBuilderOld firstRowTreeBuilder, WireframeTreeBuilderOld secondRowTreeBuilder) {
 		generationBuilder = Wireframes.twoLines(firstRowTreeBuilder, secondRowTreeBuilder);
 	}
 

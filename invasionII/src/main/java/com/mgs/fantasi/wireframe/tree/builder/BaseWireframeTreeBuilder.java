@@ -7,7 +7,7 @@ import com.mgs.fantasi.properties.data.measurements.Measurement;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
 
-public abstract class BaseWireframeTreeBuilder<T extends BaseWireframeTreeBuilder> implements WireframeTreeBuilder {
+public abstract class BaseWireframeTreeBuilder<T extends BaseWireframeTreeBuilder> implements WireframeTreeBuilderOld {
 	private final UIPropertiesBuilder uiPropertiesBuilder = rectangularEmpty();
 	private String name = "";
 

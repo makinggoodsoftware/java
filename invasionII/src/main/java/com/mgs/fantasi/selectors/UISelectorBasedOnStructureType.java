@@ -1,12 +1,12 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.wireframe.tree.WireframeNode;
-import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilderOld;
 
 public class UISelectorBasedOnStructureType implements UISelector {
-	private final Class<? extends WireframeTreeBuilder> type;
+	private final Class<? extends WireframeTreeBuilderOld> type;
 
-	public UISelectorBasedOnStructureType(Class<? extends WireframeTreeBuilder> type) {
+	public UISelectorBasedOnStructureType(Class<? extends WireframeTreeBuilderOld> type) {
 		this.type = type;
 	}
 

@@ -11,12 +11,12 @@ import java.awt.*;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
 public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
-	private final WireframeTreeBuilder firstLineTreeBuilder;
-	private final WireframeTreeBuilder secondLineTreeBuilder;
+	private final WireframeTreeBuilderOld firstLineTreeBuilder;
+	private final WireframeTreeBuilderOld secondLineTreeBuilder;
 
 	private Fraction firstLineHeightSizeRatio = null;
 
-	public TwoLinesWireframeTreeBuilder(WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder) {
+	public TwoLinesWireframeTreeBuilder(WireframeTreeBuilderOld firstLineTreeBuilder, WireframeTreeBuilderOld secondLineTreeBuilder) {
 		this.firstLineTreeBuilder = firstLineTreeBuilder;
 		this.secondLineTreeBuilder = secondLineTreeBuilder;
 	}

@@ -9,12 +9,12 @@ import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.empty;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.rectangle;
 
 public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<RectangleWireframeTreeBuilder> {
-	private WireframeTreeBuilder content;
+	private WireframeTreeBuilderOld content;
 
 	public RectangleWireframeTreeBuilder() {
 	}
 
-	public RectangleWireframeTreeBuilder withContent(WireframeTreeBuilder content) {
+	public RectangleWireframeTreeBuilder withContent(WireframeTreeBuilderOld content) {
 		this.content = content;
 		return this;
 	}

@@ -6,15 +6,15 @@ import com.mgs.tree.TreeWithConnectionInfo;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class TemplateSingleBranchTreeWithConnectionInfo<T, Z, Y extends TreeWithConnectionInfo<T, Z, Y>> implements TreeWithConnectionInfo<T, Z, Y> {
+public abstract class TemplateTreeWithConnectionInfo<T, Z, Y extends TreeWithConnectionInfo<T, Z, Y>> implements TreeWithConnectionInfo<T, Z, Y> {
 	private final Node<T> root;
 	private final Map<Z, Y> children;
 
-	public TemplateSingleBranchTreeWithConnectionInfo(Node<T> root) {
+	public TemplateTreeWithConnectionInfo(Node<T> root) {
 		this(root, new HashMap<Z, Y>());
 	}
 
-	public TemplateSingleBranchTreeWithConnectionInfo(Node<T> root, Map<Z, Y> children) {
+	public TemplateTreeWithConnectionInfo(Node<T> root, Map<Z, Y> children) {
 		this.children = children;
 		this.root = root;
 	}

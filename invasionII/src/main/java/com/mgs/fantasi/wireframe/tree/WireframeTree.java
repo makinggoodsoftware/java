@@ -3,11 +3,11 @@ package com.mgs.fantasi.wireframe.tree;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.tree.Node;
-import com.mgs.tree.templates.TemplateSingleBranchTreeWithConnectionInfo;
+import com.mgs.tree.templates.TemplateTreeWithConnectionInfo;
 
 import java.util.Map;
 
-public class WireframeTree extends TemplateSingleBranchTreeWithConnectionInfo<Wireframe, CollocationInfo, WireframeTree> {
+public class WireframeTree extends TemplateTreeWithConnectionInfo<Wireframe, CollocationInfo, WireframeTree> {
 	WireframeTree(WireframeNode root) {
 		super(root);
 	}

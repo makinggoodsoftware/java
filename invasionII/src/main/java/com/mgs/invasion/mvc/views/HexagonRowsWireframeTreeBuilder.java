@@ -8,7 +8,7 @@ import com.mgs.fantasi.wireframe.tree.WireframeTree;
 import com.mgs.fantasi.wireframe.tree.builder.BaseWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.tree.builder.PijamaRowsWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.tree.builder.PolygonWireframeTreeBuilder;
-import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilderOld;
+import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.wireframe.Wireframes.*;
 
@@ -37,7 +37,7 @@ public class HexagonRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<He
 		return pijamaRows.build();
 	}
 
-	public WireframeTreeBuilderOld withHexagonMeasurement(UIProperty<Measurement> hexagonMeasurement) {
+	public WireframeTreeBuilder withHexagonMeasurement(UIProperty<Measurement> hexagonMeasurement) {
 		hexagon.withMeasurement(hexagonMeasurement);
 		return this;
 	}

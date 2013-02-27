@@ -11,10 +11,10 @@ import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
 public class VerticalSlicesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
 	private static final int UNDEFINED = -1;
-	private final WireframeTreeBuilderOld contentTreeBuilder;
+	private final WireframeTreeBuilder contentTreeBuilder;
 	private int numberOfDivisions = UNDEFINED;
 
-	public VerticalSlicesWireframeTreeBuilder(WireframeTreeBuilderOld contentTreeBuilder) {
+	public VerticalSlicesWireframeTreeBuilder(WireframeTreeBuilder contentTreeBuilder) {
 		this.contentTreeBuilder = contentTreeBuilder;
 	}
 

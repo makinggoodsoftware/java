@@ -7,7 +7,7 @@ import com.mgs.fantasi.properties.UIPropertyType;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
-import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilderOld;
+import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ import static com.mgs.invasion.mvc.views.HexagonRowsWireframeTreeBuilder.pijamaH
 
 public class Main {
 	public static void main(String... args) {
-		new Main().go(new ProfileFactory().debug());
+		new Main().go(new ProfileFactory().production());
 	}
 
 	private void go(UIProfile uiProfile) {
@@ -31,7 +31,7 @@ public class Main {
 
 
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
-		WireframeTreeBuilderOld wireframeTreeBuilder = layered().
+		WireframeTreeBuilder wireframeTreeBuilder = layered().
 				withLayer(
 						pijamaHexagonRows(numberOVerticalDivisions, numberOfGenerations).
 								withName("OddHexagonRows").

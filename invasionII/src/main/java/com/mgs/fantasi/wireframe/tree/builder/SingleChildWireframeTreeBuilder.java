@@ -10,13 +10,13 @@ import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.empty;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.rectangle;
 
-public class RectangleWireframeTreeBuilder implements WireframeTreeBuilder {
+public class SingleChildWireframeTreeBuilder implements WireframeTreeBuilder {
 	private WireframeTreeBuilder content;
 	private final PolygonPointsIterator shape;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
 	private final String name;
 
-	public RectangleWireframeTreeBuilder(String name, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
+	public SingleChildWireframeTreeBuilder(String name, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
 		this.name = name;
 		this.shape = shape;
 		this.uiPropertiesBuilder = uiPropertiesBuilder;

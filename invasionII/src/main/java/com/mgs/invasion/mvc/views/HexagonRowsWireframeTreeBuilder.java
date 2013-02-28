@@ -8,14 +8,14 @@ import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
 import com.mgs.fantasi.wireframe.tree.builder.PijamaRowsWireframeTreeBuilder;
-import com.mgs.fantasi.wireframe.tree.builder.RectangleWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.SingleChildWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
 import static com.mgs.fantasi.wireframe.Wireframes.*;
 
 public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
-	private final RectangleWireframeTreeBuilder hexagon;
+	private final SingleChildWireframeTreeBuilder hexagon;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
 	private PijamaRowsWireframeTreeBuilder pijamaRows;
 	private final String name;

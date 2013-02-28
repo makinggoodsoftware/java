@@ -10,8 +10,8 @@ public class Wireframes {
 		return new LayeredElementsWireframeTreeBuilder(name, new NativeRectanguarShape(), uiPropertiesBuilder);
 	}
 
-	public static RectangleWireframeTreeBuilder rectangle(String name, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new RectangleWireframeTreeBuilder(name, shape, uiPropertiesBuilder);
+	public static SingleChildWireframeTreeBuilder rectangle(String name, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
+		return new SingleChildWireframeTreeBuilder(name, shape, uiPropertiesBuilder);
 	}
 
 	public static VerticalSlicesWireframeTreeBuilder verticalSlices(String name, WireframeTreeBuilder contentTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {

@@ -3,7 +3,7 @@ package com.mgs.invasion.mvc.views;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.selectors.UISelectorFactory;
-import com.mgs.fantasi.wireframe.tree.builder.RectangleWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.SingleChildWireframeTreeBuilder;
 
 import java.awt.*;
 
@@ -18,16 +18,6 @@ public class ProfileFactory {
 		UIProfile debugProfile = new UIProfile();
 
 		debugProfile.addStyle(
-				UISelectorFactory.forType(RectangleWireframeTreeBuilder.class),
-				allUndefined().
-						withBorder(newBorder(
-								Color.BLUE,
-								5
-						)).
-						withBackgroundColor(backgroundColorFromAwt(GREEN))
-						.build()
-		);
-		debugProfile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
 				allUndefined().
 						withBorder(newBorder(
@@ -35,6 +25,16 @@ public class ProfileFactory {
 								10
 						)).
 						withBackgroundColor(backgroundColorFromAwt(RED))
+						.build()
+		);
+		debugProfile.addStyle(
+				UISelectorFactory.forType(SingleChildWireframeTreeBuilder.class),
+				allUndefined().
+						withBorder(newBorder(
+								Color.BLUE,
+								5
+						)).
+						withBackgroundColor(backgroundColorFromAwt(GREEN))
 						.build()
 		);
 

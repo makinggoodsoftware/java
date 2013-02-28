@@ -5,13 +5,12 @@ import com.mgs.fantasi.properties.data.Color;
 import com.mgs.fantasi.properties.data.Padding;
 import com.mgs.fantasi.properties.data.UIPropertyData;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
-import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
-import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.mgs.fantasi.properties.UIPropertyFactory.*;
+import static com.mgs.fantasi.properties.UIPropertyFactory.empty;
+import static com.mgs.fantasi.properties.UIPropertyFactory.undefined;
 import static com.mgs.fantasi.properties.UIPropertyId.*;
 
 public class UIPropertiesBuilderFactory {
@@ -20,7 +19,6 @@ public class UIPropertiesBuilderFactory {
 		UIProperty<Color> backgroundColor = empty(UIPropertyType.BACKGROUND_COLOR);
 		UIProperty<Color> foregroundColor = empty(UIPropertyType.FOREGROUND_COLOR);
 		UIProperty<Padding> padding = empty(UIPropertyType.PADDING);
-		UIProperty<PolygonPointsIterator> shape = uiProperty((PolygonPointsIterator) new NativeRectanguarShape(), UIPropertyType.SHAPE);
 		UIProperty<Measurement> measurement = empty(UIPropertyType.MEASUREMENT);
 
 		return new UIPropertiesBuilder(newUIPropertiesMap(
@@ -28,7 +26,6 @@ public class UIPropertiesBuilderFactory {
 				backgroundColor,
 				foregroundColor,
 				padding,
-				shape,
 				measurement
 		));
 	}
@@ -38,7 +35,6 @@ public class UIPropertiesBuilderFactory {
 		UIProperty<Color> backgroundColor = uiPropertiesProvider.getBackgroundColor();
 		UIProperty<Color> foregroundColor = uiPropertiesProvider.getForegroundColor();
 		UIProperty<Padding> padding = uiPropertiesProvider.getPadding();
-		UIProperty<PolygonPointsIterator> shape = uiPropertiesProvider.getShape();
 		UIProperty<Measurement> measurement = uiPropertiesProvider.getMeasurement();
 
 		return new UIPropertiesBuilder(newUIPropertiesMap(
@@ -46,7 +42,6 @@ public class UIPropertiesBuilderFactory {
 				backgroundColor,
 				foregroundColor,
 				padding,
-				shape,
 				measurement
 		));
 	}
@@ -57,7 +52,6 @@ public class UIPropertiesBuilderFactory {
 		UIProperty<Color> backgroundColor = undefined(UIPropertyType.BACKGROUND_COLOR);
 		UIProperty<Color> foregroundColor = undefined(UIPropertyType.FOREGROUND_COLOR);
 		UIProperty<Padding> padding = undefined(UIPropertyType.PADDING);
-		UIProperty<PolygonPointsIterator> shape = undefined(UIPropertyType.SHAPE);
 		UIProperty<Measurement> measurement = undefined(UIPropertyType.MEASUREMENT);
 
 		return new UIPropertiesBuilder(newUIPropertiesMap(
@@ -65,7 +59,6 @@ public class UIPropertiesBuilderFactory {
 				backgroundColor,
 				foregroundColor,
 				padding,
-				shape,
 				measurement
 		));
 	}
@@ -75,7 +68,6 @@ public class UIPropertiesBuilderFactory {
 			UIProperty<Color> backgroundColor,
 			UIProperty<Color> foregroundColor,
 			UIProperty<Padding> padding,
-			UIProperty<PolygonPointsIterator> shape,
 			UIProperty<Measurement> measurement
 	) {
 		Map<UIPropertyId, UIProperty<? extends UIPropertyData>> properties = new HashMap<UIPropertyId, UIProperty<? extends UIPropertyData>>();
@@ -83,7 +75,6 @@ public class UIPropertiesBuilderFactory {
 		properties.put(BACKGROUND_COLOR, backgroundColor);
 		properties.put(FOREGROUND_COLOR, foregroundColor);
 		properties.put(PADDING, padding);
-		properties.put(SHAPE, shape);
 		properties.put(MEASUREMENT, measurement);
 		return properties;
 	}

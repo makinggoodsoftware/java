@@ -41,7 +41,7 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	private JPanelBuilder renderWireframe(WireframeNode wireframe, UIProfile uiProfile) {
 		UIPropertiesBuilder withStylesApplied = from(wireframe.getValue().getUiProperties());
 		withStylesApplied.applyStyles(uiProfile.findStylesFor(wireframe));
-		return jPanelBuilderFactory.forUIProperties(withStylesApplied.build());
+		return jPanelBuilderFactory.forUIProperties(withStylesApplied.build(), wireframe.getShape());
 	}
 
 

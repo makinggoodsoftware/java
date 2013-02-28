@@ -16,4 +16,7 @@ public class Wireframe {
 		return uiProperties;
 	}
 
+	public PolygonPointsIterator getShape() {
+		return shape;
+	}
 }

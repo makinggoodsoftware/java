@@ -5,7 +5,6 @@ import com.mgs.fantasi.properties.data.Color;
 import com.mgs.fantasi.properties.data.Padding;
 import com.mgs.fantasi.properties.data.UIPropertyData;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
-import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -32,10 +31,6 @@ public class UIProperties implements Iterable<Map.Entry<UIPropertyId, UIProperty
 
 	public UIProperty<Padding> getPadding() {
 		return (UIProperty<Padding>) properties.get(UIPropertyId.PADDING);
-	}
-
-	public UIProperty<PolygonPointsIterator> getShape() {
-		return (UIProperty<PolygonPointsIterator>) properties.get(UIPropertyId.SHAPE);
 	}
 
 	public UIProperty<Measurement> getMeasurement() {

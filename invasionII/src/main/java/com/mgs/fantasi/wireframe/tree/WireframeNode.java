@@ -1,5 +1,6 @@
 package com.mgs.fantasi.wireframe.tree;
 
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 import com.mgs.tree.templates.TemplateNode;
@@ -26,5 +27,9 @@ public class WireframeNode extends TemplateNode<Wireframe> {
 
 	public WireframeLayoutType getType() {
 		return (WireframeLayoutType) getTag(TYPE);
+	}
+
+	public PolygonPointsIterator getShape() {
+		return getValue().getShape();
 	}
 }

@@ -13,6 +13,6 @@ public class UISelectorBasedOnShape implements UISelector {
 	@Override
 	public boolean appliesTo(WireframeNode renderable) {
 		if ((renderable.getValue() == null) || (renderable.getValue() == null)) return false;
-		return renderable.getValue().getUiProperties().getShape().getValue().getClass().equals(type);
+		return renderable.getShape().getClass().equals(type);
 	}
 }

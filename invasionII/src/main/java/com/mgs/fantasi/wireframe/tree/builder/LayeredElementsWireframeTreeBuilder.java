@@ -1,5 +1,6 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
+import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -10,8 +11,16 @@ import java.util.List;
 import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.layered;
 
-public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilder {
-	private List<WireframeTreeBuilder> layers = new ArrayList<WireframeTreeBuilder>();
+public class LayeredElementsWireframeTreeBuilder implements WireframeTreeBuilder {
+	private final List<WireframeTreeBuilder> layers = new ArrayList<WireframeTreeBuilder>();
+	private final UIPropertiesBuilder uiPropertiesBuilder;
+	private final String name;
+
+	public LayeredElementsWireframeTreeBuilder(UIPropertiesBuilder uiPropertiesBuilder, String name) {
+		this.uiPropertiesBuilder = uiPropertiesBuilder;
+		this.name = name;
+	}
+
 
 	public LayeredElementsWireframeTreeBuilder withLayer(WireframeTreeBuilder layer) {
 		layers.add(layer);
@@ -20,8 +29,8 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 
 	@Override
 	public WireframeTree build() {
-		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
-		WireframeTree wireframeTree = layered(wireframe, getName(), this.getClass());
+		Wireframe wireframe = new Wireframe(uiPropertiesBuilder.build());
+		WireframeTree wireframeTree = layered(wireframe, name, this.getClass());
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			WireframeTreeBuilder layerBuilder = layers.get(i);
 			WireframeTree layer = layerBuilder.build();
@@ -29,5 +38,15 @@ public class LayeredElementsWireframeTreeBuilder extends BaseWireframeTreeBuilde
 		}
 
 		return wireframeTree;
+	}
+
+	@Override
+	public UIPropertiesBuilder getUiPropertiesBuilder() {
+		return uiPropertiesBuilder;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 }

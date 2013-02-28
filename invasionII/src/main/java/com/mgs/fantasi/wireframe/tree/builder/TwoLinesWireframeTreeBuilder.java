@@ -1,5 +1,6 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
+import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.wireframe.CollocationInfo;
@@ -10,20 +11,34 @@ import java.awt.*;
 
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
-public class TwoLinesWireframeTreeBuilder extends BaseWireframeTreeBuilder {
+public class TwoLinesWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final WireframeTreeBuilder firstLineTreeBuilder;
 	private final WireframeTreeBuilder secondLineTreeBuilder;
 
 	private Fraction firstLineHeightSizeRatio = null;
+	private final UIPropertiesBuilder uiPropertiesBuilder;
+	private final String name;
 
-	public TwoLinesWireframeTreeBuilder(WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder) {
+	public TwoLinesWireframeTreeBuilder(String name, WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
+		this.name = name;
 		this.firstLineTreeBuilder = firstLineTreeBuilder;
 		this.secondLineTreeBuilder = secondLineTreeBuilder;
+		this.uiPropertiesBuilder = uiPropertiesBuilder;
 	}
 
 	public TwoLinesWireframeTreeBuilder withFirstRowSize(Fraction firstLineHeightSizeRatio) {
 		this.firstLineHeightSizeRatio = firstLineHeightSizeRatio;
 		return this;
+	}
+
+	@Override
+	public UIPropertiesBuilder getUiPropertiesBuilder() {
+		return uiPropertiesBuilder;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	@Override

@@ -1,23 +1,29 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
+import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.Wireframes;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
 
 import java.awt.*;
 
+import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
+import static com.mgs.fantasi.wireframe.Wireframes.twoLines;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
-public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<PijamaRowsWireframeTreeBuilder> {
+public class PijamaRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private static final int UNDEFINED = -1;
 	private final TwoLinesWireframeTreeBuilder generationBuilder;
 	private int numberOfGenerations = UNDEFINED;
+	private final String name;
+	private final UIPropertiesBuilder uiPropertiesBuilder;
 
-	public PijamaRowsWireframeTreeBuilder(WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder) {
-		generationBuilder = Wireframes.twoLines(firstRowTreeBuilder, secondRowTreeBuilder);
+	public PijamaRowsWireframeTreeBuilder(String name, WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
+		this.name = name;
+		this.uiPropertiesBuilder = uiPropertiesBuilder;
+		generationBuilder = twoLines(getName() + "_two_lines", firstRowTreeBuilder, secondRowTreeBuilder, rectangularEmpty());
 	}
 
 	public PijamaRowsWireframeTreeBuilder withFirstRowSize(Fraction sizeConstraints) {
@@ -28,6 +34,16 @@ public class PijamaRowsWireframeTreeBuilder extends BaseWireframeTreeBuilder<Pij
 	public PijamaRowsWireframeTreeBuilder withNumberOfGenerations(int numberOfGenerations) {
 		this.numberOfGenerations = numberOfGenerations;
 		return this;
+	}
+
+	@Override
+	public UIPropertiesBuilder getUiPropertiesBuilder() {
+		return uiPropertiesBuilder;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	@Override

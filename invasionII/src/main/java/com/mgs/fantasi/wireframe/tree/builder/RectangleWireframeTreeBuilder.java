@@ -1,5 +1,6 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
+import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -8,15 +9,24 @@ import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.empty;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.rectangle;
 
-public class RectangleWireframeTreeBuilder extends BaseWireframeTreeBuilder<RectangleWireframeTreeBuilder> {
+public class RectangleWireframeTreeBuilder implements WireframeTreeBuilder {
 	private WireframeTreeBuilder content;
+	private final UIPropertiesBuilder uiPropertiesBuilder;
+	private final String name;
 
-	public RectangleWireframeTreeBuilder() {
+	public RectangleWireframeTreeBuilder(String name, UIPropertiesBuilder uiPropertiesBuilder) {
+		this.name = name;
+		this.uiPropertiesBuilder = uiPropertiesBuilder;
 	}
 
-	public RectangleWireframeTreeBuilder withContent(WireframeTreeBuilder content) {
-		this.content = content;
-		return this;
+	@Override
+	public UIPropertiesBuilder getUiPropertiesBuilder() {
+		return uiPropertiesBuilder;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	@Override

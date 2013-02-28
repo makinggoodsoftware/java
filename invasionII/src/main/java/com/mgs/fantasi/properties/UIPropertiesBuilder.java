@@ -29,6 +29,10 @@ public class UIPropertiesBuilder {
 		return withUIProperty(PADDING, padding);
 	}
 
+	public UIPropertiesBuilder withMargin(UIProperty<Padding> padding) {
+		return withUIProperty(MARGIN, padding);
+	}
+
 	public UIPropertiesBuilder withShape(UIProperty<PolygonPointsIterator> polygonPointsIterator) {
 		return withUIProperty(SHAPE, polygonPointsIterator);
 	}

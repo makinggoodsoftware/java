@@ -5,16 +5,17 @@ import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
+import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
 import com.mgs.fantasi.wireframe.tree.builder.PijamaRowsWireframeTreeBuilder;
-import com.mgs.fantasi.wireframe.tree.builder.PolygonWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.RectangleWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
 import static com.mgs.fantasi.wireframe.Wireframes.*;
 
 public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
-	private final PolygonWireframeTreeBuilder hexagon;
+	private final RectangleWireframeTreeBuilder hexagon;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
 	private PijamaRowsWireframeTreeBuilder pijamaRows;
 	private final String name;
@@ -28,7 +29,7 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	public HexagonRowsWireframeTreeBuilder(UIPropertiesBuilder uiPropertiesBuilder, String name) {
 		this.uiPropertiesBuilder = uiPropertiesBuilder;
 		this.name = name;
-		hexagon = polygon(name + "_polygon", new HexagonShape(), rectangularEmpty());
+		hexagon = rectangle(name + "_polygon", new HexagonShape(), rectangularEmpty());
 	}
 
 	public HexagonRowsWireframeTreeBuilder withNumberOfGenerations(int numberOfGenerations) {
@@ -61,7 +62,7 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 		this.pijamaRows = pijamaRows(
 				getName() + "_pijama_rows",
 				verticalSlices(getName() + "_odd", hexagon, rectangularEmpty()).withVerticalDivisions(numberOVerticalDivisions),
-				rectangle(getName() + "_even", rectangularEmpty()),
+				rectangle(getName() + "_even", new NativeRectanguarShape(), rectangularEmpty()),
 				rectangularEmpty()
 		).
 				withFirstRowSize(Fractions.thwoThirds()).

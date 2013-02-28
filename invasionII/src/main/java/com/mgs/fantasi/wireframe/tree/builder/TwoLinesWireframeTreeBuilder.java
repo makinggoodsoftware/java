@@ -3,6 +3,7 @@ package com.mgs.fantasi.wireframe.tree.builder;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -16,13 +17,15 @@ public class TwoLinesWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final WireframeTreeBuilder secondLineTreeBuilder;
 
 	private Fraction firstLineHeightSizeRatio = null;
+	private final PolygonPointsIterator shape;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
 	private final String name;
 
-	public TwoLinesWireframeTreeBuilder(String name, WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
+	public TwoLinesWireframeTreeBuilder(String name, WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
 		this.name = name;
 		this.firstLineTreeBuilder = firstLineTreeBuilder;
 		this.secondLineTreeBuilder = secondLineTreeBuilder;
+		this.shape = shape;
 		this.uiPropertiesBuilder = uiPropertiesBuilder;
 	}
 
@@ -43,7 +46,7 @@ public class TwoLinesWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	@Override
 	public WireframeTree build() {
-		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
+		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build(), shape);
 		WireframeTree wireframeTree = grid(wireframe, getName(), this.getClass());
 
 		Dimension dimension = new Dimension(1, 2);

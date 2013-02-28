@@ -1,6 +1,7 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -11,11 +12,13 @@ import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.rectangle;
 
 public class RectangleWireframeTreeBuilder implements WireframeTreeBuilder {
 	private WireframeTreeBuilder content;
+	private final PolygonPointsIterator shape;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
 	private final String name;
 
-	public RectangleWireframeTreeBuilder(String name, UIPropertiesBuilder uiPropertiesBuilder) {
+	public RectangleWireframeTreeBuilder(String name, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
 		this.name = name;
+		this.shape = shape;
 		this.uiPropertiesBuilder = uiPropertiesBuilder;
 	}
 
@@ -31,7 +34,7 @@ public class RectangleWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	@Override
 	public WireframeTree build() {
-		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
+		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build(), shape);
 		if (content == null) {
 			return empty(wireframe, getName(), this.getClass());
 		}

@@ -1,6 +1,7 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -14,12 +15,14 @@ public class VerticalSlicesWireframeTreeBuilder implements WireframeTreeBuilder 
 	private static final int UNDEFINED = -1;
 	private final WireframeTreeBuilder contentTreeBuilder;
 	private int numberOfDivisions = UNDEFINED;
+	private final PolygonPointsIterator shape;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
 	private final String name;
 
-	public VerticalSlicesWireframeTreeBuilder(String name, WireframeTreeBuilder contentTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
+	public VerticalSlicesWireframeTreeBuilder(String name, WireframeTreeBuilder contentTreeBuilder, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
 		this.name = name;
 		this.contentTreeBuilder = contentTreeBuilder;
+		this.shape = shape;
 		this.uiPropertiesBuilder = uiPropertiesBuilder;
 	}
 
@@ -35,7 +38,7 @@ public class VerticalSlicesWireframeTreeBuilder implements WireframeTreeBuilder 
 
 	@Override
 	public WireframeTree build() {
-		final Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
+		final Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build(), shape);
 		WireframeTree wireframeTree = grid(wireframe, getName(), this.getClass());
 		Dimension dimension = new Dimension(numberOfDivisions, 1);
 		for (int x = 0; x < dimension.width; x++) {

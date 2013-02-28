@@ -3,6 +3,7 @@ package com.mgs.fantasi.wireframe.tree.builder;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
+import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -18,10 +19,12 @@ public class PijamaRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final TwoLinesWireframeTreeBuilder generationBuilder;
 	private int numberOfGenerations = UNDEFINED;
 	private final String name;
+	private final PolygonPointsIterator shape;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
 
-	public PijamaRowsWireframeTreeBuilder(String name, WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
+	public PijamaRowsWireframeTreeBuilder(String name, WireframeTreeBuilder firstRowTreeBuilder, WireframeTreeBuilder secondRowTreeBuilder, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
 		this.name = name;
+		this.shape = shape;
 		this.uiPropertiesBuilder = uiPropertiesBuilder;
 		generationBuilder = twoLines(getName() + "_two_lines", firstRowTreeBuilder, secondRowTreeBuilder, rectangularEmpty());
 	}
@@ -48,7 +51,7 @@ public class PijamaRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	@Override
 	public WireframeTree build() {
-		final Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build());
+		final Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build(), shape);
 		WireframeTree wireframeTree = grid(wireframe, getName(), this.getClass());
 		Dimension dimension = new Dimension(1, numberOfGenerations);
 		for (int x = 0; x < dimension.width; x++) {

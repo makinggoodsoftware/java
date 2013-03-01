@@ -4,13 +4,9 @@ import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
 
 import java.awt.*;
-
-import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
 public class TwoLinesWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final WireframeTreeBuilder firstLineTreeBuilder;
@@ -46,27 +42,12 @@ public class TwoLinesWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	@Override
 	public WireframeTree build() {
-		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build(), shape);
-		WireframeTree wireframeTree = grid(wireframe, getName(), this.getClass());
-
-		Dimension dimension = new Dimension(1, 2);
+		GridWireframeTreeBuilder gridWireframeTreeBuilder = new GridWireframeTreeBuilder(getName(), uiPropertiesBuilder);
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-
-		for (int x = 0; x < dimension.width; x++) {
-			for (int y = 0; y < dimension.height; y++) {
-				CollocationInfo collocationInfo;
-				WireframeTree child;
-				if (y == 0) {
-					collocationInfo = new CollocationInfo(0, Fractions.all(), firstLineHeightSizeRatio, 0, y);
-					child = firstLineTreeBuilder.build();
-				} else {
-					collocationInfo = new CollocationInfo(0, Fractions.all(), remainder, 0, y);
-					child = secondLineTreeBuilder.build();
-				}
-				wireframeTree.addChild(collocationInfo, child);
-			}
-		}
-
-		return wireframeTree;
+		return gridWireframeTreeBuilder
+				.withDimension(new Dimension(1, 2))
+				.withCell(new Point(0, 0), firstLineHeightSizeRatio, Fractions.all(), firstLineTreeBuilder)
+				.withCell(new Point(0, 1), remainder, Fractions.all(), secondLineTreeBuilder)
+				.build();
 	}
 }

@@ -3,7 +3,10 @@ package com.mgs.fantasi.wireframe;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.tree.builder.*;
+import com.mgs.fantasi.wireframe.tree.builder.LayeredElementsWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.SingleChildWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.VerticalSlicesWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 public class Wireframes {
 	public static LayeredElementsWireframeTreeBuilder layered(String name, UIPropertiesBuilder uiPropertiesBuilder) {
@@ -16,10 +19,6 @@ public class Wireframes {
 
 	public static VerticalSlicesWireframeTreeBuilder verticalSlices(String name, WireframeTreeBuilder contentTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
 		return new VerticalSlicesWireframeTreeBuilder(name, contentTreeBuilder, new NativeRectanguarShape(), uiPropertiesBuilder);
-	}
-
-	public static PijamaRowsWireframeTreeBuilder horizontalRepeater(String name, WireframeTreeBuilder content, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new PijamaRowsWireframeTreeBuilder(name, content, uiPropertiesBuilder);
 	}
 
 }

@@ -7,18 +7,18 @@ import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
-import com.mgs.fantasi.wireframe.tree.builder.PijamaRowsWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.tree.builder.SingleChildWireframeTreeBuilder;
 import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
-import static com.mgs.fantasi.wireframe.Wireframes.*;
+import static com.mgs.fantasi.wireframe.Wireframes.rectangle;
+import static com.mgs.fantasi.wireframe.Wireframes.verticalSlices;
+import static com.mgs.fantasi.wireframe.tree.builder.GridWireframeTreeBuilderFactory.horizontalRepeater;
 import static com.mgs.fantasi.wireframe.tree.builder.GridWireframeTreeBuilderFactory.twoLines;
 
 public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final SingleChildWireframeTreeBuilder hexagon;
 	private final UIPropertiesBuilder uiPropertiesBuilder;
-	private PijamaRowsWireframeTreeBuilder pijamaRows;
 	private final String name;
 	private int numberOfGenerations;
 	private int numberOVerticalDivisions;
@@ -69,9 +69,8 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 						rectangle(getName() + "_even", new NativeRectanguarShape(), rectangularEmpty()),
 						rectangularEmpty()
 				),
+				numberOfGenerations,
 				uiPropertiesBuilder
-		)
-				.withNumberOfGenerations(numberOfGenerations)
-				.build();
+		).build();
 	}
 }

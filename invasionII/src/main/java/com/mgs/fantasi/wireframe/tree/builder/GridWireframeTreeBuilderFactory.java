@@ -16,4 +16,10 @@ public class GridWireframeTreeBuilderFactory {
 				.withCell(new Point(0, 1), remainder, Fractions.all(), secondLineTreeBuilder)
 				.fill();
 	}
+
+	public static GridWireframeTreeBuilder horizontalRepeater(String name, WireframeTreeBuilder toRepeat, int numberOfGenerations, UIPropertiesBuilder uiPropertiesBuilder) {
+		return new GridWireframeTreeBuilder(name, uiPropertiesBuilder)
+				.withDimension(new Dimension(1, numberOfGenerations))
+				.allCellsWith(toRepeat);
+	}
 }

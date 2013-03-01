@@ -13,6 +13,7 @@ import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
 import static com.mgs.fantasi.wireframe.Wireframes.*;
+import static com.mgs.fantasi.wireframe.tree.builder.GridWireframeTreeBuilderFactory.twoLines;
 
 public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final SingleChildWireframeTreeBuilder hexagon;
@@ -59,14 +60,18 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	@Override
 	public WireframeTree build() {
-		this.pijamaRows = pijamaRows(
+		return horizontalRepeater(
 				getName() + "_pijama_rows",
-				verticalSlices(getName() + "_odd", hexagon, rectangularEmpty()).withVerticalDivisions(numberOVerticalDivisions),
-				rectangle(getName() + "_even", new NativeRectanguarShape(), rectangularEmpty()),
-				rectangularEmpty()
-		).
-				withFirstRowSize(Fractions.thwoThirds()).
-				withNumberOfGenerations(numberOfGenerations);
-		return pijamaRows.build();
+				twoLines(
+						getName() + "_generation",
+						Fractions.thwoThirds(),
+						verticalSlices(getName() + "_odd", hexagon, rectangularEmpty()).withVerticalDivisions(numberOVerticalDivisions),
+						rectangle(getName() + "_even", new NativeRectanguarShape(), rectangularEmpty()),
+						rectangularEmpty()
+				),
+				uiPropertiesBuilder
+		)
+				.withNumberOfGenerations(numberOfGenerations)
+				.build();
 	}
 }

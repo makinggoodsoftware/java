@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
 public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
@@ -26,7 +27,7 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	public GridWireframeContent withDimension(Dimension dimension) {
 		this.dimension = dimension;
-		return new GridWireframeContent(this);
+		return new GridWireframeContent(this, dimension);
 	}
 
 	@Override
@@ -43,8 +44,6 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 	public WireframeTree build() {
 		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build(), new NativeRectanguarShape());
 		WireframeTree wireframeTree = grid(wireframe, getName(), this.getClass());
-
-		Dimension dimension = new Dimension(1, 2);
 
 		for (int x = 0; x < dimension.width; x++) {
 			for (int y = 0; y < dimension.height; y++) {
@@ -69,11 +68,13 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	public static class GridWireframeContent {
 		private final GridWireframeTreeBuilder parent;
+		private final Dimension dimension;
 
 		private final Map<Point, CoordinateContent> cellContents = new HashMap<Point, CoordinateContent>();
 
-		public GridWireframeContent(GridWireframeTreeBuilder parent) {
+		public GridWireframeContent(GridWireframeTreeBuilder parent, Dimension dimension) {
 			this.parent = parent;
+			this.dimension = dimension;
 		}
 
 		public GridWireframeContent withCell(Point point, Fraction heightSizeRatio, Fraction widthSizeRatio, WireframeTreeBuilder content) {
@@ -82,10 +83,22 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 		}
 
 		public WireframeTree build() {
-			parent.setCellContent(cellContents);
-			return parent.build();
+			return fill().build();
 		}
 
+		public GridWireframeTreeBuilder fill() {
+			parent.setCellContent(cellContents);
+			return parent;
+		}
+
+		public GridWireframeTreeBuilder allCellsWith(WireframeTreeBuilder content) {
+			for (int x = 0; x < dimension.width; x++) {
+				for (int y = 0; y < dimension.height; y++) {
+					cellContents.put(new Point(x, y), new CoordinateContent(all(), all(), content));
+				}
+			}
+			return fill();
+		}
 	}
 
 	public static class CoordinateContent {

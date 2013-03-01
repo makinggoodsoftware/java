@@ -18,11 +18,8 @@ public class Wireframes {
 		return new VerticalSlicesWireframeTreeBuilder(name, contentTreeBuilder, new NativeRectanguarShape(), uiPropertiesBuilder);
 	}
 
-	public static PijamaRowsWireframeTreeBuilder pijamaRows(String name, WireframeTreeBuilder oddLineTreeBuilder, WireframeTreeBuilder evenRowTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new PijamaRowsWireframeTreeBuilder(name, oddLineTreeBuilder, evenRowTreeBuilder, new NativeRectanguarShape(), uiPropertiesBuilder);
+	public static PijamaRowsWireframeTreeBuilder horizontalRepeater(String name, WireframeTreeBuilder content, UIPropertiesBuilder uiPropertiesBuilder) {
+		return new PijamaRowsWireframeTreeBuilder(name, content, uiPropertiesBuilder);
 	}
 
-	public static TwoLinesWireframeTreeBuilder twoLines(String name, WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new TwoLinesWireframeTreeBuilder(name, firstLineTreeBuilder, secondLineTreeBuilder, new NativeRectanguarShape(), uiPropertiesBuilder);
-	}
 }

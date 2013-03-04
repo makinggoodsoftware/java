@@ -14,22 +14,6 @@ import static com.mgs.fantasi.properties.UIPropertyFactory.undefined;
 import static com.mgs.fantasi.properties.UIPropertyId.*;
 
 public class UIPropertiesBuilderFactory {
-	public static UIPropertiesBuilder rectangularEmpty() {
-		UIProperty<Border> border = empty(UIPropertyType.BORDER);
-		UIProperty<Color> backgroundColor = empty(UIPropertyType.BACKGROUND_COLOR);
-		UIProperty<Color> foregroundColor = empty(UIPropertyType.FOREGROUND_COLOR);
-		UIProperty<Padding> padding = empty(UIPropertyType.PADDING);
-		UIProperty<Measurement> measurement = empty(UIPropertyType.MEASUREMENT);
-
-		return new UIPropertiesBuilder(newUIPropertiesMap(
-				border,
-				backgroundColor,
-				foregroundColor,
-				padding,
-				measurement
-		));
-	}
-
 	public static UIPropertiesBuilder from(UIPropertiesProvider uiPropertiesProvider) {
 		UIProperty<Border> border = uiPropertiesProvider.getBorder();
 		UIProperty<Color> backgroundColor = uiPropertiesProvider.getBackgroundColor();
@@ -46,8 +30,24 @@ public class UIPropertiesBuilderFactory {
 		));
 	}
 
+	public static UIPropertiesBuilder allEmptyUIProperties() {
+		UIProperty<Border> border = empty(UIPropertyType.BORDER);
+		UIProperty<Color> backgroundColor = empty(UIPropertyType.BACKGROUND_COLOR);
+		UIProperty<Color> foregroundColor = empty(UIPropertyType.FOREGROUND_COLOR);
+		UIProperty<Padding> padding = empty(UIPropertyType.PADDING);
+		UIProperty<Measurement> measurement = empty(UIPropertyType.MEASUREMENT);
 
-	public static UIPropertiesBuilder allUndefined() {
+		return new UIPropertiesBuilder(newUIPropertiesMap(
+				border,
+				backgroundColor,
+				foregroundColor,
+				padding,
+				measurement
+		));
+	}
+
+
+	public static UIPropertiesBuilder allUndefinedUIProperties() {
 		UIProperty<Border> border = undefined(UIPropertyType.BORDER);
 		UIProperty<Color> backgroundColor = undefined(UIPropertyType.BACKGROUND_COLOR);
 		UIProperty<Color> foregroundColor = undefined(UIPropertyType.FOREGROUND_COLOR);

@@ -3,11 +3,11 @@ package com.mgs.invasion.mvc.views;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.selectors.UISelectorFactory;
-import com.mgs.fantasi.wireframe.tree.builder.SingleChildWireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.builder.FinalWireframeTreeBuilder;
 
 import java.awt.*;
 
-import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allUndefined;
+import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allUndefinedUIProperties;
 import static com.mgs.fantasi.properties.UIPropertyFactory.backgroundColorFromAwt;
 import static com.mgs.fantasi.properties.UIPropertyFactory.newBorder;
 import static java.awt.Color.GREEN;
@@ -18,23 +18,23 @@ public class ProfileFactory {
 		UIProfile debugProfile = new UIProfile();
 
 		debugProfile.addStyle(
-				UISelectorFactory.forShape(HexagonShape.class),
-				allUndefined().
-						withBorder(newBorder(
-								Color.YELLOW,
-								10
-						)).
-						withBackgroundColor(backgroundColorFromAwt(RED))
-						.build()
-		);
-		debugProfile.addStyle(
-				UISelectorFactory.forType(SingleChildWireframeTreeBuilder.class),
-				allUndefined().
+				UISelectorFactory.forType(FinalWireframeTreeBuilder.class),
+				allUndefinedUIProperties().
 						withBorder(newBorder(
 								Color.BLUE,
 								5
 						)).
 						withBackgroundColor(backgroundColorFromAwt(GREEN))
+						.build()
+		);
+		debugProfile.addStyle(
+				UISelectorFactory.forShape(HexagonShape.class),
+				allUndefinedUIProperties().
+						withBorder(newBorder(
+								Color.YELLOW,
+								10
+						)).
+						withBackgroundColor(backgroundColorFromAwt(RED))
 						.build()
 		);
 
@@ -46,7 +46,7 @@ public class ProfileFactory {
 
 		profile.addStyle(
 				UISelectorFactory.forShape(HexagonShape.class),
-				allUndefined().withBorder(
+				allUndefinedUIProperties().withBorder(
 						newBorder(
 								Color.BLACK,
 								1
@@ -57,7 +57,7 @@ public class ProfileFactory {
 
 		profile.addStyle(
 				UISelectorFactory.forName("2ndLayerOfHexagons"),
-				allUndefined().withBorder(
+				allUndefinedUIProperties().withBorder(
 						newBorder(
 								Color.BLACK,
 								1

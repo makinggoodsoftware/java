@@ -14,7 +14,7 @@ import com.mgs.invasion.mvc.views.ProfileFactory;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
+import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
 import static com.mgs.fantasi.wireframe.Wireframes.layered;
 import static com.mgs.invasion.mvc.views.HexagonRowsWireframeTreeBuilder.hexagonRows;
@@ -33,15 +33,15 @@ public class Main {
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
 		Padding margin = hexagonMeasurement.getValue().asPadding().withHalfOfItsSize();
 
-		WireframeTreeBuilder wireframeTreeBuilder = layered("main_frame", rectangularEmpty())
+		WireframeTreeBuilder wireframeTreeBuilder = layered("main_frame", allEmptyUIProperties())
 				.withLayer(
-						hexagonRows("odd_hexagons", rectangularEmpty())
+						hexagonRows("odd_hexagons", allEmptyUIProperties())
 								.withNumberOfGenerations(numberOfGenerations)
 								.withNumberOfVerticalDivisions(numberOVerticalDivisions)
 								.withHexagonSize(hexagonMeasurement)
 				).
 						withLayer(
-								hexagonRows("even_hexagons", rectangularEmpty().withMargin(uiProperty(margin, UIPropertyType.MEASUREMENT)))
+								hexagonRows("even_hexagons", allEmptyUIProperties().withMargin(uiProperty(margin, UIPropertyType.MEASUREMENT)))
 										.withNumberOfGenerations(numberOfGenerations)
 										.withNumberOfVerticalDivisions(numberOVerticalDivisions)
 										.withHexagonSize(hexagonMeasurement)

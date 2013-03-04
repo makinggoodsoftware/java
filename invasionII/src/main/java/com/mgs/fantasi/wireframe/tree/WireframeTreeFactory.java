@@ -9,7 +9,7 @@ public class WireframeTreeFactory {
 		return new WireframeTree(root);
 	}
 
-	public static WireframeTree empty(Wireframe wireframe, String name, Class<? extends WireframeTreeBuilder> builderClass) {
+	public static WireframeTree emptyTree(Wireframe wireframe, String name, Class<? extends WireframeTreeBuilder> builderClass) {
 		WireframeNode root = new WireframeNode(wireframe, name, builderClass, WireframeLayoutType.EMPTY);
 		return new WireframeTree(root);
 	}

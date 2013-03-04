@@ -22,4 +22,10 @@ public class GridWireframeTreeBuilderFactory {
 				.withDimension(new Dimension(1, numberOfGenerations))
 				.allCellsWith(toRepeat);
 	}
+
+	public static GridWireframeTreeBuilder verticalDivisions(String name, int numberOfDivisions, WireframeTreeBuilder content, UIPropertiesBuilder uiPropertiesBuilder) {
+		return new GridWireframeTreeBuilder(name, uiPropertiesBuilder)
+				.withDimension(new Dimension(numberOfDivisions, 1))
+				.allCellsWith(content);
+	}
 }

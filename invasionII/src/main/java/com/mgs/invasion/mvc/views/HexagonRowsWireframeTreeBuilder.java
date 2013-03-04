@@ -12,9 +12,7 @@ import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.rectangularEmpty;
 import static com.mgs.fantasi.wireframe.Wireframes.rectangle;
-import static com.mgs.fantasi.wireframe.Wireframes.verticalSlices;
-import static com.mgs.fantasi.wireframe.tree.builder.GridWireframeTreeBuilderFactory.horizontalRepeater;
-import static com.mgs.fantasi.wireframe.tree.builder.GridWireframeTreeBuilderFactory.twoLines;
+import static com.mgs.fantasi.wireframe.tree.builder.GridWireframeTreeBuilderFactory.*;
 
 public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final SingleChildWireframeTreeBuilder hexagon;
@@ -65,7 +63,7 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 				twoLines(
 						getName() + "_generation",
 						Fractions.thwoThirds(),
-						verticalSlices(getName() + "_odd", hexagon, rectangularEmpty()).withVerticalDivisions(numberOVerticalDivisions),
+						verticalDivisions(getName() + "_odd", numberOVerticalDivisions, hexagon, rectangularEmpty()),
 						rectangle(getName() + "_even", new NativeRectanguarShape(), rectangularEmpty()),
 						rectangularEmpty()
 				),

@@ -23,9 +23,9 @@ public class GridWireframeTreeBuilderFactory {
 				.allCellsWith(toRepeat);
 	}
 
-	public static GridWireframeTreeBuilder verticalDivisions(String name, int numberOfDivisions, WireframeTreeBuilder content, UIPropertiesBuilder uiPropertiesBuilder) {
+	public static GridWireframeTreeBuilder verticalRepeater(String name, WireframeTreeBuilder toRepeat, int numberOfGenerations, UIPropertiesBuilder uiPropertiesBuilder) {
 		return new GridWireframeTreeBuilder(name, uiPropertiesBuilder)
-				.withDimension(new Dimension(numberOfDivisions, 1))
-				.allCellsWith(content);
+				.withDimension(new Dimension(numberOfGenerations, 1))
+				.allCellsWith(toRepeat);
 	}
 }

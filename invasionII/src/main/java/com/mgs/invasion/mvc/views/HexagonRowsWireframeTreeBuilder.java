@@ -63,8 +63,8 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 				twoLines(
 						getName() + "_generation",
 						Fractions.thwoThirds(),
-						verticalDivisions(getName() + "_odd", numberOVerticalDivisions, hexagon, rectangularEmpty()),
-						rectangle(getName() + "_even", new NativeRectanguarShape(), rectangularEmpty()),
+						verticalRepeater(getName() + "_hexagons", hexagon, numberOVerticalDivisions, rectangularEmpty()),
+						rectangle(getName() + "_space", new NativeRectanguarShape(), rectangularEmpty()),
 						rectangularEmpty()
 				),
 				numberOfGenerations,

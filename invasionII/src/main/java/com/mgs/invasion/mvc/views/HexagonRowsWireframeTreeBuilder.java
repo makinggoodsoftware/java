@@ -6,12 +6,12 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
+import com.mgs.fantasi.wireframe.Wireframes;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
 import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
-import static com.mgs.fantasi.wireframe.Wireframes.emptyRectangle;
-import static com.mgs.fantasi.wireframe.tree.builder.GridWireframeTreeBuilderFactory.*;
+import static com.mgs.fantasi.wireframe.Wireframes.*;
 
 public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final WireframeTreeBuilder hexagon;
@@ -57,7 +57,7 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	@Override
 	public WireframeTree build() {
-		return horizontalRepeater(
+		return Wireframes.horizontalRepeater(
 				getName() + "_pijama_rows",
 				twoLines(
 						getName() + "_generation",

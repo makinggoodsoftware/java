@@ -3,27 +3,25 @@ package com.mgs.fantasi.wireframe;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
-import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
-import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.tree.builder.*;
 
 import java.awt.*;
 
 public class Wireframes {
-	public static LayeredElementsWireframeTreeBuilder layered(String name, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new LayeredElementsWireframeTreeBuilder(name, new NativeRectanguarShape(), uiPropertiesBuilder);
+	public static LayeredElementsWireframeTreeBuilder layered(String name, Wireframe wireframe) {
+		return new LayeredElementsWireframeTreeBuilder(name, wireframe);
 	}
 
-	public static SingleChildWireframeTreeBuilder rectangle(String name, WireframeTreeBuilder content, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new SingleChildWireframeTreeBuilder(name, content, shape, uiPropertiesBuilder);
+	public static SingleChildWireframeTreeBuilder rectangle(String name, Wireframe wireframe, WireframeTreeBuilder content) {
+		return new SingleChildWireframeTreeBuilder(name, wireframe, content);
 	}
 
-	public static FinalWireframeTreeBuilder emptyRectangle(String name, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new FinalWireframeTreeBuilder(name, shape, uiPropertiesBuilder);
+	public static FinalWireframeTreeBuilder emptyRectangle(String name, Wireframe wireframe) {
+		return new FinalWireframeTreeBuilder(name, wireframe);
 	}
 
-	public static GridWireframeTreeBuilder twoLines(String name, Fraction firstLineHeightSizeRatio, WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
-		GridWireframeTreeBuilder gridWireframeTreeBuilder = new GridWireframeTreeBuilder(name, uiPropertiesBuilder);
+	public static GridWireframeTreeBuilder twoLines(String name, Wireframe wireframe, Fraction firstLineHeightSizeRatio, WireframeTreeBuilder firstLineTreeBuilder, WireframeTreeBuilder secondLineTreeBuilder, UIPropertiesBuilder uiPropertiesBuilder) {
+		GridWireframeTreeBuilder gridWireframeTreeBuilder = new GridWireframeTreeBuilder(name, wireframe);
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
 		return gridWireframeTreeBuilder
 				.withDimension(new Dimension(1, 2))
@@ -32,14 +30,14 @@ public class Wireframes {
 				.fill();
 	}
 
-	public static GridWireframeTreeBuilder horizontalRepeater(String name, WireframeTreeBuilder toRepeat, int numberOfGenerations, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new GridWireframeTreeBuilder(name, uiPropertiesBuilder)
+	public static GridWireframeTreeBuilder horizontalRepeater(String name, Wireframe wireframe, WireframeTreeBuilder toRepeat, int numberOfGenerations) {
+		return new GridWireframeTreeBuilder(name, wireframe)
 				.withDimension(new Dimension(1, numberOfGenerations))
 				.allCellsWith(toRepeat);
 	}
 
-	public static GridWireframeTreeBuilder verticalRepeater(String name, WireframeTreeBuilder toRepeat, int numberOfGenerations, UIPropertiesBuilder uiPropertiesBuilder) {
-		return new GridWireframeTreeBuilder(name, uiPropertiesBuilder)
+	public static GridWireframeTreeBuilder verticalRepeater(String name, Wireframe wireframe, WireframeTreeBuilder toRepeat, int numberOfGenerations) {
+		return new GridWireframeTreeBuilder(name, wireframe)
 				.withDimension(new Dimension(numberOfGenerations, 1))
 				.allCellsWith(toRepeat);
 	}

@@ -4,9 +4,10 @@ import com.mgs.fantasi.driver.UIDriver;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.UIPropertyType;
-import com.mgs.fantasi.properties.data.Padding;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
+import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
+import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
 import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
 import com.mgs.invasion.mvc.views.ProfileFactory;
@@ -31,17 +32,18 @@ public class Main {
 		int numberOfGenerations = 5;
 
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
-		Padding margin = hexagonMeasurement.getValue().asPadding().withHalfOfItsSize();
 
-		WireframeTreeBuilder wireframeTreeBuilder = layered("main_frame", allEmptyUIProperties())
+		Wireframe layersContainer = new Wireframe(allEmptyUIProperties().build(), new NativeRectanguarShape());
+
+		WireframeTreeBuilder wireframeTreeBuilder = layered("main_frame", layersContainer)
 				.withLayer(
-						hexagonRows("odd_hexagons", allEmptyUIProperties())
+						hexagonRows("odd_hexagons")
 								.withNumberOfGenerations(numberOfGenerations)
 								.withNumberOfVerticalDivisions(numberOVerticalDivisions)
 								.withHexagonSize(hexagonMeasurement)
 				).
 						withLayer(
-								hexagonRows("even_hexagons", allEmptyUIProperties().withMargin(uiProperty(margin, UIPropertyType.MEASUREMENT)))
+								hexagonRows("even_hexagons")
 										.withNumberOfGenerations(numberOfGenerations)
 										.withNumberOfVerticalDivisions(numberOVerticalDivisions)
 										.withHexagonSize(hexagonMeasurement)

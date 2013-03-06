@@ -1,8 +1,6 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
-import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
-import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -15,24 +13,19 @@ import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
 public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
-	private final UIPropertiesBuilder uiPropertiesBuilder;
+	private final Wireframe wireframe;
 	private final String name;
 	private Dimension dimension;
 	private Map<Point, CoordinateContent> cellContents;
 
-	public GridWireframeTreeBuilder(String name, UIPropertiesBuilder uiPropertiesBuilder) {
+	public GridWireframeTreeBuilder(String name, Wireframe wireframe) {
 		this.name = name;
-		this.uiPropertiesBuilder = uiPropertiesBuilder;
+		this.wireframe = wireframe;
 	}
 
 	public GridWireframeContent withDimension(Dimension dimension) {
 		this.dimension = dimension;
 		return new GridWireframeContent(this, dimension);
-	}
-
-	@Override
-	public UIPropertiesBuilder getUiPropertiesBuilder() {
-		return uiPropertiesBuilder;
 	}
 
 	@Override
@@ -42,7 +35,6 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 
 	@Override
 	public WireframeTree build() {
-		Wireframe wireframe = new Wireframe(getUiPropertiesBuilder().build(), new NativeRectanguarShape());
 		WireframeTree wireframeTree = grid(wireframe, getName(), this.getClass());
 
 		for (int x = 0; x < dimension.width; x++) {
@@ -56,6 +48,11 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 		}
 
 		return wireframeTree;
+	}
+
+	@Override
+	public Wireframe getRootWireframe() {
+		return wireframe;
 	}
 
 	private CoordinateContent locateContentFor(int x, int y) {

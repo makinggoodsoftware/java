@@ -1,7 +1,5 @@
 package com.mgs.fantasi.wireframe.tree.builder;
 
-import com.mgs.fantasi.properties.UIPropertiesBuilder;
-import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.WireframeTree;
@@ -14,13 +12,11 @@ import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.layered;
 
 public class LayeredElementsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private final List<WireframeTreeBuilder> layers = new ArrayList<WireframeTreeBuilder>();
-	private final UIPropertiesBuilder uiPropertiesBuilder;
 	private final String name;
-	private final PolygonPointsIterator shape;
+	private final Wireframe wireframe;
 
-	public LayeredElementsWireframeTreeBuilder(String name, PolygonPointsIterator shape, UIPropertiesBuilder uiPropertiesBuilder) {
-		this.shape = shape;
-		this.uiPropertiesBuilder = uiPropertiesBuilder;
+	public LayeredElementsWireframeTreeBuilder(String name, Wireframe wireframe) {
+		this.wireframe = wireframe;
 		this.name = name;
 	}
 
@@ -32,7 +28,6 @@ public class LayeredElementsWireframeTreeBuilder implements WireframeTreeBuilder
 
 	@Override
 	public WireframeTree build() {
-		Wireframe wireframe = new Wireframe(uiPropertiesBuilder.build(), shape);
 		WireframeTree wireframeTree = layered(wireframe, name, this.getClass());
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			WireframeTreeBuilder layerBuilder = layers.get(i);
@@ -44,8 +39,8 @@ public class LayeredElementsWireframeTreeBuilder implements WireframeTreeBuilder
 	}
 
 	@Override
-	public UIPropertiesBuilder getUiPropertiesBuilder() {
-		return uiPropertiesBuilder;
+	public Wireframe getRootWireframe() {
+		return wireframe;
 	}
 
 	@Override

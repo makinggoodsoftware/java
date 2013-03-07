@@ -6,18 +6,16 @@ import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.UIPropertyType;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
-import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
-import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
 import static com.mgs.fantasi.structure.BluePrints.newBluePrint;
+import static com.mgs.fantasi.wireframe.Wireframes.newRectangularAllEmptyUIPropertiesWireframe;
 import static com.mgs.invasion.mvc.views.HexagonRowsBluePrint.hexagonRows;
 
 public class Main {
@@ -33,10 +31,8 @@ public class Main {
 
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
 
-		Wireframe layersContainer = new Wireframe(allEmptyUIProperties().build(), new NativeRectanguarShape());
-
 		BluePrint bluePrint =
-				newBluePrint("main_frame", layersContainer).layered()
+				newBluePrint("main_frame", newRectangularAllEmptyUIPropertiesWireframe()).layered()
 						.withLayer(
 								hexagonRows("odd_hexagons")
 										.withNumberOfGenerations(numberOfGenerations)

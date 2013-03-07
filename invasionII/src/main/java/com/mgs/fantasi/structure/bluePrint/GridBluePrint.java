@@ -1,16 +1,16 @@
-package com.mgs.fantasi.wireframe.tree.builder;
+package com.mgs.fantasi.structure.bluePrint;
 
 import com.mgs.fantasi.properties.data.measurements.Fraction;
-import com.mgs.fantasi.wireframe.CollocationInfo;
+import com.mgs.fantasi.structure.CollocationInfo;
+import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.Structure;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
-import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
+import static com.mgs.fantasi.structure.Structures.gridStructure;
 
 public class GridBluePrint implements BluePrint {
 	private final Wireframe wireframe;
@@ -35,7 +35,7 @@ public class GridBluePrint implements BluePrint {
 
 	@Override
 	public Structure build() {
-		Structure structure = grid(wireframe, getName(), this.getClass());
+		Structure structure = gridStructure(wireframe, getName(), this.getClass());
 
 		for (int x = 0; x < dimension.width; x++) {
 			for (int y = 0; y < dimension.height; y++) {
@@ -48,11 +48,6 @@ public class GridBluePrint implements BluePrint {
 		}
 
 		return structure;
-	}
-
-	@Override
-	public Wireframe getRootWireframe() {
-		return wireframe;
 	}
 
 	private CoordinateContent locateContentFor(int x, int y) {

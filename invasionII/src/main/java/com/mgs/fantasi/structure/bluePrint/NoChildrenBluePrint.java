@@ -1,9 +1,9 @@
-package com.mgs.fantasi.wireframe.tree.builder;
+package com.mgs.fantasi.structure.bluePrint;
 
+import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.Structure;
 
-import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.emptyTree;
+import static com.mgs.fantasi.structure.Structures.emptyStructure;
 
 public class NoChildrenBluePrint implements BluePrint {
 	private final String name;
@@ -16,12 +16,7 @@ public class NoChildrenBluePrint implements BluePrint {
 
 	@Override
 	public Structure build() {
-		return emptyTree(wireframe, getName(), this.getClass());
-	}
-
-	@Override
-	public Wireframe getRootWireframe() {
-		return wireframe;
+		return emptyStructure(wireframe, getName(), this.getClass());
 	}
 
 	@Override

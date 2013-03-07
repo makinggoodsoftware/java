@@ -1,7 +1,7 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.wireframe.tree.builder.BluePrint;
+import com.mgs.fantasi.structure.bluePrint.BluePrint;
 
 public class UISelectorFactory {
 

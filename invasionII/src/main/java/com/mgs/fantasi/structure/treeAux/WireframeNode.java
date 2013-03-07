@@ -1,8 +1,8 @@
-package com.mgs.fantasi.wireframe.tree;
+package com.mgs.fantasi.structure.treeAux;
 
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
+import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.builder.BluePrint;
 import com.mgs.tree.templates.TemplateNode;
 
 public class WireframeNode extends TemplateNode<Wireframe> {

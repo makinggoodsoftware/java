@@ -2,8 +2,8 @@ package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.driver.swing.SwingUtils;
 import com.mgs.fantasi.properties.UIProperties;
-import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.tree.WireframeLayoutType;
+import com.mgs.fantasi.structure.CollocationInfo;
+import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class StandardJPanelBuilder implements JPanelBuilder {
 		if (type instanceof GridBagLayout) {
 			return SwingUtils.coordinates(specifics.getCoordinateX(), specifics.getCoordinateY(), specifics.getProportionOfParentWeight(), specifics.getProportionOfParentHeight());
 		} else if (type instanceof OverlayLayout) {
-			return specifics.getzIndex();
+			return specifics.getZIndex();
 		}
 		throw new RuntimeException("Not expected to hit this code point");
 	}

@@ -4,8 +4,8 @@ import com.mgs.fantasi.properties.data.Padding;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
-import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.tree.WireframeLayoutType;
+import com.mgs.fantasi.structure.CollocationInfo;
+import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
 
 import javax.swing.*;
 import java.awt.*;

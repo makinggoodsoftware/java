@@ -1,14 +1,14 @@
-package com.mgs.fantasi.wireframe.tree.builder;
+package com.mgs.fantasi.structure.bluePrint;
 
-import com.mgs.fantasi.wireframe.CollocationInfo;
+import com.mgs.fantasi.structure.CollocationInfo;
+import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.Structure;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
-import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.layered;
+import static com.mgs.fantasi.structure.Structures.layeredStructure;
 
 public class LayeredElementsBluePrint implements BluePrint {
 	private final List<BluePrint> layers = new ArrayList<BluePrint>();
@@ -28,7 +28,7 @@ public class LayeredElementsBluePrint implements BluePrint {
 
 	@Override
 	public Structure build() {
-		Structure structure = layered(wireframe, name, this.getClass());
+		Structure structure = layeredStructure(wireframe, name, this.getClass());
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			BluePrint layerBuilder = layers.get(i);
 			Structure layer = layerBuilder.build();
@@ -36,11 +36,6 @@ public class LayeredElementsBluePrint implements BluePrint {
 		}
 
 		return structure;
-	}
-
-	@Override
-	public Wireframe getRootWireframe() {
-		return wireframe;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.mgs.fantasi.wireframe;
+package com.mgs.fantasi.structure;
 
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 
@@ -33,7 +33,7 @@ public class CollocationInfo {
 		return proportionOfParentWeight;
 	}
 
-	public int getzIndex() {
+	public int getZIndex() {
 		return zIndex;
 	}
 }

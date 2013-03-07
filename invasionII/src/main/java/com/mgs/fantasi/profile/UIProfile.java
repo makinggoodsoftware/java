@@ -2,7 +2,7 @@ package com.mgs.fantasi.profile;
 
 import com.mgs.fantasi.properties.UIProperties;
 import com.mgs.fantasi.selectors.UISelector;
-import com.mgs.fantasi.wireframe.tree.WireframeNode;
+import com.mgs.fantasi.structure.treeAux.WireframeNode;
 
 import java.util.HashMap;
 import java.util.HashSet;

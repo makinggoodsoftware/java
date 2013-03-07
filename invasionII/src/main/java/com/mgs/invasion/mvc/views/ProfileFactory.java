@@ -3,7 +3,7 @@ package com.mgs.invasion.mvc.views;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.selectors.UISelectorFactory;
-import com.mgs.fantasi.wireframe.tree.builder.NoChildrenBluePrint;
+import com.mgs.fantasi.structure.bluePrint.NoChildrenBluePrint;
 
 import java.awt.*;
 

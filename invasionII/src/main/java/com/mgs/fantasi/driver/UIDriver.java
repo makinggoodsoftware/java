@@ -5,7 +5,7 @@ import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
 import com.mgs.fantasi.profile.UIProfile;
-import com.mgs.fantasi.wireframe.tree.Structure;
+import com.mgs.fantasi.structure.Structure;
 
 import javax.swing.*;
 import java.awt.*;

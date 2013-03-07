@@ -1,11 +1,11 @@
-package com.mgs.fantasi.wireframe.tree.builder;
+package com.mgs.fantasi.structure.bluePrint;
 
-import com.mgs.fantasi.wireframe.CollocationInfo;
+import com.mgs.fantasi.structure.CollocationInfo;
+import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.Structure;
 
 import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
-import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.rectangle;
+import static com.mgs.fantasi.structure.Structures.simpleStructure;
 
 public class SingleChildBluePrint implements BluePrint {
 	private final BluePrint content;
@@ -24,16 +24,11 @@ public class SingleChildBluePrint implements BluePrint {
 	}
 
 	@Override
-	public Wireframe getRootWireframe() {
-		return wireframe;
-	}
-
-	@Override
 	public Structure build() {
 		if (content == null) {
 			throw new RuntimeException("Content can't be null!!");
 		}
-		Structure structure = rectangle(wireframe, getName(), this.getClass());
+		Structure structure = simpleStructure(wireframe, getName(), this.getClass());
 		structure.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.build());
 		return structure;
 	}

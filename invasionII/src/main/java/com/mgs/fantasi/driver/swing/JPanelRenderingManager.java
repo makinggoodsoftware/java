@@ -5,9 +5,9 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelBuilder;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
-import com.mgs.fantasi.wireframe.CollocationInfo;
-import com.mgs.fantasi.wireframe.tree.Structure;
-import com.mgs.fantasi.wireframe.tree.WireframeNode;
+import com.mgs.fantasi.structure.CollocationInfo;
+import com.mgs.fantasi.structure.Structure;
+import com.mgs.fantasi.structure.treeAux.WireframeNode;
 
 import javax.swing.*;
 import java.util.Map;

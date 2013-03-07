@@ -1,4 +1,4 @@
-package com.mgs.fantasi.wireframe.tree;
+package com.mgs.fantasi.structure.treeAux;
 
 public enum WireframeLayoutType {
 	GRID, EMPTY, LAYERS, SIMPLE

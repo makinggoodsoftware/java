@@ -1,6 +1,6 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.wireframe.tree.WireframeLayoutType;
+import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
 
 import javax.swing.*;
 import java.awt.*;

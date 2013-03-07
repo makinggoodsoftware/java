@@ -6,12 +6,12 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
+import com.mgs.fantasi.structure.Structure;
+import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.Structure;
-import com.mgs.fantasi.wireframe.tree.builder.BluePrint;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
-import static com.mgs.fantasi.wireframe.BluePrints.newBluePrint;
+import static com.mgs.fantasi.structure.BluePrints.newBluePrint;
 
 public class HexagonRowsBluePrint implements BluePrint {
 	private final String name;
@@ -52,11 +52,6 @@ public class HexagonRowsBluePrint implements BluePrint {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public Wireframe getRootWireframe() {
-		return allContainer;
 	}
 
 	@Override

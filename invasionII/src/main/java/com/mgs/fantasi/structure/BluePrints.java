@@ -1,8 +1,9 @@
-package com.mgs.fantasi.wireframe;
+package com.mgs.fantasi.structure;
 
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
-import com.mgs.fantasi.wireframe.tree.builder.*;
+import com.mgs.fantasi.structure.bluePrint.*;
+import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 

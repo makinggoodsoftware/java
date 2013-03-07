@@ -7,12 +7,12 @@ import com.mgs.tree.templates.TemplateTreeWithConnectionInfo;
 
 import java.util.Map;
 
-public class WireframeTree extends TemplateTreeWithConnectionInfo<Wireframe, CollocationInfo, WireframeTree> {
-	WireframeTree(WireframeNode root) {
+public class Structure extends TemplateTreeWithConnectionInfo<Wireframe, CollocationInfo, Structure> {
+	Structure(WireframeNode root) {
 		super(root);
 	}
 
-	public WireframeTree(Node<Wireframe> root, Map<CollocationInfo, WireframeTree> children) {
+	public Structure(Node<Wireframe> root, Map<CollocationInfo, Structure> children) {
 		super(root, children);
 	}
 

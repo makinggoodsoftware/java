@@ -3,7 +3,7 @@ package com.mgs.fantasi.wireframe.tree.builder;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.wireframe.CollocationInfo;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.WireframeTree;
+import com.mgs.fantasi.wireframe.tree.Structure;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -12,13 +12,13 @@ import java.util.Map;
 import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.wireframe.tree.WireframeTreeFactory.grid;
 
-public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
+public class GridBluePrint implements BluePrint {
 	private final Wireframe wireframe;
 	private final String name;
 	private Dimension dimension;
 	private Map<Point, CoordinateContent> cellContents;
 
-	public GridWireframeTreeBuilder(String name, Wireframe wireframe) {
+	public GridBluePrint(String name, Wireframe wireframe) {
 		this.name = name;
 		this.wireframe = wireframe;
 	}
@@ -34,8 +34,8 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 	}
 
 	@Override
-	public WireframeTree build() {
-		WireframeTree wireframeTree = grid(wireframe, getName(), this.getClass());
+	public Structure build() {
+		Structure structure = grid(wireframe, getName(), this.getClass());
 
 		for (int x = 0; x < dimension.width; x++) {
 			for (int y = 0; y < dimension.height; y++) {
@@ -43,11 +43,11 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 				Fraction width = child.getWidthSizeRatio();
 				Fraction height = child.getHeightSizeRatio();
 				CollocationInfo collocationInfo = new CollocationInfo(0, width, height, x, y);
-				wireframeTree.addChild(collocationInfo, child.getContent().build());
+				structure.addChild(collocationInfo, child.getContent().build());
 			}
 		}
 
-		return wireframeTree;
+		return structure;
 	}
 
 	@Override
@@ -64,31 +64,31 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 	}
 
 	public static class GridWireframeContent {
-		private final GridWireframeTreeBuilder parent;
+		private final GridBluePrint parent;
 		private final Dimension dimension;
 
 		private final Map<Point, CoordinateContent> cellContents = new HashMap<Point, CoordinateContent>();
 
-		public GridWireframeContent(GridWireframeTreeBuilder parent, Dimension dimension) {
+		public GridWireframeContent(GridBluePrint parent, Dimension dimension) {
 			this.parent = parent;
 			this.dimension = dimension;
 		}
 
-		public GridWireframeContent withCell(Point point, Fraction heightSizeRatio, Fraction widthSizeRatio, WireframeTreeBuilder content) {
+		public GridWireframeContent withCell(Point point, Fraction heightSizeRatio, Fraction widthSizeRatio, BluePrint content) {
 			cellContents.put(point, new CoordinateContent(heightSizeRatio, widthSizeRatio, content));
 			return this;
 		}
 
-		public WireframeTree build() {
+		public Structure build() {
 			return fill().build();
 		}
 
-		public GridWireframeTreeBuilder fill() {
+		public GridBluePrint fill() {
 			parent.setCellContent(cellContents);
 			return parent;
 		}
 
-		public GridWireframeTreeBuilder allCellsWith(WireframeTreeBuilder content) {
+		public GridBluePrint allCellsWith(BluePrint content) {
 			for (int x = 0; x < dimension.width; x++) {
 				for (int y = 0; y < dimension.height; y++) {
 					cellContents.put(new Point(x, y), new CoordinateContent(all(), all(), content));
@@ -101,15 +101,15 @@ public class GridWireframeTreeBuilder implements WireframeTreeBuilder {
 	public static class CoordinateContent {
 		private final Fraction heightSizeRatio;
 		private final Fraction widthSizeRatio;
-		private final WireframeTreeBuilder content;
+		private final BluePrint content;
 
-		public CoordinateContent(Fraction heightSizeRatio, Fraction widthSizeRatio, WireframeTreeBuilder content) {
+		public CoordinateContent(Fraction heightSizeRatio, Fraction widthSizeRatio, BluePrint content) {
 			this.heightSizeRatio = heightSizeRatio;
 			this.widthSizeRatio = widthSizeRatio;
 			this.content = content;
 		}
 
-		public WireframeTreeBuilder getContent() {
+		public BluePrint getContent() {
 			return content;
 		}
 

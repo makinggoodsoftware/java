@@ -6,15 +6,15 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
+import com.mgs.fantasi.wireframe.BluePrints;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.Wireframes;
-import com.mgs.fantasi.wireframe.tree.WireframeTree;
-import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.Structure;
+import com.mgs.fantasi.wireframe.tree.builder.BluePrint;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
-import static com.mgs.fantasi.wireframe.Wireframes.*;
+import static com.mgs.fantasi.wireframe.BluePrints.*;
 
-public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
+public class HexagonRowsBluePrint implements BluePrint {
 	private final String name;
 	private final Wireframe allContainer;
 	private final UIPropertiesBuilder twoLinesContainerUIProperties = allEmptyUIProperties();
@@ -25,26 +25,26 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	private int numberOfGenerations;
 	private int numberOVerticalDivisions;
 
-	public static HexagonRowsWireframeTreeBuilder hexagonRows(String name) {
-		return new HexagonRowsWireframeTreeBuilder(name, new Wireframe(allEmptyUIProperties().build(), new NativeRectanguarShape()));
+	public static HexagonRowsBluePrint hexagonRows(String name) {
+		return new HexagonRowsBluePrint(name, new Wireframe(allEmptyUIProperties().build(), new NativeRectanguarShape()));
 	}
 
-	public HexagonRowsWireframeTreeBuilder(String name, Wireframe wireframe) {
+	public HexagonRowsBluePrint(String name, Wireframe wireframe) {
 		this.name = name;
 		this.allContainer = wireframe;
 	}
 
-	public HexagonRowsWireframeTreeBuilder withNumberOfGenerations(int numberOfGenerations) {
+	public HexagonRowsBluePrint withNumberOfGenerations(int numberOfGenerations) {
 		this.numberOfGenerations = numberOfGenerations;
 		return this;
 	}
 
-	public HexagonRowsWireframeTreeBuilder withNumberOfVerticalDivisions(int numberOfVerticalDivisions) {
+	public HexagonRowsBluePrint withNumberOfVerticalDivisions(int numberOfVerticalDivisions) {
 		this.numberOVerticalDivisions = numberOfVerticalDivisions;
 		return this;
 	}
 
-	public HexagonRowsWireframeTreeBuilder withHexagonSize(UIProperty<Measurement> hexagonMeasurement) {
+	public HexagonRowsBluePrint withHexagonSize(UIProperty<Measurement> hexagonMeasurement) {
 		hexagonContainerUIProperties.withMeasurement(hexagonMeasurement);
 		return this;
 	}
@@ -61,13 +61,13 @@ public class HexagonRowsWireframeTreeBuilder implements WireframeTreeBuilder {
 	}
 
 	@Override
-	public WireframeTree build() {
+	public Structure build() {
 		Wireframe twoLinesContainer = new Wireframe(twoLinesContainerUIProperties.build(), new NativeRectanguarShape());
 		Wireframe hexagonRowsContainer = new Wireframe(hexagonRowsContainerUIProperties.build(), new NativeRectanguarShape());
 		Wireframe spanBetweenHexagonRowsContainer = new Wireframe(spanBetweenHexagonRowsContainerUIProperties.build(), new NativeRectanguarShape());
 		Wireframe hexagonContainer = new Wireframe(hexagonContainerUIProperties.build(), new HexagonShape());
 
-		return Wireframes.horizontalRepeater(
+		return BluePrints.horizontalRepeater(
 				getName() + "_pijama_rows",
 				allContainer,
 				twoLines(

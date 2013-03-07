@@ -8,8 +8,8 @@ import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
 import com.mgs.fantasi.wireframe.Wireframe;
-import com.mgs.fantasi.wireframe.tree.WireframeTree;
-import com.mgs.fantasi.wireframe.tree.builder.WireframeTreeBuilder;
+import com.mgs.fantasi.wireframe.tree.Structure;
+import com.mgs.fantasi.wireframe.tree.builder.BluePrint;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 
 import javax.swing.*;
@@ -17,8 +17,8 @@ import java.awt.*;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
-import static com.mgs.fantasi.wireframe.Wireframes.layered;
-import static com.mgs.invasion.mvc.views.HexagonRowsWireframeTreeBuilder.hexagonRows;
+import static com.mgs.fantasi.wireframe.BluePrints.newBluePrint;
+import static com.mgs.invasion.mvc.views.HexagonRowsBluePrint.hexagonRows;
 
 public class Main {
 	public static void main(String... args) {
@@ -35,20 +35,20 @@ public class Main {
 
 		Wireframe layersContainer = new Wireframe(allEmptyUIProperties().build(), new NativeRectanguarShape());
 
-		WireframeTreeBuilder wireframeTreeBuilder = layered("main_frame", layersContainer)
-				.withLayer(
-						hexagonRows("odd_hexagons")
-								.withNumberOfGenerations(numberOfGenerations)
-								.withNumberOfVerticalDivisions(numberOVerticalDivisions)
-								.withHexagonSize(hexagonMeasurement)
-				).
-						withLayer(
-								hexagonRows("even_hexagons")
+		BluePrint bluePrint =
+				newBluePrint("main_frame", layersContainer).layered()
+						.withLayer(
+								hexagonRows("odd_hexagons")
 										.withNumberOfGenerations(numberOfGenerations)
 										.withNumberOfVerticalDivisions(numberOVerticalDivisions)
 										.withHexagonSize(hexagonMeasurement)
-						);
-		WireframeTree tree = wireframeTreeBuilder.build();
+						).withLayer(
+						hexagonRows("even_hexagons")
+								.withNumberOfGenerations(numberOfGenerations)
+								.withNumberOfVerticalDivisions(numberOVerticalDivisions)
+								.withHexagonSize(hexagonMeasurement)
+				);
+		Structure tree = bluePrint.build();
 
 		uiDriver.show(tree, new Dimension(400, 400), uiProfile);
 	}

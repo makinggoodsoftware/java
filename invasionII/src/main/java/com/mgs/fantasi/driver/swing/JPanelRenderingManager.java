@@ -6,8 +6,8 @@ import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.wireframe.CollocationInfo;
+import com.mgs.fantasi.wireframe.tree.Structure;
 import com.mgs.fantasi.wireframe.tree.WireframeNode;
-import com.mgs.fantasi.wireframe.tree.WireframeTree;
 
 import javax.swing.*;
 import java.util.Map;
@@ -23,14 +23,14 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	}
 
 	@Override
-	public JPanel render(WireframeTree wireframeTree, UIProfile uiProfile) {
-		JPanelBuilder jPanelBuilder = renderWireframe(wireframeTree.getRoot(), uiProfile);
-		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, wireframeTree.getChildren(), uiProfile);
-		return jPanelBuilderWithChildren.build(wireframeTree.getType());
+	public JPanel render(Structure structure, UIProfile uiProfile) {
+		JPanelBuilder jPanelBuilder = renderWireframe(structure.getRoot(), uiProfile);
+		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, structure.getChildren(), uiProfile);
+		return jPanelBuilderWithChildren.build(structure.getType());
 	}
 
-	private JPanelBuilder renderChildrenIntoJPanelBuilder(JPanelBuilder jPanelBuilder, Map<CollocationInfo, WireframeTree> children, UIProfile uiProfile) {
-		for (Map.Entry<CollocationInfo, WireframeTree> wireframeChildPart : children.entrySet()) {
+	private JPanelBuilder renderChildrenIntoJPanelBuilder(JPanelBuilder jPanelBuilder, Map<CollocationInfo, Structure> children, UIProfile uiProfile) {
+		for (Map.Entry<CollocationInfo, Structure> wireframeChildPart : children.entrySet()) {
 			JPanel child = render(wireframeChildPart.getValue(), uiProfile);
 			jPanelBuilder.withChild(child, wireframeChildPart.getKey());
 		}

@@ -6,13 +6,12 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
-import com.mgs.fantasi.wireframe.BluePrints;
 import com.mgs.fantasi.wireframe.Wireframe;
 import com.mgs.fantasi.wireframe.tree.Structure;
 import com.mgs.fantasi.wireframe.tree.builder.BluePrint;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
-import static com.mgs.fantasi.wireframe.BluePrints.*;
+import static com.mgs.fantasi.wireframe.BluePrints.newBluePrint;
 
 public class HexagonRowsBluePrint implements BluePrint {
 	private final String name;
@@ -67,16 +66,17 @@ public class HexagonRowsBluePrint implements BluePrint {
 		Wireframe spanBetweenHexagonRowsContainer = new Wireframe(spanBetweenHexagonRowsContainerUIProperties.build(), new NativeRectanguarShape());
 		Wireframe hexagonContainer = new Wireframe(hexagonContainerUIProperties.build(), new HexagonShape());
 
-		return BluePrints.horizontalRepeater(
-				getName() + "_pijama_rows",
-				allContainer,
-				twoLines(
-						getName() + "_generation",
-						twoLinesContainer, Fractions.thwoThirds(),
-						verticalRepeater(getName() + "_hexagons", hexagonRowsContainer, emptyRectangle(getName() + "_hexagon", hexagonContainer), numberOVerticalDivisions),
-						emptyRectangle(getName() + "_space", spanBetweenHexagonRowsContainer), allEmptyUIProperties()
-				),
-				numberOfGenerations
-		).build();
+		return
+				newBluePrint(getName() + "_pijama_rows", allContainer).horizontalRepeater(
+						newBluePrint(getName() + "_pijama_rows", twoLinesContainer).twoLines(
+								Fractions.thwoThirds(),
+								newBluePrint(getName() + "_hexagons", hexagonRowsContainer).verticalRepeater(
+										newBluePrint(getName() + "_hexagon", hexagonContainer).emptyRectangle(),
+										numberOVerticalDivisions
+								),
+								newBluePrint(getName() + "_space", spanBetweenHexagonRowsContainer).emptyRectangle()
+						),
+						numberOfGenerations
+				).build();
 	}
 }

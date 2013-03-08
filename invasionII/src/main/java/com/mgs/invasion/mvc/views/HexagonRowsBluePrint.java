@@ -10,7 +10,7 @@ import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
-import static com.mgs.fantasi.structure.BasicBluePrints.newBasicBluePrint;
+import static com.mgs.fantasi.structure.BasicBluePrintBuilders.newBasicBluePrintBuilder;
 import static com.mgs.fantasi.wireframe.Wireframes.*;
 
 public class HexagonRowsBluePrint implements BluePrint {
@@ -57,28 +57,27 @@ public class HexagonRowsBluePrint implements BluePrint {
 	@Override
 	public Structure build() {
 		return
-				newBasicBluePrint("hexagonRows").
+				newBasicBluePrintBuilder("hexagonRows").
 						withWireframe(allContainer).
 						repeatingHorizontally(
-								newBasicBluePrint("linesOfHexagons").
+								newBasicBluePrintBuilder("linesOfHexagons").
 										withWireframe(newRectangularWireframe(twoLinesContainerUIProperties)).
 										twoLines(
 												Fractions.thwoThirds(),
-												newBasicBluePrint("hexagonsRow").
+												newBasicBluePrintBuilder("hexagonsRow").
 														withWireframe(newRectangularWireframe(hexagonRowsContainerUIProperties)).
 														repeatingVertically(
-																newBasicBluePrint("hexagon").
+																newBasicBluePrintBuilder("hexagon").
 																		withWireframe(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE)).
 																		emptyRectangle(),
 																numberOVerticalDivisions
 														),
-												newBasicBluePrint("space").
+												newBasicBluePrintBuilder("space").
 														withWireframe(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties)).
 														emptyRectangle()
 										),
 								numberOfGenerations
-						).
-						build();
+						).build();
 	}
 
 

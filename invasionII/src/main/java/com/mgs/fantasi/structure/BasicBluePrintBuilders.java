@@ -7,29 +7,29 @@ import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 
-public abstract class BasicBluePrints {
+public abstract class BasicBluePrintBuilders {
 
-	public static BasicBluePrintBuilderStep1 newBasicBluePrint(String name) {
-		return new BasicBluePrintBuilderStep1(name);
+	public static BasicBluePrintBuilderStep1SpecifyWireframe newBasicBluePrintBuilder(String name) {
+		return new BasicBluePrintBuilderStep1SpecifyWireframe(name);
 	}
 
-	public static class BasicBluePrintBuilderStep1 {
+	public static class BasicBluePrintBuilderStep1SpecifyWireframe {
 		private final String name;
 
-		public BasicBluePrintBuilderStep1(String name) {
+		public BasicBluePrintBuilderStep1SpecifyWireframe(String name) {
 			this.name = name;
 		}
 
-		public BasicBluePrintBuilderStep2 withWireframe(Wireframe wireframe) {
-			return new BasicBluePrintBuilderStep2(name, wireframe);
+		public BasicBluePrintBuilderStep2SpecifyTypeOfLayout withWireframe(Wireframe wireframe) {
+			return new BasicBluePrintBuilderStep2SpecifyTypeOfLayout(name, wireframe);
 		}
 	}
 
-	public static class BasicBluePrintBuilderStep2 {
+	public static class BasicBluePrintBuilderStep2SpecifyTypeOfLayout {
 		private final String name;
 		private final Wireframe wireframe;
 
-		public BasicBluePrintBuilderStep2(String name, Wireframe wireframe) {
+		public BasicBluePrintBuilderStep2SpecifyTypeOfLayout(String name, Wireframe wireframe) {
 			this.name = name;
 			this.wireframe = wireframe;
 		}

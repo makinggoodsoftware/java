@@ -7,21 +7,24 @@ import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 
-public abstract class BasicBluePrintBuilders {
+public abstract class BasicBluePrintBuildersFactory {
 
-	public static BasicBluePrintBuilderStep1SpecifyWireframe newBasicBluePrintBuilder(String name) {
-		return new BasicBluePrintBuilderStep1SpecifyWireframe(name);
+	public static ZBasicBluePrintBuilderStep1SpecifyWireframe<HorizontalRepeaterBuilder> newHorizontalRepeaterBluePrint(String name) {
+		return new ZBasicBluePrintBuilderStep1SpecifyWireframe(name, new HorizontalRepeaterBuilder());
 	}
 
-	public static class BasicBluePrintBuilderStep1SpecifyWireframe {
+	public static class ZBasicBluePrintBuilderStep1SpecifyWireframe<T extends BluePrintBuilder> {
 		private final String name;
+		private final T bluePrintBuilder;
 
-		public BasicBluePrintBuilderStep1SpecifyWireframe(String name) {
+		public ZBasicBluePrintBuilderStep1SpecifyWireframe(String name, T bluePrintBuilder) {
 			this.name = name;
+			this.bluePrintBuilder = bluePrintBuilder;
 		}
 
-		public BasicBluePrintBuilderStep2SpecifyTypeOfLayout withWireframe(Wireframe wireframe) {
-			return new BasicBluePrintBuilderStep2SpecifyTypeOfLayout(name, wireframe);
+		public T withWireframe(Wireframe wireframe) {
+			bluePrintBuilder.initialise(name, wireframe);
+			return bluePrintBuilder;
 		}
 	}
 
@@ -66,5 +69,42 @@ public abstract class BasicBluePrintBuilders {
 					.withDimension(new Dimension(numberOfGenerations, 1))
 					.allCellsWith(toRepeat);
 		}
+	}
+
+	public static class HorizontalRepeaterBuilder implements BluePrintBuilder {
+		private String name;
+		private Wireframe wireframe;
+		private BluePrint bluePrint;
+		private int numberOfGenerations;
+
+		@Override
+		public void initialise(String name, Wireframe wireframe) {
+			this.name = name;
+			this.wireframe = wireframe;
+		}
+
+		public HorizontalRepeaterBuilder repeating(BluePrint bluePrint) {
+			this.bluePrint = bluePrint;
+			return this;
+		}
+
+		public HorizontalRepeaterBuilder repetitions(int numberOfGenerations) {
+			this.numberOfGenerations = numberOfGenerations;
+			return this;
+		}
+
+		@Override
+		public Structure build() {
+			return new GridBluePrint(name, wireframe)
+					.withDimension(new Dimension(1, numberOfGenerations))
+					.allCellsWith(bluePrint).build();
+		}
+	}
+
+	public static interface BluePrintBuilder {
+
+		void initialise(String name, Wireframe wireframe);
+
+		Structure build();
 	}
 }

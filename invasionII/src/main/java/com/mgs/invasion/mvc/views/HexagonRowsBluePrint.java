@@ -11,6 +11,7 @@ import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
 import static com.mgs.fantasi.structure.BasicBluePrintBuilders.newBasicBluePrintBuilder;
+import static com.mgs.fantasi.structure.BasicBluePrintBuildersFactory.newHorizontalRepeaterBluePrint;
 import static com.mgs.fantasi.wireframe.Wireframes.*;
 
 public class HexagonRowsBluePrint implements BluePrint {
@@ -57,27 +58,26 @@ public class HexagonRowsBluePrint implements BluePrint {
 	@Override
 	public Structure build() {
 		return
-				newBasicBluePrintBuilder("hexagonRows").
+				newHorizontalRepeaterBluePrint("hexagonRows").
 						withWireframe(allContainer).
-						repeatingHorizontally(
-								newBasicBluePrintBuilder("linesOfHexagons").
-										withWireframe(newRectangularWireframe(twoLinesContainerUIProperties)).
-										twoLines(
-												Fractions.thwoThirds(),
-												newBasicBluePrintBuilder("hexagonsRow").
-														withWireframe(newRectangularWireframe(hexagonRowsContainerUIProperties)).
-														repeatingVertically(
-																newBasicBluePrintBuilder("hexagon").
-																		withWireframe(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE)).
-																		emptyRectangle(),
-																numberOVerticalDivisions
-														),
-												newBasicBluePrintBuilder("space").
-														withWireframe(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties)).
-														emptyRectangle()
-										),
-								numberOfGenerations
-						).build();
+						repeating(newBasicBluePrintBuilder("linesOfHexagons").
+								withWireframe(newRectangularWireframe(twoLinesContainerUIProperties)).
+								twoLines(
+										Fractions.thwoThirds(),
+										newBasicBluePrintBuilder("hexagonsRow").
+												withWireframe(newRectangularWireframe(hexagonRowsContainerUIProperties)).
+												repeatingVertically(
+														newBasicBluePrintBuilder("hexagon").
+																withWireframe(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE)).
+																emptyRectangle(),
+														numberOVerticalDivisions
+												),
+										newBasicBluePrintBuilder("space").
+												withWireframe(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties)).
+												emptyRectangle()
+								)).
+						repetitions(numberOfGenerations).
+						build();
 	}
 
 

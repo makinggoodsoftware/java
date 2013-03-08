@@ -7,16 +7,29 @@ import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 
-public abstract class BluePrints {
-	public static BluePrintBuilder newBluePrint(String name, Wireframe wireframe) {
-		return new BluePrintBuilder(name, wireframe);
+public abstract class BasicBluePrints {
+
+	public static BasicBluePrintBuilderStep1 newBasicBluePrint(String name) {
+		return new BasicBluePrintBuilderStep1(name);
 	}
 
-	public static class BluePrintBuilder {
+	public static class BasicBluePrintBuilderStep1 {
+		private final String name;
+
+		public BasicBluePrintBuilderStep1(String name) {
+			this.name = name;
+		}
+
+		public BasicBluePrintBuilderStep2 withWireframe(Wireframe wireframe) {
+			return new BasicBluePrintBuilderStep2(name, wireframe);
+		}
+	}
+
+	public static class BasicBluePrintBuilderStep2 {
 		private final String name;
 		private final Wireframe wireframe;
 
-		public BluePrintBuilder(String name, Wireframe wireframe) {
+		public BasicBluePrintBuilderStep2(String name, Wireframe wireframe) {
 			this.name = name;
 			this.wireframe = wireframe;
 		}
@@ -43,13 +56,13 @@ public abstract class BluePrints {
 					.fill();
 		}
 
-		public GridBluePrint horizontalRepeater(BluePrint toRepeat, int numberOfGenerations) {
+		public GridBluePrint repeatingHorizontally(BluePrint toRepeat, int numberOfGenerations) {
 			return new GridBluePrint(name, wireframe)
 					.withDimension(new Dimension(1, numberOfGenerations))
 					.allCellsWith(toRepeat);
 		}
 
-		public GridBluePrint verticalRepeater(BluePrint toRepeat, int numberOfGenerations) {
+		public GridBluePrint repeatingVertically(BluePrint toRepeat, int numberOfGenerations) {
 			return new GridBluePrint(name, wireframe)
 					.withDimension(new Dimension(numberOfGenerations, 1))
 					.allCellsWith(toRepeat);

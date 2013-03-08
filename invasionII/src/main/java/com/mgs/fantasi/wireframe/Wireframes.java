@@ -15,7 +15,7 @@ public class Wireframes {
 		return new Wireframe(uiPropertiesBuilder.build(), shape);
 	}
 
-	public static Wireframe newRectangularAllEmptyUIPropertiesWireframe() {
+	public static Wireframe newRectangularAllUIPropertiesEmptyWireframe() {
 		return new Wireframe(allEmptyUIProperties().build(), new NativeRectanguarShape());
 	}
 }

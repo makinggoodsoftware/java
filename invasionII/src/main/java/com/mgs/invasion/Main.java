@@ -14,8 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
-import static com.mgs.fantasi.structure.BluePrints.newBluePrint;
-import static com.mgs.fantasi.wireframe.Wireframes.newRectangularAllEmptyUIPropertiesWireframe;
+import static com.mgs.fantasi.structure.BasicBluePrints.newBasicBluePrint;
+import static com.mgs.fantasi.wireframe.Wireframes.newRectangularAllUIPropertiesEmptyWireframe;
 import static com.mgs.invasion.mvc.views.HexagonRowsBluePrint.hexagonRows;
 
 public class Main {
@@ -32,7 +32,9 @@ public class Main {
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
 
 		BluePrint bluePrint =
-				newBluePrint("main_frame", newRectangularAllEmptyUIPropertiesWireframe()).layered()
+				newBasicBluePrint("main_frame").
+						withWireframe(newRectangularAllUIPropertiesEmptyWireframe()).
+						layered()
 						.withLayer(
 								hexagonRows("odd_hexagons")
 										.withNumberOfGenerations(numberOfGenerations)

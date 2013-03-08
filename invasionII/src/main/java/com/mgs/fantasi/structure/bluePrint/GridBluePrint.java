@@ -34,7 +34,7 @@ public class GridBluePrint implements BluePrint {
 	}
 
 	@Override
-	public Structure build() {
+	public Structure buildStructure() {
 		Structure structure = gridStructure(wireframe, getName(), this.getClass());
 
 		for (int x = 0; x < dimension.width; x++) {
@@ -43,7 +43,7 @@ public class GridBluePrint implements BluePrint {
 				Fraction width = child.getWidthSizeRatio();
 				Fraction height = child.getHeightSizeRatio();
 				CollocationInfo collocationInfo = new CollocationInfo(0, width, height, x, y);
-				structure.addChild(collocationInfo, child.getContent().build());
+				structure.addChild(collocationInfo, child.getContent().buildStructure());
 			}
 		}
 
@@ -75,7 +75,7 @@ public class GridBluePrint implements BluePrint {
 		}
 
 		public Structure build() {
-			return fill().build();
+			return fill().buildStructure();
 		}
 
 		public GridBluePrint fill() {

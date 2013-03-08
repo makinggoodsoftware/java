@@ -24,12 +24,12 @@ public class SingleChildBluePrint implements BluePrint {
 	}
 
 	@Override
-	public Structure build() {
+	public Structure buildStructure() {
 		if (content == null) {
 			throw new RuntimeException("Content can't be null!!");
 		}
 		Structure structure = simpleStructure(wireframe, getName(), this.getClass());
-		structure.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.build());
+		structure.addChild(new CollocationInfo(0, all(), all(), 0, 0), content.buildStructure());
 		return structure;
 	}
 }

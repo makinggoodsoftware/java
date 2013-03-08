@@ -15,7 +15,7 @@ public class NoChildrenBluePrint implements BluePrint {
 	}
 
 	@Override
-	public Structure build() {
+	public Structure buildStructure() {
 		return emptyStructure(wireframe, getName(), this.getClass());
 	}
 

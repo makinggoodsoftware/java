@@ -37,7 +37,7 @@ public class TwoLinesBluePrintBuilder implements BluePrint {
 	}
 
 	@Override
-	public Structure build() {
+	public Structure buildStructure() {
 		GridBluePrint gridWireframeTreeBuilder = new GridBluePrint(name, wireframe);
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
 		return gridWireframeTreeBuilder
@@ -45,7 +45,7 @@ public class TwoLinesBluePrintBuilder implements BluePrint {
 				.withCell(new Point(0, 0), firstLineHeightSizeRatio, Fractions.all(), firstLine)
 				.withCell(new Point(0, 1), remainder, Fractions.all(), secondLine)
 				.fill()
-				.build();
+				.buildStructure();
 	}
 
 	@Override

@@ -9,8 +9,8 @@ import java.awt.*;
 
 public abstract class BasicBluePrintBuildersFactory {
 
-	public static ZBasicBluePrintBuilderStep1SpecifyWireframe<HorizontalRepeaterBuilder> newHorizontalRepeaterBluePrint(String name) {
-		return new ZBasicBluePrintBuilderStep1SpecifyWireframe(name, new HorizontalRepeaterBuilder());
+	public static <T extends BluePrintBuilder> ZBasicBluePrintBuilderStep1SpecifyWireframe<T> newBluePrintBuilder(String name, T pattern) {
+		return new ZBasicBluePrintBuilderStep1SpecifyWireframe(name, pattern);
 	}
 
 	public static class ZBasicBluePrintBuilderStep1SpecifyWireframe<T extends BluePrintBuilder> {
@@ -71,7 +71,7 @@ public abstract class BasicBluePrintBuildersFactory {
 		}
 	}
 
-	public static class HorizontalRepeaterBuilder implements BluePrintBuilder {
+	public static class HorizontalRepeaterPattern implements BluePrintBuilder {
 		private String name;
 		private Wireframe wireframe;
 		private BluePrint bluePrint;
@@ -83,21 +83,60 @@ public abstract class BasicBluePrintBuildersFactory {
 			this.wireframe = wireframe;
 		}
 
-		public HorizontalRepeaterBuilder repeating(BluePrint bluePrint) {
+		public HorizontalRepeaterPattern repeating(BluePrint bluePrint) {
 			this.bluePrint = bluePrint;
 			return this;
 		}
 
-		public HorizontalRepeaterBuilder repetitions(int numberOfGenerations) {
+		public HorizontalRepeaterPattern repetitions(int numberOfGenerations) {
 			this.numberOfGenerations = numberOfGenerations;
 			return this;
 		}
 
 		@Override
-		public Structure build() {
+		public BluePrint buildBlueprint() {
 			return new GridBluePrint(name, wireframe)
 					.withDimension(new Dimension(1, numberOfGenerations))
-					.allCellsWith(bluePrint).build();
+					.allCellsWith(bluePrint);
+		}
+	}
+
+	public static class TwoLinesPattern implements BluePrintBuilder {
+		private String name;
+		private Wireframe wireframe;
+		private Fraction firstLineHeightSizeRatio;
+		private BluePrint firstLineTreeBuilder;
+		private BluePrint secondLineTreeBuilder;
+
+		public TwoLinesPattern withFirstLineHeightSizeRatio(Fraction firstLineHeightSizeRatio) {
+			this.firstLineHeightSizeRatio = firstLineHeightSizeRatio;
+			return this;
+		}
+
+		public TwoLinesPattern withFirstLineTreeBuilder(BluePrint firstLineTreeBuilder) {
+			this.firstLineTreeBuilder = firstLineTreeBuilder;
+			return this;
+		}
+
+		public TwoLinesPattern withSecondLineTreeBuilder(BluePrint secondLineTreeBuilder) {
+			this.secondLineTreeBuilder = secondLineTreeBuilder;
+			return this;
+		}
+
+		@Override
+		public void initialise(String name, Wireframe wireframe) {
+			this.name = name;
+			this.wireframe = wireframe;
+		}
+
+		@Override
+		public BluePrint buildBlueprint() {
+			Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
+			return new GridBluePrint(name, wireframe)
+					.withDimension(new Dimension(1, 2))
+					.withCell(new Point(0, 0), firstLineHeightSizeRatio, Fractions.all(), firstLineTreeBuilder)
+					.withCell(new Point(0, 1), remainder, Fractions.all(), secondLineTreeBuilder)
+					.fill();
 		}
 	}
 
@@ -105,6 +144,7 @@ public abstract class BasicBluePrintBuildersFactory {
 
 		void initialise(String name, Wireframe wireframe);
 
-		Structure build();
+		BluePrint buildBlueprint();
+
 	}
 }

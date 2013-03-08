@@ -46,7 +46,7 @@ public class Main {
 								.withNumberOfVerticalDivisions(numberOVerticalDivisions)
 								.withHexagonSize(hexagonMeasurement)
 				);
-		Structure tree = bluePrint.build();
+		Structure tree = bluePrint.buildStructure();
 
 		uiDriver.show(tree, new Dimension(400, 400), uiProfile);
 	}

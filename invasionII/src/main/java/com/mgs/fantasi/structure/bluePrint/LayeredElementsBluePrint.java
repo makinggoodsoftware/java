@@ -27,11 +27,11 @@ public class LayeredElementsBluePrint implements BluePrint {
 	}
 
 	@Override
-	public Structure build() {
+	public Structure buildStructure() {
 		Structure structure = layeredStructure(wireframe, name, this.getClass());
 		for (int i = layers.size() - 1; i >= 0; i--) {
 			BluePrint layerBuilder = layers.get(i);
-			Structure layer = layerBuilder.build();
+			Structure layer = layerBuilder.buildStructure();
 			structure.addChild(new CollocationInfo(i, all(), all(), 0, 0), layer);
 		}
 

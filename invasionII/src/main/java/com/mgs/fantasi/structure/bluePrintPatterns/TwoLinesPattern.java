@@ -2,14 +2,13 @@ package com.mgs.fantasi.structure.bluePrintPatterns;
 
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
-import com.mgs.fantasi.structure.BasicBluePrintBuildersFactory;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.structure.bluePrint.GridBluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 
-public class TwoLinesPattern implements BasicBluePrintBuildersFactory.BluePrintBuilder {
+public class TwoLinesPattern implements BluePrintPattern {
 	private String name;
 	private Wireframe wireframe;
 	private Fraction firstLineHeightSizeRatio;

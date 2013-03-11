@@ -1,13 +1,12 @@
 package com.mgs.fantasi.structure.bluePrintPatterns;
 
-import com.mgs.fantasi.structure.BasicBluePrintBuildersFactory;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.structure.bluePrint.GridBluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 
-public class VerticalRepeaterPattern implements BasicBluePrintBuildersFactory.BluePrintBuilder {
+public class VerticalRepeaterPattern implements BluePrintPattern {
 	private String name;
 	private Wireframe wireframe;
 	private BluePrint bluePrint;

@@ -1,6 +1,5 @@
 package com.mgs.fantasi.structure.bluePrintPatterns;
 
-import com.mgs.fantasi.structure.BasicBluePrintBuildersFactory;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.structure.bluePrint.LayeredElementsBluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
@@ -8,10 +7,10 @@ import com.mgs.fantasi.wireframe.Wireframe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LayeredPattern implements BasicBluePrintBuildersFactory.BluePrintBuilder {
+public class LayeredPattern implements BluePrintPattern {
 	private String name;
 	private Wireframe wireframe;
-	private final List<BluePrint> layers = new ArrayList<BluePrint>();
+	private final List<BluePrintPattern> layers = new ArrayList<BluePrintPattern>();
 
 	@Override
 	public void initialise(String name, Wireframe wireframe) {
@@ -19,7 +18,7 @@ public class LayeredPattern implements BasicBluePrintBuildersFactory.BluePrintBu
 		this.wireframe = wireframe;
 	}
 
-	public LayeredPattern withLayer(BluePrint layer) {
+	public LayeredPattern withLayer(BluePrintPattern layer) {
 		layers.add(layer);
 		return this;
 	}
@@ -27,8 +26,8 @@ public class LayeredPattern implements BasicBluePrintBuildersFactory.BluePrintBu
 	@Override
 	public BluePrint buildBlueprint() {
 		LayeredElementsBluePrint layeredElementsBluePrint = new LayeredElementsBluePrint(name, wireframe);
-		for (BluePrint layer : layers) {
-			layeredElementsBluePrint.withLayer(layer);
+		for (BluePrintPattern layer : layers) {
+			layeredElementsBluePrint.withLayer(layer.buildBlueprint());
 		}
 		return layeredElementsBluePrint;
 	}

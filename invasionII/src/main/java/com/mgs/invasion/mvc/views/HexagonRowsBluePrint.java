@@ -5,11 +5,12 @@ import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
-import com.mgs.fantasi.structure.BasicBluePrintBuildersFactory;
 import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
-import com.mgs.fantasi.structure.bluePrint.GridBluePrint;
 import com.mgs.fantasi.structure.bluePrint.NoChildrenBluePrint;
+import com.mgs.fantasi.structure.bluePrintPatterns.HorizontalRepeaterPattern;
+import com.mgs.fantasi.structure.bluePrintPatterns.TwoLinesPattern;
+import com.mgs.fantasi.structure.bluePrintPatterns.VerticalRepeaterPattern;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
@@ -60,24 +61,27 @@ public class HexagonRowsBluePrint implements BluePrint {
 
 	@Override
 	public Structure buildStructure() {
-		GridBluePrint firstLineTreeBuilder = newBasicBluePrintBuilder("hexagonsRow").
-				withWireframe(newRectangularWireframe(hexagonRowsContainerUIProperties)).
-				repeatingVertically(
-						newBasicBluePrintBuilder("hexagon").
-								withWireframe(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE)).
-								emptyRectangle(),
-						numberOVerticalDivisions);
 		NoChildrenBluePrint space = newBasicBluePrintBuilder("space").
 				withWireframe(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties)).
 				emptyRectangle();
 		return
-				newBluePrintBuilder("hexagonRows", new BasicBluePrintBuildersFactory.HorizontalRepeaterPattern()).
+				newBluePrintBuilder("hexagonRows", new HorizontalRepeaterPattern()).
 						withWireframe(allContainer).
 						repeating(
-								newBluePrintBuilder("linesOfHexagons", new BasicBluePrintBuildersFactory.TwoLinesPattern()).
+								newBluePrintBuilder("linesOfHexagons", new TwoLinesPattern()).
 										withWireframe(newRectangularWireframe(twoLinesContainerUIProperties)).
 										withFirstLineHeightSizeRatio(Fractions.thwoThirds()).
-										withFirstLineTreeBuilder(firstLineTreeBuilder).
+										withFirstLineTreeBuilder(
+												newBluePrintBuilder("hexagons", new VerticalRepeaterPattern()).
+														withWireframe(newRectangularWireframe(hexagonRowsContainerUIProperties)).
+														repeating(
+																newBasicBluePrintBuilder("hexagon").
+																		withWireframe(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE)).
+																		emptyRectangle()
+														).
+														repetitions(numberOVerticalDivisions).
+														buildBlueprint()
+										).
 										withSecondLineTreeBuilder(space).
 										buildBlueprint()
 						).

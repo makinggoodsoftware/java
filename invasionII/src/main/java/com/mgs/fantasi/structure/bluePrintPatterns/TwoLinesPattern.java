@@ -12,21 +12,21 @@ public class TwoLinesPattern implements BluePrintPattern {
 	private String name;
 	private Wireframe wireframe;
 	private Fraction firstLineHeightSizeRatio;
-	private BluePrint firstLineTreeBuilder;
-	private BluePrint secondLineTreeBuilder;
+	private BluePrintPattern firstLine;
+	private BluePrintPattern secondLine;
 
 	public TwoLinesPattern withFirstLineHeightSizeRatio(Fraction firstLineHeightSizeRatio) {
 		this.firstLineHeightSizeRatio = firstLineHeightSizeRatio;
 		return this;
 	}
 
-	public TwoLinesPattern withFirstLineTreeBuilder(BluePrint firstLineTreeBuilder) {
-		this.firstLineTreeBuilder = firstLineTreeBuilder;
+	public TwoLinesPattern withFirstLineTreeBuilder(BluePrintPattern firstLine) {
+		this.firstLine = firstLine;
 		return this;
 	}
 
-	public TwoLinesPattern withSecondLineTreeBuilder(BluePrint secondLineTreeBuilder) {
-		this.secondLineTreeBuilder = secondLineTreeBuilder;
+	public TwoLinesPattern withSecondLineTreeBuilder(BluePrintPattern secondLine) {
+		this.secondLine = secondLine;
 		return this;
 	}
 
@@ -41,8 +41,8 @@ public class TwoLinesPattern implements BluePrintPattern {
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
 		return new GridBluePrint(name, wireframe)
 				.withDimension(new Dimension(1, 2))
-				.withCell(new Point(0, 0), firstLineHeightSizeRatio, Fractions.all(), firstLineTreeBuilder)
-				.withCell(new Point(0, 1), remainder, Fractions.all(), secondLineTreeBuilder)
+				.withCell(new Point(0, 0), firstLineHeightSizeRatio, Fractions.all(), firstLine.buildBlueprint())
+				.withCell(new Point(0, 1), remainder, Fractions.all(), secondLine.buildBlueprint())
 				.fill();
 	}
 }

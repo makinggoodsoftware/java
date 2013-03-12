@@ -7,8 +7,6 @@ import com.mgs.fantasi.wireframe.Wireframe;
 public class EmptyRectanglePattern implements BluePrintPattern {
 	private String name;
 	private Wireframe wireframe;
-	private BluePrint bluePrint;
-	private int numberOfGenerations;
 
 	@Override
 	public void initialise(String name, Wireframe wireframe) {

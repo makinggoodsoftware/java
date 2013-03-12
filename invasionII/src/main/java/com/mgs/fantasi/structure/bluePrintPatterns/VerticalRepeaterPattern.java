@@ -9,7 +9,7 @@ import java.awt.*;
 public class VerticalRepeaterPattern implements BluePrintPattern {
 	private String name;
 	private Wireframe wireframe;
-	private BluePrint bluePrint;
+	private BluePrintPattern bluePrintPattern;
 	private int numberOfGenerations;
 
 	@Override
@@ -18,8 +18,8 @@ public class VerticalRepeaterPattern implements BluePrintPattern {
 		this.wireframe = wireframe;
 	}
 
-	public VerticalRepeaterPattern repeating(BluePrint bluePrint) {
-		this.bluePrint = bluePrint;
+	public VerticalRepeaterPattern repeating(BluePrintPattern bluePrint) {
+		this.bluePrintPattern = bluePrint;
 		return this;
 	}
 
@@ -32,6 +32,6 @@ public class VerticalRepeaterPattern implements BluePrintPattern {
 	public BluePrint buildBlueprint() {
 		return new GridBluePrint(name, wireframe)
 				.withDimension(new Dimension(numberOfGenerations, 1))
-				.allCellsWith(bluePrint);
+				.allCellsWith(bluePrintPattern.buildBlueprint());
 	}
 }

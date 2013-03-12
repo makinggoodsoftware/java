@@ -9,7 +9,7 @@ import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.structure.bluePrintPatterns.LayeredPattern;
-import com.mgs.invasion.mvc.views.HexagonRowsBluePrint;
+import com.mgs.invasion.mvc.views.HexagonRowsPattern;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 
 import javax.swing.*;
@@ -36,14 +36,14 @@ public class Main {
 				newBluePrintBuilder("main_frame", new LayeredPattern()).
 						withWireframe(newRectangularAllUIPropertiesEmptyWireframe()).
 						withLayer(
-								newBluePrintBuilder("odd_hexagons", new HexagonRowsBluePrint()).
+								newBluePrintBuilder("odd_hexagons", new HexagonRowsPattern()).
 										withWireframe(newRectangularAllUIPropertiesEmptyWireframe()).
 										withNumberOfGenerations(numberOfGenerations).
 										withNumberOfVerticalDivisions(numberOVerticalDivisions).
 										withHexagonSize(hexagonMeasurement)
 						).
 						withLayer(
-								newBluePrintBuilder("even_hexagons", new HexagonRowsBluePrint()).
+								newBluePrintBuilder("even_hexagons", new HexagonRowsPattern()).
 										withWireframe(newRectangularAllUIPropertiesEmptyWireframe()).
 										withNumberOfGenerations(numberOfGenerations).
 										withNumberOfVerticalDivisions(numberOVerticalDivisions).

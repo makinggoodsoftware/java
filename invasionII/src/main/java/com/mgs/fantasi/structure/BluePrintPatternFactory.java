@@ -9,6 +9,10 @@ public abstract class BluePrintPatternFactory {
 		return new BluePrintPatternBuilder(name, pattern);
 	}
 
+	public static Blah newBluePrintBuilder(String name) {
+		return new Blah(name);
+	}
+
 	public static class BluePrintPatternBuilder<T extends BluePrintPattern> {
 		private final String name;
 		private final T bluePrintBuilder;
@@ -24,4 +28,30 @@ public abstract class BluePrintPatternFactory {
 		}
 	}
 
+	public static class Blah {
+		private final String name;
+
+		public Blah(String name) {
+			this.name = name;
+		}
+
+		public Bleh withWireframe(Wireframe wireframe) {
+			return new Bleh(name, wireframe);
+		}
+	}
+
+	public static class Bleh {
+		private final String name;
+		private final Wireframe wireframe;
+
+		public Bleh(String name, Wireframe wireframe) {
+			this.name = name;
+			this.wireframe = wireframe;
+		}
+
+		public <T extends BluePrintPattern> T withContent(T pattern) {
+			pattern.initialise(name, wireframe);
+			return pattern;
+		}
+	}
 }

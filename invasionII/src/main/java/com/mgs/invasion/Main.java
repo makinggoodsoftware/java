@@ -17,7 +17,7 @@ import java.awt.*;
 
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
 import static com.mgs.fantasi.structure.BluePrintPatternFactory.newBluePrintBuilder;
-import static com.mgs.fantasi.wireframe.Wireframes.newRectangularAllUIPropertiesEmptyWireframe;
+import static com.mgs.fantasi.wireframe.Wireframes.rectangularWireframe;
 
 public class Main {
 	public static void main(String... args) {
@@ -33,26 +33,27 @@ public class Main {
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
 
 		BluePrint bluePrint =
-				newBluePrintBuilder("main_frame", new LayeredPattern()).
-						withWireframe(newRectangularAllUIPropertiesEmptyWireframe()).
-						withLayer(
-								newBluePrintBuilder("odd_hexagons", new HexagonRowsPattern()).
-										withWireframe(newRectangularAllUIPropertiesEmptyWireframe()).
-										withNumberOfGenerations(numberOfGenerations).
-										withNumberOfVerticalDivisions(numberOVerticalDivisions).
-										withHexagonSize(hexagonMeasurement)
-						).
-						withLayer(
-								newBluePrintBuilder("even_hexagons", new HexagonRowsPattern()).
-										withWireframe(newRectangularAllUIPropertiesEmptyWireframe()).
-										withNumberOfGenerations(numberOfGenerations).
-										withNumberOfVerticalDivisions(numberOVerticalDivisions).
-										withHexagonSize(hexagonMeasurement)
-						).
-						buildBlueprint();
+				newBluePrintBuilder("main_frame").
+						withWireframe(rectangularWireframe()).
+						withContent(
+								new LayeredPattern().
+										withLayer(
+												newBluePrintBuilder("odd_hexagons", new HexagonRowsPattern()).
+														withWireframe(rectangularWireframe()).
+														withNumberOfGenerations(numberOfGenerations).
+														withNumberOfVerticalDivisions(numberOVerticalDivisions).
+														withHexagonSize(hexagonMeasurement)
+										).
+										withLayer(
+												newBluePrintBuilder("even_hexagons", new HexagonRowsPattern()).
+														withWireframe(rectangularWireframe()).
+														withNumberOfGenerations(numberOfGenerations).
+														withNumberOfVerticalDivisions(numberOVerticalDivisions).
+														withHexagonSize(hexagonMeasurement)
+										)
+						).buildBlueprint();
 		Structure tree = bluePrint.buildStructure();
 
 		uiDriver.show(tree, new Dimension(400, 400), uiProfile);
 	}
-
 }

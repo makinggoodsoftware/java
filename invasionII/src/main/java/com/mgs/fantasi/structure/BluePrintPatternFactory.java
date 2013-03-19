@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structure;
 
+import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.structure.bluePrintPatterns.BluePrintPattern;
 import com.mgs.fantasi.wireframe.Wireframe;
 
@@ -9,8 +10,8 @@ public abstract class BluePrintPatternFactory {
 		return new BluePrintPatternBuilder(name, pattern);
 	}
 
-	public static Blah newBluePrintBuilder(String name) {
-		return new Blah(name);
+	public static BluePrintBuilder newBluePrintBuilder(String name) {
+		return new BluePrintBuilder(name);
 	}
 
 	public static class BluePrintPatternBuilder<T extends BluePrintPattern> {
@@ -28,30 +29,28 @@ public abstract class BluePrintPatternFactory {
 		}
 	}
 
-	public static class Blah {
+	public static class BluePrintBuilder {
 		private final String name;
+		private Wireframe wireframe;
+		private BluePrintPattern pattern;
 
-		public Blah(String name) {
+		public BluePrintBuilder(String name) {
 			this.name = name;
 		}
 
-		public Bleh withWireframe(Wireframe wireframe) {
-			return new Bleh(name, wireframe);
-		}
-	}
-
-	public static class Bleh {
-		private final String name;
-		private final Wireframe wireframe;
-
-		public Bleh(String name, Wireframe wireframe) {
-			this.name = name;
-			this.wireframe = wireframe;
-		}
-
-		public <T extends BluePrintPattern> T withContent(T pattern) {
+		public BluePrintBuilder withContent(BluePrintPattern pattern) {
+			this.pattern = pattern;
 			pattern.initialise(name, wireframe);
-			return pattern;
+			return this;
+		}
+
+		public BluePrintBuilder withWireframe(Wireframe wireframe) {
+			this.wireframe = wireframe;
+			return this;
+		}
+
+		public BluePrint build() {
+			return pattern.buildBlueprint();
 		}
 	}
 }

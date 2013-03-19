@@ -12,6 +12,13 @@ public class LayeredPattern implements BluePrintPattern {
 	private Wireframe wireframe;
 	private final List<BluePrintPattern> layers = new ArrayList<BluePrintPattern>();
 
+	private LayeredPattern() {
+	}
+
+	public static LayeredPattern layered() {
+		return new LayeredPattern();
+	}
+
 	@Override
 	public void initialise(String name, Wireframe wireframe) {
 		this.name = name;

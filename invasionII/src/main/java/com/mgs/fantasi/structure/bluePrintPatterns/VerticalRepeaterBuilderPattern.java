@@ -1,15 +1,16 @@
 package com.mgs.fantasi.structure.bluePrintPatterns;
 
+import com.mgs.fantasi.structure.BluePrintBuilderFactory;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.structure.bluePrint.GridBluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 
-public class VerticalRepeaterPattern implements BluePrintPattern {
+public class VerticalRepeaterBuilderPattern implements BluePrintBuilderPattern {
 	private String name;
 	private Wireframe wireframe;
-	private BluePrintPattern bluePrintPattern;
+	private BluePrintBuilderFactory.BluePrintBuilder bluePrintBuilderPattern;
 	private int numberOfGenerations;
 
 	@Override
@@ -18,12 +19,12 @@ public class VerticalRepeaterPattern implements BluePrintPattern {
 		this.wireframe = wireframe;
 	}
 
-	public VerticalRepeaterPattern repeating(BluePrintPattern bluePrint) {
-		this.bluePrintPattern = bluePrint;
+	public VerticalRepeaterBuilderPattern repeating(BluePrintBuilderFactory.BluePrintBuilder bluePrintBuilder) {
+		this.bluePrintBuilderPattern = bluePrintBuilder;
 		return this;
 	}
 
-	public VerticalRepeaterPattern repetitions(int numberOfGenerations) {
+	public VerticalRepeaterBuilderPattern repetitions(int numberOfGenerations) {
 		this.numberOfGenerations = numberOfGenerations;
 		return this;
 	}
@@ -32,6 +33,6 @@ public class VerticalRepeaterPattern implements BluePrintPattern {
 	public BluePrint buildBlueprint() {
 		return new GridBluePrint(name, wireframe)
 				.withDimension(new Dimension(numberOfGenerations, 1))
-				.allCellsWith(bluePrintPattern.buildBlueprint());
+				.allCellsWith(bluePrintBuilderPattern.build());
 	}
 }

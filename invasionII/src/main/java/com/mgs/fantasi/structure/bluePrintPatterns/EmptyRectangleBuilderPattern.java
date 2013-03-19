@@ -4,7 +4,7 @@ import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.structure.bluePrint.NoChildrenBluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
 
-public class EmptyRectanglePattern implements BluePrintPattern {
+public class EmptyRectangleBuilderPattern implements BluePrintBuilderPattern {
 	private String name;
 	private Wireframe wireframe;
 

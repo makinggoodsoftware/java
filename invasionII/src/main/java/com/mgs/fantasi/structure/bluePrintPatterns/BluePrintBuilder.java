@@ -3,10 +3,8 @@ package com.mgs.fantasi.structure.bluePrintPatterns;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.fantasi.wireframe.Wireframe;
 
-public interface BluePrintBuilderPattern {
+public interface BluePrintBuilder {
 
-	void initialise(String name, Wireframe wireframe);
-
-	BluePrint buildBlueprint();
+	BluePrint buildBlueprint(String name, Wireframe wireframe);
 
 }

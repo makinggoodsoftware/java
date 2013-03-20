@@ -9,36 +9,28 @@ import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
 
-public class TwoLinesBuilderPattern implements BluePrintBuilderPattern {
-	private String name;
-	private Wireframe wireframe;
+public class TwoLinesBuilder implements BluePrintBuilder {
 	private Fraction firstLineHeightSizeRatio;
-	private BluePrintBuilderFactory.BluePrintBuilder firstLine;
-	private BluePrintBuilderFactory.BluePrintBuilder secondLine;
+	private BluePrintBuilderFactory.BluePrintBuilderHelper firstLine;
+	private BluePrintBuilderFactory.BluePrintBuilderHelper secondLine;
 
-	public TwoLinesBuilderPattern withFirstLineHeightSizeRatio(Fraction firstLineHeightSizeRatio) {
+	public TwoLinesBuilder withFirstLineHeightSizeRatio(Fraction firstLineHeightSizeRatio) {
 		this.firstLineHeightSizeRatio = firstLineHeightSizeRatio;
 		return this;
 	}
 
-	public TwoLinesBuilderPattern withFirstLineTreeBuilder(BluePrintBuilderFactory.BluePrintBuilder firstLine) {
+	public TwoLinesBuilder withFirstLineTreeBuilder(BluePrintBuilderFactory.BluePrintBuilderHelper firstLine) {
 		this.firstLine = firstLine;
 		return this;
 	}
 
-	public TwoLinesBuilderPattern withSecondLineTreeBuilder(BluePrintBuilderFactory.BluePrintBuilder secondLine) {
+	public TwoLinesBuilder withSecondLineTreeBuilder(BluePrintBuilderFactory.BluePrintBuilderHelper secondLine) {
 		this.secondLine = secondLine;
 		return this;
 	}
 
 	@Override
-	public void initialise(String name, Wireframe wireframe) {
-		this.name = name;
-		this.wireframe = wireframe;
-	}
-
-	@Override
-	public BluePrint buildBlueprint() {
+	public BluePrint buildBlueprint(String name, Wireframe wireframe) {
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
 		return new GridBluePrint(name, wireframe)
 				.withDimension(new Dimension(1, 2))

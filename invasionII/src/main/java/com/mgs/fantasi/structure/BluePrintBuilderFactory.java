@@ -1,37 +1,36 @@
 package com.mgs.fantasi.structure;
 
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
-import com.mgs.fantasi.structure.bluePrintPatterns.BluePrintBuilderPattern;
+import com.mgs.fantasi.structure.bluePrintPatterns.BluePrintBuilder;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 public abstract class BluePrintBuilderFactory {
 
-	public static BluePrintBuilder newBluePrintBuilder(String name) {
-		return new BluePrintBuilder(name);
+	public static BluePrintBuilderHelper createCanvas(String name) {
+		return new BluePrintBuilderHelper(name);
 	}
 
-	public static class BluePrintBuilder {
+	public static class BluePrintBuilderHelper {
 		private final String name;
 		private Wireframe wireframe;
-		private BluePrintBuilderPattern builderPattern;
+		private BluePrintBuilder builder;
 
-		public BluePrintBuilder(String name) {
+		public BluePrintBuilderHelper(String name) {
 			this.name = name;
 		}
 
-		public BluePrintBuilder withContent(BluePrintBuilderPattern builderPattern) {
-			this.builderPattern = builderPattern;
-			builderPattern.initialise(name, wireframe);
+		public BluePrintBuilderHelper withContent(BluePrintBuilder builder) {
+			this.builder = builder;
 			return this;
 		}
 
-		public BluePrintBuilder withFrame(Wireframe wireframe) {
+		public BluePrintBuilderHelper withFrame(Wireframe wireframe) {
 			this.wireframe = wireframe;
 			return this;
 		}
 
 		public BluePrint build() {
-			return builderPattern.buildBlueprint();
+			return builder.buildBlueprint(name, wireframe);
 		}
 	}
 }

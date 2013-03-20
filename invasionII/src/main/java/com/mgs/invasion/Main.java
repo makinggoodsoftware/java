@@ -8,15 +8,15 @@ import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.structure.bluePrint.BluePrint;
-import com.mgs.invasion.mvc.views.HexagonRowsBuilderPattern;
+import com.mgs.invasion.mvc.views.HexagonRowsBuilder;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
-import static com.mgs.fantasi.structure.BluePrintBuilderFactory.newBluePrintBuilder;
-import static com.mgs.fantasi.structure.bluePrintPatterns.LayeredBuilderPattern.layered;
+import static com.mgs.fantasi.structure.BluePrintBuilderFactory.createCanvas;
+import static com.mgs.fantasi.structure.bluePrintPatterns.LayeredBuilder.layered;
 import static com.mgs.fantasi.wireframe.Wireframes.basicRectangle;
 
 public class Main {
@@ -33,32 +33,31 @@ public class Main {
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
 
 		BluePrint bluePrint =
-				newBluePrintBuilder("main_frame").
+				createCanvas("main_frame").
 						withFrame(basicRectangle()).
 						withContent(
 								layered().
 										withLayer(
-												newBluePrintBuilder("odd_hexagons").
+												createCanvas("odd_hexagons").
 														withFrame(basicRectangle()).
 														withContent(
-																new HexagonRowsBuilderPattern().
+																new HexagonRowsBuilder().
 																		withNumberOfGenerations(numberOfGenerations).
 																		withNumberOfVerticalDivisions(numberOVerticalDivisions).
 																		withHexagonSize(hexagonMeasurement)
 														)
 										).
 										withLayer(
-												newBluePrintBuilder("even_hexagons").
+												createCanvas("even_hexagons").
 														withFrame(basicRectangle()).
 														withContent(
-																new HexagonRowsBuilderPattern().
+																new HexagonRowsBuilder().
 																		withNumberOfGenerations(numberOfGenerations).
 																		withNumberOfVerticalDivisions(numberOVerticalDivisions).
 																		withHexagonSize(hexagonMeasurement)
 														)
 										)
-						).
-						build();
+						).build();
 		Structure tree = bluePrint.buildStructure();
 
 		uiDriver.show(tree, new Dimension(400, 400), uiProfile);

@@ -3,7 +3,7 @@ package com.mgs.invasion.mvc.views;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.selectors.UISelectorFactory;
-import com.mgs.fantasi.structure.bluePrint.NoChildrenBluePrint;
+import com.mgs.fantasi.structure.bluePrintPatterns.EmptyRectangleBuilder;
 
 import java.awt.*;
 
@@ -18,7 +18,7 @@ public class ProfileFactory {
 		UIProfile debugProfile = new UIProfile();
 
 		debugProfile.addStyle(
-				UISelectorFactory.forType(NoChildrenBluePrint.class),
+				UISelectorFactory.forType(EmptyRectangleBuilder.class),
 				allUndefinedUIProperties().
 						withBorder(newBorder(
 								Color.BLUE,

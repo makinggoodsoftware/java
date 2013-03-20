@@ -1,15 +1,18 @@
 package com.mgs.fantasi.structure.bluePrintPatterns;
 
-import com.mgs.fantasi.structure.BluePrintBuilderFactory;
-import com.mgs.fantasi.structure.bluePrint.BluePrint;
-import com.mgs.fantasi.structure.bluePrint.LayeredElementsBluePrint;
+import com.mgs.fantasi.structure.CollocationInfo;
+import com.mgs.fantasi.structure.Structure;
+import com.mgs.fantasi.structure.StructureBuilderFactory;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LayeredBuilder implements BluePrintBuilder {
-	private final List<BluePrintBuilderFactory.BluePrintBuilderHelper> layers = new ArrayList<BluePrintBuilderFactory.BluePrintBuilderHelper>();
+import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
+import static com.mgs.fantasi.structure.Structures.layeredStructure;
+
+public class LayeredBuilder implements StructureContentBuilder {
+	private final List<StructureBuilderFactory.StructureBuilder> layers = new ArrayList<StructureBuilderFactory.StructureBuilder>();
 
 	private LayeredBuilder() {
 	}
@@ -18,17 +21,19 @@ public class LayeredBuilder implements BluePrintBuilder {
 		return new LayeredBuilder();
 	}
 
-	public LayeredBuilder withLayer(BluePrintBuilderFactory.BluePrintBuilderHelper layer) {
+	public LayeredBuilder withLayer(StructureBuilderFactory.StructureBuilder layer) {
 		layers.add(layer);
 		return this;
 	}
 
 	@Override
-	public BluePrint buildBlueprint(String name, Wireframe wireframe) {
-		LayeredElementsBluePrint layeredElementsBluePrint = new LayeredElementsBluePrint(name, wireframe);
-		for (BluePrintBuilderFactory.BluePrintBuilderHelper layer : layers) {
-			layeredElementsBluePrint.withLayer(layer.build());
+	public Structure buildStructure(String name, Wireframe wireframe) {
+		Structure structure = layeredStructure(wireframe, name, this.getClass());
+		for (int i = layers.size() - 1; i >= 0; i--) {
+			StructureBuilderFactory.StructureBuilder layerBuilder = layers.get(i);
+			structure.addChild(new CollocationInfo(i, all(), all(), 0, 0), layerBuilder.build());
 		}
-		return layeredElementsBluePrint;
+
+		return structure;
 	}
 }

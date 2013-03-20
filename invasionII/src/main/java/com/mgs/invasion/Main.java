@@ -7,7 +7,6 @@ import com.mgs.fantasi.properties.UIPropertyType;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.structure.Structure;
-import com.mgs.fantasi.structure.bluePrint.BluePrint;
 import com.mgs.invasion.mvc.views.HexagonRowsBuilder;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 
@@ -15,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
-import static com.mgs.fantasi.structure.BluePrintBuilderFactory.createCanvas;
+import static com.mgs.fantasi.structure.StructureBuilderFactory.createStructureBuilder;
 import static com.mgs.fantasi.structure.bluePrintPatterns.LayeredBuilder.layered;
 import static com.mgs.fantasi.wireframe.Wireframes.basicRectangle;
 
@@ -32,13 +31,13 @@ public class Main {
 
 		UIProperty<Measurement> hexagonMeasurement = uiProperty(Measurements.futureMeasurement(), UIPropertyType.MEASUREMENT);
 
-		BluePrint bluePrint =
-				createCanvas("main_frame").
+		Structure hexagonsGrid =
+				createStructureBuilder("main_frame").
 						withFrame(basicRectangle()).
 						withContent(
 								layered().
 										withLayer(
-												createCanvas("odd_hexagons").
+												createStructureBuilder("odd_hexagons").
 														withFrame(basicRectangle()).
 														withContent(
 																new HexagonRowsBuilder().
@@ -48,7 +47,7 @@ public class Main {
 														)
 										).
 										withLayer(
-												createCanvas("even_hexagons").
+												createStructureBuilder("even_hexagons").
 														withFrame(basicRectangle()).
 														withContent(
 																new HexagonRowsBuilder().
@@ -58,8 +57,7 @@ public class Main {
 														)
 										)
 						).build();
-		Structure tree = bluePrint.buildStructure();
 
-		uiDriver.show(tree, new Dimension(400, 400), uiProfile);
+		uiDriver.show(hexagonsGrid, new Dimension(400, 400), uiProfile);
 	}
 }

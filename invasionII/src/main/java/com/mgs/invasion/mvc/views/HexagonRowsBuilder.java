@@ -5,16 +5,16 @@ import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
-import com.mgs.fantasi.structure.bluePrint.BluePrint;
+import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.structure.bluePrintPatterns.*;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
-import static com.mgs.fantasi.structure.BluePrintBuilderFactory.createCanvas;
+import static com.mgs.fantasi.structure.StructureBuilderFactory.createStructureBuilder;
 import static com.mgs.fantasi.wireframe.Wireframes.newRectangularWireframe;
 import static com.mgs.fantasi.wireframe.Wireframes.newWireframe;
 
-public class HexagonRowsBuilder implements BluePrintBuilder {
+public class HexagonRowsBuilder implements StructureContentBuilder {
 	private static final HexagonShape HEXAGON_SHAPE = new HexagonShape();
 	private final UIPropertiesBuilder twoLinesContainerUIProperties = allEmptyUIProperties();
 	private final UIPropertiesBuilder hexagonRowsContainerUIProperties = allEmptyUIProperties();
@@ -40,24 +40,24 @@ public class HexagonRowsBuilder implements BluePrintBuilder {
 	}
 
 	@Override
-	public BluePrint buildBlueprint(String name, Wireframe wireframe) {
+	public Structure buildStructure(String name, Wireframe wireframe) {
 		return
-				createCanvas("hexagonRows").
+				createStructureBuilder("hexagonRows").
 						withFrame(wireframe).
 						withContent(new HorizontalRepeaterBuilder().
 								repeating(
-										createCanvas("linesOfHexagons").
+										createStructureBuilder("linesOfHexagons").
 												withFrame(newRectangularWireframe(twoLinesContainerUIProperties)).
 												withContent(
 														new TwoLinesBuilder().
 																withFirstLineHeightSizeRatio(Fractions.thwoThirds()).
 																withFirstLineTreeBuilder(
-																		createCanvas("hexagons").
+																		createStructureBuilder("hexagons").
 																				withFrame(newRectangularWireframe(hexagonRowsContainerUIProperties)).
 																				withContent(
 																						new VerticalRepeaterBuilder().
 																								repeating(
-																										createCanvas("hexagon").
+																										createStructureBuilder("hexagon").
 																												withFrame(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE)).
 																												withContent(new EmptyRectangleBuilder())
 																								).
@@ -65,7 +65,7 @@ public class HexagonRowsBuilder implements BluePrintBuilder {
 																				)
 																).
 																withSecondLineTreeBuilder(
-																		createCanvas("space").
+																		createStructureBuilder("space").
 																				withFrame(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties)).
 																				withContent(new EmptyRectangleBuilder())
 																)

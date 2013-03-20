@@ -1,12 +1,13 @@
 package com.mgs.fantasi.structure.bluePrintPatterns;
 
-import com.mgs.fantasi.structure.bluePrint.BluePrint;
-import com.mgs.fantasi.structure.bluePrint.NoChildrenBluePrint;
+import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.wireframe.Wireframe;
 
-public class EmptyRectangleBuilder implements BluePrintBuilder {
+import static com.mgs.fantasi.structure.Structures.emptyStructure;
+
+public class EmptyRectangleBuilder implements StructureContentBuilder {
 	@Override
-	public BluePrint buildBlueprint(String name, Wireframe wireframe) {
-		return new NoChildrenBluePrint(name, wireframe);
+	public Structure buildStructure(String name, Wireframe wireframe) {
+		return emptyStructure(wireframe, name, this.getClass());
 	}
 }

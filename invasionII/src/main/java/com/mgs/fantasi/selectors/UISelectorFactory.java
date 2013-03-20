@@ -1,11 +1,11 @@
 package com.mgs.fantasi.selectors;
 
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
-import com.mgs.fantasi.structure.bluePrint.BluePrint;
+import com.mgs.fantasi.structure.bluePrintPatterns.StructureContentBuilder;
 
 public class UISelectorFactory {
 
-	public static UISelector forType(Class<? extends BluePrint> type) {
+	public static UISelector forType(Class<? extends StructureContentBuilder> type) {
 		return new UISelectorBasedOnStructureType(type);
 	}
 

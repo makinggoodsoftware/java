@@ -13,6 +13,13 @@ public class TwoHorizontalLinesLayout implements StructureLayout {
 	private StructureBuilder firstLine;
 	private StructureBuilder secondLine;
 
+	private TwoHorizontalLinesLayout() {
+	}
+
+	public static TwoHorizontalLinesLayout twoHorizontalLines() {
+		return new TwoHorizontalLinesLayout();
+	}
+
 	public TwoHorizontalLinesLayout withFirstLineHeightSizeRatio(Fraction firstLineHeightSizeRatio) {
 		this.firstLineHeightSizeRatio = firstLineHeightSizeRatio;
 		return this;
@@ -31,7 +38,7 @@ public class TwoHorizontalLinesLayout implements StructureLayout {
 	@Override
 	public Structure buildStructure(String name, Wireframe wireframe) {
 		Fraction remainder = Fractions.allWithBase(firstLineHeightSizeRatio.getBase()).minus(firstLineHeightSizeRatio);
-		return new GridLayoutBuilder()
+		return GridLayoutBuilder.gridLayoutBuilder()
 				.withDimension(new Dimension(1, 2))
 				.withCell(new Point(0, 0), firstLineHeightSizeRatio, Fractions.all(), firstLine)
 				.withCell(new Point(0, 1), remainder, Fractions.all(), secondLine)

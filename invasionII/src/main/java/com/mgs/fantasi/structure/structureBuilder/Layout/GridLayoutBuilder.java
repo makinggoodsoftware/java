@@ -17,6 +17,13 @@ public class GridLayoutBuilder {
 	private Dimension dimension;
 	private Map<Point, CoordinateContent> cellContents;
 
+	private GridLayoutBuilder() {
+	}
+
+	public static GridLayoutBuilder gridLayoutBuilder() {
+		return new GridLayoutBuilder();
+	}
+
 	public GridWireframeContent withDimension(Dimension dimension) {
 		this.dimension = dimension;
 		return new GridWireframeContent(this, dimension);

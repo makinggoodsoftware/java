@@ -6,13 +6,13 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.structure.Structure;
-import com.mgs.fantasi.structure.structureBuilder.Layout.HorizontalRepeaterLayout;
 import com.mgs.fantasi.structure.structureBuilder.Layout.StructureLayout;
-import com.mgs.fantasi.structure.structureBuilder.Layout.TwoHorizontalLinesLayout;
-import com.mgs.fantasi.structure.structureBuilder.Layout.VerticalRepeaterLayout;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
+import static com.mgs.fantasi.structure.structureBuilder.Layout.HorizontalRepeaterLayout.horizontalRepeater;
+import static com.mgs.fantasi.structure.structureBuilder.Layout.TwoHorizontalLinesLayout.twoHorizontalLines;
+import static com.mgs.fantasi.structure.structureBuilder.Layout.VerticalRepeaterLayout.verticalRepeater;
 import static com.mgs.fantasi.structure.structureBuilder.StructureBuilderFactory.createStructureBuilder;
 import static com.mgs.fantasi.wireframe.Wireframes.newRectangularWireframe;
 import static com.mgs.fantasi.wireframe.Wireframes.newWireframe;
@@ -26,6 +26,13 @@ public class HexagonRowsLayout implements StructureLayout {
 
 	private int numberOfGenerations;
 	private int numberOVerticalDivisions;
+
+	private HexagonRowsLayout() {
+	}
+
+	public static HexagonRowsLayout hexagonRows() {
+		return new HexagonRowsLayout();
+	}
 
 	public HexagonRowsLayout withNumberOfGenerations(int numberOfGenerations) {
 		this.numberOfGenerations = numberOfGenerations;
@@ -47,30 +54,31 @@ public class HexagonRowsLayout implements StructureLayout {
 		return
 				createStructureBuilder("hexagonRows").
 						withFrame(wireframe).
-						withLayout(new HorizontalRepeaterLayout().
-								repeating(
-										createStructureBuilder("linesOfHexagons").
-												withFrame(newRectangularWireframe(twoLinesContainerUIProperties)).
-												withLayout(
-														new TwoHorizontalLinesLayout().
-																withFirstLineHeightSizeRatio(Fractions.thwoThirds()).
-																withFirstLineTreeBuilder(
-																		createStructureBuilder("hexagons").
-																				withFrame(newRectangularWireframe(hexagonRowsContainerUIProperties)).
-																				withLayout(
-																						new VerticalRepeaterLayout().
-																								repeating(
-																										createStructureBuilder("hexagon").withFrame(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE))
-																								).
-																								repetitions(numberOVerticalDivisions)
-																				)
-																).
-																withSecondLineTreeBuilder(
-																		createStructureBuilder("space").withFrame(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties))
-																)
-												)
-								).
-								repetitions(numberOfGenerations)).
+						withLayout(
+								horizontalRepeater().
+										repeating(
+												createStructureBuilder("linesOfHexagons").
+														withFrame(newRectangularWireframe(twoLinesContainerUIProperties)).
+														withLayout(
+																twoHorizontalLines().
+																		withFirstLineHeightSizeRatio(Fractions.thwoThirds()).
+																		withFirstLineTreeBuilder(
+																				createStructureBuilder("hexagons").
+																						withFrame(newRectangularWireframe(hexagonRowsContainerUIProperties)).
+																						withLayout(
+																								verticalRepeater().
+																										repeating(
+																												createStructureBuilder("hexagon").withFrame(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE))
+																										).
+																										repetitions(numberOVerticalDivisions)
+																						)
+																		).
+																		withSecondLineTreeBuilder(
+																				createStructureBuilder("space").withFrame(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties))
+																		)
+														)
+										).
+										repetitions(numberOfGenerations)).
 						build();
 	}
 }

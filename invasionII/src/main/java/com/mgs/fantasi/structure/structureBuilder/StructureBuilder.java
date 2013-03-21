@@ -8,7 +8,7 @@ import com.mgs.fantasi.wireframe.Wireframe;
 public class StructureBuilder {
 	private final String name;
 	private Wireframe wireframe;
-	private StructureLayout layout = new EmptyLayout();
+	private StructureLayout layout = EmptyLayout.emptyLayout();
 
 	StructureBuilder(String name) {
 		this.name = name;

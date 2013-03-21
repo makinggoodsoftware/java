@@ -10,6 +10,14 @@ public class HorizontalRepeaterLayout implements StructureLayout {
 	private StructureBuilder structureBuilderPattern;
 	private int numberOfGenerations;
 
+
+	private HorizontalRepeaterLayout() {
+	}
+
+	public static HorizontalRepeaterLayout horizontalRepeater() {
+		return new HorizontalRepeaterLayout();
+	}
+
 	public HorizontalRepeaterLayout repeating(StructureBuilder structureBuilderPattern) {
 		this.structureBuilderPattern = structureBuilderPattern;
 		return this;
@@ -22,7 +30,7 @@ public class HorizontalRepeaterLayout implements StructureLayout {
 
 	@Override
 	public Structure buildStructure(String name, Wireframe wireframe) {
-		return new GridLayoutBuilder()
+		return GridLayoutBuilder.gridLayoutBuilder()
 				.withDimension(new Dimension(1, numberOfGenerations))
 				.allCellsWith(structureBuilderPattern)
 				.buildStructure(name, wireframe, this.getClass());

@@ -7,7 +7,6 @@ import com.mgs.fantasi.properties.UIPropertyType;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.measurements.Measurements;
 import com.mgs.fantasi.structure.Structure;
-import com.mgs.invasion.mvc.views.HexagonRowsLayout;
 import com.mgs.invasion.mvc.views.ProfileFactory;
 
 import javax.swing.*;
@@ -17,6 +16,7 @@ import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
 import static com.mgs.fantasi.structure.structureBuilder.Layout.LayeredLayout.layered;
 import static com.mgs.fantasi.structure.structureBuilder.StructureBuilderFactory.createStructureBuilder;
 import static com.mgs.fantasi.wireframe.Wireframes.basicRectangle;
+import static com.mgs.invasion.mvc.views.HexagonRowsLayout.hexagonRows;
 
 public class Main {
 	public static void main(String... args) {
@@ -40,7 +40,7 @@ public class Main {
 												createStructureBuilder("odd_hexagons").
 														withFrame(basicRectangle()).
 														withLayout(
-																new HexagonRowsLayout().
+																hexagonRows().
 																		withNumberOfGenerations(numberOfGenerations).
 																		withNumberOfVerticalDivisions(numberOVerticalDivisions).
 																		withHexagonSize(hexagonMeasurement)
@@ -50,7 +50,7 @@ public class Main {
 												createStructureBuilder("even_hexagons").
 														withFrame(basicRectangle()).
 														withLayout(
-																new HexagonRowsLayout().
+																hexagonRows().
 																		withNumberOfGenerations(numberOfGenerations).
 																		withNumberOfVerticalDivisions(numberOVerticalDivisions).
 																		withHexagonSize(hexagonMeasurement)

@@ -1,13 +1,14 @@
 package com.mgs.fantasi.structure.structureBuilder;
 
 import com.mgs.fantasi.structure.Structure;
+import com.mgs.fantasi.structure.structureBuilder.Layout.EmptyLayout;
 import com.mgs.fantasi.structure.structureBuilder.Layout.StructureLayout;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 public class StructureBuilder {
 	private final String name;
 	private Wireframe wireframe;
-	private StructureLayout layout;
+	private StructureLayout layout = new EmptyLayout();
 
 	StructureBuilder(String name) {
 		this.name = name;

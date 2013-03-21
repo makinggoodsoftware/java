@@ -1,9 +1,9 @@
-package com.mgs.fantasi.structure.bluePrintPatterns;
+package com.mgs.fantasi.structure.structureBuilder.Layout;
 
 import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.wireframe.Wireframe;
 
-public interface StructureContentBuilder {
+public interface StructureLayout {
 
 	Structure buildStructure(String name, Wireframe wireframe);
 

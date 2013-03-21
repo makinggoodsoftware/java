@@ -6,15 +6,15 @@ import com.mgs.fantasi.properties.data.measurements.Fractions;
 import com.mgs.fantasi.properties.data.measurements.Measurement;
 import com.mgs.fantasi.properties.data.polygon.HexagonShape;
 import com.mgs.fantasi.structure.Structure;
-import com.mgs.fantasi.structure.bluePrintPatterns.*;
+import com.mgs.fantasi.structure.structureBuilder.Layout.*;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
-import static com.mgs.fantasi.structure.StructureBuilderFactory.createStructureBuilder;
+import static com.mgs.fantasi.structure.structureBuilder.StructureBuilderFactory.createStructureBuilder;
 import static com.mgs.fantasi.wireframe.Wireframes.newRectangularWireframe;
 import static com.mgs.fantasi.wireframe.Wireframes.newWireframe;
 
-public class HexagonRowsBuilder implements StructureContentBuilder {
+public class HexagonRowsBuilder implements StructureLayout {
 	private static final HexagonShape HEXAGON_SHAPE = new HexagonShape();
 	private final UIPropertiesBuilder twoLinesContainerUIProperties = allEmptyUIProperties();
 	private final UIPropertiesBuilder hexagonRowsContainerUIProperties = allEmptyUIProperties();
@@ -44,22 +44,22 @@ public class HexagonRowsBuilder implements StructureContentBuilder {
 		return
 				createStructureBuilder("hexagonRows").
 						withFrame(wireframe).
-						withContent(new HorizontalRepeaterBuilder().
+						withLayout(new HorizontalRepeaterLayout().
 								repeating(
 										createStructureBuilder("linesOfHexagons").
 												withFrame(newRectangularWireframe(twoLinesContainerUIProperties)).
-												withContent(
-														new TwoLinesBuilder().
+												withLayout(
+														new TwoHorizontalLinesLayout().
 																withFirstLineHeightSizeRatio(Fractions.thwoThirds()).
 																withFirstLineTreeBuilder(
 																		createStructureBuilder("hexagons").
 																				withFrame(newRectangularWireframe(hexagonRowsContainerUIProperties)).
-																				withContent(
-																						new VerticalRepeaterBuilder().
+																				withLayout(
+																						new VerticalRepeaterLayout().
 																								repeating(
 																										createStructureBuilder("hexagon").
 																												withFrame(newWireframe(hexagonContainerUIProperties, HEXAGON_SHAPE)).
-																												withContent(new EmptyRectangleBuilder())
+																												withLayout(new EmptyLayout())
 																								).
 																								repetitions(numberOVerticalDivisions)
 																				)
@@ -67,7 +67,7 @@ public class HexagonRowsBuilder implements StructureContentBuilder {
 																withSecondLineTreeBuilder(
 																		createStructureBuilder("space").
 																				withFrame(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties)).
-																				withContent(new EmptyRectangleBuilder())
+																				withLayout(new EmptyLayout())
 																)
 												)
 								).

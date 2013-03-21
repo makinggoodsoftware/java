@@ -14,8 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
-import static com.mgs.fantasi.structure.StructureBuilderFactory.createStructureBuilder;
-import static com.mgs.fantasi.structure.bluePrintPatterns.LayeredBuilder.layered;
+import static com.mgs.fantasi.structure.structureBuilder.Layout.LayeredLayout.layered;
+import static com.mgs.fantasi.structure.structureBuilder.StructureBuilderFactory.createStructureBuilder;
 import static com.mgs.fantasi.wireframe.Wireframes.basicRectangle;
 
 public class Main {
@@ -34,12 +34,12 @@ public class Main {
 		Structure hexagonsGrid =
 				createStructureBuilder("main_frame").
 						withFrame(basicRectangle()).
-						withContent(
+						withLayout(
 								layered().
 										withLayer(
 												createStructureBuilder("odd_hexagons").
 														withFrame(basicRectangle()).
-														withContent(
+														withLayout(
 																new HexagonRowsBuilder().
 																		withNumberOfGenerations(numberOfGenerations).
 																		withNumberOfVerticalDivisions(numberOVerticalDivisions).
@@ -49,7 +49,7 @@ public class Main {
 										withLayer(
 												createStructureBuilder("even_hexagons").
 														withFrame(basicRectangle()).
-														withContent(
+														withLayout(
 																new HexagonRowsBuilder().
 																		withNumberOfGenerations(numberOfGenerations).
 																		withNumberOfVerticalDivisions(numberOVerticalDivisions).

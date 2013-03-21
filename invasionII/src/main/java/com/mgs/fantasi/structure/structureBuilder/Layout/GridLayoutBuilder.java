@@ -1,10 +1,9 @@
-package com.mgs.fantasi.structure.bluePrint;
+package com.mgs.fantasi.structure.structureBuilder.Layout;
 
 import com.mgs.fantasi.properties.data.measurements.Fraction;
 import com.mgs.fantasi.structure.CollocationInfo;
 import com.mgs.fantasi.structure.Structure;
-import com.mgs.fantasi.structure.StructureBuilderFactory;
-import com.mgs.fantasi.structure.bluePrintPatterns.StructureContentBuilder;
+import com.mgs.fantasi.structure.structureBuilder.StructureBuilder;
 import com.mgs.fantasi.wireframe.Wireframe;
 
 import java.awt.*;
@@ -14,7 +13,7 @@ import java.util.Map;
 import static com.mgs.fantasi.properties.data.measurements.Fractions.all;
 import static com.mgs.fantasi.structure.Structures.gridStructure;
 
-public class GridStructureBuilder {
+public class GridLayoutBuilder {
 	private Dimension dimension;
 	private Map<Point, CoordinateContent> cellContents;
 
@@ -23,7 +22,7 @@ public class GridStructureBuilder {
 		return new GridWireframeContent(this, dimension);
 	}
 
-	public Structure buildStructure(String name, Wireframe wireframe, Class<? extends StructureContentBuilder> parent) {
+	public Structure buildStructure(String name, Wireframe wireframe, Class<? extends StructureLayout> parent) {
 		Structure structure = gridStructure(wireframe, name, parent);
 
 		for (int x = 0; x < dimension.width; x++) {
@@ -48,31 +47,31 @@ public class GridStructureBuilder {
 	}
 
 	public static class GridWireframeContent {
-		private final GridStructureBuilder parent;
+		private final GridLayoutBuilder parent;
 		private final Dimension dimension;
 
 		private final Map<Point, CoordinateContent> cellContents = new HashMap<Point, CoordinateContent>();
 
-		public GridWireframeContent(GridStructureBuilder parent, Dimension dimension) {
+		public GridWireframeContent(GridLayoutBuilder parent, Dimension dimension) {
 			this.parent = parent;
 			this.dimension = dimension;
 		}
 
-		public GridWireframeContent withCell(Point point, Fraction heightSizeRatio, Fraction widthSizeRatio, StructureBuilderFactory.StructureBuilder content) {
+		public GridWireframeContent withCell(Point point, Fraction heightSizeRatio, Fraction widthSizeRatio, StructureBuilder content) {
 			cellContents.put(point, new CoordinateContent(heightSizeRatio, widthSizeRatio, content));
 			return this;
 		}
 
-		public Structure build(String name, Wireframe wireframe, Class<? extends StructureContentBuilder> parent) {
+		public Structure build(String name, Wireframe wireframe, Class<? extends StructureLayout> parent) {
 			return fill().buildStructure(name, wireframe, parent);
 		}
 
-		public GridStructureBuilder fill() {
+		public GridLayoutBuilder fill() {
 			parent.setCellContent(cellContents);
 			return parent;
 		}
 
-		public GridStructureBuilder allCellsWith(StructureBuilderFactory.StructureBuilder content) {
+		public GridLayoutBuilder allCellsWith(StructureBuilder content) {
 			for (int x = 0; x < dimension.width; x++) {
 				for (int y = 0; y < dimension.height; y++) {
 					cellContents.put(new Point(x, y), new CoordinateContent(all(), all(), content));
@@ -85,15 +84,15 @@ public class GridStructureBuilder {
 	public static class CoordinateContent {
 		private final Fraction heightSizeRatio;
 		private final Fraction widthSizeRatio;
-		private final StructureBuilderFactory.StructureBuilder content;
+		private final StructureBuilder content;
 
-		public CoordinateContent(Fraction heightSizeRatio, Fraction widthSizeRatio, StructureBuilderFactory.StructureBuilder content) {
+		public CoordinateContent(Fraction heightSizeRatio, Fraction widthSizeRatio, StructureBuilder content) {
 			this.heightSizeRatio = heightSizeRatio;
 			this.widthSizeRatio = widthSizeRatio;
 			this.content = content;
 		}
 
-		public StructureBuilderFactory.StructureBuilder getContent() {
+		public StructureBuilder getContent() {
 			return content;
 		}
 

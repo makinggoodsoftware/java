@@ -1,12 +1,12 @@
 package com.mgs.fantasi.selectors;
 
-import com.mgs.fantasi.structure.bluePrintPatterns.StructureContentBuilder;
+import com.mgs.fantasi.structure.structureBuilder.Layout.StructureLayout;
 import com.mgs.fantasi.structure.treeAux.WireframeNode;
 
 public class UISelectorBasedOnStructureType implements UISelector {
-	private final Class<? extends StructureContentBuilder> type;
+	private final Class<? extends StructureLayout> type;
 
-	public UISelectorBasedOnStructureType(Class<? extends StructureContentBuilder> type) {
+	public UISelectorBasedOnStructureType(Class<? extends StructureLayout> type) {
 		this.type = type;
 	}
 

@@ -1,8 +1,8 @@
 package com.mgs.fantasi.driver.swing;
 
 import com.mgs.fantasi.driver.RenderingManager;
-import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelBuilder;
-import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
+import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelDto;
+import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelDtoFactory;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.properties.UIPropertiesBuilder;
 import com.mgs.fantasi.structure.CollocationInfo;
@@ -15,33 +15,33 @@ import java.util.Map;
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.from;
 
 public class JPanelRenderingManager implements RenderingManager<JPanel> {
-	private final JPanelCreationStrategyFactory jPanelBuilderFactory;
+	private final JPanelDtoFactory jPanelDtoFactory;
 
 
-	public JPanelRenderingManager(JPanelCreationStrategyFactory jPanelBuilderFactory) {
-		this.jPanelBuilderFactory = jPanelBuilderFactory;
+	public JPanelRenderingManager(JPanelDtoFactory jPanelDtoFactory) {
+		this.jPanelDtoFactory = jPanelDtoFactory;
 	}
 
 	@Override
 	public JPanel render(Structure structure, UIProfile uiProfile) {
-		JPanelBuilder jPanelBuilder = renderWireframe(structure.getRoot(), uiProfile);
-		JPanelBuilder jPanelBuilderWithChildren = renderChildrenIntoJPanelBuilder(jPanelBuilder, structure.getChildren(), uiProfile);
-		return jPanelBuilderWithChildren.build(structure.getType());
+		return createDto(structure, uiProfile).build(structure.getType());
 	}
 
-	private JPanelBuilder renderChildrenIntoJPanelBuilder(JPanelBuilder jPanelBuilder, Map<CollocationInfo, Structure> children, UIProfile uiProfile) {
-		for (Map.Entry<CollocationInfo, Structure> wireframeChildPart : children.entrySet()) {
-			JPanel child = render(wireframeChildPart.getValue(), uiProfile);
-			jPanelBuilder.withChild(child, wireframeChildPart.getKey());
+	private JPanelDto createDto(Structure structure, UIProfile uiProfile) {
+		JPanelDto jPanelDto = createContainerDto(structure.getRoot(), uiProfile);
+
+		for (Map.Entry<CollocationInfo, Structure> childNode : structure.getChildren().entrySet()) {
+			JPanelDto child = createDto(childNode.getValue(), uiProfile);
+			jPanelDto.addChild(child, childNode.getKey(), childNode.getValue().getType());
 		}
 
-		return jPanelBuilder;
+		return jPanelDto;
 	}
 
-	private JPanelBuilder renderWireframe(WireframeNode wireframe, UIProfile uiProfile) {
+	private JPanelDto createContainerDto(WireframeNode wireframe, UIProfile uiProfile) {
 		UIPropertiesBuilder withStylesApplied = from(wireframe.getValue().getUiProperties());
 		withStylesApplied.applyStyles(uiProfile.findStylesFor(wireframe));
-		return jPanelBuilderFactory.forUIProperties(withStylesApplied.build(), wireframe.getShape());
+		return jPanelDtoFactory.forUIProperties(withStylesApplied.build(), wireframe.getShape());
 	}
 
 

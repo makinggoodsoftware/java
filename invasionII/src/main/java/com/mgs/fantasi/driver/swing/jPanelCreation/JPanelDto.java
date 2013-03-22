@@ -5,8 +5,8 @@ import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
 
 import javax.swing.*;
 
-public interface JPanelBuilder {
+public interface JPanelDto {
 	JPanel build(WireframeLayoutType layoutType);
 
-	JPanelBuilder withChild(JPanel child, CollocationInfo collocationInfo);
+	JPanelDto addChild(JPanelDto child, CollocationInfo collocationInfo, WireframeLayoutType wireframeLayoutType);
 }

@@ -12,11 +12,11 @@ import java.awt.*;
 
 import static com.mgs.fantasi.driver.swing.SwingUtils.coordinates;
 
-public class DecoratedJPanelWithPadding implements JPanelBuilder {
-	private final JPanelBuilder decoratedPanel;
+public class DecoratedJPanelWithPadding implements JPanelDto {
+	private final JPanelDto decoratedPanel;
 	private final Padding padding;
 
-	public DecoratedJPanelWithPadding(JPanelBuilder decoratedPanel, Padding padding) {
+	public DecoratedJPanelWithPadding(JPanelDto decoratedPanel, Padding padding) {
 		this.decoratedPanel = decoratedPanel;
 		this.padding = padding;
 	}
@@ -33,8 +33,8 @@ public class DecoratedJPanelWithPadding implements JPanelBuilder {
 	}
 
 	@Override
-	public JPanelBuilder withChild(JPanel child, CollocationInfo collocationInfo) {
-		this.decoratedPanel.withChild(child, collocationInfo);
+	public JPanelDto addChild(JPanelDto child, CollocationInfo collocationInfo, WireframeLayoutType wireframeLayoutType) {
+		this.decoratedPanel.addChild(child, collocationInfo, wireframeLayoutType);
 		return this;
 	}
 

@@ -2,7 +2,7 @@ package com.mgs.fantasi.driver;
 
 import com.mgs.fantasi.driver.swing.JPanelRenderingManager;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
-import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelCreationStrategyFactory;
+import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelDtoFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
 import com.mgs.fantasi.profile.UIProfile;
 import com.mgs.fantasi.structure.Structure;
@@ -17,13 +17,13 @@ public class UIDriver<T> {
 
 	public static UIDriver<JPanel> forSwing() {
 		JPanelLayoutTranslator jPanelLayoutTranslator = new JPanelLayoutTranslator();
-		JPanelCreationStrategyFactory jPanelCreationStrategyFactory = new JPanelCreationStrategyFactory(jPanelLayoutTranslator);
+		JPanelDtoFactory jPanelDtoFactory = new JPanelDtoFactory(jPanelLayoutTranslator);
 
 		return new UIDriver<JPanel>
 				(
 						new SwingUIDisplayManager(),
 						new JPanelRenderingManager(
-								jPanelCreationStrategyFactory
+								jPanelDtoFactory
 						)
 				);
 	}

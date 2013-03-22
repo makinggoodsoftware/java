@@ -10,12 +10,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StandardJPanelBuilder implements JPanelBuilder {
+public class StandardJPanelDto implements JPanelDto {
 	private final UIProperties uiProperties;
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 	private List<JPanelChild> children = new ArrayList<JPanelChild>();
 
-	public StandardJPanelBuilder(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator) {
+	public StandardJPanelDto(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator) {
 		this.uiProperties = uiProperties;
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 	}
@@ -29,7 +29,7 @@ public class StandardJPanelBuilder implements JPanelBuilder {
 			LayoutManager layout = jPanelLayoutTranslator.translate(layoutType, jPanel);
 			jPanel.setLayout(layout);
 			for (JPanelChild child : children) {
-				jPanel.add(child.getPanel(), translate(child.getCollocationInfo(), layout));
+				jPanel.add(child.getPanel().build(child.getWireframeLayoutType()), translate(child.getCollocationInfo(), layout));
 			}
 		}
 		return jPanel;
@@ -46,27 +46,33 @@ public class StandardJPanelBuilder implements JPanelBuilder {
 
 
 	@Override
-	public JPanelBuilder withChild(JPanel child, CollocationInfo collocationInfo) {
-		children.add(new JPanelChild(child, collocationInfo));
+	public JPanelDto addChild(JPanelDto child, CollocationInfo collocationInfo, WireframeLayoutType wireframeLayoutType) {
+		children.add(new JPanelChild(child, collocationInfo, wireframeLayoutType));
 		return this;
 	}
 
 	private class JPanelChild {
-		private final JPanel panel;
+		private final JPanelDto panel;
 		private final CollocationInfo collocationInfo;
+		private final WireframeLayoutType wireframeLayoutType;
 
-		public JPanelChild(JPanel panel, CollocationInfo collocationInfo) {
+		public JPanelChild(JPanelDto panel, CollocationInfo collocationInfo, WireframeLayoutType wireframeLayoutType) {
 			this.panel = panel;
 			this.collocationInfo = collocationInfo;
+			this.wireframeLayoutType = wireframeLayoutType;
 		}
 
 
-		public JPanel getPanel() {
+		public JPanelDto getPanel() {
 			return panel;
 		}
 
 		public CollocationInfo getCollocationInfo() {
 			return collocationInfo;
+		}
+
+		public WireframeLayoutType getWireframeLayoutType() {
+			return wireframeLayoutType;
 		}
 	}
 }

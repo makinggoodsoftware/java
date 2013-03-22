@@ -7,12 +7,12 @@ import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
 
 import javax.swing.*;
 
-public class NonRectangularJPanelBuilder implements JPanelBuilder {
+public class NonRectangularJPanelDto implements JPanelDto {
 	private final PolygonPointsIterator shape;
 	private final UIProperties uiProperties;
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 
-	public NonRectangularJPanelBuilder(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator, PolygonPointsIterator shape) {
+	public NonRectangularJPanelDto(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator, PolygonPointsIterator shape) {
 		this.uiProperties = uiProperties;
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 		this.shape = shape;
@@ -28,7 +28,7 @@ public class NonRectangularJPanelBuilder implements JPanelBuilder {
 	}
 
 	@Override
-	public JPanelBuilder withChild(JPanel child, CollocationInfo collocationInfo) {
+	public JPanelDto addChild(JPanelDto child, CollocationInfo collocationInfo, WireframeLayoutType wireframeLayoutType) {
 		throw new RuntimeException("Can't add content into a non rectangular panel");
 	}
 

@@ -12,7 +12,7 @@ public class JPanelDtoFactory {
 
 	public JPanelDto forUIProperties(UIProperties uiProperties, PolygonPointsIterator shape) {
 		JPanelDto baseDto = shape.isRectangular() ?
-				new StandardJPanelDto(uiProperties, jPanelLayoutTranslator) :
+				new StandardJPanelDto(uiProperties, jPanelLayoutTranslator, new StandardJPanelFactory()) :
 				new NonRectangularJPanelDto(uiProperties, jPanelLayoutTranslator, shape);
 
 		return uiProperties.getPadding().isFullyDefined() ?

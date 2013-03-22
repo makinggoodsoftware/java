@@ -14,15 +14,17 @@ public class StandardJPanelDto implements JPanelDto {
 	private final UIProperties uiProperties;
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 	private List<JPanelChild> children = new ArrayList<JPanelChild>();
+	private final StandardJPanelFactory jPanelFactory;
 
-	public StandardJPanelDto(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator) {
+	public StandardJPanelDto(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator, StandardJPanelFactory jPanelFactory) {
 		this.uiProperties = uiProperties;
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
+		this.jPanelFactory = jPanelFactory;
 	}
 
 	@Override
 	public JPanel build(WireframeLayoutType layoutType) {
-		return new StandardJPanelFactory().create(layoutType, uiProperties, jPanelLayoutTranslator, children);
+		return jPanelFactory.create(layoutType, uiProperties, jPanelLayoutTranslator, children);
 	}
 
 	public static Object translate(CollocationInfo specifics, LayoutManager type) {

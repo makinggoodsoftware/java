@@ -7,7 +7,7 @@ import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.allEmptyUIProperties;
 
 public class Wireframes {
-	public static Wireframe newRectangularWireframe(UIPropertiesBuilder uiPropertiesBuilder) {
+	public static Wireframe rectangle(UIPropertiesBuilder uiPropertiesBuilder) {
 		return new Wireframe(uiPropertiesBuilder.build(), new NativeRectanguarShape());
 	}
 
@@ -15,7 +15,7 @@ public class Wireframes {
 		return new Wireframe(uiPropertiesBuilder.build(), shape);
 	}
 
-	public static Wireframe basicRectangle() {
+	public static Wireframe emptyRectangle() {
 		return new Wireframe(allEmptyUIProperties().build(), new NativeRectanguarShape());
 	}
 }

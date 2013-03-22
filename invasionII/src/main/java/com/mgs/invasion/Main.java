@@ -15,7 +15,7 @@ import java.awt.*;
 import static com.mgs.fantasi.properties.UIPropertyFactory.uiProperty;
 import static com.mgs.fantasi.structure.structureBuilder.Layout.LayeredLayout.layered;
 import static com.mgs.fantasi.structure.structureBuilder.StructureBuilderFactory.createStructureBuilder;
-import static com.mgs.fantasi.wireframe.Wireframes.basicRectangle;
+import static com.mgs.fantasi.wireframe.Wireframes.emptyRectangle;
 import static com.mgs.invasion.mvc.views.HexagonRowsLayout.hexagonRows;
 
 public class Main {
@@ -33,12 +33,12 @@ public class Main {
 
 		Structure hexagonsGrid =
 				createStructureBuilder("main_frame").
-						withFrame(basicRectangle()).
+						withFrame(emptyRectangle()).
 						withLayout(
 								layered().
 										withLayer(
 												createStructureBuilder("odd_hexagons").
-														withFrame(basicRectangle()).
+														withFrame(emptyRectangle()).
 														withLayout(
 																hexagonRows().
 																		withNumberOfGenerations(numberOfGenerations).
@@ -48,7 +48,7 @@ public class Main {
 										).
 										withLayer(
 												createStructureBuilder("even_hexagons").
-														withFrame(basicRectangle()).
+														withFrame(emptyRectangle()).
 														withLayout(
 																hexagonRows().
 																		withNumberOfGenerations(numberOfGenerations).

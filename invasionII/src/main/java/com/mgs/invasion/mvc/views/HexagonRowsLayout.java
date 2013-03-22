@@ -14,8 +14,8 @@ import static com.mgs.fantasi.structure.structureBuilder.Layout.HorizontalRepeat
 import static com.mgs.fantasi.structure.structureBuilder.Layout.TwoHorizontalLinesLayout.twoHorizontalLines;
 import static com.mgs.fantasi.structure.structureBuilder.Layout.VerticalRepeaterLayout.verticalRepeater;
 import static com.mgs.fantasi.structure.structureBuilder.StructureBuilderFactory.createStructureBuilder;
-import static com.mgs.fantasi.wireframe.Wireframes.newRectangularWireframe;
 import static com.mgs.fantasi.wireframe.Wireframes.newWireframe;
+import static com.mgs.fantasi.wireframe.Wireframes.rectangle;
 
 public class HexagonRowsLayout implements StructureLayout {
 	private static final HexagonShape HEXAGON_SHAPE = new HexagonShape();
@@ -58,13 +58,13 @@ public class HexagonRowsLayout implements StructureLayout {
 								horizontalRepeater().
 										repeating(
 												createStructureBuilder("linesOfHexagons").
-														withFrame(newRectangularWireframe(twoLinesContainerUIProperties)).
+														withFrame(rectangle(twoLinesContainerUIProperties)).
 														withLayout(
 																twoHorizontalLines().
 																		withFirstLineHeightSizeRatio(Fractions.thwoThirds()).
 																		withFirstLineTreeBuilder(
 																				createStructureBuilder("hexagons").
-																						withFrame(newRectangularWireframe(hexagonRowsContainerUIProperties)).
+																						withFrame(rectangle(hexagonRowsContainerUIProperties)).
 																						withLayout(
 																								verticalRepeater().
 																										repeating(
@@ -74,7 +74,7 @@ public class HexagonRowsLayout implements StructureLayout {
 																						)
 																		).
 																		withSecondLineTreeBuilder(
-																				createStructureBuilder("space").withFrame(newRectangularWireframe(spanBetweenHexagonRowsContainerUIProperties))
+																				createStructureBuilder("space").withFrame(rectangle(spanBetweenHexagonRowsContainerUIProperties))
 																		)
 														)
 										).

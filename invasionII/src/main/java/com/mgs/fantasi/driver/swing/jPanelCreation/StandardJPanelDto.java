@@ -22,17 +22,7 @@ public class StandardJPanelDto implements JPanelDto {
 
 	@Override
 	public JPanel build(WireframeLayoutType layoutType) {
-		JPanel jPanel = new JPanel();
-		jPanel.setOpaque(false);
-		SwingUtils.applyUIProperties(jPanel, uiProperties);
-		if (layoutType != WireframeLayoutType.EMPTY) {
-			LayoutManager layout = jPanelLayoutTranslator.translate(layoutType, jPanel);
-			jPanel.setLayout(layout);
-			for (JPanelChild child : children) {
-				jPanel.add(child.getPanel().build(child.getWireframeLayoutType()), translate(child.getCollocationInfo(), layout));
-			}
-		}
-		return jPanel;
+		return new StandardJPanelFactory().create(layoutType, uiProperties, jPanelLayoutTranslator, children);
 	}
 
 	public static Object translate(CollocationInfo specifics, LayoutManager type) {
@@ -51,7 +41,7 @@ public class StandardJPanelDto implements JPanelDto {
 		return this;
 	}
 
-	private class JPanelChild {
+	class JPanelChild {
 		private final JPanelDto panel;
 		private final CollocationInfo collocationInfo;
 		private final WireframeLayoutType wireframeLayoutType;

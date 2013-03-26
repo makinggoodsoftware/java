@@ -4,7 +4,8 @@ import com.mgs.fantasi.driver.RenderingManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelDto;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelDtoFactory;
 import com.mgs.fantasi.profile.UIProfile;
-import com.mgs.fantasi.properties.UIPropertiesBuilder;
+import com.mgs.fantasi.properties.UIPropertiesManager;
+import com.mgs.fantasi.properties.UIPropertiesProvider;
 import com.mgs.fantasi.structure.CollocationInfo;
 import com.mgs.fantasi.structure.Structure;
 import com.mgs.fantasi.structure.treeAux.WireframeNode;
@@ -12,14 +13,14 @@ import com.mgs.fantasi.structure.treeAux.WireframeNode;
 import javax.swing.*;
 import java.util.Map;
 
-import static com.mgs.fantasi.properties.UIPropertiesBuilderFactory.from;
-
 public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	private final JPanelDtoFactory jPanelDtoFactory;
+	private final UIPropertiesManager uiPropertiesManager;
 
 
-	public JPanelRenderingManager(JPanelDtoFactory jPanelDtoFactory) {
+	public JPanelRenderingManager(JPanelDtoFactory jPanelDtoFactory, UIPropertiesManager uiPropertiesManager) {
 		this.jPanelDtoFactory = jPanelDtoFactory;
+		this.uiPropertiesManager = uiPropertiesManager;
 	}
 
 	@Override
@@ -28,7 +29,10 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 	}
 
 	private JPanelDto createDto(Structure structure, UIProfile uiProfile) {
-		JPanelDto jPanelDto = createContainerDto(structure.getRoot(), uiProfile);
+		WireframeNode root = structure.getRoot();
+
+		UIPropertiesProvider withStylesApplied = uiPropertiesManager.applyStyles(root.getUiProperties(), uiProfile.findStylesFor(root));
+		JPanelDto jPanelDto = jPanelDtoFactory.forUIProperties(withStylesApplied, root.getShape());
 
 		for (Map.Entry<CollocationInfo, Structure> childNode : structure.getChildren().entrySet()) {
 			JPanelDto child = createDto(childNode.getValue(), uiProfile);
@@ -36,12 +40,6 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 		}
 
 		return jPanelDto;
-	}
-
-	private JPanelDto createContainerDto(WireframeNode wireframe, UIProfile uiProfile) {
-		UIPropertiesBuilder withStylesApplied = from(wireframe.getValue().getUiProperties());
-		withStylesApplied.applyStyles(uiProfile.findStylesFor(wireframe));
-		return jPanelDtoFactory.forUIProperties(withStylesApplied.build(), wireframe.getShape());
 	}
 
 

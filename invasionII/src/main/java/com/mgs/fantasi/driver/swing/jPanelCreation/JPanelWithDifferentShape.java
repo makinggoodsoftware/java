@@ -1,6 +1,6 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
-import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIPropertiesProvider;
 import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.data.Border;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
@@ -12,9 +12,9 @@ import java.awt.geom.Point2D;
 
 public class JPanelWithDifferentShape extends JPanel {
 	private final PolygonPointsIterator shape;
-	private final UIProperties uiProperties;
+	private final UIPropertiesProvider uiProperties;
 
-	public JPanelWithDifferentShape(PolygonPointsIterator shape, UIProperties uiProperties) {
+	public JPanelWithDifferentShape(PolygonPointsIterator shape, UIPropertiesProvider uiProperties) {
 		this.shape = shape;
 		this.uiProperties = uiProperties;
 		setOpaque(false);

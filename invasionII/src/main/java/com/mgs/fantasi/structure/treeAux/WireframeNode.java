@@ -1,5 +1,6 @@
 package com.mgs.fantasi.structure.treeAux;
 
+import com.mgs.fantasi.properties.UIPropertiesProvider;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.structure.structureBuilder.Layout.StructureLayout;
 import com.mgs.fantasi.wireframe.Wireframe;
@@ -32,5 +33,9 @@ public class WireframeNode extends TemplateNode<Wireframe> {
 
 	public PolygonPointsIterator getShape() {
 		return getValue().getShape();
+	}
+
+	public UIPropertiesProvider getUiProperties() {
+		return getValue().getUiProperties();
 	}
 }

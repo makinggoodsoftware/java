@@ -1,7 +1,7 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.driver.swing.SwingUtils;
-import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIPropertiesProvider;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.structure.CollocationInfo;
 import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StandardJPanelDto implements JPanelDto {
-	private final UIProperties uiProperties;
+	private final UIPropertiesProvider uiProperties;
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 	private List<JPanelChild> children = new ArrayList<JPanelChild>();
 	private final JPanelFactory jPanelFactory;
 	private final PolygonPointsIterator shape;
 
-	public StandardJPanelDto(UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator, PolygonPointsIterator shape, JPanelFactory jPanelFactory) {
+	public StandardJPanelDto(UIPropertiesProvider uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator, PolygonPointsIterator shape, JPanelFactory jPanelFactory) {
 		this.uiProperties = uiProperties;
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
 		this.jPanelFactory = jPanelFactory;

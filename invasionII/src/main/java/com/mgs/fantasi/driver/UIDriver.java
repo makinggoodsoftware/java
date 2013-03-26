@@ -5,6 +5,7 @@ import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelDtoFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
 import com.mgs.fantasi.profile.UIProfile;
+import com.mgs.fantasi.properties.UIPropertiesManager;
 import com.mgs.fantasi.structure.Structure;
 
 import javax.swing.*;
@@ -23,7 +24,8 @@ public class UIDriver<T> {
 				(
 						new SwingUIDisplayManager(),
 						new JPanelRenderingManager(
-								jPanelDtoFactory
+								jPanelDtoFactory,
+								new UIPropertiesManager()
 						)
 				);
 	}

@@ -1,6 +1,6 @@
 package com.mgs.fantasi.driver.swing;
 
-import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIPropertiesProvider;
 import com.mgs.fantasi.properties.UIProperty;
 import com.mgs.fantasi.properties.data.Border;
 import com.mgs.fantasi.properties.data.measurements.Fraction;
@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SwingUtils {
-	public static void applyUIProperties(JPanel jPanel, UIProperties uiProperties) {
+	public static void applyUIProperties(JPanel jPanel, UIPropertiesProvider uiProperties) {
 		UIProperty<com.mgs.fantasi.properties.data.Color> backgroundColor = uiProperties.getBackgroundColor();
 		if (backgroundColor.isFullyDefined()) {
 			jPanel.setBackground(backgroundColor.getValue().getColorAsAwt());

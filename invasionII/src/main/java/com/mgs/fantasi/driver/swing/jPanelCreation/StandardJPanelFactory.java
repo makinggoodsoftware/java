@@ -1,7 +1,7 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.driver.swing.SwingUtils;
-import com.mgs.fantasi.properties.UIProperties;
+import com.mgs.fantasi.properties.UIPropertiesProvider;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StandardJPanelFactory implements JPanelFactory {
 	@Override
-	public JPanel create(WireframeLayoutType layoutType, UIProperties uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator1, List<StandardJPanelDto.JPanelChild> children, PolygonPointsIterator shape) {
+	public JPanel create(WireframeLayoutType layoutType, UIPropertiesProvider uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator1, List<StandardJPanelDto.JPanelChild> children, PolygonPointsIterator shape) {
 		JPanel jPanel = new JPanel();
 		jPanel.setOpaque(false);
 		SwingUtils.applyUIProperties(jPanel, uiProperties);

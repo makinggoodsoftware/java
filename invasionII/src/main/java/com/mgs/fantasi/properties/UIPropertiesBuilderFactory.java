@@ -14,7 +14,7 @@ import static com.mgs.fantasi.properties.UIPropertyFactory.undefined;
 import static com.mgs.fantasi.properties.UIPropertyId.*;
 
 public class UIPropertiesBuilderFactory {
-	public static UIPropertiesBuilder from(UIPropertiesProvider uiPropertiesProvider) {
+	public static UIPropertiesBuilder copy(UIPropertiesProvider uiPropertiesProvider) {
 		UIProperty<Border> border = uiPropertiesProvider.getBorder();
 		UIProperty<Color> backgroundColor = uiPropertiesProvider.getBackgroundColor();
 		UIProperty<Color> foregroundColor = uiPropertiesProvider.getForegroundColor();

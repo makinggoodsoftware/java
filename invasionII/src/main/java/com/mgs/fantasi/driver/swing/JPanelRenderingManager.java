@@ -32,14 +32,14 @@ public class JPanelRenderingManager implements RenderingManager<JPanel> {
 		WireframeNode root = structure.getRoot();
 
 		UIPropertiesProvider withStylesApplied = uiPropertiesManager.applyStyles(root.getUiProperties(), uiProfile.findStylesFor(root));
-		JPanelDto jPanelDto = jPanelDtoFactory.forUIProperties(withStylesApplied, root.getShape());
+		JPanelDto containerJPanelDto = jPanelDtoFactory.forUIProperties(withStylesApplied, root.getShape());
 
 		for (Map.Entry<CollocationInfo, Structure> childNode : structure.getChildren().entrySet()) {
-			JPanelDto child = createDto(childNode.getValue(), uiProfile);
-			jPanelDto.addChild(child, childNode.getKey(), childNode.getValue().getType());
+			JPanelDto childJPanelDto = createDto(childNode.getValue(), uiProfile);
+			containerJPanelDto.addChild(childJPanelDto, childNode.getKey(), childNode.getValue().getType());
 		}
 
-		return jPanelDto;
+		return containerJPanelDto;
 	}
 
 

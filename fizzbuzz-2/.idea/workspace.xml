@@ -63,36 +63,6 @@
     </component>
     <component name="FileEditorManager">
         <leaf>
-            <file leaf-file-name="TranslationResult.java" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/TranslationResult.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state line="20" column="19" selection-start="483" selection-end="483"
-                               vertical-scroll-proportion="0.0">
-                            <folding/>
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file leaf-file-name="MathExpertImpl.java" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/MathExpertImpl.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state line="12" column="25" selection-start="423" selection-end="423"
-                               vertical-scroll-proportion="0.0">
-                            <folding/>
-                        </state>
-                    </provider>
-                </entry>
-            </file>
-            <file leaf-file-name="MathExpertImplTest.java" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/MathExpertImplTest.java">
-                    <provider selected="true" editor-type-id="text-editor">
-                        <state line="20" column="9" selection-start="743" selection-end="743"
-                               vertical-scroll-proportion="0.0">
-                            <folding/>
-                        </state>
-                    </provider>
-                </entry>
-            </file>
             <file leaf-file-name="MathExpressionBuilderTest.java" pinned="false" current="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/MathExpressionBuilderTest.java">
                     <provider selected="true" editor-type-id="text-editor">
@@ -113,15 +83,43 @@
                     </provider>
                 </entry>
             </file>
-            <file leaf-file-name="RuleBasedNumberTranslatorTest.java" pinned="false" current="true"
-                  current-in-tab="true">
+            <file leaf-file-name="RuleBasedNumberTranslatorTest.java" pinned="false" current="false"
+                  current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/RuleBasedNumberTranslatorTest.java">
                     <provider selected="true" editor-type-id="text-editor">
-                        <state line="49" column="53" selection-start="1798" selection-end="1798"
-                               vertical-scroll-proportion="0.3989071">
-                            <folding>
-                                <element signature="imports" expanded="true"/>
-                            </folding>
+                        <state line="49" column="53" selection-start="1672" selection-end="1672"
+                               vertical-scroll-proportion="0.0">
+                            <folding/>
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/Main.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state line="17" column="65" selection-start="657" selection-end="657"
+                               vertical-scroll-proportion="0.0">
+                            <folding/>
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="NumberRangePrinter.java" pinned="false" current="true" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/NumberRangePrinter.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state line="16" column="73" selection-start="496" selection-end="496"
+                               vertical-scroll-proportion="0.43715847">
+                            <folding/>
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="RuleBasedNumberTranslator.java" pinned="false" current="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/RuleBasedNumberTranslator.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state line="15" column="8" selection-start="470" selection-end="470"
+                               vertical-scroll-proportion="0.0">
+                            <folding/>
                         </state>
                     </provider>
                 </entry>
@@ -129,7 +127,7 @@
             <file leaf-file-name="LuckyRule.java" pinned="false" current="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/LuckyRule.java">
                     <provider selected="true" editor-type-id="text-editor">
-                        <state line="8" column="8" selection-start="264" selection-end="264"
+                        <state line="8" column="8" selection-start="265" selection-end="265"
                                vertical-scroll-proportion="0.0">
                             <folding/>
                         </state>
@@ -139,7 +137,7 @@
             <file leaf-file-name="LuckyRuleTest.java" pinned="false" current="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/LuckyRuleTest.java">
                     <provider selected="true" editor-type-id="text-editor">
-                        <state line="30" column="0" selection-start="862" selection-end="862"
+                        <state line="30" column="0" selection-start="816" selection-end="816"
                                vertical-scroll-proportion="0.0">
                             <folding/>
                         </state>
@@ -149,7 +147,7 @@
             <file leaf-file-name="FizzFuzzRuleTest.java" pinned="false" current="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/FizzFuzzRuleTest.java">
                     <provider selected="true" editor-type-id="text-editor">
-                        <state line="23" column="9" selection-start="681" selection-end="681"
+                        <state line="23" column="9" selection-start="625" selection-end="625"
                                vertical-scroll-proportion="0.0">
                             <folding/>
                         </state>
@@ -159,7 +157,7 @@
             <file leaf-file-name="FizzFuzzRule.java" pinned="false" current="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/FizzFuzzRule.java">
                     <provider selected="true" editor-type-id="text-editor">
-                        <state line="29" column="7" selection-start="1005" selection-end="1005"
+                        <state line="29" column="7" selection-start="1006" selection-end="1006"
                                vertical-scroll-proportion="0.0">
                             <folding/>
                         </state>
@@ -231,8 +229,6 @@
             <sortByType/>
         </navigator>
         <panes>
-            <pane id="Scope"/>
-            <pane id="PackagesPane"/>
             <pane id="ProjectPane">
                 <subPane>
                     <PATH>
@@ -293,6 +289,8 @@
                     </PATH>
                 </subPane>
             </pane>
+            <pane id="Scope"/>
+            <pane id="PackagesPane"/>
         </panes>
     </component>
     <component name="PropertiesComponent">
@@ -687,9 +685,9 @@
             <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED"
                          type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false"
                          content_ui="tabs"/>
-            <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED"
-                         visible="true" weight="0.49188313" sideWeight="0.670229" order="0" side_tool="false"
-                         content_ui="tabs"/>
+            <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED"
+                         type="DOCKED" visible="true" weight="0.49188313" sideWeight="0.670229" order="0"
+                         side_tool="false" content_ui="tabs"/>
             <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED"
                          visible="false" weight="0.32890856" sideWeight="0.5" order="2" side_tool="false"
                          content_ui="tabs"/>
@@ -781,26 +779,9 @@
                        vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/NumberRangePrinter.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state line="14" column="16" selection-start="334" selection-end="334"
-                       vertical-scroll-proportion="0.0"/>
-            </provider>
-        </entry>
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/NumberTranslator.java">
             <provider selected="true" editor-type-id="text-editor">
                 <state line="2" column="0" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0"/>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/RuleBasedNumberTranslator.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state line="8" column="58" selection-start="296" selection-end="317" vertical-scroll-proportion="0.0"/>
-            </provider>
-        </entry>
-        <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/Main.java">
-            <provider selected="true" editor-type-id="text-editor">
-                <state line="10" column="101" selection-start="376" selection-end="376"
-                       vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/TranslationResult.java">
@@ -817,7 +798,7 @@
         </entry>
         <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/MathExpertImplTest.java">
             <provider selected="true" editor-type-id="text-editor">
-                <state line="20" column="9" selection-start="743" selection-end="743" vertical-scroll-proportion="0.0"/>
+                <state line="20" column="9" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
         <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/MathExpressionBuilderTest.java">
@@ -831,31 +812,50 @@
                        vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
+        <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/RuleBasedNumberTranslatorTest.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state line="49" column="53" selection-start="1672" selection-end="1672"
+                       vertical-scroll-proportion="0.0"/>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/Main.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state line="17" column="65" selection-start="657" selection-end="657"
+                       vertical-scroll-proportion="0.0"/>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/RuleBasedNumberTranslator.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state line="15" column="8" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0"/>
+            </provider>
+        </entry>
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/LuckyRule.java">
             <provider selected="true" editor-type-id="text-editor">
-                <state line="8" column="8" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0"/>
+                <state line="8" column="8" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
         <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/LuckyRuleTest.java">
             <provider selected="true" editor-type-id="text-editor">
-                <state line="30" column="0" selection-start="862" selection-end="862" vertical-scroll-proportion="0.0"/>
+                <state line="30" column="0" selection-start="816" selection-end="816" vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
         <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/FizzFuzzRuleTest.java">
             <provider selected="true" editor-type-id="text-editor">
-                <state line="23" column="9" selection-start="681" selection-end="681" vertical-scroll-proportion="0.0"/>
+                <state line="23" column="9" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
         <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/FizzFuzzRule.java">
             <provider selected="true" editor-type-id="text-editor">
-                <state line="29" column="7" selection-start="1005" selection-end="1005"
+                <state line="29" column="7" selection-start="1006" selection-end="1006"
                        vertical-scroll-proportion="0.0"/>
             </provider>
         </entry>
-        <entry file="file://$PROJECT_DIR$/test/com/mgs/fizzbuzz/RuleBasedNumberTranslatorTest.java">
+        <entry file="file://$PROJECT_DIR$/src/com/mgs/fizzbuzz/NumberRangePrinter.java">
             <provider selected="true" editor-type-id="text-editor">
-                <state line="49" column="53" selection-start="1798" selection-end="1798"
-                       vertical-scroll-proportion="0.3989071"/>
+                <state line="16" column="73" selection-start="496" selection-end="496"
+                       vertical-scroll-proportion="0.43715847">
+                    <folding/>
+                </state>
             </provider>
         </entry>
     </component>

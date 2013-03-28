@@ -11,15 +11,15 @@ import java.util.List;
 
 public class StandardJPanelFactory implements JPanelFactory {
 	@Override
-	public JPanel create(WireframeLayoutType layoutType, UIPropertiesProvider uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator1, List<StandardJPanelDto.JPanelChild> children, PolygonPointsIterator shape) {
+	public JPanel create(WireframeLayoutType layoutType, UIPropertiesProvider uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator1, List<JPanelDto.JPanelChild> children, PolygonPointsIterator shape) {
 		JPanel jPanel = new JPanel();
 		jPanel.setOpaque(false);
 		SwingUtils.applyUIProperties(jPanel, uiProperties);
 		if (layoutType != WireframeLayoutType.EMPTY) {
 			LayoutManager layout = jPanelLayoutTranslator1.translate(layoutType, jPanel);
 			jPanel.setLayout(layout);
-			for (StandardJPanelDto.JPanelChild child : children) {
-				jPanel.add(child.getPanel().build(child.getWireframeLayoutType()), StandardJPanelDto.translate(child.getCollocationInfo(), layout));
+			for (JPanelDto.JPanelChild child : children) {
+				jPanel.add(child.getPanel().build(child.getWireframeLayoutType()), JPanelDto.translate(child.getCollocationInfo(), layout));
 			}
 		}
 		return jPanel;

@@ -5,6 +5,7 @@ import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelDtoFactory;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
 import com.mgs.fantasi.profile.UIProfile;
+import com.mgs.fantasi.properties.PaddingDecorator;
 import com.mgs.fantasi.properties.UIPropertiesManager;
 import com.mgs.fantasi.structure.Structure;
 
@@ -18,7 +19,7 @@ public class UIDriver<T> {
 
 	public static UIDriver<JPanel> forSwing() {
 		JPanelLayoutTranslator jPanelLayoutTranslator = new JPanelLayoutTranslator();
-		JPanelDtoFactory jPanelDtoFactory = new JPanelDtoFactory(jPanelLayoutTranslator);
+		JPanelDtoFactory jPanelDtoFactory = new JPanelDtoFactory(jPanelLayoutTranslator, new PaddingDecorator());
 
 		return new UIDriver<JPanel>
 				(

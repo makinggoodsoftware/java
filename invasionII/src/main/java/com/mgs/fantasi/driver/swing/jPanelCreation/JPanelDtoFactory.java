@@ -1,24 +1,24 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
+import com.mgs.fantasi.properties.JPanelDecorator;
 import com.mgs.fantasi.properties.UIPropertiesProvider;
-import com.mgs.fantasi.properties.data.polygon.NativeRectanguarShape;
+import com.mgs.fantasi.properties.data.Padding;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 
 public class JPanelDtoFactory {
 	private final JPanelLayoutTranslator jPanelLayoutTranslator;
+	private final JPanelDecorator<Padding> paddingDecorator;
 
-	public JPanelDtoFactory(JPanelLayoutTranslator jPanelLayoutTranslator) {
+	public JPanelDtoFactory(JPanelLayoutTranslator jPanelLayoutTranslator, JPanelDecorator<Padding> paddingDecorator) {
 		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
+		this.paddingDecorator = paddingDecorator;
 	}
 
 	public JPanelDto forUIProperties(UIPropertiesProvider uiProperties, PolygonPointsIterator shape) {
-		JPanelDto baseDto = shape.isRectangular() ?
-				new StandardJPanelDto(uiProperties, jPanelLayoutTranslator, new NativeRectanguarShape(), new StandardJPanelFactory()) :
-				new StandardJPanelDto(uiProperties, jPanelLayoutTranslator, shape, new NonRectangularJPanelFactory());
+		return shape.isRectangular() ?
+				new JPanelDto(uiProperties, jPanelLayoutTranslator, shape, new StandardJPanelFactory(), paddingDecorator) :
+				new JPanelDto(uiProperties, jPanelLayoutTranslator, shape, new NonRectangularJPanelFactory(), paddingDecorator);
 
-		return uiProperties.getPadding().isFullyDefined() ?
-				new DecoratedJPanelWithPadding(baseDto, uiProperties.getPadding().getValue()) :
-				baseDto;
 	}
 
 }

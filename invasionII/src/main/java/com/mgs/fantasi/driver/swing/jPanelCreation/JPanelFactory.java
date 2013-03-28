@@ -8,5 +8,5 @@ import javax.swing.*;
 import java.util.List;
 
 public interface JPanelFactory {
-	JPanel create(WireframeLayoutType layoutType, UIPropertiesProvider uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator1, List<StandardJPanelDto.JPanelChild> children, PolygonPointsIterator shape);
+	JPanel create(WireframeLayoutType layoutType, UIPropertiesProvider uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator1, List<JPanelDto.JPanelChild> children, PolygonPointsIterator shape);
 }

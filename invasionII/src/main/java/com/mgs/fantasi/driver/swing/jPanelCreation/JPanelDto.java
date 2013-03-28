@@ -1,9 +1,7 @@
 package com.mgs.fantasi.driver.swing.jPanelCreation;
 
 import com.mgs.fantasi.driver.swing.SwingUtils;
-import com.mgs.fantasi.properties.JPanelDecorator;
 import com.mgs.fantasi.properties.UIPropertiesProvider;
-import com.mgs.fantasi.properties.data.Padding;
 import com.mgs.fantasi.properties.data.polygon.PolygonPointsIterator;
 import com.mgs.fantasi.structure.CollocationInfo;
 import com.mgs.fantasi.structure.treeAux.WireframeLayoutType;
@@ -15,26 +13,14 @@ import java.util.List;
 
 public class JPanelDto {
 	private final UIPropertiesProvider uiProperties;
-	private final JPanelLayoutTranslator jPanelLayoutTranslator;
 	private List<JPanelChild> children = new ArrayList<JPanelChild>();
-	private final JPanelFactory jPanelFactory;
 	private final PolygonPointsIterator shape;
-	private final JPanelDecorator<Padding> paddingDecorator;
+	private final WireframeLayoutType type;
 
-	public JPanelDto(UIPropertiesProvider uiProperties, JPanelLayoutTranslator jPanelLayoutTranslator, PolygonPointsIterator shape, JPanelFactory jPanelFactory, JPanelDecorator<Padding> paddingDecorator) {
+	public JPanelDto(UIPropertiesProvider uiProperties, PolygonPointsIterator shape, WireframeLayoutType type) {
 		this.uiProperties = uiProperties;
-		this.jPanelLayoutTranslator = jPanelLayoutTranslator;
-		this.jPanelFactory = jPanelFactory;
 		this.shape = shape;
-		this.paddingDecorator = paddingDecorator;
-	}
-
-	public JPanel build(WireframeLayoutType layoutType) {
-		JPanel undecorated = jPanelFactory.create(layoutType, uiProperties, jPanelLayoutTranslator, children, shape);
-		if (uiProperties.getPadding().isFullyDefined()) {
-			return paddingDecorator.decorate(undecorated, uiProperties.getPadding().getValue());
-		}
-		return undecorated;
+		this.type = type;
 	}
 
 	public static Object translate(CollocationInfo specifics, LayoutManager type) {
@@ -47,20 +33,34 @@ public class JPanelDto {
 	}
 
 
-	public JPanelDto addChild(JPanelDto child, CollocationInfo collocationInfo, WireframeLayoutType wireframeLayoutType) {
-		children.add(new JPanelChild(child, collocationInfo, wireframeLayoutType));
+	public JPanelDto addChild(JPanelDto child, CollocationInfo collocationInfo) {
+		children.add(new JPanelChild(child, collocationInfo));
 		return this;
 	}
 
-	class JPanelChild {
+	public UIPropertiesProvider getUiProperties() {
+		return uiProperties;
+	}
+
+	public PolygonPointsIterator getShape() {
+		return shape;
+	}
+
+	public List<JPanelChild> getChildren() {
+		return children;
+	}
+
+	public WireframeLayoutType getType() {
+		return type;
+	}
+
+	public class JPanelChild {
 		private final JPanelDto panel;
 		private final CollocationInfo collocationInfo;
-		private final WireframeLayoutType wireframeLayoutType;
 
-		public JPanelChild(JPanelDto panel, CollocationInfo collocationInfo, WireframeLayoutType wireframeLayoutType) {
+		public JPanelChild(JPanelDto panel, CollocationInfo collocationInfo) {
 			this.panel = panel;
 			this.collocationInfo = collocationInfo;
-			this.wireframeLayoutType = wireframeLayoutType;
 		}
 
 
@@ -72,8 +72,5 @@ public class JPanelDto {
 			return collocationInfo;
 		}
 
-		public WireframeLayoutType getWireframeLayoutType() {
-			return wireframeLayoutType;
-		}
 	}
 }

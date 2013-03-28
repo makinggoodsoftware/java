@@ -1,5 +1,6 @@
 package com.mgs.fantasi.driver;
 
+import com.mgs.fantasi.driver.swing.JPanelDtoTransformer;
 import com.mgs.fantasi.driver.swing.JPanelRenderingManager;
 import com.mgs.fantasi.driver.swing.SwingUIDisplayManager;
 import com.mgs.fantasi.driver.swing.jPanelCreation.JPanelLayoutTranslator;
@@ -23,8 +24,7 @@ public class UIDriver<T> {
 						new SwingUIDisplayManager(),
 						new JPanelRenderingManager(
 								new UIPropertiesManager(),
-								new JPanelLayoutTranslator(),
-								new PaddingDecorator()
+								new JPanelDtoTransformer(new PaddingDecorator(), new JPanelLayoutTranslator())
 						)
 				);
 	}
